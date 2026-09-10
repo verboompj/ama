@@ -81,4 +81,4 @@ Questions to answer before/while designing the agentic solution for Case Study 4
 
 ---
 
-*Related reading: `Investigate/case-understanding-presentation.md`, `docs/research/`, `docs/copernicus/`.*
+*Related reading: `investigate/case-understanding-presentation.md`, `docs/research/`, `docs/copernicus/`.*
