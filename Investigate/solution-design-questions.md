@@ -75,7 +75,7 @@ Questions to answer before/while designing the agentic solution for Case Study 4
 - What is the rollback plan if the new system underperforms or causes farmer harm during the 2026–2028 window?
 
 ## 11. Legal & Compliance Sign-off
-- Which compliance standards (see `regulatory-compliance/`) require formal sign-off before go-live, and from whom (DPO, legal, security, EU Commission liaison)?
+- Which compliance standards (see `docs/regulatory-compliance/`) require formal sign-off before go-live, and from whom (DPO, legal, security, EU Commission liaison)?
 - Is a conformity assessment required under the EU AI Act before deployment, and what is the timeline given phased applicability (2025–2026)?
 - What ongoing compliance monitoring/reporting cadence is required post-launch (annual AMS quality assessment, NIS2 incident reporting, GDPR audits)?
 
