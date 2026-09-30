@@ -32,7 +32,7 @@ original material.
 ```
 .
 ├── case/                    # The original case study brief (source material)
-├── casestudy/               # Case understanding write-up & open design questions
+│   └── casestudy/           # Case understanding write-up & open design questions
 ├── docs/
 │   ├── architecture/        # Proposed AI solution architecture (AKS + Azure AI services)
 │   ├── copernicus/          # Copernicus data/services/tools inventory
