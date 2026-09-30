@@ -13,24 +13,19 @@
 
 ## Purpose
 
-This repository documents the end-to-end **solution design exercise for Case Study 47**:
-an agentic AI system that verifies EU Common Agricultural Policy (CAP) subsidy claims
-using Copernicus (Sentinel) satellite imagery for a fictional Hungarian paying agency.
+This repository is built around **Case Study 47**: a capstone case brief describing an
+agentic AI system to verify EU Common Agricultural Policy (CAP) subsidy claims using
+Copernicus (Sentinel) satellite imagery, for a fictional Hungarian paying agency.
 
-It captures the full design journey — not just the final architecture:
+The original case brief (`case/case-study-47.md` and its source scan
+`case/case-study-47.jpg`) sets the scenario: the business challenge, the proposed
+agentic architecture brief, expected outcomes, and the business case, as issued for the
+capstone exercise.
 
-- **Understanding the case** — business challenge, stakeholders, objectives, and the
-  proposed agentic architecture brief.
-- **Solution design questions** — the open questions worked through across business,
-  data, agent scope, governance, privacy, security, and technical architecture before
-  committing to a design.
-- **Regulatory & compliance research** — CAP regulations, the Area Monitoring System,
-  GDPR, the EU AI Act, NIS2, INSPIRE, eIDAS, and related frameworks that constrain the
-  solution.
-- **Copernicus reference material** — an inventory of the Copernicus programme's open
-  data services, Sentinel satellites, contributing missions, tools, and access portals.
-- **Architecture** — the proposed AI solution design, including how components map to
-  AKS (self-hosted business logic/agents) versus managed Azure AI/data services.
+Everything else in this repository — case understanding write-ups, solution design
+questions, regulatory research, Copernicus reference material, and the proposed AI
+architecture — is participant work produced *in response to* that case, not part of the
+original material.
 
 ## Repository Structure
 
