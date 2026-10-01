@@ -1,0 +1,22 @@
+{
+  "scene": "S2A_34TDT_20260629_1_L2A",
+  "acquired": "2026-06-29T09:47:43.114Z",
+  "product": "Copernicus Sentinel-2 Level-2A surface reflectance",
+  "tile": "34TDT",
+  "tile_cloud_cover_percent": 0.16195,
+  "center_wgs84": [
+    20.1,
+    47.12
+  ],
+  "aoi_area_m2": 250000,
+  "aoi_area_hectares": 25,
+  "native_pixel_size_m": 10,
+  "approx_native_pixels_in_aoi": 2500,
+  "ndvi_summary": {
+    "mean": 0.2264,
+    "p05": 0.1681,
+    "p95": 0.5836
+  },
+  "source_note": "Copernicus Sentinel-2 scene accessed through the Element 84 Earth Search/AWS Open Data mirror.",
+  "legal_area_note": "Use authoritative LPIS parcel geometry in a suitable projected CRS for official area. The sample AOI is illustrative only."
+}

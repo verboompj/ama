@@ -1,0 +1,41 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Illustrative agricultural analysis AOI",
+        "area_m2": 250000,
+        "area_ha": 25,
+        "official_parcel": false
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              20.09674273,
+              47.1177247
+            ],
+            [
+              20.10333314,
+              47.11777648
+            ],
+            [
+              20.10325755,
+              47.12227521
+            ],
+            [
+              20.09666658,
+              47.12222342
+            ],
+            [
+              20.09674273,
+              47.1177247
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}
