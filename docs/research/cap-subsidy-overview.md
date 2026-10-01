@@ -32,6 +32,13 @@ Funded at EU level from the EU budget, CAP consists of three main support types:
 - Each Member State implements a national CAP Strategic Plan aligned with EU objectives.
 - Each Member State publishes CAP subsidy recipient details per EU transparency rules.
 
+## Claim Process and Equality
+
+For an explanation of what a CAP claim contains, how it moves through application,
+satellite monitoring, checks, payment, and appeal, and how CAP can create both equality
+and inequality within the EU and in relation to non-EU producers, see
+[CAP Claims: Process, Equality, and Unequal Effects](./cap-claim-process-and-equity.md).
+
 ## Sources
 - [CAP at a glance – European Commission](https://agriculture.ec.europa.eu/common-agricultural-policy/cap-overview/cap-glance_en)
 - [CAP Strategic Plans – European Commission](https://agriculture.ec.europa.eu/common-agricultural-policy/cap-overview/cap-strategic-plans_en)
