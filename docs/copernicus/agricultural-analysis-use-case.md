@@ -26,7 +26,7 @@ Parcels that cannot be resolved at Sentinel resolution follow
 
 ## 2. Sample Copernicus Image
 
-![Sentinel-2 Hungarian agricultural sample](../../assets/copernicus/sentinel-2-hungary-crop-sample.png)
+![Sentinel-2 Hungarian agricultural sample](./sample-data/sentinel-2-hungary-crop-sample.png)
 
 ### Sample metadata
 
@@ -47,11 +47,11 @@ Parcels that cannot be resolved at Sentinel resolution follow
 
 Supporting files:
 
-- [`sentinel-2-hungary-crop-sample.png`](../../assets/copernicus/sentinel-2-hungary-crop-sample.png)
-- [`sentinel-2-hungary-true-colour.png`](../../assets/copernicus/sentinel-2-hungary-true-colour.png)
-- [`sentinel-2-hungary-ndvi.png`](../../assets/copernicus/sentinel-2-hungary-ndvi.png)
-- [`sentinel-2-hungary-sample-aoi.geojson`](../../assets/copernicus/sentinel-2-hungary-sample-aoi.geojson)
-- [`sentinel-2-hungary-crop-sample.json`](../../assets/copernicus/sentinel-2-hungary-crop-sample.json)
+- [`sentinel-2-hungary-crop-sample.png`](./sample-data/sentinel-2-hungary-crop-sample.png)
+- [`sentinel-2-hungary-true-colour.png`](./sample-data/sentinel-2-hungary-true-colour.png)
+- [`sentinel-2-hungary-ndvi.png`](./sample-data/sentinel-2-hungary-ndvi.png)
+- [`sentinel-2-hungary-sample-aoi.geojson`](./sample-data/sentinel-2-hungary-sample-aoi.geojson)
+- [`sentinel-2-hungary-crop-sample.json`](./sample-data/sentinel-2-hungary-crop-sample.json)
 
 The yellow outline is an illustrative analysis area, not a Hungarian LPIS parcel.
 The sample demonstrates imagery and index extraction only. A crop type must not be
