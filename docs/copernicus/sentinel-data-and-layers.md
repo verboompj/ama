@@ -19,6 +19,12 @@ The key distinction is:
 Satellite imagery can support a finding, but it does not by itself establish legal
 ownership, the official parcel boundary, or final CAP eligibility.
 
+The agreed capstone/MVP route for acquiring open prototype data is documented in
+[`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md).
+Resolution limits, Copernicus Contributing Missions, commercial imagery, and the
+recommended escalation strategy are documented in
+[`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md).
+
 ## 2. Sentinel Mission Overview
 
 | Mission | Sensor and principal data | Typical use | Relevance to this project |
@@ -302,4 +308,3 @@ The project must keep the distinction between **observation**, **inference**,
 - [CLMS dataset catalogue](https://land.copernicus.eu/en/dataset-catalog)
 - [ERA5-Land](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land)
 - [Copernicus agrometeorological indicators](https://cds.climate.copernicus.eu/datasets/sis-agrometeorological-indicators)
-

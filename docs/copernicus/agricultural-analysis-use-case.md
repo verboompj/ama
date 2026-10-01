@@ -19,6 +19,10 @@ For mission and layer descriptions, see
 [`sentinel-data-and-layers.md`](./sentinel-data-and-layers.md).
 The controlled model-development lifecycle is defined in
 [`crop-classifier-training-procedure.md`](./crop-classifier-training-procedure.md).
+The first implementation uses the public-data strategy in
+[`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md).
+Parcels that cannot be resolved at Sentinel resolution follow
+[`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md).
 
 ## 2. Sample Copernicus Image
 
@@ -360,6 +364,9 @@ The interface should show:
 - time from observation to explainable case action.
 
 ## 10. Recommended MVP
+
+The concrete acquisition and implementation steps for this MVP are documented in
+[`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md).
 
 Start with:
 

@@ -20,6 +20,16 @@ Related documents:
   Sentinel and supporting data.
 - [`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md) describes
   the end-to-end crop and parcel-area use case.
+- [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md) defines
+  the agreed public-data route for the first capstone/MVP implementation.
+
+### Prototype versus production labels
+
+For the first public-data prototype, CLMS Crop Types may be used as weak labels
+according to
+[`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md). These
+labels are suitable for pipeline development and experimental evaluation but do not
+meet the independent-validation standard described below.
 
 ## 2. Training Principles
 
@@ -535,4 +545,3 @@ automatically retrain or promote a model.
 This experiment answers the most important early question: whether adding Sentinel-1
 and multi-temporal features produces enough reliable improvement over a transparent
 Sentinel-2 baseline to justify the operational pipeline.
-
