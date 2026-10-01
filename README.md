@@ -27,6 +27,10 @@ questions, regulatory research, Copernicus reference material, and the proposed 
 architecture — is participant work produced *in response to* that case, not part of the
 original material.
 
+The repository also includes a detailed
+[persona and use-case catalog](./docs/Persona/personas-and-use-cases.md) covering farmers,
+government officials, auditors, compliance roles, and technical operators.
+
 ## Repository Structure
 
 ```
@@ -36,6 +40,7 @@ original material.
 ├── docs/
 │   ├── architecture/        # Proposed AI solution architecture (AKS + Azure AI services)
 │   ├── copernicus/          # Copernicus data/services/tools inventory
+│   ├── Persona/             # Role-based personas, requirements & journeys
 │   ├── regulatory-compliance/ # Regulatory & legal framework summaries
 │   └── research/            # Supporting research notes
 └── assets/                  # Repository media (logo, etc.)
