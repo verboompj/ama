@@ -19,7 +19,7 @@ data source can resolve every parcel.
 
 Related documents:
 
-- [`sentinel-data-and-layers.md`](./sentinel-data-and-layers.md)
+- [`../sentinel-data-and-layers.md`](../sentinel-data-and-layers.md)
 - [`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md)
 - [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md)
 - [`crop-classifier-training-procedure.md`](./crop-classifier-training-procedure.md)
@@ -412,4 +412,3 @@ justifies it.
 - [CCM user categories](https://dataspace.copernicus.eu/explore-data/data-collections/copernicus-contributing-missions/ccm-user-categories)
 - [VHR_IMAGE_2024 completion and access](https://dataspace.copernicus.eu/news/2026-3-31-vhrimage2024-collection-copernicus-contributing-missions-ccm-now-completed-and)
 - [Copernicus Rapid Response Desk](https://www.rapidresponse.copernicus.eu/)
-

@@ -5,7 +5,7 @@
 This document introduces the Copernicus Sentinel missions and the data layers that are
 relevant to Case Study 47. It is a data reference, not an implementation workflow.
 The concrete crop-analysis workflow is documented separately in
-[`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md).
+[`crop-classification/agricultural-analysis-use-case.md`](./crop-classification/agricultural-analysis-use-case.md).
 
 The key distinction is:
 
@@ -20,10 +20,10 @@ Satellite imagery can support a finding, but it does not by itself establish leg
 ownership, the official parcel boundary, or final CAP eligibility.
 
 The agreed capstone/MVP route for acquiring open prototype data is documented in
-[`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md).
+[`crop-classification/public-data-crop-prototype-plan.md`](./crop-classification/public-data-crop-prototype-plan.md).
 Resolution limits, Copernicus Contributing Missions, commercial imagery, and the
 recommended escalation strategy are documented in
-[`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md).
+[`crop-classification/high-resolution-data-strategy.md`](./crop-classification/high-resolution-data-strategy.md).
 
 ## 2. Sentinel Mission Overview
 

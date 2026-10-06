@@ -16,7 +16,7 @@ parcel area, legal eligibility, payment reduction, or sanction.
 
 Related documents:
 
-- [`sentinel-data-and-layers.md`](./sentinel-data-and-layers.md) describes available
+- [`../sentinel-data-and-layers.md`](../sentinel-data-and-layers.md) describes available
   Sentinel and supporting data.
 - [`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md) describes
   the end-to-end crop and parcel-area use case.

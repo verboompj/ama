@@ -54,7 +54,7 @@ retain an explicit transition path to MÁK data.
 ## 3. Relationship to Other Documents
 
 - Dataset and layer descriptions:
-  [`sentinel-data-and-layers.md`](./sentinel-data-and-layers.md)
+  [`../sentinel-data-and-layers.md`](../sentinel-data-and-layers.md)
 - End-to-end parcel analysis:
   [`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md)
 - Controlled model training and release:

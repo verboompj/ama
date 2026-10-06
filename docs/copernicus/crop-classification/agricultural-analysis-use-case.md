@@ -16,7 +16,7 @@ This is not a single-image recognition problem. It is a **parcel-based,
 multi-temporal evidence problem**.
 
 For mission and layer descriptions, see
-[`sentinel-data-and-layers.md`](./sentinel-data-and-layers.md).
+[`../sentinel-data-and-layers.md`](../sentinel-data-and-layers.md).
 The controlled model-development lifecycle is defined in
 [`crop-classifier-training-procedure.md`](./crop-classifier-training-procedure.md).
 The first implementation uses the public-data strategy in

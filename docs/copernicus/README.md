@@ -6,11 +6,7 @@ Files:
 - [`services.md`](./services.md) — the six core Copernicus services
 - [`sentinel-satellites.md`](./sentinel-satellites.md) — Sentinel missions (data assets)
 - [`sentinel-data-and-layers.md`](./sentinel-data-and-layers.md) — project-focused introduction to Sentinel missions, bands, quality layers, derived products, and recommended data tiers
-- [`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md) — concrete crop-type and parcel-area analysis workflow, sample imagery, outputs, and evaluation
-- [`crop-classifier-training-procedure.md`](./crop-classifier-training-procedure.md) — label governance, dataset construction, leakage-safe splitting, model training, calibration, approval, deployment, and retraining
-- [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md) — agreed CLMS/Sentinel public-data strategy, implementation steps, limitations, and transition to official Hungarian labels
-- [`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md) — Sentinel resolution risks, mixed-pixel controls, CCM/VHR access, commercial imagery, and cost-controlled evidence escalation
-- [`sample-data/`](./sample-data/) — Hungarian Sentinel-2 true-colour/NDVI samples, analysis AOI, and scene metadata used by the agricultural analysis use case
+- [`crop-classification/`](./crop-classification/) — crop-recognition goal, agricultural analysis use case, public-data prototype, model-training procedure, high-resolution strategy, and sample data
 - [`contributing-missions.md`](./contributing-missions.md) — Copernicus Contributing Missions (CCM)
 - [`software-tools.md`](./software-tools.md) — processing software, toolboxes, APIs
 - [`portals-and-platforms.md`](./portals-and-platforms.md) — access portals, DIAS platforms, catalogues
