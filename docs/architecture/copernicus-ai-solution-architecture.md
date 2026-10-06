@@ -1,5 +1,10 @@
 # AI Solution on AKS for Copernicus Earth Observation Data
 
+> This document describes the original AKS-centric option, including GPU-enabled AKS
+> workloads. For the recommended design where agents and application services run on
+> CPU-only AKS while Microsoft Foundry and Azure ML provide managed models, see
+> [`aks-centered-foundry-architecture.md`](./aks-centered-foundry-architecture.md).
+
 ## 1. Goal
 
 Build a solution where users can **interact conversationally** (natural language) with Copernicus Earth Observation data — search scenes, ask analytical questions ("show me flooded areas near Rotterdam last week"), and get processed imagery/insights back — while keeping all custom business logic, agent orchestration, and web apps **self-hosted in AKS**, and using **Azure PaaS only where self-hosting adds no value** (model endpoints, managed search, managed storage).
