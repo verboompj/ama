@@ -2,6 +2,10 @@
 
 ## Maintained Design
 
+- [`business-process-flow.md`](./business-process-flow.md) — business ownership and
+  claim-to-payment flow, including normal farmer evidence, exception/random
+  validation, independent inspection, and the advance/final-payment lifecycle.
+  Includes an [editable Excalidraw overview](./business-process-flow.excalidraw).
 - [`aks-centered-foundry-architecture.md`](./aks-centered-foundry-architecture.md) —
   recommended design using AKS CPU for the agent runtime and deterministic application
   services, Microsoft Foundry for foundation models, Azure ML managed

@@ -42,6 +42,9 @@ relate to sowing, harvest, and evidence validation.
 The [evidence-validation storyline](./docs/copernicus/crop-classification/evidence-validation-storyline.md)
 connects normal farmer-photo capture, exception handling, and random validation to the
 [independent ground/drone process](./docs/copernicus/crop-classification/drone-survey-validation-process.md).
+The [business-process flow](./docs/architecture/business-process-flow.md) maps those
+activities to their owners and carries the claim through advance, final calculation,
+payment reconciliation, and appeal safeguards.
 
 ## Repository Structure
 

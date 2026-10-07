@@ -23,6 +23,9 @@ models.
 This is the maintained architecture for the case. The earlier GPU-serving design
 has been retired; it is not an alternative implementation baseline.
 
+For business ownership, evidence branches, and the advance/final-payment lifecycle,
+see the [business process flow](./business-process-flow.md).
+
 ## 2. Why Agents Fit AKS
 
 An agent is not the model itself. The agent runtime is application code that:

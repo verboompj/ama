@@ -8,10 +8,16 @@
 | **CREODIAS** | Professional cloud-based EO processing/storage platform; Sentinel, Envisat, Landsat, and contributing mission data | https://creodias.eu/ |
 | **ONDA (Serco)** | DIAS platform: data access, cloud processing, APIs | https://www.onda-dias.eu/ |
 | **Mundi (Atos)** | DIAS platform: cloud environments, easy data access | https://www.mundiwebservices.com/ |
-| **Sobloo (Airbus)** | DIAS platform: APIs, cloud, extensive EO + third-party datasets | https://sobloo.eu/ |
 | **Copernicus Land Monitoring Service portal** | CLMS product catalogue and data policy | https://land.copernicus.eu/ |
 | **STAC Catalogue (CDSE)** | Asset-level SpatioTemporal Asset Catalog for programmatic discovery | https://browser.stac.dataspace.copernicus.eu/ |
 | **Copernicus Rapid Response Desk** | Info on contributing missions/operators, emerging data providers | https://www.rapidresponse.copernicus.eu/ |
+
+## Platform Selection
+
+Historical DIAS inventories are not evidence of present service availability.
+Verify provider status, contracts, licences, and processing geography before selection.
+This project's maintained architecture uses the **Copernicus Data Space Ecosystem**
+for Sentinel discovery and processing.
 
 ## Registration
 Free registration (~1 minute) unlocks additional features (download management, quotas, advanced APIs): https://dataspace.copernicus.eu/registration
