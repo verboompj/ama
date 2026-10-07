@@ -86,16 +86,29 @@ deliberate trade-off rather than accidental complexity.
 ```mermaid
 flowchart TB
     subgraph Users
-        FARMER[Farmer Portal]
+        FARMERWEB[Farmer Web Portal / PWA]
+        FARMERMOBILE[Farmer Mobile Experience]
         STAFF[Caseworker / Inspector Portal]
+        INSPECTOR[Inspector Field Mobile]
         AUDITOR[Audit and Governance Users]
+    end
+
+    subgraph Identity["User Identity"]
+        NATIONALID[Hungarian National eID / eIDAS Identity Provider]
+        ENTRA[Microsoft Entra ID\nagency workforce tenant]
+        EXTERNALID[Optional Entra External ID\napproved federation broker]
     end
 
     subgraph AKS["AKS Standard - CPU Only"]
         INGRESS[Gateway API / App Routing]
         BFF[web-bff]
-        AGENT[interactive-agent-api\nfarmer and caseworker conversations]
-        AGENTWORKER[agent-worker\nqueue and schedule driven]
+        INTERACTIVE[interactive-agent-api]
+        WORKER[agent-worker\nqueue and schedule driven]
+        FARMERAGENT[Farmer Guidance Agent\nL3 - bounded actions]
+        MONITORAGENT[Parcel Monitoring Agent\nL4 - classify, abstain, or escalate]
+        RESOLUTIONAGENT[Discrepancy Resolution Agent\nL3 - bounded actions, escalate disputes]
+        INSPECTIONAGENT[Inspection Prioritisation Agent\nL2 - recommendation only]
+        AUDITAGENT[Audit Evidence Agent\nL4 - autonomous draft only]
         CASE[case-api]
         RULES[CAP rules-service]
         EVIDENCE[evidence-api]
@@ -136,27 +149,47 @@ flowchart TB
         PROCESS[openEO / Sentinel Hub]
     end
 
-    FARMER --> INGRESS
-    STAFF --> INGRESS
+    FARMERWEB --> NATIONALID
+    FARMERMOBILE --> NATIONALID
+    NATIONALID -.federation if approved.-> EXTERNALID
+    EXTERNALID --> INGRESS
+    NATIONALID --> INGRESS
+    STAFF --> ENTRA
+    INSPECTOR --> ENTRA
+    ENTRA --> INGRESS
     AUDITOR --> INGRESS
     INGRESS --> BFF
-    BFF --> AGENT
+    BFF --> INTERACTIVE
     BFF --> CASE
 
-    AGENT --> CHAT
-    AGENT --> SEARCH
-    AGENT --> CASE
-    AGENT --> RULES
-    AGENT --> EVIDENCE
-    AGENT --> PRED
-    AGENT --> STATE
+    INTERACTIVE --> FARMERAGENT
+    INTERACTIVE --> RESOLUTIONAGENT
+    FARMERAGENT --> CHAT
+    FARMERAGENT --> SEARCH
+    FARMERAGENT --> CASE
+    FARMERAGENT --> RULES
+    RESOLUTIONAGENT --> CHAT
+    RESOLUTIONAGENT --> CASE
+    RESOLUTIONAGENT --> RULES
+    RESOLUTIONAGENT --> EVIDENCE
+
+    WORKER --> MONITORAGENT
+    WORKER --> INSPECTIONAGENT
+    MONITORAGENT --> PRED
+    MONITORAGENT --> EVIDENCE
+    MONITORAGENT --> RULES
+    INSPECTIONAGENT --> CASE
+    INSPECTIONAGENT --> RULES
 
     CASE --> CASEDB
     CASE --> BUS
     RULES --> CASEDB
     EVIDENCE --> LAKE
-    BUS --> AGENTWORKER
+    BUS --> WORKER
     BUS --> AUDIT
+    AUDIT --> AUDITAGENT
+    AUDITAGENT --> CASE
+    AUDITAGENT --> EVIDENCE
     AUDIT --> LAKE
 
     FETCH --> STAC
@@ -173,6 +206,8 @@ flowchart TB
     BATCH --> PRED
 
     GUIDANCE --> SEARCH
+    FARMERAGENT --> STATE
+    RESOLUTIONAGENT --> STATE
     EMBED --> SEARCH
     AKS --> ACR
     AKS --> MON
@@ -193,10 +228,62 @@ flowchart TB
 Responsibilities:
 
 - user sessions and portal-specific APIs;
+- shared backend-for-frontend for responsive web and mobile clients;
 - request aggregation;
 - streaming chat responses;
-- authentication and user context;
+- validation of authenticated identity tokens and user context;
 - protection against exposing internal service contracts.
+
+### 5.1.1 User authentication and client channels
+
+The architecture has three distinct identity planes. Do not treat them as
+interchangeable:
+
+| User/workload | Authentication authority | Intended use |
+|---|---|---|
+| Farmers | Hungarian national eID or another government-approved, eIDAS-compatible identity provider | Sign in to submit claims, respond to discrepancies, and provide evidence |
+| Agency staff and inspectors | Microsoft Entra ID workforce tenant | Staff portal, inspector tools, case review, and privileged administration |
+| AKS services | Microsoft Entra Workload Identity and managed identities | Passwordless service-to-service access to Azure resources and APIs |
+
+The national eID provider is authoritative for farmer identity. **Microsoft Entra
+External ID may be used as a federation/CIAM broker only if the agency confirms that
+the national identity provider, assurance level, claims, and eIDAS requirements are
+supported.** It must not silently replace or downgrade the government identity
+assurance. The final federation pattern is a discovery and security sign-off item.
+
+All interactive clients use OpenID Connect Authorization Code flow with PKCE. The
+backend validates issuer, audience, signature, expiry, scopes, and required claims;
+authorization is rechecked server-side for every case and parcel. Do not trust
+client-supplied farmer, role, or case identifiers. Staff access uses Entra Conditional
+Access and MFA; privileged roles use PIM and time-bound elevation.
+
+#### Farmer web and mobile
+
+Provide a responsive, accessible farmer portal that works on mobile browsers. Start
+with an installable Progressive Web App (PWA) sharing the same APIs and identity flow;
+consider a separate native app only if discovery confirms a need for capabilities a
+PWA cannot reliably provide, such as robust offline field capture or device integration.
+
+The mobile experience must support:
+
+- claim and parcel status, clear notices, deadlines, and evidence requests;
+- map and parcel context suitable for a small screen;
+- guided geo-tagged photo capture with explicit location permission;
+- upload progress, resumable uploads, and retry on intermittent connectivity;
+- accessible Hungarian-language content and assisted-service alternatives; and
+- secure local handling of drafts and evidence.
+
+Offline mode may capture a draft or queue an upload, but must not make eligibility
+decisions or present an unsynchronised submission as received. The server confirms
+receipt and records authoritative timestamps.
+
+#### Inspector field mobile
+
+Provide inspectors with a responsive field workflow for assigned visits, parcel maps,
+approved evidence, checklists, photographs, and signed inspection notes. Use the staff
+Entra identity, device-compliance policy, and least-privilege case assignments. Cache
+only the minimum required field data, encrypt it on the device, and expire or wipe it
+after synchronisation or loss of access.
 
 ### 5.2 `agent-api`
 
@@ -270,15 +357,19 @@ Workers should use Kubernetes Jobs or KEDA-scaled Deployments where appropriate.
 
 ### 5.7 Agent deployment map
 
-| Case agent | AKS runtime | Trigger | Authority |
-|---|---|---|---|
-| Farmer Guidance Agent | `interactive-agent-api` | Farmer conversation | Guidance and bounded portal actions |
-| Parcel Monitoring Agent | `feature-worker` plus `agent-worker` | Seasonal schedule/new acquisition | Produces monitoring evidence; abstains/escalates |
-| Discrepancy Resolution Agent | `agent-worker` and interactive API | Case event/farmer response | Bounded evidence requests and routine resolution |
-| Inspection Prioritisation Agent | `agent-worker` | Unresolved/risk-review event | Recommendation only |
-| Audit Evidence Agent | `audit-pack-worker` | Audit request/scheduled control | Autonomous draft; human sign-off |
+| Case agent | Autonomy level | AKS runtime | Trigger | Allowed autonomy and hard boundary |
+|---|---|---|---|---|
+| **Farmer Guidance Agent** | **L3 – bounded action** | `interactive-agent-api` | Farmer conversation | Explains approved rules, pre-checks claims, and guides evidence submission. Cannot change an official claim or decide eligibility. |
+| **Parcel Monitoring Agent** | **L4 – autonomous analytical output** | `feature-worker` + `agent-worker` | Seasonal schedule/new acquisition | Produces parcel classification and evidence, including an inconclusive result. Must abstain/escalate on uncertainty; cannot reject a claim, reduce payment, or impose a sanction. |
+| **Discrepancy Resolution Agent** | **L3 – bounded action** | `interactive-agent-api` + `agent-worker` | Case event/farmer response | Sends approved notices, requests evidence, validates submissions, and resolves only routine cases under deterministic rules. Escalates disputes and any potentially adverse outcome. |
+| **Inspection Prioritisation Agent** | **L2 – recommendation only** | `agent-worker` | Unresolved/risk-review event | Ranks cases for human consideration. Cannot order an inspection, determine non-compliance, or use unapproved risk factors. |
+| **Audit Evidence Agent** | **L4 – autonomous draft only** | `audit-pack-worker` | Audit request/scheduled control | Compiles and validates a draft evidence pack. An authorised official must review and approve it before submission. |
 
 The monitoring and audit agents are not dependent on a user chat session.
+
+L-level labels describe **workflow autonomy, not legal decision authority**. L4 is
+limited to reversible analytical or drafting work. No agent has authority to issue an
+official adverse decision, alter payment entitlement, or replace human review.
 
 ## 6. Keep Models Outside AKS
 
@@ -509,6 +600,20 @@ Use timeouts, bounded retries, circuit breakers, and bulkheads for every downstr
 tool.
 
 ## 14. Identity and Security
+
+### Human identity
+
+- Farmers authenticate with the agency-approved national eID/eIDAS-compatible
+  provider; validate any federation through Entra External ID before selecting it.
+- Staff and inspectors authenticate through the agency Microsoft Entra workforce
+  tenant, with Conditional Access, MFA, and PIM for privileged actions.
+- Web, PWA, and mobile clients use OIDC Authorization Code with PKCE and short-lived
+  tokens; APIs validate tokens and enforce case-level authorization server-side.
+- Do not put client secrets in browser or mobile applications. Treat mobile devices as
+  untrusted clients and use secure OS storage for refresh tokens where applicable.
+- Do not rely on device GPS or client-provided identity claims as proof of eligibility.
+
+### Workload identity
 
 Use:
 
