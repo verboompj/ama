@@ -73,7 +73,7 @@ claimed from this image alone.
 | Optical crop signal | Sentinel-2 L2A seasonal time series | Provides visible, NIR, red-edge, and SWIR crop signatures |
 | Cloud-independent signal | Sentinel-1 GRD IW VV+VH time series | Fills optical gaps and adds structure/moisture/activity features |
 | Optical quality control | Sentinel-2 SCL and cloud probability | Removes cloud, shadow, snow, and invalid observations |
-| Crop prior/reference | CLMS Crop Types/Cropping Patterns | Adds European context and an independent comparison layer |
+| Crop prior/reference | CLMS Crop Types/Cropping Patterns | Supporting model-derived reference, not independent ground truth; availability and target leakage must be checked |
 | Grassland/mowing | CLMS Grasslands plus S1/S2 time series | Supports grassland and mowing-specific monitoring |
 | Weather explanation | ERA5-Land/agrometeorological indicators | Explains delayed or abnormal phenology |
 | Terrain/radar correction | Copernicus DEM | Supports slope/aspect and Sentinel-1 terrain correction |
@@ -150,7 +150,10 @@ analysis request.
 
 Use the scheme year, region, crop calendar, and declared crop to determine the
 observation window. A useful first implementation would collect data from pre-sowing
-or winter cover through harvest, rather than selecting arbitrary calendar dates.
+or winter cover through harvest for retrospective analysis. Operational scoring uses
+an explicit as-of date and availability cutoff, not the complete future season.
+Choose the predictor window from region/scheme calendars without leaking the declared
+crop into the classifier.
 
 The window must account for:
 
@@ -160,6 +163,11 @@ The window must account for:
 - fallow or bare-soil periods;
 - unusual weather and delayed planting;
 - acquisition gaps.
+
+Recompute features over the observed prefix, preserve missing transitions, and
+use a model/calibration approved for that cutoff. Early autumn readiness must be
+demonstrated with truncated-season backtests, not full-season accuracy. See the
+[as-of-date training contract](./crop-classifier-training-procedure.md#81-as-of-date-feature-contract).
 
 ### Step 3: Discover Sentinel acquisitions
 
@@ -221,6 +229,9 @@ Optional but useful inputs:
 Context must not leak the answer. For example, the farmer's declared crop may be used
 as the item being tested but should not be supplied to the classifier as if it were
 ground truth.
+Target-year CLMS labels and confidence must remain label metadata in the weak-label
+prototype. Any historical CLMS predictor must have been published before the scoring
+cutoff and be separately evaluated.
 
 ### Step 7: Classify the crop
 
@@ -237,6 +248,7 @@ The model output should include:
 - an abstain/unknown result;
 - coverage and data-quality score;
 - evidence dates and important features;
+- as-of date, availability cutoff, and observed seasonal window;
 - model/version identifier;
 - known limitations relevant to the parcel.
 
@@ -287,6 +299,8 @@ approved field-evidence route.
     "cropName": "Wheat"
   },
   "analysis": {
+    "asOfDate": "2026-09-30",
+    "availabilityCutoff": "2026-09-30T23:59:59Z",
     "predictedCropCode": "DEMO-MAIZE",
     "predictedCropName": "Maize",
     "confidence": 0.87,
@@ -298,7 +312,7 @@ approved field-evidence route.
     "sentinel2Observations": 23,
     "sentinel1Observations": 31,
     "modelVersion": "crop-classifier-demo-0.1",
-    "result": "DISCREPANCY_REVIEW_REQUIRED"
+    "result": "REVIEW_REQUIRED"
   }
 }
 ```
@@ -314,6 +328,7 @@ Each analysis should produce:
 - official parcel geometry/version and area calculation;
 - declared crop/activity;
 - source Sentinel product IDs and acquisition times;
+- as-of date, availability cutoff, and product availability timestamps;
 - cloud/quality masks and valid-coverage statistics;
 - parcel-level time-series chart;
 - selected RGB, false-colour, NDVI/NDRE, and radar evidence views;
@@ -355,6 +370,7 @@ The interface should show:
 - calibration/error by confidence band;
 - abstention coverage and accuracy;
 - performance by region, parcel size, season, and observation coverage;
+- accuracy, calibration, abstention, and review workload by supported as-of cutoff;
 - false discrepancy rate against validated outcomes.
 
 ### Area and geometry metrics
@@ -375,28 +391,41 @@ The interface should show:
 - human override and appeal outcome;
 - time from observation to explainable case action.
 
-## 10. Recommended MVP
+## 10. Public Demonstrator and Production Pilot
 
-The concrete acquisition and implementation steps for this MVP are documented in
+The concrete acquisition and implementation steps for the public demonstrator are documented in
 [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md).
 
-Start with:
+### Public-data demonstrator
+
+Start with one region, a small crop taxonomy, public or explicitly non-authoritative
+analysis polygons, CLMS weak labels, Sentinel-1/2 prefix and complete-season features,
+a transparent baseline, abstention, and downloadable lineage. Calculated area is
+analysis area, not an official entitlement. Show normal farmer-photo capture and
+registration with synthetic task data; neither weak predictions nor synthetic
+evidence can authorise payment.
+
+### Authoritative-data production pilot
+
+After an approved agency data agreement, use:
 
 1. one region and a small set of spectrally/phenologically distinct crop classes;
 2. official LPIS polygons and validated historical claims;
-3. Sentinel-2 L2A seasonal features;
-4. Sentinel-1 VV/VH seasonal features;
+3. Sentinel-2 L2A features approved for operational as-of cutoffs;
+4. Sentinel-1 VV/VH features over the same available prefix;
 5. a transparent tree-based baseline and an explicit unknown class;
 6. parcel-level area calculation from LPIS;
 7. a caseworker evidence page and downloadable audit record;
 8. no autonomous adverse decision.
 
 Add grassland mowing, complex eco-scheme conditions, temporal deep learning, and
-farmer photo fusion only after the baseline is measured and understood.
+automated farmer-photo model fusion only after the baseline is measured and
+understood. Photo capture, quarantine, receipts, and human evidence review are a
+normal lane, not deferred until model fusion exists.
 
 ## 11. Decision
 
-For this project, use:
+For the production target, use:
 
 - **Sentinel-2 L2A** as the primary crop-discrimination source;
 - **Sentinel-1 GRD VV+VH** as the all-weather complementary source;
@@ -408,3 +437,5 @@ For this project, use:
 This combination is aligned with the Area Monitoring System, technically appropriate
 for crop phenology, and defensible to farmers and auditors when the full lineage and
 human-review path are preserved.
+The first public demonstrator substitutes weak labels and analysis geometries as
+described in §10; it must not imply that authoritative data access already exists.

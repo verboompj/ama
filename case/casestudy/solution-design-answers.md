@@ -15,7 +15,12 @@ It is not a substitute for legal, procurement, security, or accreditation sign-o
 
 The agency administers approximately **EUR 2 billion in annual CAP payments to 160,000 farmers** through a process that is partly manual, labour-intensive, slow, and unable to review every parcel every season. The current control environment has contributed to approximately **EUR 60 million in European Commission financial corrections over three years**, while farmers may wait months for payments.
 
-This is not a discretionary technology programme. The Area Monitoring System is mandatory, and eligibility conditions that can be monitored using Sentinel data or geo-tagged photographs must be incorporated into the monitoring process. Delaying implementation prolongs financial corrections, manual inspection costs, payment delays, and political dissatisfaction.
+This is not a discretionary technology programme. The Area Monitoring System is
+mandatory; monitorable conditions must be covered under the applicable EU rules and
+Hungarian rollout, including the permitted gradual inclusion of photo-only
+conditions. Delayed implementation prolongs exposure to control deficiencies,
+inspection costs, payment delays, and dissatisfaction; actual corrections depend on
+the deficiencies found, not simply the technology rollout date.
 
 The programme should therefore be funded to:
 
@@ -26,7 +31,25 @@ The programme should therefore be funded to:
 5. reduce physical-inspection cost by a target of **40%**; and
 6. reduce the error rate and associated financial corrections without weakening farmers' procedural rights.
 
-The first executive KPI should be **median time from a complete claim to payment**, measured against the previous three scheme years. Financial corrections, inspection cost, farmer satisfaction, and overturned adverse decisions should be reported alongside it.
+These monetary figures and targets come from the case brief, not independently
+verified Hungarian national statistics. Corrections avoided must be attributed by
+cause; broader coverage cannot eliminate corrections unrelated to monitoring.
+
+Payment reporting must distinguish **first material payment** from **substantially
+complete payment**, measured against the previous three claim years using claim and
+treasury records. Report median/P90 time to each, year-end paid share, and unpaid
+value in December/March, separately for no-advance, partial-advance, and
+maximum-advance cohorts. The proposed substantially-complete threshold is 90% of
+final eligible value, a measurement convention for agency validation, not a legal rule.
+Financial corrections, inspection cost, farmer satisfaction, and overturned adverse
+decisions should be reported alongside these measures.
+
+The two-month target concerns delayed cohorts and outstanding balances, not a
+universal acceleration of an advance already received on 16 October. Ordinary/balance
+payments normally start from 1 December, with the normal deadline on 30 June of the
+following year. Earlier readiness must respect those windows and the required
+controls; see the
+[CAP payment calendar](../../docs/research/cap-claim-and-payment-calendar.md).
 
 ### Cost of inaction
 
@@ -90,6 +113,12 @@ The design phase begins with a twelve-week discovery covering:
 - national registers;
 - audit and records-management systems; and
 - Copernicus Data Space services.
+
+The deterministic payment-system adapter exports only approved readiness/decision
+records. The existing authorised agency system retains payment execution and its
+ledger; acknowledgements, settlements, balances, recoveries, and offsets are
+reconciled to case state using stable transaction and idempotency references.
+An agent or model-consistent parcel cannot authorise a transfer.
 
 ### Data-quality gate
 
@@ -675,7 +704,8 @@ Automation should shift staff from repetitive checking toward complex evidence r
 
 | Outcome | Measure |
 |---|---|
-| Faster payment | Median and percentile claim-to-payment time; target direction: two months earlier |
+| Faster payment | Median/P90 to first material and substantially complete payment; target direction: up to two months earlier for delayed cohorts/balances within legal windows |
+| Payment completion | Date reaching the proposed 90% of final eligible value, share paid by year-end, and unpaid value at 31 December/31 March, split by advance cohort |
 | Lower corrections | Annual value and cause of Commission financial corrections |
 | Lower inspection cost | Cost per claim and total physical-inspection cost; target direction: 40% reduction |
 | Better accuracy | Confirmed error, false-discrepancy, and human-overturn rates |

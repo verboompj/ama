@@ -1,17 +1,29 @@
 # Copernicus Programme
 
 ## What it is
-Copernicus is the European Union's flagship Earth observation programme, providing free, full, and open access to satellite and in-situ data for monitoring the Earth (land, marine, atmosphere, climate, emergency management, and security).
+Copernicus is the European Union's flagship Earth observation programme for land,
+marine, atmosphere, climate, emergency management, and security. Sentinel and many
+service products are open; some CCM licences and security outputs have restrictions.
 
 ## Relevance to CAP / Case Study 47
-Copernicus **Sentinel-1** (radar) and **Sentinel-2** (optical) satellites provide imagery every 3–5 days, enabling continuous, automated monitoring of agricultural parcels. This underpins the EU's **Area Monitoring System (AMS)**, which since 1 January 2025 treats any eligibility condition monitorable via Sentinel data (or geolocated photos) as "monitorable" under CAP rules.
+Copernicus **Sentinel-1** (radar) and **Sentinel-2** (optical) time series support
+systematic agricultural monitoring. Acquisition cadence varies by constellation,
+orbit, location, and acquisition plan; cloud and quality masks can create longer
+usable-observation gaps.
+
+The EU's **Area Monitoring System (AMS)** covers monitorable area-based conditions.
+The original Article 10(3) of Regulation (EU) 2022/1173 extends monitorability to
+geotagged photos from 1 January 2025, while paragraph 4 permits gradual inclusion
+of photo-only conditions. Confirm the current consolidated rules and national
+rollout; see the [AMS summary](../regulatory-compliance/area-monitoring-system.md).
 
 - **Sen4CAP** ("Sentinels for Common Agricultural Policy") provides validated algorithms and workflows for CAP-compliant monitoring using Sentinel data.
 - Analysis of Sentinel imagery supports crop classification, mowing/ploughing detection, and eco-scheme compliance checks, reducing reliance on manual on-the-spot inspections.
 
 ## Data Policy
 - Governed principally by **Regulation (EU) No 2021/696** (establishing the Union Space Programme and the EU Agency for the Space Programme, EUSPA), and **Commission Delegated Regulation (EU) No 1159/2013** for the land monitoring data policy.
-- **Open access**: Copernicus land monitoring products, datasets, software, scripts, and documentation are free and openly available.
+- **Access**: Sentinel and many CLMS products are open. Verify individual data/software
+  licences; CCM/security restrictions and processing quotas/charges remain distinct.
 - **User obligations** when distributing/communicating Copernicus products:
   - Clearly indicate the source.
   - Indicate clearly if the products have been adapted or modified.

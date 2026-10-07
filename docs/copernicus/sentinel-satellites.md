@@ -12,7 +12,12 @@ Sentinel satellites, operated by ESA/EUMETSAT for Copernicus, are the primary so
 | **Sentinel-5P (Precursor)** | Atmospheric spectrometer | Trace gases and aerosols affecting air quality/climate; bridges gap before Sentinel-5 |
 | **Sentinel-6** | Radar altimeter | Global sea surface height measurement for oceanography and climate |
 
-Each mission (except 5P) is typically a constellation of ≥2 satellites for frequent, comprehensive coverage. Sentinel-1/2 refresh over a given parcel every 3–5 days — the basis of the CAP Area Monitoring System.
+Mission configurations and active satellites vary. Sentinel-2's nominal
+two-satellite revisit is about five days at the equator; Sentinel-1 repeat coverage
+depends on the active constellation, orbit, and acquisition plan. Neither is a
+guarantee of a usable parcel observation at that interval. Latitude, cloud/shadow
+masks, geometry, processing latency, and data quality determine the actual time
+series and observation gaps used by AMS.
 
 ## Sources
 - [ESA — The Sentinel missions](https://www.esa.int/Applications/Observing_the_Earth/Copernicus/The_Sentinel_missions)

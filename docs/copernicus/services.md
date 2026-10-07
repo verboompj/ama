@@ -1,6 +1,6 @@
 # Copernicus Core Services
 
-Copernicus delivers six core operational services, each producing free and open data/information products:
+Copernicus delivers six core operational services with product-specific access rules:
 
 | Service | Focus |
 |---|---|
@@ -11,7 +11,11 @@ Copernicus delivers six core operational services, each producing free and open 
 | **Copernicus Security Service** | Border surveillance, maritime surveillance, support for EU external actions |
 | **Copernicus Emergency Management Service (CEMS)** | Rapid mapping and geospatial info for natural/man-made disaster response |
 
-All services provide freely accessible, near-real-time data from satellites and in-situ sensors, processed for policy-makers, researchers, public authorities, and businesses.
+Many products are openly accessible, but security-service outputs and some tasking
+or emergency workflows have authorised-user restrictions. Products range from
+near-real-time observations to annual land classifications, historical reanalyses,
+and projections. Check each product's licence, publication latency, access conditions,
+and platform quotas; open source data does not imply free unlimited processing.
 
 ## Sources
 - [Copernicus Services — copernicus.eu](https://www.copernicus.eu/en/copernicus-services)

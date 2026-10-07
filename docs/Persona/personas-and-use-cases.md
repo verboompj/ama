@@ -156,7 +156,9 @@ during time-sensitive agricultural work.
   - what evidence can resolve it;
   - whether a human has reviewed the case.
 - Guided capture and upload of geo-tagged photos, including offline capture,
-  validation, consent/privacy notice, and upload retry.
+  validation, camera/location permissions, privacy notice, and upload retry. Device
+  permissions and notice acknowledgement are separate from the agency's GDPR lawful
+  basis for processing.
 - An always-available parcel evidence option for voluntary material-event capture,
   approved scheme milestones, and focused agency requests; this must not become a
   universal photo requirement without a lawful and proportionate rule.
@@ -666,8 +668,10 @@ must confirm the actual organisation and decision rights.
 
 The system likely processes personal data, location data, farm business information,
 geo-tagged photographs, model inferences, and decisions affecting access to public
-benefits. It may therefore trigger GDPR impact-assessment duties and high-risk AI
-obligations, in addition to CAP, accessibility, eIDAS, and administrative-law controls.
+benefits. It may therefore trigger GDPR impact-assessment duties. AI Act high-risk
+status requires a documented intended-use assessment; public subsidy payments alone
+do not establish an Annex III category. CAP, accessibility, eIDAS, and
+administrative-law controls also apply.
 
 ### Goals
 
@@ -969,5 +973,5 @@ This document is based on the following repository material:
   — public-sector web and mobile accessibility.
 - [`../regulatory-compliance/nis2-directive.md`](../regulatory-compliance/nis2-directive.md)
   — cybersecurity risk management, continuity, and incident reporting.
-- [`../architecture/copernicus-ai-solution-architecture.md`](../architecture/copernicus-ai-solution-architecture.md)
+- [`../architecture/aks-centered-foundry-architecture.md`](../architecture/aks-centered-foundry-architecture.md)
   — proposed platform, data flow, operations, and technical components.

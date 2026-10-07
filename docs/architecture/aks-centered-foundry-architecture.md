@@ -20,8 +20,8 @@ This architecture provides substantial practical AKS experience without using
 Kubernetes to operate GPU drivers, model servers, vector databases, or foundation
 models.
 
-The original AKS GPU-serving option remains documented in
-[`copernicus-ai-solution-architecture.md`](./copernicus-ai-solution-architecture.md).
+This is the maintained architecture for the case. The earlier GPU-serving design
+has been retired; it is not an alternative implementation baseline.
 
 ## 2. Why Agents Fit AKS
 
@@ -117,6 +117,7 @@ flowchart TB
         CASE[case-api]
         RULES[CAP rules-service]
         EVIDENCE[evidence-api]
+        PAYMENT[payment-system-adapter\ncontrolled export and reconciliation]
         FETCH[copernicus-fetcher]
         FEATURE[feature-worker]
         DRONEWORKER[drone-evidence-worker\nmanifest validation and photogrammetry]
@@ -147,6 +148,7 @@ flowchart TB
         STATE[Conversation / Thread State]
         PRED[Prediction Result Store]
         BUS[Service Bus]
+        EVENTS[Event Grid\nobject and scan notifications]
         KV[Key Vault]
         MON[Application Insights / Azure Monitor]
         AUDITLOG[Immutable Audit Log]
@@ -156,6 +158,10 @@ flowchart TB
     subgraph Copernicus["Copernicus Data Space Ecosystem"]
         STAC[STAC Catalogue]
         PROCESS[openEO / Sentinel Hub]
+    end
+
+    subgraph Agency["Existing Authorised Agency Systems"]
+        TREASURY[Payment / Treasury System\nauthorisation, execution and ledger]
     end
 
     FARMERWEB --> NATIONALID
@@ -195,6 +201,10 @@ flowchart TB
 
     CASE --> CASEDB
     CASE --> BUS
+    CASE -->|Approved readiness and decision record| PAYMENT
+    PAYMENT -->|Controlled payment handoff| TREASURY
+    TREASURY -->|Transaction and recovery status| PAYMENT
+    PAYMENT -->|Reconciled status and references| CASE
     RULES --> CASEDB
     EVIDENCE --> LAKE
     EVIDENCE --> EVIDENCESTORE
@@ -216,7 +226,9 @@ flowchart TB
     FIELDCONTROLLER --> BFF
     EVIDENCE -.authorises restricted upload.-> FIELDCONTROLLER
     FIELDCONTROLLER -.direct resumable upload.-> QUARANTINE
-    QUARANTINE --> BUS
+    QUARANTINE --> EVENTS
+    EVENTS -->|Object and scan status| EVIDENCE
+    EVIDENCE -->|Finalised complete clean mission| BUS
     BUS --> DRONEWORKER
     DRONEWORKER --> DRONEVISION
     DRONEVISION --> DRONEWORKER
@@ -318,7 +330,7 @@ capture footprint, surveyor findings, and upload receipt. Drone-control software
 not receive broader case access than required, and consumer cloud synchronisation is
 not part of the evidence path.
 
-### 5.2 `agent-api`
+### 5.2 `interactive-agent-api` and `agent-worker`
 
 Responsibilities:
 
@@ -352,8 +364,23 @@ Responsibilities:
 - farmer responses;
 - human-review tasks;
 - appeal and discrepancy status;
+- intervention-level provisional/final amounts, advance readiness, payment holds,
+  and reconciled advance, balance, recovery, and offset status;
 - role-based access control;
 - immutable material-event history.
+
+`case-api` establishes case readiness; it does not transfer funds. A deterministic
+`payment-system-adapter` hands off only approved decision/readiness records to the
+existing authorised paying-agency/treasury system. That system retains payment
+authorisation, execution, scheduling, and the authoritative transaction ledger.
+
+The adapter records claim year, intervention, approved amount, rule/decision version,
+authorisation reference, and a stable idempotency key. It reconciles acknowledgements,
+failures, settlements, balances, offsets, and recoveries back to the case with
+transaction references. A submitted or accepted instruction is not a paid amount.
+Duplicate callbacks and retries must not create a second payment; unresolved or
+conflicting status creates an operational exception. Agents cannot invoke payment
+execution or edit these fields.
 
 ### 5.4 `rules-service`
 
@@ -374,6 +401,7 @@ Responsibilities:
 - approved imagery and chart references;
 - model result and provenance;
 - task-scoped farmer and inspector upload authorisation;
+- upload-session finalisation against a versioned expected-object manifest;
 - quarantine validation, raw-object hashes, receipts, and evidence registration;
 - evidence-package generation;
 - farmer-safe and caseworker-safe views;
@@ -425,15 +453,23 @@ rejoins the authoritative case at human review. It is not a second decision syst
 5. The field application uploads large raw files directly and resumably to a
    quarantine Blob container. The payload does not traverse `web-bff` or
    `evidence-api`.
-6. Blob completion emits an event through Service Bus. `drone-evidence-worker`
-   validates the manifest, hashes, media, capture metadata, and quality before
-   preserving raw originals.
-7. The worker creates versioned orthomosaics, capture masks, LPIS overlays, and a
+6. Blob object/scan notifications reach `evidence-api` through an Event Grid
+   subscription. The client explicitly finalises the upload session. Only after every
+   manifest object is committed, hashes and sizes match, and malware scans are clean
+   does the service publish a mission-ready message to Service Bus. Missing, failed,
+   or pending objects keep the mission in quarantine with an explicit status.
+7. `drone-evidence-worker` revalidates the pinned manifest/object versions, media,
+   capture metadata, and quality before preserving raw originals. Session/manifest
+   version is the deduplication key; retries are idempotent, and exhausted failures
+   enter the dead-letter queue with an operator-visible task exception.
+8. The worker creates versioned orthomosaics, capture masks, LPIS overlays, and a
    processing report. Optional high-resolution image analysis uses a separate Azure
    ML batch model.
-8. `evidence-api` registers approved raw evidence, derivatives, and model outputs in
-   the case evidence graph. The surveyor records an independent structured finding.
-9. The Caseworker reviews Copernicus, drone, farmer, and surveyor evidence together.
+9. `evidence-api` registers approved raw evidence and derivatives. The surveyor
+   attests an independent finding before model suggestions are revealed. Optional
+   model outputs may be registered separately but remain hidden from the surveyor
+   until that finding is locked; any later reconciliation is a separate record.
+10. The Caseworker reviews Copernicus, drone, farmer, and surveyor evidence together.
    Any administrative outcome follows the existing human-controlled decision path.
 
 The existing Sentinel crop classifier is not reused directly for raw drone imagery.
@@ -510,6 +546,11 @@ Use Azure Machine Learning for the custom crop classifier:
 The first classifier should be XGBoost, LightGBM, or another CPU-friendly model over
 seasonal parcel features. GPU is optional for later temporal deep-learning
 experiments, not required for the baseline.
+
+Operational inference has an explicit `asOfDate` and data-availability cutoff.
+Features, calibration, and abstention thresholds must be approved for that cutoff;
+full-season accuracy cannot substantiate readiness for an October advance. See the
+[training procedure's as-of contract](../copernicus/crop-classification/crop-classifier-training-procedure.md#81-as-of-date-feature-contract).
 
 Foundry foundation-model fine-tuning is not a substitute for training this arbitrary
 geospatial classifier.
@@ -783,10 +824,11 @@ Controls include:
 Use one correlation ID across the portal request, agent turn, model call, tool call,
 case event, crop prediction, and human decision.
 
-Persist high-risk AI logs and technical evidence to an immutable/WORM-capable storage
+Persist material AI logs and technical evidence to an immutable/WORM-capable storage
 destination. Retain model, prompt, tool, dataset, rule, and deployment versions for the
-period required by the AI Act, CAP audit, national administrative law, and the
-agency's approved records schedule. Use at least the applicable AI Act minimum and
+period required by the applicable AI Act classification, CAP audit, national
+administrative law, and the agency's approved records schedule. Where high-risk
+requirements apply, use at least the applicable AI Act minimum and
 extend it where CAP/audit obligations require longer retention. Keep transient chat
 retention separate from the legally required case/evidence record; GDPR erasure does
 not remove records retained under a valid public-task or legal-obligation basis.
@@ -857,19 +899,27 @@ disabled outside demonstration/interactive periods where operationally acceptabl
 ## 20. MVP Sequence
 
 1. Deploy an AKS CPU cluster with Workload Identity, ingress, ACR, and monitoring.
-2. Deploy `web-bff`, `agent-api`, `case-api`, and `rules-service`.
+2. Deploy `web-bff`, `interactive-agent-api`, `agent-worker`, `case-api`,
+   `rules-service`, and `evidence-api`.
 3. Deploy an EU Regional or EU Data Zone Foundry chat model and grant the agent
    workload identity access.
 4. Add the governed guidance-indexing worker and AI Search index versioning.
 5. Build the public crop-feature dataset.
-6. Train the CPU crop classifier using Azure ML managed compute.
+6. Train the CPU crop classifier using Azure ML managed compute; evaluate both
+   complete-season and truncated-season/as-of-date candidates.
 7. Deploy a managed batch endpoint.
 8. Add the Prediction Result Store and `get_crop_result`, `get_case_status`, and
    `get_cap_rule` tools.
 9. Add farmer-safe explanations and human escalation.
 10. Run agent and crop model in shadow mode.
-11. Add KEDA workers for ingestion, evidence, and audits.
-12. Add an online crop endpoint only if interactive rescoring is required.
+11. Add the farmer capture/quarantine/receipt lane and KEDA workers for ingestion,
+   evidence, and audits. Photo capture is in scope; automated photo interpretation
+   is optional and separately evaluated.
+12. Demonstrate an optional drone side flow with synthetic or authorised data,
+   mission finalisation, independent findings, and both exception and random entry.
+13. Demonstrate payment-status reconciliation using a mock treasury adapter. Connect
+   the real system only after agency authorisation and integration assurance.
+14. Add an online crop endpoint only if interactive rescoring is required.
 
 ## 21. If Azure ML Is Not Available
 

@@ -39,13 +39,17 @@ within countries, between EU Member States, and between EU and non-EU producers.
 The [CAP claim and payment calendar](./docs/research/cap-claim-and-payment-calendar.md)
 explains how spring claims, seasonal monitoring, autumn advances, and final payments
 relate to sowing, harvest, and evidence validation.
+The [evidence-validation storyline](./docs/copernicus/crop-classification/evidence-validation-storyline.md)
+connects normal farmer-photo capture, exception handling, and random validation to the
+[independent ground/drone process](./docs/copernicus/crop-classification/drone-survey-validation-process.md).
 
 ## Repository Structure
 
 ```
 .
-├── case/                    # The original case study brief (source material)
-│   └── casestudy/           # Case understanding write-up & open design questions
+├── case/                    # Original case brief and assessment source material
+│   ├── casestudy/           # Participant case understanding & design questions
+│   └── rubrik/              # Assessment rubric
 ├── docs/
 │   ├── architecture/        # Proposed AI solution architecture (AKS + Azure AI services)
 │   ├── copernicus/          # Copernicus data/services/tools inventory
@@ -69,8 +73,8 @@ Licensed under the [MIT License](./LICENSE).
 
 <p align="center">
   <sub>
-    ⚠️ <strong>Fictive case study.</strong> The organisation, figures, and scenario in this repository are illustrative and used for solution-design practice only.
-    No real farmer, agency, or personal data is used or referenced.<br>
+    ⚠️ <strong>Fictive case study.</strong> The case organisation, personas, figures, and scenario are illustrative and used for solution-design practice only.
+    No real claimant or personal case data is used. Public institutions, legislation, and published campaign information are referenced as research, separately from the fictional scenario.<br>
     Maintained as part of the <strong>AMA (Azure Master Architect)</strong> initiative.
   </sub>
 </p>

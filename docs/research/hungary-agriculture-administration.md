@@ -5,6 +5,10 @@ Hungary's accredited CAP paying agency is the **Magyar Államkincstár (Hungaria
 - **EAGF** — European Agricultural Guarantee Fund (direct payments/Pillar 1)
 - **EAFRD** — European Agricultural Fund for Rural Development (Pillar 2)
 
+This is real-world institutional research. The Field & File organisation and personas
+are fictional; the case's payment volumes and control gaps are scenario assumptions,
+not asserted facts about MÁK.
+
 ## Responsibilities
 - Manages payments under strict EU rules and is directly accountable for the legality and correctness of the payment process.
 - Distributes funds to a wide range of beneficiaries, from small family farms to large agricultural cooperatives.
@@ -17,7 +21,10 @@ Hungary's accredited CAP paying agency is the **Magyar Államkincstár (Hungaria
 - Operates under EU Commission audit interfaces and reporting obligations (see `regulatory-compliance/` for the applicable EU frameworks).
 
 ## Recent Context
-As of August 2026, the agency was reportedly the target of a ransomware cyberattack that disrupted some services during a key farmer payment period; official statements indicated payment systems and client data largely remained secure.
+The linked August 2026 media report describes an alleged ransomware incident.
+Its operational impact and claims about payment/client-data integrity have not been
+independently corroborated here. Do not treat the report as an established case fact
+or cite official assurances without a primary agency source.
 
 ## Sources
 - [CAP paying agencies — European Commission](https://agriculture.ec.europa.eu/common-agricultural-policy/financing-cap/cap-paying-agencies_en)

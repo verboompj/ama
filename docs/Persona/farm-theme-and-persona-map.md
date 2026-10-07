@@ -388,6 +388,9 @@ This document defines the narrative and visual layer. Detailed requirements rema
 - [AKS-Centred Foundry Architecture](../architecture/aks-centered-foundry-architecture.md);
 - [Crop Classification Goal](../copernicus/crop-classification/README.md);
 - [Agricultural Analysis Use Case](../copernicus/crop-classification/agricultural-analysis-use-case.md);
+- [Evidence Validation Storyline](../copernicus/crop-classification/evidence-validation-storyline.md);
+- [Drone Survey and Manual Validation](../copernicus/crop-classification/drone-survey-validation-process.md);
+- [CAP Claim and Payment Calendar](../research/cap-claim-and-payment-calendar.md);
 - [High-Resolution Data Strategy](../copernicus/crop-classification/high-resolution-data-strategy.md).
 
 If the story and the detailed documents differ, the detailed policy, persona, data,

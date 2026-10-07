@@ -186,16 +186,20 @@ can accelerate prototyping and provide context.
 | Dataset | Typical scale/cadence | Project use | Limitation |
 |---|---|---|---|
 | High Resolution Layer Croplands | 10 m, annual products | Prior/reference for crop type, cropping pattern, seasonality | Not the authoritative current-year Hungarian claim record |
-| Crop Types | 10 m, yearly | Benchmark, weak label, national comparison, model feature | Product taxonomy may not match CAP scheme taxonomy |
+| Crop Types | 10 m, yearly | Supporting reference or weak label; historical predictor only with availability/leakage checks | Derived from observations, not independent ground truth; taxonomy may not match CAP |
 | Cropping Patterns | 10 m, yearly | Emergence, harvest, bare-soil period, crop duration | Derived product with its own uncertainty |
 | High Resolution Layer Grasslands | 10 m, annual products | Grassland extent and status | Must not replace current parcel evidence |
 | Grassland mowing layers | Product-dependent | Supporting evidence for mowing activity | Validate event timing and local accuracy |
 | CORINE Land Cover | Pan-European, coarser and multi-year | Broad land-cover context and obvious anomaly checks | Too coarse and infrequent for parcel eligibility |
 | Copernicus DEM | 10 m/30 m depending entitlement/coverage | Terrain correction, slope/aspect, erosion context | Elevation is not a crop observation |
 
-CLMS layers are valuable as priors, contextual features, and independent comparison
-datasets. They should not silently become the legal source of parcel boundaries or
-farmer declarations.
+CLMS layers are supporting model-derived references, not independent inspected ground
+truth; they may share Sentinel inputs with the classifier being evaluated. Keep
+target-year crop labels and confidence out of predictor features. A historical
+context input must have been published before the scoring cutoff and be separately
+evaluated. CLMS must not silently become the legal source of parcel boundaries or
+farmer declarations; see the
+[as-of training contract](./crop-classification/crop-classifier-training-procedure.md#81-as-of-date-feature-contract).
 
 ## 7. Copernicus Climate Data
 

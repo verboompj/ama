@@ -54,12 +54,15 @@ flowchart TD
 
     K --> M{Drone justified and lawful?}
     M -->|No| N[Ground inspection or other evidence route]
+    N --> X[Capture scoped alternative evidence]
+    X --> Q
     M -->|Yes| O[Plan and authorise mission]
     O --> P[Capture independent drone evidence]
     P --> Q[Validate, process, and register evidence]
     Q --> R[Surveyor records factual findings]
     R --> S{Question answered?}
     S -->|No| T[Inconclusive or further evidence required]
+    T --> I
     S -->|Yes| U[Caseworker reviews combined evidence]
     U --> V[Human-controlled administrative decision]
     V --> W[Farmer notification and audit record]
@@ -94,13 +97,15 @@ and detects systematic blind spots.
 
 The quality sample should:
 
-- be selected independently of model confidence and case outcome;
-- use a documented random or stratified sampling design;
+- use probability-based selection independent of inspection outcomes, without
+  cherry-picking cases already believed to be wrong;
+- use a documented random or stratified sampling design; confidence/evidence-quality
+  bands may be declared strata, with random selection within each stratum;
 - represent relevant regions, crops, parcel sizes, boundary complexity, and evidence
   quality bands;
 - lock the sample before inspection outcomes are known;
-- record the sampling frame, exclusions, strata, method, random seed, and selection
-  timestamp;
+- record the sampling frame, exclusions, strata, inclusion probabilities, random
+  seed, selection timestamp, and applicable weighting method;
 - keep statistically selected cases identifiable in reporting;
 - avoid substituting convenient or nearby parcels for selected parcels without a
   documented sampling decision.
@@ -108,6 +113,12 @@ The quality sample should:
 A risk-based sample answers “where might problems be concentrated?” A random sample
 answers “how well does the control system work overall?” Their results must be
 reported separately.
+Population estimates must use the design's weights, denominators, and uncertainty
+intervals rather than an unweighted pooled inspection rate. Record aborted visits,
+invalid capture, non-response, replacements, and any resulting coverage bias.
+The quality owner must also confirm how this operational sample meets the applicable
+EU AMS quality-assessment methodology; the prototype design is not a substitute for
+that methodology.
 
 ### 3.3 Inconclusive Copernicus imagery
 
@@ -259,8 +270,10 @@ At the site, the surveyor:
    neighbouring-property detail;
 10. records deviations, gaps, access problems, and any portion not observed.
 
-The inspector's factual observations should be recorded before model predictions are
-revealed where doing so reduces confirmation bias.
+Record and attest the independent field observations before revealing model
+suggestions. If the surveyor has already seen predictions, record that exposure and
+do not present the finding as blinded independent evaluation.
+
 
 ### Phase 4: Secure and transfer the mission package
 
@@ -278,20 +291,33 @@ The field application creates a manifest containing:
 
 Raw files are encrypted on the approved device and in transit. The authoritative
 ingestion service verifies the task assignment and creates a short-lived upload
-session restricted to that inspection task, parcel, expected manifest, file types,
-object prefix, size limits, and expiry.
+session restricted to that inspection task, parcel, expected manifest, and expiry.
+Issue short-lived create/write SAS URLs for each approved blob name, with no general
+container access. A path prefix is a naming convention, not an arbitrary-prefix Blob
+SAS permission. Validate manifest size/type limits in quarantine; SAS does not enforce
+those content constraints.
 
 Because a drone mission can contain gigabytes of imagery, the files do not pass
 through the application API. The field application uses resumable block uploads
 directly to an isolated Blob quarantine container. `evidence-api` retains control of
 authorisation and expected content without proxying the payload.
 
-Upload completion emits an event through the approved eventing path. The ingestion
-worker then validates file type, malware status, manifest completeness, checksums,
-capture metadata, and upload completion. It records a receipt and preserves accepted
-raw originals as read-only evidence. A failed validation keeps the objects isolated
-and creates an explicit task exception; it does not create success-shaped case
-evidence.
+Storage object notifications reach the ingestion service through an Event Grid
+subscription; an approved scanner reports malware completion through the same
+configured event bridge. An object-created event is not mission completion.
+
+The client explicitly finalises the session against a versioned manifest. Before
+`evidence-api` publishes a mission-ready message to Service Bus, all expected objects
+must be committed, size/type/hash checks must pass, and scan status must be clean.
+Pin the blob version or snapshot and hash so later writes cannot change the bytes
+that were scanned and accepted. Missing or pending objects retain an explicit
+quarantine status; a validation failure creates a task exception, not case evidence.
+
+`drone-evidence-worker` revalidates the pinned manifest and capture metadata, records
+an acceptance receipt, and preserves those exact raw bytes as read-only evidence.
+Key processing by session ID and manifest version, deduplicate events, use bounded
+idempotent retries, and route exhausted failures to a monitored dead-letter queue.
+Do not create duplicate evidence or silently discard failed missions.
 
 Consumer cloud synchronisation, personal storage, and unmanaged editing applications
 must not be used.
@@ -338,6 +364,12 @@ positioning, parcel coverage, and geofence deviation so the surveyor can correct
 capture before leaving the site.
 
 ### Phase 6: Independent surveyor finding
+
+The surveyor completes and locks the independent finding from field observations,
+accepted raw evidence, and non-interpretive derivatives before model predictions are
+shown. Automated image outputs may be computed in parallel, but access is withheld
+until attestation. Preserve the pre-AI record; any later assisted comparison or
+reconciliation is a separately versioned finding, not an overwrite.
 
 The surveyor answers the scoped factual question using structured findings:
 
@@ -434,17 +466,25 @@ flowchart LR
     D --> E[evidence-api authorises upload session]
     E --> F[Direct resumable upload]
     F --> G[Blob quarantine]
-    G --> H[Service Bus event]
+    G --> EG[Event Grid object notifications]
+    G --> SC[Approved malware scanner]
+    SC --> EG
+    EG --> FIN[evidence-api checks pinned manifest and scan status]
+    B -->|Explicit finalise request| FIN
+    FIN -->|Complete and clean| H[Service Bus mission-ready message]
+    FIN -->|Missing, pending or failed| HOLD[Quarantine status or task exception]
     H --> I[drone-evidence-worker]
     I --> J[Manifest and chain-of-custody validation]
     J --> K[Orthomosaic and quality report]
     K --> L{Drone vision approved?}
     L -->|Yes| M[Separate Azure ML batch model]
     L -->|No| N[No automated image interpretation]
-    M --> O[Evidence registration]
-    N --> O
-    O --> P[Independent surveyor finding]
+    M --> O[Register advisory output\nhidden until independent attestation]
+    N --> RAW
+    K --> RAW[Register raw evidence and derivatives]
+    RAW --> P[Lock independent surveyor finding\nbefore model suggestions]
     P --> Q[Caseworker reviews combined evidence]
+    O -->|Release only after finding locked| Q
     Q --> R[Human-controlled decision]
 
     S[Sentinel seasonal evidence] --> Q
@@ -458,10 +498,12 @@ flowchart LR
 | Prepare field task | Inspector field mobile through `web-bff`/`case-api` | Downloads minimum assigned parcel data for offline work |
 | Capture and manifest | Approved drone/field application | Signs or attests mission metadata and preserves hashes |
 | Authorise upload | `evidence-api` | Creates a short-lived, task-scoped upload session; does not proxy large files |
-| Upload | Field application directly to Blob quarantine | Uses encrypted resumable uploads and cannot write outside the assigned object prefix |
-| Validate and process | `drone-evidence-worker` on AKS CPU or approved geospatial service | Verifies the manifest and chain of custody, then produces versioned derivatives and quality report |
+| Upload | Field application directly to Blob quarantine | Uses encrypted resumable uploads to approved per-blob SAS URLs; content limits are checked in quarantine |
+| Finalise mission | `evidence-api`, Event Grid, approved scanner, Service Bus | Pins manifest/object versions, waits for complete clean content, then publishes one logical mission-ready event |
+| Validate and process | `drone-evidence-worker` on AKS CPU or approved geospatial service | Idempotently verifies the pinned manifest and chain of custody, then produces versioned derivatives and quality report; exhausted retries surface through a monitored dead-letter queue |
 | Optional image analysis | Separate Azure ML managed batch model | Analyses approved derivatives; does not reuse the Sentinel model contract |
 | Store lineage | Evidence storage plus immutable audit log | Separates raw evidence, derivatives, findings, and decisions |
+| Independent finding | Surveyor UI through `evidence-api` | Locks pre-AI attestation before releasing predictions; preserves assisted reconciliation separately |
 | Review | Caseworker UI via `case-api` and `evidence-api` | Shows Copernicus, drone, farmer, and surveyor evidence by date |
 | Decide | Rules service plus authorised human workflow | No agent or image-processing job makes an adverse decision |
 | Audit | `audit-pack-worker` and Audit Evidence Agent | Compiles a draft package for authorised approval |
@@ -491,8 +533,11 @@ The following records remain distinct:
 - `FlightPlan`: planned capture, permissions, safety, and privacy controls;
 - `DroneMission`: actual operation, equipment, footprint, timing, and exceptions;
 - `EvidenceManifest`: files, hashes, metadata, transfer, and chain of custody;
+- `UploadSession`: expected-object manifest version, pinned versions/hashes, scan
+  status, finalisation, receipts, and processing idempotency key;
 - `EvidenceDerivative`: orthomosaic or other product plus complete processing lineage;
 - `SurveyFinding`: factual observation, limitations, and attestation;
+- `AssistedFinding`: optional post-attestation reconciliation and prediction exposure;
 - `CaseReview`: interpretation against declaration and rule;
 - `AdministrativeDecision`: authorised outcome, reasoning, notification, and appeal;
 - `ValidationOutcome`: quality-assessment result and eligibility for governed model
@@ -544,7 +589,9 @@ presented as cadastral or official LPIS geometry without validation and authorit
 ## 12. Random Validation and Model Governance
 
 Random validation results provide an independent estimate of operational performance.
-Report at least:
+Apply inclusion-probability/design weights and report denominators, uncertainty,
+completion/non-response, and relevant coverage limitations for population estimates.
+Keep risk-targeted inspection yield separate. Report at least:
 
 - agreement between remotely consistent results and field findings;
 - false-consistent and false-discrepancy rates;
@@ -566,6 +613,10 @@ Drone findings become training labels only after:
 
 Random validation records are particularly valuable as a locked evaluation set. They
 should not all be consumed as training data.
+Assign that locked set before training-data selection, keep related parcel/holding
+snapshots out of training, and use only pre-AI findings meeting the temporal and
+quality requirements as independent test labels. Report assisted or previously
+prediction-exposed findings separately.
 
 ## 13. Success Measures
 

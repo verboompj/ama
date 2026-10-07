@@ -9,7 +9,15 @@
 - Strengthens supervisory powers and introduces harmonised sanctions across Member States.
 
 ## Relevance to Case Study 47 (Hungarian Paying Agency)
-As a public-sector body handling €2 billion/year in payments and sensitive farmer/financial data across the national portal and AI agents, the paying agency (Magyar Államkincstár) falls within NIS2's expanded critical/important-entity scope. This is directly underscored by the real-world August 2026 ransomware incident that disrupted the agency's services during a critical payment period — illustrating exactly the risk NIS2 is designed to mitigate (incident response, resilience, reporting obligations).
+The fictional case agency handles substantial payments and sensitive farmer/financial
+data, making resilience, access control, supply-chain assurance, and incident response
+essential design controls. Its legal status as an essential or important entity must
+be confirmed against NIS2, Hungarian transposition, and the competent authority's
+classification; payment volume alone does not determine applicability.
+
+The linked media report concerning Magyar Államkincstár is background research, not
+a verified case fact or evidence of NIS2 classification. Incident details and claimed
+data/payment impacts require official corroboration before use in risk assertions.
 
 ## Source
 - [Directive (EU) 2022/2555 — full text, EUR-Lex](https://eur-lex.europa.eu/eli/dir/2022/2555/oj/eng)

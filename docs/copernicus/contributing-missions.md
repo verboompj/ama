@@ -10,6 +10,13 @@ Commercial and public Earth observation satellite missions that complement the c
 - Spectrometers
 - Emerging domains: hyperspectral, thermal infrared imaging
 
+## Access and Licence
+
+CCM access is not the same as open Sentinel access. Confirm the user category,
+dataset-specific licence, permitted redistribution, and tasking entitlement before
+using commercial/VHR data. Processing and new acquisitions may have quotas or costs;
+see the [high-resolution strategy](./crop-classification/high-resolution-data-strategy.md).
+
 ## Example Missions
 - **ENVISAT** (incl. MERIS instrument)
 - **SMOS** (Soil Moisture and Ocean Salinity)

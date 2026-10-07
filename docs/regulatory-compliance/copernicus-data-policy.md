@@ -4,7 +4,11 @@
 Governed principally by **Regulation (EU) No 2021/696** (establishing the Union Space Programme and the European Union Agency for the Space Programme, EUSPA) and **Commission Delegated Regulation (EU) No 1159/2013** (Copernicus data and information policy).
 
 ## Scope
-- **Full, open, and free access**: Copernicus data, land monitoring products, software, scripts, and documentation are made available openly and free of charge.
+- **Open access with product-specific limits**: Sentinel data and many Copernicus
+  service products, including CLMS, are openly available. CCM commercial imagery and
+  security-service outputs can have eligible-user/licence restrictions. Check
+  individual software licences, attribution, redistribution, quotas, and processing
+  charges; data access does not imply unlimited free compute.
 - **User obligations** when distributing or communicating Copernicus products:
   - Clearly indicate the source.
   - Indicate clearly if products have been adapted or modified.

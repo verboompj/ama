@@ -28,8 +28,8 @@ Questions to answer before/while designing the agentic solution for Case Study 4
 
 ## 4. Autonomy, Governance & Explainability
 - What justifies L4 ("autonomous") for Parcel Monitoring and Audit Evidence, vs. L2 ("recommend") for Inspection Prioritisation — is this consistent with EU AI Act risk classification?
-- Is this system a "high-risk AI system" under the EU AI Act (Annex III — access to public services/benefits)? What conformity assessment, documentation, and logging obligations follow?
-- What explainability method will be used for crop/activity classification (e.g., feature attribution, confidence scores, human-readable rationale) to satisfy farmers' right to be heard and right to reasons for decisions (Charter Art. 41)?
+- What AI Act Article 6/Annex III category, if any, applies to each intended use? Does Annex III point 5(a) on essential public assistance actually cover the relevant agricultural support, and what documented provider/deployer obligations follow?
+- What explainability method will be used for crop/activity classification (e.g., feature attribution, confidence scores, human-readable rationale) to satisfy farmers' procedural rights under applicable EU general principles and Hungarian law, with Charter Article 41 as the Union-level reference?
 - What is the appeal/dispute escalation path, and what SLA applies to human review?
 - Who is accountable when an autonomous classification is wrong and causes a farmer financial harm?
 - How will model drift, seasonal variation, and edge cases (e.g., unusual weather, cloud cover gaps in Sentinel data) be monitored and handled?
@@ -42,8 +42,8 @@ Questions to answer before/while designing the agentic solution for Case Study 4
 - How is data shared with the EU Commission for audit purposes governed (data minimisation, access controls)?
 
 ## 6. Security & Resilience
-- Given the real-world ransomware incident affecting the agency, what is the disaster recovery / business continuity plan for the new agentic system during a payment-critical period?
-- Does the system meet NIS2 obligations for essential/important entities (risk management, incident reporting, supply chain security)?
+- What is the disaster recovery / business continuity plan for ransomware or other disruption during a payment-critical period? Any cited real incident requires official corroboration.
+- What is the agency's confirmed NIS2 status under Hungarian transposition, and which risk-management, reporting, and supply-chain obligations apply?
 - How are the AI agents themselves secured against prompt injection, data poisoning (e.g., manipulated geo-tagged photos), or model manipulation?
 - What are the access control and audit-logging requirements for staff (inspectors, legal officers) interacting with agent outputs?
 
@@ -63,12 +63,15 @@ Questions to answer before/while designing the agentic solution for Case Study 4
 - What is the modeling approach for crop/activity classification (custom ML model, foundation model + fine-tuning, third-party service like Sen4CAP)?
 - What data pipeline handles Sentinel-1/2 ingestion, pre-processing (e.g., Sen2Cor atmospheric correction), and feature extraction?
 - What is the system's approach to orchestration between agents (workflow engine, agent framework, human-in-the-loop tooling)?
-- What are the latency/throughput requirements (seasonal monitoring cadence — every 3-5 days per Sentinel revisit)?
+- What are the latency/throughput requirements by sensor, usable observation availability, and case deadline, rather than assuming a fixed 3-5-day revisit?
+- Which as-of dates can the classifier support, and how will prefix backtests exclude later observations, product revisions, and target-label metadata?
 - How will the system scale to 160,000 farmers and their associated parcels, and what is the compute/cost model?
 - What monitoring/observability is planned for agent performance, drift, and error rates in production?
 
 ## 10. Evaluation & Success Metrics
 - How will "error rate and financial corrections reduced" be measured and attributed to the new system vs. other factors?
+- How will first-material and substantially-complete payment be measured separately by advance cohort, including the proposed 90% completion threshold and statutory windows?
+- What sampling probabilities, weights, independence controls, and non-response handling support random-validation estimates, separately from targeted inspection yield?
 - What is the baseline and target for the 40% inspection cost reduction, and how is it tracked?
 - How is farmer satisfaction measured (survey, complaint volume, payment-timeliness perception)?
 - What is the plan for a pilot/phased rollout (which region, crop types, or scheme first) before national scale-up?
@@ -76,9 +79,10 @@ Questions to answer before/while designing the agentic solution for Case Study 4
 
 ## 11. Legal & Compliance Sign-off
 - Which compliance standards (see `docs/regulatory-compliance/`) require formal sign-off before go-live, and from whom (DPO, legal, security, EU Commission liaison)?
-- Is a conformity assessment required under the EU AI Act before deployment, and what is the timeline given phased applicability (2025–2026)?
+- Is a conformity assessment required under the confirmed AI Act classification, and what provisions/application dates govern the intended deployment?
 - What ongoing compliance monitoring/reporting cadence is required post-launch (annual AMS quality assessment, NIS2 incident reporting, GDPR audits)?
 
 ---
 
-*Related reading: `investigate/case-understanding-presentation.md`, `docs/research/`, `docs/copernicus/`.*
+*Related reading: [case understanding](./case-understanding-presentation.md),
+[research](../../docs/research/), and [Copernicus](../../docs/copernicus/).*

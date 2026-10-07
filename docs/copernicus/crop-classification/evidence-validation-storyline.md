@@ -253,13 +253,19 @@ purpose:
 - original image dimensions, media type, and cryptographic hash;
 - task instructions and application version;
 - offline-capture and later-upload timestamps;
-- farmer explanation and consent/privacy acknowledgement where required;
+- farmer explanation, privacy-notice acknowledgement, and device camera/location
+  permissions where required;
 - validation warnings and upload receipt.
 
 GPS and EXIF metadata are supporting signals, not proof. Location may be inaccurate,
 spoofed, stripped, or unavailable. The service should combine task context,
 application capture, file integrity, parcel geometry, server timestamps, visual
 content, and human review according to risk.
+
+Device permission allows capture; notice acknowledgement records transparency.
+Neither is automatically GDPR consent for agency processing. The agency must record
+the applicable legal-obligation/public-task basis, purpose, and retention, and must
+not make mandatory benefit evidence depend on purported freely given consent.
 
 The application must not:
 
@@ -293,12 +299,21 @@ use an API-mediated upload for small files or a short-lived direct Blob upload f
 larger/resumable transfers. In both cases:
 
 - `evidence-api` authorises the task and expected content;
+- direct uploads use approved per-blob authorisation, not a generic prefix-scoped SAS;
 - files enter quarantine before becoming case evidence;
 - raw originals and hashes are preserved;
 - malware, format, size, and manifest checks are explicit;
+- a finalised package is accepted only when all pinned objects are complete and
+  clean; a single Blob event is not a submission receipt;
 - `case-api` stores the authoritative task and workflow state;
 - Blob/ADLS stores evidence objects and derivatives;
 - no LLM receives raw evidence by default.
+
+Direct-upload object/scan notifications use the configured Event Grid bridge.
+Session finalisation, immutable byte/hash checks, and idempotent retries follow the
+[drone ingestion contract](./drone-survey-validation-process.md#phase-4-secure-and-transfer-the-mission-package),
+scaled to the smaller farmer package. Offline capture remains a draft until the
+server issues a receipt.
 
 ## 9. Automated Checks and Model Boundaries
 

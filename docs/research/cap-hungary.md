@@ -11,7 +11,10 @@
 - **Application procedures**: calls for proposals, application guides and deadlines, managed and announced by the National Managing Authority.
 
 ## Scale (context from Case Study 47)
-Hungary pays approximately **€2 billion a year** in CAP subsidies to roughly **160,000 farmers**, verified via sample on-the-spot inspections and a partially implemented Area Monitoring System.
+The fictional case brief assumes **€2 billion a year**, roughly **160,000 farmers**,
+sample on-the-spot inspections, and partially implemented AMS. These are scenario
+inputs, not independently verified current Hungarian payment or control statistics.
+Use official national/EU reporting for any real-world comparison.
 
 ## Sources
 - [Magyarország KAP stratégiai terve, 2023-2027 (PDF, Hungarian Government portal)](https://kormany.hu/dokumentumtar/magyarorszag-kap-strategiai-terve-2023-2027)

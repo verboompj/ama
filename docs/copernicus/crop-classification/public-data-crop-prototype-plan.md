@@ -87,6 +87,11 @@ evaluation where CLMS products are available and comparable.
 
 Do not mix observations and labels from different agricultural years.
 
+Also reconstruct truncated-season snapshots at the supported as-of checkpoints in
+[training §8.1](./crop-classifier-training-procedure.md#81-as-of-date-feature-contract).
+Annual CLMS labels may be used retrospectively as targets once published; they are
+not available current-season predictor inputs.
+
 ### Initial classes
 
 Select 3-5 frequent and visually/phenologically distinguishable CLMS crop classes,
@@ -271,12 +276,22 @@ Aggregate per-date features into:
 - optical/radar change points;
 - valid observation counts;
 - maximum observation gap;
-- cloud and boundary quality;
-- CLMS weak-label confidence.
+- cloud and boundary quality.
+
+Keep CLMS weak-label confidence, class proportions, and provenance in a separate
+label-metadata table for selection/weighting and evaluation slices, never in the
+predictor feature vector. Otherwise the classifier may learn from the product that
+supplies its target, and the feature would be unavailable in live seasonal scoring.
+
+For each early-season snapshot, recompute features using only acquired and available
+observations by the recorded cutoff. Preserve missing transitions and never fill them
+with later harvest/senescence information. All snapshots of an analysis unit remain
+in the same spatial/year split.
 
 Keep the original time-series table for charts and future temporal models.
 
-**Output:** One model-ready row per analysis unit/year plus lineage.
+**Output:** One predictor row per analysis unit/year/as-of cutoff, separate label
+metadata, and complete lineage.
 
 ### Step 8: Train transparent baselines
 
@@ -303,12 +318,15 @@ Measure:
 - abstention rate and retained accuracy;
 - performance by region, parcel size, confidence, and observation coverage;
 - Sentinel-1 plus Sentinel-2 improvement over Sentinel-2 alone.
+- the same metrics by as-of checkpoint, including abstention and review workload.
 
 Interpret results as:
 
 > Agreement with CLMS weak labels under the prototype conditions.
 
 Do not describe them as field-verified Hungarian crop accuracy.
+Confidence-based label selection also limits representativeness; report excluded
+units and do not generalise results to the full claim population.
 
 ### Step 10: Build the demonstration
 
@@ -337,8 +355,10 @@ Minimum analysis-unit table:
 | `country` | `HU` for Hungarian prototype units |
 | `region` | Selected prototype region |
 | `year` | Agricultural year |
+| `as_of_date` | Scoring cutoff for each feature snapshot |
+| `availability_cutoff` | Latest permitted product availability time |
 | `weak_crop_code` | CLMS-derived crop class |
-| `weak_label_confidence` | Aggregated confidence-layer value |
+| `weak_label_confidence` | Label metadata only; aggregated confidence-layer value |
 | `dominant_class_fraction` | Fraction covered by the selected class |
 | `label_source` | CLMS product identifier/version |
 | `split` | Train, validation, or test |
@@ -357,6 +377,8 @@ The public-data prototype is complete when:
 - Sentinel-2 and Sentinel-1 seasonal features are available;
 - spatially isolated train/validation/test splits exist;
 - baseline models and calibrated abstention are evaluated;
+- truncated-season checkpoints are backtested without future-data leakage and clearly
+  distinguished from complete-season results;
 - a farmer/caseworker-style evidence view is demonstrated;
 - all outputs clearly state that labels are weak and non-authoritative;
 - the transition requirements for MÁK data are documented.

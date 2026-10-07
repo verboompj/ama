@@ -491,6 +491,21 @@ The rules service owns:
 
 Agents may explain these rules but cannot choose a payment date, percentage, or amount.
 
+### Payment-system boundary
+
+Case readiness and model consistency are not payment authorisation. A deterministic
+adapter hands approved case/decision records to the existing authorised agency
+payment/treasury system, which retains authorisation, scheduling, execution, and the
+transaction ledger. The
+[architecture](../architecture/aks-centered-foundry-architecture.md#53-case-api)
+defines this boundary.
+
+Use stable claim/year/intervention, decision, authorisation, and idempotency references.
+Reconcile confirmed transaction status, paid amounts, balances, offsets, failures,
+and recoveries back to the case. An accepted instruction is not a settled payment;
+conflicting or missing acknowledgements create an explicit operational exception.
+No agent may execute a payment or change entitlement.
+
 ### Farmer experience
 
 The portal should show:

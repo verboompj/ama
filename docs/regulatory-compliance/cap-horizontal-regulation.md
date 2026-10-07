@@ -11,7 +11,11 @@
 - Retains EAGF and EAFRD as the financing funds.
 
 ## Relevance to Case Study 47 (Hungarian Paying Agency)
-This is the direct legal basis for the paying agency's obligation to run IACS/LPIS-based checks, and for the €60 million in Commission financial corrections at stake. The Audit Evidence Agent's "Commission audit packs" exist to satisfy this Regulation's clearance/conformity procedures.
+This is the legal basis for the paying agency's IACS/LPIS control obligations and
+the financial-correction framework. The **€60 million** figure is a case-brief
+scenario input, not an amount established by this Regulation or independently
+verified national reporting. The Audit Evidence Agent prepares draft evidence for
+authorised review under the clearance/conformity procedures.
 
 ## Source
 - [Regulation (EU) 2021/2116 — full text, EUR-Lex](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2116)

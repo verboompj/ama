@@ -22,6 +22,8 @@ Related documents:
   the end-to-end crop and parcel-area use case.
 - [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md) defines
   the agreed public-data route for the first capstone/MVP implementation.
+- [`drone-survey-validation-process.md`](./drone-survey-validation-process.md) defines
+  independent field findings, random validation, and governed reuse of drone evidence.
 
 ### Prototype versus production labels
 
@@ -67,6 +69,7 @@ Use labels in this order of confidence:
 | Label source | Suggested confidence | Use |
 |---|---:|---|
 | Completed field inspection with definitive crop finding | Highest | Training, validation, and test |
+| Independently attested survey/drone finding with accepted evidence and a defensible link to the labelled season/condition | Highest after quality review | Training/validation, or locked random-sample test |
 | Expert-reviewed remote-sensing result with supporting evidence | High | Training/validation after quality review |
 | Claim confirmed through several independent controls | Medium | Training with label-confidence weighting |
 | Farmer declaration with no independent validation | Low | Unlabelled/weakly labelled data; not gold-standard test data |
@@ -75,6 +78,13 @@ Use labels in this order of confidence:
 Do not automatically treat a human override as ground truth. An override may correct
 the model, apply a legal exception, repair bad geometry, or reflect a procedural
 decision rather than identify the crop.
+
+Use the [drone procedure's label-governance gates](./drone-survey-validation-process.md#12-random-validation-and-model-governance)
+for survey-derived labels. A current drone snapshot does not establish an earlier
+crop or activity without supporting temporal evidence. Keep model-assisted findings
+distinct from pre-AI independent observations, and reserve locked evaluation records
+before selecting feedback for training. Risk-targeted inspection results are not an
+unbiased operational test set.
 
 ### 3.3 Earth-observation data
 
@@ -182,6 +192,7 @@ Create three isolated datasets:
 - For temporal generalisation, reserve at least one later season as an out-of-time
   test.
 - For geographic generalisation, reserve one or more regions as an out-of-region test.
+- Keep every cutoff snapshot of the same parcel/holding in its assigned split.
 
 Recommended evaluations:
 
@@ -282,6 +293,37 @@ Missing observations are informative and must be explicit:
 - whether key phenological windows are missing;
 - whether only one orbit or sensor is available.
 
+### 8.1 As-of-date feature contract
+
+Every operational request records `asOfDate`, an agricultural-season start, a
+data-availability cutoff, and the feature/model version. Use only observations
+acquired by the as-of date and actually available to the pipeline by the availability
+cutoff. Record both timestamps; retrospective downloads of later-published products
+must not be treated as if they were available earlier.
+
+- Recompute maxima, integrals, gaps, change points, and quality counts over the
+  observed prefix only. Label a peak as the maximum observed so far, not a proven
+  complete-season peak.
+- Mark harvest/senescence or other unobserved transitions as missing, rather than
+  inferring them from later imagery or substituting a complete-season value.
+- Do not interpolate using observations after the cutoff. Historical backtests must
+  reproduce the availability of product revisions and weather/context inputs.
+- Keep the declared crop as the item compared after inference, not a predictor or a
+  way to select a crop-specific feature window that leaks the declaration.
+- Keep CLMS target labels, target-year confidence, inspection outcomes, and legal
+  decisions out of predictor features. Label-confidence weighting is training
+  metadata, not an inference input. A separately evaluated historical context layer
+  must have a documented publication date before the cutoff.
+
+Train cutoff-specific candidates or a prefix-aware model, then calibrate and approve
+performance separately for each supported cutoff/window. Illustrative checkpoints
+are 31 May, 30 June, 31 July, 30 September, and 15 October; these are experiment
+checkpoints, not payment entitlements or mandatory evidence deadlines. Unsupported
+windows return `UNKNOWN` or use another approved evidence route.
+
+Complete-season models remain useful for retrospective analysis and later controls.
+They must not be used to claim early-season readiness without prefix evaluation.
+
 ## 9. Establish Baselines
 
 Train and document simple baselines before a complex temporal model.
@@ -375,7 +417,8 @@ Example decision inputs:
 - review workload by crop and region;
 - number/area of affected farmers and parcels;
 - expected physical inspections avoided;
-- errors weighted by potential payment impact.
+- errors weighted by potential payment impact;
+- readiness and review/abstention workload at each supported as-of cutoff.
 
 ### Slice evaluation
 
@@ -389,6 +432,7 @@ Report all key metrics by:
 - boundary-pixel proportion;
 - season/year;
 - model confidence band;
+- as-of cutoff and available season length;
 - farm type or other dimensions only where lawful, available, and meaningful.
 
 ### Acceptance conditions
@@ -401,7 +445,11 @@ Release criteria must be agreed before viewing final test results. At minimum:
 - unknown/abstention catches low-quality cases;
 - out-of-region and out-of-time degradation is understood;
 - the model beats the approved baseline;
-- legal, operational, data-protection, and model-risk reviews are complete.
+- legal, operational, data-protection, and model-risk reviews are complete;
+- each claimed operational cutoff passes its pre-agreed class, calibration,
+  false-discrepancy, and abstention limits on the locked out-of-time test. Report
+  early-versus-full-season performance and data latency; do not extrapolate the
+  latter's accuracy to earlier payment readiness.
 
 ## 13. Error Analysis
 
@@ -438,6 +486,8 @@ Do not solve a label or geometry problem by making the model more complex.
 For every production inference, retain:
 
 - source product IDs and acquisition dates;
+- as-of date, availability cutoff, product publication/ingestion timestamps, and
+  observed seasonal window;
 - valid/masked coverage;
 - parcel statistics and time-series features;
 - predicted class probabilities;
@@ -463,6 +513,7 @@ must connect reliable evidence to the applicable rule and preserve human review.
 - training-data statement and lineage;
 - taxonomy and supported/unsupported classes;
 - evaluation report including all slices;
+- approved as-of windows and prefix-backtest results;
 - calibration and threshold report;
 - error-analysis report;
 - known limitations;
@@ -481,7 +532,8 @@ At minimum:
 - data protection/AI risk representative;
 - security/platform representative.
 
-Approval should be tied to a specific scheme year, region, taxonomy, and model version.
+Approval should be tied to a specific scheme year, region, taxonomy, model version,
+and supported as-of windows.
 
 ## 16. Deployment
 
@@ -532,14 +584,16 @@ automatically retrain or promote a model.
 2. Use one historical season for training and validation.
 3. Reserve the following season as the out-of-time test.
 4. Group splits by holding and spatial cluster.
-5. Extract parcel-level Sentinel-2 and Sentinel-1 seasonal features.
+5. Extract parcel-level Sentinel-2 and Sentinel-1 features for complete seasons and
+   the as-of checkpoints in §8.1, preserving the same split for all parcel snapshots.
 6. Train:
    - majority baseline;
    - Sentinel-2-only gradient-boosted model;
    - Sentinel-1 plus Sentinel-2 gradient-boosted model.
 7. Calibrate probabilities.
 8. Add a conservative abstention threshold.
-9. Compare false discrepancy rate and retained coverage.
+9. Compare false discrepancy rate, retained coverage, calibration, and review workload
+   by cutoff on the locked next-season test.
 10. Run in shadow mode against a current-season sample.
 
 This experiment answers the most important early question: whether adding Sentinel-1

@@ -1,6 +1,10 @@
-# Copernicus — Open Access Inventory
+# Copernicus — Data and Access Inventory
 
-This folder catalogues what is available under the Copernicus programme's open-access data policy: core services, satellite data/assets, contributing missions, software/processing tools, and access portals.
+This folder catalogues core services, satellite data/assets, contributing missions,
+software/processing tools, and access portals. Sentinel and many service products,
+including CLMS, have open access; CCM licences and some security outputs are
+restricted. Check product-specific terms, eligible users, quotas, and processing
+charges rather than assuming every listed item is freely reusable.
 
 Files:
 - [`services.md`](./services.md) — the six core Copernicus services
