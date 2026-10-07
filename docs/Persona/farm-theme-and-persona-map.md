@@ -85,6 +85,13 @@ These are narrative roles, not comedy impressions or copies of television
 personalities. Each character represents an existing design persona documented in
 [Personas and Use Cases](./personas-and-use-cases.md).
 
+For recognisable farm-side references, see the
+[Clarkson's Farm persona reference map](./clarksons-farm-persona-reference.md):
+Jeremy as the Farmer, Charlie as the Adviser, Kaleb as the Farm Operations Lead,
+Gerald as the Experienced Field Contributor, and Lisa as the Farm Business
+Administrator. These are comparative role anchors, not replacements for the
+fictional identities or the agency's independent decision roles.
+
 | Existing persona | Field & File role | Narrative function | Typical scene | Product touchpoint |
 |---|---|---|---|---|
 | Farmer / CAP applicant | **The Farmer** | Keeps the consequences real: crops, weather, deadlines, and cash flow | Finds that a replanted parcel no longer matches the original declaration | Farmer portal, parcel map, guidance agent, evidence upload |
@@ -385,6 +392,7 @@ auditable public administration.
 This document defines the narrative and visual layer. Detailed requirements remain in:
 
 - [Personas and Use Cases](./personas-and-use-cases.md);
+- [Clarkson's Farm Persona Reference Map](./clarksons-farm-persona-reference.md);
 - [AKS-Centred Foundry Architecture](../architecture/aks-centered-foundry-architecture.md);
 - [Crop Classification Goal](../copernicus/crop-classification/README.md);
 - [Agricultural Analysis Use Case](../copernicus/crop-classification/agricultural-analysis-use-case.md);
