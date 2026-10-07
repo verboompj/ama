@@ -87,6 +87,50 @@ An increased ceiling does not mean every farmer automatically receives that
 percentage. The Member State must use the authorisation, and the paying agency must
 have sufficient completed controls and an eligible amount that can safely be paid.
 
+### Normal payment handling
+
+The normal process is not “pay every farmer provisionally and inspect every farm
+later.” Physical inspection applies to selected or unresolved cases, while
+administrative checks and the Area Monitoring System cover the wider claim
+population.
+
+A typical claim follows one of these paths:
+
+| Path | Typical handling |
+|---|---|
+| Sufficiently checked and eligible for advance | An advance is paid from the permitted autumn date; the remaining balance is calculated and paid later |
+| Partly resolved claim or intervention | The sufficiently established amount may progress where national rules permit; unresolved elements remain pending |
+| No advance available or controls incomplete | The farmer waits for the normal/final payment after the required checks |
+| Later finding changes eligibility | The balance is recalculated; an overpaid advance may be recovered or offset under the applicable rules |
+| No material issue and no separate advance | The paying agency may issue one payment during the ordinary payment campaign |
+
+The simplified lifecycle is:
+
+```text
+Annual claim
+    ↓
+Administrative checks and seasonal monitoring
+    ↓
+Enough eligibility established for an advance?
+    ├─ Yes → autumn advance
+    │           ↓
+    │      remaining checks and final calculation
+    │           ↓
+    │      balance payment or recovery/offset
+    │
+    └─ No  → claim remains pending
+                ↓
+           checks completed
+                ↓
+           one final/ordinary payment
+```
+
+January is therefore not the mandatory payment month. Some farmers may receive an
+advance from October, many receive additional or final amounts from December onward,
+and unresolved cases may continue into the following months. The exact batch depends
+on intervention rules, completed controls, national implementation, and the individual
+case.
+
 ## 5. Hungarian Example
 
 The Hungarian annual **Egységes Kérelem** (single application) provides a useful
@@ -108,7 +152,222 @@ This is an example, not a permanent calendar. The exact Hungarian dates, interve
 advance amounts, and operational conditions must be taken from the Hungarian State
 Treasury and CAP authority publications for the relevant claim year.
 
-## 6. Where Validation Fits
+## 6. Interpreting the Case Target: Payment Two Months Earlier
+
+The case brief does not define a separate two- or three-month legal payment window. It
+sets a relative outcome target:
+
+> Payments two months earlier.
+
+The target is too ambiguous if interpreted only as the first transfer. A farmer who
+already receives a substantial advance on 16 October cannot receive that advance two
+months earlier under the normal framework. The useful interpretation is:
+
+> Increase the amount of valid support paid during the earliest lawful payment
+> campaigns and reduce the time until farmers receive substantially all of their
+> final eligible amount.
+
+The original two-month target remains relevant for farmers whose advance or balance is
+currently delayed, but it should not be presented as a universal benefit.
+
+The historical baseline must be established before claiming the benefit. Illustrative
+movements could be:
+
+| Current first material payment | Target payment | Approximate improvement |
+|---|---|---:|
+| February | December | Two months |
+| January | November | Two months |
+| December | October advance campaign | Approximately two months |
+| 16 October | Cannot move two months earlier under the normal framework | Increase the number of claims reaching this earliest batch |
+
+The practical value differs by payment cohort:
+
+| Current farmer situation | Likely value from the programme |
+|---|---|
+| No advance because validation is unfinished | High: the claim may become ready for an autumn payment instead of waiting until winter or spring |
+| Advance is paid late | High or moderate: earlier evidence resolution can move it into an earlier batch |
+| Maximum available advance is already paid on 16 October | Little or no first-payment benefit |
+| Advance is timely but the balance is delayed | Benefit applies to the unpaid balance, not to the amount already received |
+| Claim remains blocked into the following spring | High: resolving the exception can remove a long payment delay |
+| Eligibility or sanction is genuinely disputed | Correctness and due process take priority over speed |
+
+The programme cannot move the normal legal opening for advances earlier than
+16 October. Its opportunity is to:
+
+- make more valid claims ready for the earliest lawful payment batch;
+- move claims from January-March into October-December;
+- prevent incomplete evidence and inspection backlogs from pushing cases toward the
+  following June deadline;
+- resolve discrepancies before payment processing rather than during or after it;
+- allow unaffected claim elements to progress where approved national rules permit.
+
+The target must not be presented as an unconditional promise to every farmer. Some
+interventions have later evidence windows, multi-year conditions, unresolved
+eligibility questions, sanctions, debt offsets, appeals, or other lawful reasons for a
+different payment date.
+
+### Baseline and KPI definition
+
+The paying agency should calculate the baseline from at least the previous three claim
+years using authoritative claim and treasury records.
+
+The case's original headline measure may still be reported:
+
+- median calendar days from **complete claim** to **first material payment**, with a
+  target direction of up to 60 days earlier for delayed cohorts.
+
+It must not be the sole KPI. A first-payment measure can appear successful when farmers
+already receive a timely advance but wait too long for the remaining balance.
+
+Primary operational measures should therefore include:
+
+- percentage of eligible farmers receiving an advance by 31 October;
+- percentage of the final eligible amount paid by 31 December;
+- median date on which each farmer has received at least 90% of the final eligible
+  amount;
+- value still unpaid at 31 December and 31 March;
+- median time from an unresolved discrepancy to release of the affected payment;
+- number and value of claims moved from January-June into October-December;
+- payment timing for farmers receiving no advance, a partial advance, and the maximum
+  available advance.
+
+Supporting measures:
+
+- median and P90 claim-to-first-payment and claim-to-substantially-complete-payment
+  time;
+- percentage and value paid by 16 October, 31 October, 31 December, and 31 March;
+- time from evidence request to discrepancy resolution;
+- percentage of claims ready when the advance campaign opens;
+- percentage receiving an advance versus only a final payment;
+- value delayed by missing evidence, inspection, legal review, data defects, or
+  operational backlog;
+- payment timing by intervention, region, farm-size cohort, parcel complexity, and
+  validation path;
+- correction, recovery, appeal, and overturned-decision rates for accelerated cases.
+
+“Complete claim,” “first material payment,” “final eligible amount,” and
+“substantially complete payment” require formal definitions. The programme must not
+improve the metric artificially by:
+
+- excluding difficult claims from the denominator;
+- treating a nominal or trivial transfer as material payment;
+- redefining completeness only after controls finish;
+- accelerating easy claims while allowing the P90 or vulnerable cohorts to worsen;
+- paying before sufficient controls and creating avoidable recoveries.
+
+The preferred substantially-complete threshold is 90% for initial measurement, because
+it captures whether most of the farmer's entitlement is available without requiring
+every minor reconciliation to be closed. The agency must validate that threshold
+against its actual interventions and payment practices.
+
+## 7. Farmer Benefits of Earlier Payment
+
+The case brief identifies improved farm liquidity as the principal farmer benefit.
+That benefit is concentrated among farmers whose advance is missing or delayed and
+farmers waiting for a material balance. Farmers who already receive the maximum
+available advance at the earliest lawful date may receive little benefit from faster
+first-payment processing.
+
+CAP support is often part of the farm's annual working-capital cycle. Moving a valid,
+material amount forward can provide value even when the total annual support does not
+change.
+
+### 7.1 Working capital
+
+Earlier payment gives the farmer cash sooner for:
+
+- seed, fertiliser, feed, fuel, plant protection, and veterinary costs;
+- machinery repair and maintenance;
+- land rent and lease obligations;
+- wages and seasonal contractors;
+- energy, insurance, tax, and utility bills;
+- loan instalments and other scheduled liabilities;
+- autumn sowing and preparation for the following season.
+
+This is especially relevant when harvest income is delayed, yields are poor, output
+prices fall, or weather creates unplanned replanting and recovery costs.
+
+### 7.2 Reduced short-term financing pressure
+
+Farmers may use overdrafts, supplier credit, short-term loans, or deferred payments
+while waiting for support. Earlier payment can reduce the period for which that
+temporary financing is required. The business case should keep this as a qualitative
+liquidity benefit until the agency has real farm and financing evidence; detailed
+interest or cost calculations are outside the current design scope.
+
+### 7.3 Better purchasing decisions
+
+Earlier liquidity may allow a farmer to:
+
+- buy inputs when needed rather than after prices rise;
+- use legitimate early-order or prompt-payment discounts;
+- secure scarce seed, feed, fertiliser, fuel, or contractor availability;
+- avoid reducing an agronomically necessary input solely because cash has not arrived;
+- schedule maintenance before a critical field operation.
+
+The programme should not count the full value of an early-purchase discount as an
+automatic benefit. It should be measured from real farmer outcomes.
+
+### 7.4 Resilience and reduced distress
+
+Predictable earlier payment can reduce the likelihood that a farmer must:
+
+- postpone essential repairs;
+- sell crops, livestock, or other assets at an unfavourable time;
+- delay payments to employees or local suppliers;
+- abandon a planned crop or environmental activity because of temporary liquidity;
+- absorb a weather shock without adequate working capital.
+
+This may matter most to smaller farms and farmers with limited access to affordable
+credit. The benefits analysis should therefore examine distribution, not only the
+national average.
+
+### 7.5 Certainty and administrative benefit
+
+The benefit is not only the date money arrives. Earlier resolution provides:
+
+- a clearer expected payment window;
+- fewer repeated evidence requests;
+- less uncertainty over whether a parcel is blocking payment;
+- earlier knowledge of any reduction or unresolved issue;
+- more time to correct procedural problems before a deadline;
+- reduced time spent calling advisers, the paying agency, or lenders for status.
+
+Predictability may be valuable even where payment cannot move by the full two months.
+
+### 7.6 Risks of accelerating payment
+
+Earlier is beneficial only when the eligible amount is sufficiently established.
+Unsafe acceleration can cause:
+
+- overpayment and later recovery;
+- unexpected debt or offset against future support;
+- avoidable disputes and appeals;
+- cash-flow shock when money already spent must be repaid;
+- unequal treatment if only digitally confident farmers can resolve cases quickly.
+
+The objective is therefore **earlier valid payment**, not payment before adequate
+control. The solution must preserve human review, alternative evidence channels,
+accessibility, correction rights, and a clear final reconciliation.
+
+### 7.7 Measuring farmer value
+
+Evaluate:
+
+- actual days payment was accelerated;
+- reported reduction in short-term financing pressure;
+- late supplier-payment incidents;
+- ability to purchase planned inputs on time;
+- complaints and status-enquiry volume;
+- farmer confidence in the expected payment date;
+- payment timing by farm size, region, intervention, digital-access needs, and credit
+  access;
+- recoveries or corrections following accelerated payment.
+
+Farmer surveys and interviews are required because treasury data shows when payment
+occurred but not how the farmer used it or what financing cost was avoided.
+
+## 8. Where Validation Fits
 
 Validation runs throughout the growing season because the paying agency needs enough
 evidence to calculate a defensible eligible amount before paying an advance or final
@@ -141,7 +400,7 @@ holding another part depends on the intervention, national implementation, and c
 state. The architecture must not invent a general partial-payment rule; it belongs in
 the versioned rules service.
 
-## 7. Field & File Storyline
+## 9. Field & File Storyline
 
 ### Spring: claim and planting
 
@@ -175,6 +434,11 @@ The Farmer sees separate statuses:
 - `Advance paid`;
 - `Final calculation pending`.
 
+Receiving the advance two months earlier than the farm's historical norm allows the
+Farmer to settle a seasonal overdraft, repair machinery, and order inputs for the next
+crop cycle without waiting until winter. These are potential storyline benefits, not
+guaranteed outcomes for every farm.
+
 ### Winter: balance and unresolved cases
 
 After remaining controls and intervention-specific conditions are completed, the
@@ -192,7 +456,7 @@ The Farmer can therefore distinguish:
 
 These are different events and must not be shown as one generic “approved” status.
 
-## 8. Product and Architecture Requirements
+## 10. Product and Architecture Requirements
 
 ### Case state
 
@@ -252,7 +516,23 @@ Operational dashboards should track:
 - intervention-specific deadlines;
 - avoidable delays caused by data, model, workflow, or staffing failures.
 
-## 9. Design Guardrails
+### Benefit tracking
+
+The programme dashboard should show the case target separately from the statutory
+calendar:
+
+- historical baseline median and P90;
+- current median and P90;
+- days improved against baseline for first payment and substantially complete payment;
+- number and value of farmers moved into an earlier payment batch;
+- percentage ready at the 16 October opening;
+- percentage of final eligible value paid by 31 December;
+- unpaid value at 31 December and 31 March;
+- separate outcomes for no-advance, partial-advance, and maximum-advance cohorts;
+- farmer-reported liquidity and predictability outcomes;
+- correction and recovery rates to confirm that speed did not weaken accuracy.
+
+## 11. Design Guardrails
 
 - Do not promise payment at sowing, harvest, or photo submission.
 - Do not treat a model-consistent parcel as a payment authorisation.
@@ -265,8 +545,15 @@ Operational dashboards should track:
   payment.
 - Do not assume that one unresolved parcel necessarily blocks every intervention or
   the complete claim; apply only approved national rules.
+- Do not describe the case's two-month target as a new statutory payment window.
+- Do not present a two-month benefit as universal when many farmers already receive an
+  early advance.
+- Do not use first-payment timing alone when the material balance remains unpaid.
+- Do not claim quantified financing savings before a separate evidence-based benefits
+  methodology is approved.
+- Do not optimise only the median while late-payment cohorts become slower.
 
-## 10. Official Sources
+## 12. Official Sources
 
 - [European Commission: Managing CAP payments and IACS](https://agriculture.ec.europa.eu/common-agricultural-policy/financing-cap/assurance-and-audit/managing-payments_en)
 - [Regulation (EU) 2021/2116 on CAP financing, management and monitoring](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32021R2116)

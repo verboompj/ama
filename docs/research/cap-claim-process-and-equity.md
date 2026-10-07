@@ -199,8 +199,8 @@ conditions, although the effect varies by farm type.
 ### Redistributive and targeted instruments
 
 The 2023–2027 framework includes instruments intended to improve distribution, such as
-complementary redistributive income support, support for young farmers, payments for
-areas facing natural constraints, and rural-development interventions. Member States
+complementary redistributive income support, payments for areas facing natural
+constraints, and rural-development interventions. Member States
 choose the detailed design within the EU framework.
 
 ### Internal and external convergence
@@ -294,6 +294,125 @@ CAP creates a common market context, but not identical farming conditions.
 
 This is a central CAP trade-off: **subsidiarity** lets countries adapt support to local
 needs, while too much divergence can weaken equal treatment and the level playing field.
+
+### Shared payment calendar, different operational performance
+
+For the annual area- and animal-based support covered by the payment framework,
+Member States share the broad EU calendar:
+
+- eligible advances may begin from **16 October** of the claim year;
+- ordinary/balance payments generally begin from **1 December**;
+- the normal payment window ends on **30 June of the following year**.
+
+These dates do not guarantee that every farmer receives an advance or a final payment
+on the opening day. Member States differ in their intervention mix, use of advances,
+control readiness, data quality, inspection capacity, and payment-batch operations.
+Investment and other non-annual interventions may follow different schedules.
+
+A country paying substantial advances in October but leaving balances unresolved
+until spring is not equivalent to one that completes most entitlements in December.
+Comparisons must distinguish **first payment**, **amount received**, and **final
+completion**.
+
+There is not yet an evidence-based country ranking in this repository. The Hungarian
+2025 campaign example establishes that advances began on 16 October; it does not
+establish that Hungary is slower or faster than other Member States in completing
+claims. Annual CAP expenditure and implementation totals alone are insufficient to
+rank farmer-level payment timeliness.
+
+### How to benchmark Member States
+
+Use the same claim year, intervention scope, and payment definitions when comparing
+countries:
+
+| Measure | What it reveals |
+|---|---|
+| Eligible farmers receiving an advance by 31 October | Reach of the early payment campaign |
+| Share of final eligible value paid by 31 December | How much support is actually available before the next year |
+| Median and P90 date when 90% of final eligible support is paid | Substantially complete payment and the delayed tail |
+| Unpaid eligible value at 31 December and 31 March | Remaining payment burden |
+| Time from discrepancy to release of affected payment | Exception-handling performance |
+| Correction and recovery rates | Whether faster payment preserved accuracy |
+| Evidence requests and visits per parcel | Farmer burden and control efficiency |
+
+The 90% threshold is a proposed analytical measure, not an EU legal payment standard.
+Use the eventually established final eligible amount as the retrospective denominator,
+and distinguish it from estimates displayed before the final decision.
+
+Break results down by no-advance, partial-advance, and maximum-advance cohorts, and by
+intervention, region, farm size, and parcel complexity. Otherwise differences in
+scheme mix or agricultural structure can be mistaken for administrative performance.
+
+National paying-agency transaction and case records are needed for this comparison.
+Commission CAP dashboards and national Strategic Plans provide intervention and
+expenditure context, but must not be assumed to contain all the required claim-level
+dates.
+
+### Impact of timely payment and completion
+
+Earlier payment does not increase the farmer's total legal entitlement merely because
+it arrives sooner. Its value is access to a material amount at the time it is needed.
+
+For farmers, timely payment and completion can:
+
+- provide working capital for inputs, wages, rent, repairs, and the next season;
+- reduce the need to defer supplier payments or rely on temporary financing;
+- reduce uncertainty over the unpaid balance and any remaining eligibility questions;
+- make seasonal purchasing and field operations easier to plan;
+- reduce repeated status enquiries, evidence requests, and unresolved administrative
+  obligations.
+
+For the paying agency, timely completion can reduce winter/spring backlogs, cases
+approaching the June deadline, inspection and review bottlenecks, and uncertainty in
+the retained payment record.
+
+The benefit is cohort-dependent. Farmers already receiving the maximum available
+advance on 16 October have little or no opportunity for earlier first payment under
+the normal framework. Their potential benefit lies in earlier balances, clearer
+decisions, and fewer unresolved tasks. Farmers receiving no advance or a delayed
+advance may benefit much more from early discrepancy resolution.
+
+Consequently, the case's **two-month-earlier payment** target is a baseline-relative
+operational target, not a new legal window or a universal benefit. It must be tested
+against historical payment records and include substantially complete payment rather
+than first transfer alone. See the
+[CAP Claim and Payment Calendar](./cap-claim-and-payment-calendar.md) for the detailed
+advance, reconciliation, final-payment, and measurement procedure.
+
+### Crop distribution: payment policy versus monitoring burden
+
+Most basic income support is **decoupled from production**. Eligible hectares,
+agricultural activity, and applicable conditions matter; the farmer does not normally
+receive a higher basic payment simply because their crop is scarce across the EU.
+
+Crop distribution nevertheless matters in several ways:
+
+| Mechanism | Effect of crop or farming mix |
+|---|---|
+| Basic income support | Usually not directly determined by current crop output or EU-wide crop scarcity |
+| Coupled income support | A national plan may target eligible crops or livestock sectors facing defined difficulties |
+| Eco-schemes and environmental interventions | Practices, rotations, cover, grassland management, and other commitments can affect eligibility |
+| National allocation and unit amounts | Intervention budgets and eligible participation can affect amounts under the approved calculation rules |
+| Monitoring and validation | Crop calendars, phenology, parcel structure, and observability affect evidence needs and resolution time |
+
+There is no generic live EU crop-distribution mechanism that automatically increases a
+claim's basic subsidy when other countries grow less of that crop. National plan
+choices and targeted support may respond to sector needs, but the approved rules
+determine an individual payment.
+
+For the proposed system, crop distribution is especially important for:
+
+- representative training and independent validation samples;
+- regional and crop-specific observation windows;
+- winter versus spring crops and double cropping;
+- repeated mowing, grazing, vineyards, orchards, and mixed-use parcels;
+- confidence calibration and abstention for underrepresented crops;
+- farmer evidence requests and independent survey/drone demand;
+- identifying cohorts whose payment is delayed by difficult remote observation.
+
+Crop predictions and administrative crop codes must remain distinct. A classifier
+produces evidence; the rules service maps the approved declaration, findings, scheme,
+and claim year to eligibility and payment.
 
 ## 7. EU farmers compared with non-EU farmers
 
@@ -443,6 +562,8 @@ evidence requests, corrections, penalties, human review, and appeals are designe
 - [European Commission — Direct aid breakdown](https://agriculture.ec.europa.eu/common-agricultural-policy/financing-cap/beneficiaries/direct-aid-breakdown_en)
 - [European Commission Joint Research Centre — CAP Strategic Plans master file and key data](https://data.europa.eu/doi/10.2760/3104919)
 - [European Commission — CAP Strategic Plans dashboards](https://agridata.ec.europa.eu/extensions/CAP/CAP.html)
+- [European Commission — Income support explained](https://agriculture.ec.europa.eu/common-agricultural-policy/income-support/income-support-explained_en)
+- [European Commission — Coupled income support](https://agriculture.ec.europa.eu/common-agricultural-policy/income-support/additional-schemes/coupled-income-support_en)
 - [European Parliament — Direct payments](https://www.europarl.europa.eu/factsheets/en/sheet/109/direct-payments)
 
 ### International trade and non-EU effects
