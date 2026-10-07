@@ -87,10 +87,10 @@ personalities. Each character represents an existing design persona documented i
 
 For recognisable farm-side references, see the
 [Clarkson's Farm persona reference map](./clarksons-farm-persona-reference.md):
-Jeremy as the Farmer, Charlie as the Adviser, Kaleb as the Farm Operations Lead,
-Gerald as the Experienced Field Contributor, and Lisa as the Farm Business
-Administrator. These are comparative role anchors, not replacements for the
-fictional identities or the agency's independent decision roles.
+**Jeremy Clarkson** maps to **Farmer / CAP applicant** and **Charlie Ireland**
+maps to **Agricultural adviser / authorised representative**. These are the only
+cast assignments: one Farmer, one Adviser. No new personas are added, and the
+remaining persona roles stay unchanged.
 
 | Existing persona | Field & File role | Narrative function | Typical scene | Product touchpoint |
 |---|---|---|---|---|
