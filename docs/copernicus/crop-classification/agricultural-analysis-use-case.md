@@ -23,6 +23,8 @@ The first implementation uses the public-data strategy in
 [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md).
 Parcels that cannot be resolved at Sentinel resolution follow
 [`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md).
+Authorised manual validation and complementary drone capture follow
+[`drone-survey-validation-process.md`](./drone-survey-validation-process.md).
 
 ## 2. Sample Copernicus Image
 
@@ -255,6 +257,13 @@ calibration, acceptance criteria, and release controls are documented in
 | Weather or flooding explains abnormal time series | Add context and avoid unsupported adverse inference |
 
 The model creates evidence and a recommendation. It does not impose a sanction.
+
+An authorised inspection may also be selected independently through a documented
+random or stratified quality sample. These checks are required to measure false
+negatives and system performance among parcels that remote monitoring marked as
+consistent. When close-range aerial evidence is proportionate and lawful, the
+inspector may use the controlled drone process; otherwise the case follows another
+approved field-evidence route.
 
 ## 6. Example Output Contract
 

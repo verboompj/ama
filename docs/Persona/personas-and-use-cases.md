@@ -422,6 +422,8 @@ seasonal scheduling are not described in the repository and require discovery.
 - Map and navigation support with offline parcel data.
 - Structured checklists tied to scheme and control requirements.
 - Secure photo, video, note, measurement, and geolocation capture.
+- Controlled drone-mission support where lawful and proportionate, including flight
+  scope, raw imagery, mission logs, quality checks, and chain of custody.
 - Device time and integrity checks with a visible chain of custody.
 - Ability to record "not observable," safety issues, access refusal, or changed field
   conditions.
@@ -434,9 +436,12 @@ seasonal scheduling are not described in the repository and require discovery.
 ### Key use cases
 
 - **IN-01:** Receive and plan risk-targeted inspections.
-- **IN-02:** Conduct a scoped parcel inspection offline.
+- **IN-02:** Conduct a scoped parcel inspection offline, using ground or authorised
+  drone evidence as appropriate.
 - **IN-03:** Submit a complete evidence package to the claim case.
 - **IN-04:** Report systematic map, policy, or model problems observed across visits.
+- **IN-05:** Conduct an independently selected random or stratified spot check for
+  control-system validation.
 
 ---
 
@@ -803,7 +808,7 @@ remaining outside individual administrative decisions unless formally authorised
 | Monitor | View claim/parcel status | Monitor all eligible parcels | Parcel Monitoring Agent classifies crop/activity time-series | Low-confidence and non-monitorable conditions abstain/escalate |
 | Notify | Receive understandable discrepancy notice | Approve or supervise notification rules | Discrepancy Agent explains issue and requests approved evidence | No notice may imply a final adverse decision when it is not one |
 | Respond | Correct, explain, or upload evidence | Review response and resolve exception | Agent validates evidence and may resolve bounded routine cases | Disputes, uncertainty, and adverse outcomes go to a human |
-| Inspect | Cooperate with a targeted visit | Collect unresolved field evidence | Inspection Agent/queue packages and prioritises tasks | Inspector independently records findings |
+| Inspect | Cooperate with a targeted or validation visit | Collect unresolved or independently sampled field evidence, including authorised drone imagery where appropriate | Inspection Agent/queue packages and prioritises candidate tasks | Human authority orders the inspection; inspector independently records findings |
 | Decide | Receive payment or proposed adverse measure | Apply rule and record reason | Agent assembles evidence and drafts explanation | Human decides sanctions and contested adverse measures |
 | Appeal | Access file and challenge decision | Review appeal independently | Agent organises the record and deadlines | Competent human authority determines appeal |
 | Audit | Understand retained record where relevant | Demonstrate control effectiveness | Audit Evidence Agent compiles traceable packs | Agency owner signs off; auditor independently assesses |

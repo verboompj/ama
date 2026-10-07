@@ -23,9 +23,11 @@ The classification goal is:
 - [`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md) — Sentinel
   resolution risks, mixed-pixel controls, Copernicus VHR access, commercial imagery,
   and evidence escalation.
+- [`drone-survey-validation-process.md`](./drone-survey-validation-process.md) —
+  targeted, random, and inconclusive-imagery inspection paths; drone mission planning,
+  evidence capture, chain of custody, human review, and audit.
 - [`sample-data/`](./sample-data/) — Hungarian Sentinel-2 true-colour/NDVI samples,
   demonstration AOI, and scene metadata.
 
 General Sentinel mission, band, quality-layer, and Copernicus dataset descriptions
 remain in [`../sentinel-data-and-layers.md`](../sentinel-data-and-layers.md).
-

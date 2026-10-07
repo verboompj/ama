@@ -30,6 +30,9 @@ original material.
 The repository also includes a detailed
 [persona and use-case catalog](./docs/Persona/personas-and-use-cases.md) covering farmers,
 government officials, auditors, compliance roles, and technical operators.
+The original [Field & File theme and persona map](./docs/Persona/farm-theme-and-persona-map.md)
+turns those roles into a seasonal farm narrative with its own logo, visual identity,
+colour system, and presentation guidance.
 The research section includes a background guide to the
 [CAP claim process and its equality and inequality effects](./docs/research/cap-claim-process-and-equity.md)
 within countries, between EU Member States, and between EU and non-EU producers.

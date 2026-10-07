@@ -93,6 +93,11 @@ flowchart TB
         AUDITOR[Audit and Governance Users]
     end
 
+    subgraph Field["Authorised Drone Survey Side Flow"]
+        DRONE[Drone Camera / Sensor]
+        FIELDCONTROLLER[Approved Controller / Field App\ncapture QC and encrypted staging]
+    end
+
     subgraph Identity["User Identity"]
         NATIONALID[Hungarian National eID / eIDAS Identity Provider]
         ENTRA[Microsoft Entra ID\nagency workforce tenant]
@@ -114,6 +119,7 @@ flowchart TB
         EVIDENCE[evidence-api]
         FETCH[copernicus-fetcher]
         FEATURE[feature-worker]
+        DRONEWORKER[drone-evidence-worker\nmanifest validation and photogrammetry]
         GUIDANCE[guidance-indexer]
         AUDIT[audit-pack-worker]
     end
@@ -129,10 +135,13 @@ flowchart TB
         REGISTRY[Model Registry]
         BATCH[Managed Batch Endpoint]
         ONLINE[Managed Online Endpoint]
+        DRONEVISION[Optional Drone Vision\nManaged Batch Endpoint]
     end
 
     subgraph Data["Managed Azure Data Services"]
         LAKE[ADLS Gen2 / Blob Storage]
+        QUARANTINE[Blob Upload Quarantine]
+        EVIDENCESTORE[Immutable Evidence Store]
         SEARCH[Azure AI Search]
         CASEDB[Operational Case Database]
         STATE[Conversation / Thread State]
@@ -156,11 +165,14 @@ flowchart TB
     NATIONALID --> INGRESS
     STAFF --> ENTRA
     INSPECTOR --> ENTRA
+    DRONE --> FIELDCONTROLLER
+    INSPECTOR --> FIELDCONTROLLER
     ENTRA --> INGRESS
     AUDITOR --> INGRESS
     INGRESS --> BFF
     BFF --> INTERACTIVE
     BFF --> CASE
+    BFF --> EVIDENCE
 
     INTERACTIVE --> FARMERAGENT
     INTERACTIVE --> RESOLUTIONAGENT
@@ -185,6 +197,8 @@ flowchart TB
     CASE --> BUS
     RULES --> CASEDB
     EVIDENCE --> LAKE
+    EVIDENCE --> EVIDENCESTORE
+    EVIDENCE --> CASE
     BUS --> WORKER
     BUS --> AUDIT
     AUDIT --> AUDITAGENT
@@ -198,6 +212,16 @@ flowchart TB
     FEATURE --> PROCESS
     FEATURE --> LAKE
     FEATURE --> BATCH
+
+    FIELDCONTROLLER --> BFF
+    EVIDENCE -.authorises restricted upload.-> FIELDCONTROLLER
+    FIELDCONTROLLER -.direct resumable upload.-> QUARANTINE
+    QUARANTINE --> BUS
+    BUS --> DRONEWORKER
+    DRONEWORKER --> DRONEVISION
+    DRONEVISION --> DRONEWORKER
+    DRONEWORKER --> EVIDENCE
+    DRONEWORKER --> EVIDENCESTORE
 
     LAKE --> TRAIN
     TRAIN --> REGISTRY
@@ -285,6 +309,12 @@ Entra identity, device-compliance policy, and least-privilege case assignments. 
 only the minimum required field data, encrypt it on the device, and expire or wipe it
 after synchronisation or loss of access.
 
+Where the agency authorises drone surveys, the field workflow also associates the
+approved inspection task with a flight plan, mission manifest, raw-image hashes,
+capture footprint, surveyor findings, and upload receipt. Drone-control software must
+not receive broader case access than required, and consumer cloud synchronisation is
+not part of the evidence path.
+
 ### 5.2 `agent-api`
 
 Responsibilities:
@@ -351,6 +381,9 @@ Responsibilities:
 - `guidance-indexer`: chunks and indexes versioned CAP guidance and removes superseded
   index versions through a governed publication process.
 - `audit-pack-worker`: compiles traceable draft audit packages.
+- optional `drone-evidence-worker`: validates authorised mission manifests and creates
+  versioned orthomosaics, quality reports, and parcel overlays while preserving raw
+  imagery and complete processing lineage.
 - optional notification worker: sends approved notices through configured channels.
 
 Workers should use Kubernetes Jobs or KEDA-scaled Deployments where appropriate.
@@ -370,6 +403,44 @@ The monitoring and audit agents are not dependent on a user chat session.
 L-level labels describe **workflow autonomy, not legal decision authority**. L4 is
 limited to reversible analytical or drafting work. No agent has authority to issue an
 official adverse decision, alter payment entitlement, or replace human review.
+
+### 5.8 Drone evidence side flow
+
+The drone route is an evidence side flow that branches from inspection selection and
+rejoins the authoritative case at human review. It is not a second decision system.
+
+1. `case-api` records a human-approved targeted, random/stratified, or
+   inconclusive-imagery inspection task.
+2. The inspector field application downloads the minimum task, parcel, and flight
+   context needed for offline work.
+3. The drone/controller performs capture and lightweight local quality checks. It
+   does not run the case LLM or make a crop-compliance decision.
+4. `evidence-api` validates the user's task assignment and creates a short-lived,
+   task-scoped upload session.
+5. The field application uploads large raw files directly and resumably to a
+   quarantine Blob container. The payload does not traverse `web-bff` or
+   `evidence-api`.
+6. Blob completion emits an event through Service Bus. `drone-evidence-worker`
+   validates the manifest, hashes, media, capture metadata, and quality before
+   preserving raw originals.
+7. The worker creates versioned orthomosaics, capture masks, LPIS overlays, and a
+   processing report. Optional high-resolution image analysis uses a separate Azure
+   ML batch model.
+8. `evidence-api` registers approved raw evidence, derivatives, and model outputs in
+   the case evidence graph. The surveyor records an independent structured finding.
+9. The Caseworker reviews Copernicus, drone, farmer, and surveyor evidence together.
+   Any administrative outcome follows the existing human-controlled decision path.
+
+The existing Sentinel crop classifier is not reused directly for raw drone imagery.
+Its input contract is a seasonal parcel-level Sentinel-1/Sentinel-2 feature sequence.
+Any drone computer-vision model has its own training data, taxonomy, calibration,
+versioning, and approval lifecycle.
+
+The Foundry model may explain a registered evidence summary, draft a case note, or
+compare already approved structured results. It does not ingest the complete raw
+mission, perform photogrammetry, replace the vision model, or establish the factual
+inspection finding. If a vision-capable model is evaluated for selected image tiles,
+its output remains advisory and must preserve the approved EU processing boundary.
 
 ## 6. Keep Models Outside AKS
 
@@ -721,6 +792,8 @@ The deployment pipeline should require:
 | Crop batch job fails | Preserve previous result and create an operational exception |
 | Copernicus API unavailable | Use cached features/evidence or defer processing |
 | Low observation quality | Return `UNKNOWN` and request additional evidence |
+| Drone mission unsafe, prohibited, or incomplete | Record an explicit aborted/invalid result and route to another approved evidence method |
+| Drone processing fails quality or lineage validation | Preserve raw evidence, reject the derivative, and create a human-review task |
 
 ## 19. Cost Model
 

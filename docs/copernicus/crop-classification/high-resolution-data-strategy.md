@@ -23,6 +23,7 @@ Related documents:
 - [`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md)
 - [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md)
 - [`crop-classifier-training-procedure.md`](./crop-classifier-training-procedure.md)
+- [`drone-survey-validation-process.md`](./drone-survey-validation-process.md)
 
 ## 2. Is Resolution the Biggest Risk?
 
@@ -301,6 +302,10 @@ Drones can provide centimetre-level evidence but require:
 - scalable operational justification.
 
 They are most appropriate for targeted inspection, not national routine monitoring.
+They may also support a statistically designed random validation sample used to
+measure monitoring accuracy and detect false-consistent results. The mission must
+follow the controlled planning, capture, chain-of-custody, review, and audit process
+in [`drone-survey-validation-process.md`](./drone-survey-validation-process.md).
 
 ### Farmer or inspector photographs
 
@@ -365,7 +370,9 @@ Use a cost-controlled escalation pipeline:
    - temporal gap: wait for/retrieve another observation or use radar;
    - spatial-resolution problem: use VHR imagery;
    - non-monitorable condition: request geo-tagged evidence;
-   - legal or factual dispute: human review or inspection.
+   - legal or factual dispute: human review or inspection;
+   - approved random validation: independent field or drone evidence, kept separate
+     from risk-targeted inspection reporting.
 5. Record why higher-resolution evidence was requested and whether it resolved the
    case.
 6. Use resolution outcomes to refine future escalation thresholds.
