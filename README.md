@@ -36,6 +36,9 @@ colour system, and presentation guidance.
 The research section includes a background guide to the
 [CAP claim process and its equality and inequality effects](./docs/research/cap-claim-process-and-equity.md)
 within countries, between EU Member States, and between EU and non-EU producers.
+The [CAP claim and payment calendar](./docs/research/cap-claim-and-payment-calendar.md)
+explains how spring claims, seasonal monitoring, autumn advances, and final payments
+relate to sowing, harvest, and evidence validation.
 
 ## Repository Structure
 

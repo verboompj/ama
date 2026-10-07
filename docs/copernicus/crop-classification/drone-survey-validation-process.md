@@ -22,6 +22,7 @@ official parcel area, or impose a payment reduction or sanction.
 Related process documents:
 
 - [Agricultural Analysis Use Case](./agricultural-analysis-use-case.md);
+- [Evidence Validation Storyline](./evidence-validation-storyline.md);
 - [High-Resolution Data Strategy](./high-resolution-data-strategy.md);
 - [Personas and Use Cases](../../Persona/personas-and-use-cases.md);
 - [Field & File Theme and Persona Map](../../Persona/farm-theme-and-persona-map.md);
@@ -122,8 +123,10 @@ Technical escalation is appropriate when the remote result is `UNKNOWN`,
 - the required feature is not observable at Sentinel resolution.
 
 Before ordering a drone mission, the caseworker or specialist considers whether a
-later Sentinel acquisition, Sentinel-1 radar, approved VHR imagery, farmer evidence,
-or an ordinary ground inspection would answer the question more safely or cheaply.
+later Sentinel acquisition, Sentinel-1 radar, approved VHR imagery, existing or
+proportionately requested farmer evidence, or an ordinary ground inspection would
+answer the question more safely or cheaply. Random validation remains an independent
+route and must not be replaced solely by claimant-supplied evidence.
 
 ## 4. Decision to Use a Drone
 

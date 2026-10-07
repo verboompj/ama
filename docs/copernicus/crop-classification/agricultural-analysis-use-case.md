@@ -25,6 +25,9 @@ Parcels that cannot be resolved at Sentinel resolution follow
 [`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md).
 Authorised manual validation and complementary drone capture follow
 [`drone-survey-validation-process.md`](./drone-survey-validation-process.md).
+The normal farmer-photo lane and its escalation into independent validation are
+defined in
+[`evidence-validation-storyline.md`](./evidence-validation-storyline.md).
 
 ## 2. Sample Copernicus Image
 

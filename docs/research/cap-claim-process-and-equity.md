@@ -148,6 +148,12 @@ relevant unit amounts, reductions, and penalties, and issues the payment decisio
 Paying agencies keep the supporting records and report expenditure through the CAP
 financial-management system.
 
+Payment is normally part of an annual claim cycle rather than an immediate payment at
+sowing or harvest. Eligible advances may begin from 16 October, with balances following
+after the required controls. See
+[CAP Claim and Payment Calendar](./cap-claim-and-payment-calendar.md) for the detailed
+EU framework, Hungarian example, validation timeline, and architecture implications.
+
 ### Step 8: Review, appeal, and audit
 
 The route for complaints and appeals is governed mainly by national administrative law

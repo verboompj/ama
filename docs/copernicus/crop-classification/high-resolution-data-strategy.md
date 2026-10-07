@@ -23,6 +23,7 @@ Related documents:
 - [`agricultural-analysis-use-case.md`](./agricultural-analysis-use-case.md)
 - [`public-data-crop-prototype-plan.md`](./public-data-crop-prototype-plan.md)
 - [`crop-classifier-training-procedure.md`](./crop-classifier-training-procedure.md)
+- [`evidence-validation-storyline.md`](./evidence-validation-storyline.md)
 - [`drone-survey-validation-process.md`](./drone-survey-validation-process.md)
 
 ## 2. Is Resolution the Biggest Risk?
@@ -319,6 +320,11 @@ validates:
 - file integrity;
 - replay or manipulation risk;
 - whether the required condition is visible.
+
+The farmer photo capability should be available throughout the season but should not
+be mandatory for every parcel unless an approved scheme rule requires it. The
+normal, requested, and inspection-escalation paths are defined in
+[`evidence-validation-storyline.md`](./evidence-validation-storyline.md).
 
 ## 10. Data Fusion
 

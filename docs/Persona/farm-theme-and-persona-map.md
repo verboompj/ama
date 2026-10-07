@@ -58,16 +58,26 @@ business problem before showing the relevant data, agent, service, and control.
 |---|---|---|---|
 | 1. Winter planning | Crop plan and cash-flow forecast | New scheme rules are published | What support is available, and what must the farmer do? |
 | 2. Spring declaration | Fields are prepared and sown | The CAP claim is drafted and submitted | Are the parcels, crops, and commitments declared correctly? |
-| 3. Early monitoring | Crops emerge unevenly | Sentinel observations begin accumulating | Does observed activity agree with the declaration? |
+| 3. Early monitoring | Crops emerge unevenly and the farmer records a material event in the app | Sentinel observations and farmer evidence begin accumulating | Does observed activity agree with the declaration, and is timely context already available? |
 | 4. The anomaly | Weather or replanting changes one parcel | The system detects a possible mismatch | Is this an error, a valid exception, or uncertain evidence? |
-| 5. Evidence | The farmer explains and submits a photo | A caseworker reviews the evidence chain | Can the discrepancy be resolved fairly without inspection? |
+| 5. Evidence | The farmer reuses or submits a guided geo-tagged photo | A caseworker reviews claimant-supplied and remote evidence | Can the question be resolved fairly without independent inspection? |
 | 6. Field survey | An inspector uses ground observation or an authorised drone mission | Structured imagery and findings enter the case file | What can close-range evidence establish that Copernicus could not? |
-| 7. Decision | Harvest and payment timing converge | A reasoned payment decision is issued | Is the outcome lawful, understandable, and proportionate? |
-| 8. Audit | The farm plans the next season | The control system and expenditure are audited | Can every important conclusion be reproduced? |
+| 7. Autumn advance | Harvest and farm cash-flow needs converge | Eligible advances may begin from 16 October after sufficient controls | Is an eligible amount established for an advance without hiding unresolved issues? |
+| 8. Final payment and audit | The farm plans the next season | Balance decisions, payments, appeals, and control-system audit continue | Can every amount and conclusion be explained and reproduced? |
 
 This structure keeps the architecture grounded in user consequences. A satellite
 classification is never the end of a chapter; the end is a clear next step, a
 resolved exception, a human decision, or auditable evidence.
+
+Farmer photo capture is a recurring capability across the season rather than a feature
+revealed only after an exception. It remains optional unless an approved scheme rule
+or proportionate evidence request requires it. Independent random validation and
+surveyor findings remain separate from claimant-supplied evidence.
+
+Payment is not triggered directly by sowing or harvest. The storyline distinguishes
+agricultural events, evidence acceptance, eligibility calculation, advance readiness,
+advance payment, and final balance. The detailed calendar is documented in
+[CAP Claim and Payment Calendar](../research/cap-claim-and-payment-calendar.md).
 
 ## 4. Persona-to-Cast Map
 

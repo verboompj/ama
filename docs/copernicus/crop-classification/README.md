@@ -23,6 +23,9 @@ The classification goal is:
 - [`high-resolution-data-strategy.md`](./high-resolution-data-strategy.md) — Sentinel
   resolution risks, mixed-pixel controls, Copernicus VHR access, commercial imagery,
   and evidence escalation.
+- [`evidence-validation-storyline.md`](./evidence-validation-storyline.md) — normal
+  farmer photo evidence, guided GPS capture, discrepancy response, independent
+  inspection escalation, and random validation.
 - [`drone-survey-validation-process.md`](./drone-survey-validation-process.md) —
   targeted, random, and inconclusive-imagery inspection paths; drone mission planning,
   evidence capture, chain of custody, human review, and audit.

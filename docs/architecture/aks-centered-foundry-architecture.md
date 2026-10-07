@@ -292,7 +292,10 @@ The mobile experience must support:
 
 - claim and parcel status, clear notices, deadlines, and evidence requests;
 - map and parcel context suitable for a small screen;
-- guided geo-tagged photo capture with explicit location permission;
+- an always-available parcel evidence option for voluntary material events, approved
+  scheme milestones, and focused evidence requests;
+- guided geo-tagged photo capture with explicit location permission and displayed
+  positioning accuracy;
 - upload progress, resumable uploads, and retry on intermittent connectivity;
 - accessible Hungarian-language content and assisted-service alternatives; and
 - secure local handling of drafts and evidence.
@@ -370,6 +373,8 @@ Responsibilities:
 
 - approved imagery and chart references;
 - model result and provenance;
+- task-scoped farmer and inspector upload authorisation;
+- quarantine validation, raw-object hashes, receipts, and evidence registration;
 - evidence-package generation;
 - farmer-safe and caseworker-safe views;
 - signed or tamper-evident evidence manifests.
@@ -441,6 +446,32 @@ compare already approved structured results. It does not ingest the complete raw
 mission, perform photogrammetry, replace the vision model, or establish the factual
 inspection finding. If a vision-capable model is evaluated for selected image tiles,
 its output remains advisory and must preserve the approved EU processing boundary.
+
+### 5.9 Farmer evidence lane
+
+Farmer photo evidence is a normal case capability that runs beside Copernicus
+monitoring. It is always available for an approved purpose but is not universally
+mandatory.
+
+1. The Farmer selects a claimed parcel and evidence purpose in the PWA/mobile
+   experience.
+2. `case-api` confirms the current claim, parcel, task, rule, and user authority.
+3. The application guides capture and records time, location, positioning accuracy,
+   task context, and an integrity hash. GPS is supporting provenance, not proof.
+4. `evidence-api` authorises receipt, validates the package in quarantine, preserves
+   the raw original, and registers the evidence reference.
+5. Deterministic checks verify package completeness and timing. Optional image-quality
+   models may identify blur or missing content but cannot decide compliance.
+6. The Discrepancy Resolution Agent may explain instructions or summarise registered
+   evidence. It cannot invent capture metadata or make an authoritative visual
+   finding.
+7. A bounded workflow or Caseworker records whether the evidence answers the scoped
+   question.
+8. Unresolved cases may enter the human-approved ground/drone inspection side flow.
+
+Random or stratified validation remains independent. Claimant-supplied photographs
+may be reviewed as part of the case, but they do not replace the independently
+collected observation required to evaluate false negatives and control-system quality.
 
 ## 6. Keep Models Outside AKS
 

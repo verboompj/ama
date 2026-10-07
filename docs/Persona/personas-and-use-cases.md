@@ -157,6 +157,9 @@ during time-sensitive agricultural work.
   - whether a human has reviewed the case.
 - Guided capture and upload of geo-tagged photos, including offline capture,
   validation, consent/privacy notice, and upload retry.
+- An always-available parcel evidence option for voluntary material-event capture,
+  approved scheme milestones, and focused agency requests; this must not become a
+  universal photo requirement without a lawful and proportionate rule.
 - Alternative evidence submission where a photo is inappropriate or impossible.
 - Ability to correct a declaration, provide an explanation, request human review,
   and lodge an appeal.
@@ -242,6 +245,24 @@ farmer's right to challenge the outcome.
 
 **Success:** No adverse individual measure is imposed without a meaningful opportunity
 to be heard.
+
+#### F-05: Capture seasonal parcel evidence
+
+**Trigger:** A material farm event occurs, an approved scheme milestone becomes due,
+or the farmer wants to preserve timely evidence before a discrepancy exists.
+
+**Main flow:**
+1. The farmer opens the claimed parcel and selects the evidence purpose.
+2. The application provides safe, accessible capture instructions.
+3. It records the authorised parcel/task context, time, location and accuracy, while
+   explaining that GPS supports provenance but does not prove the image content.
+4. The farmer captures an offline draft or uploads the evidence.
+5. The service validates and registers the evidence, issues a receipt, and keeps
+   `received` distinct from `sufficient for a task`.
+6. Relevant evidence is reused if monitoring later raises the same question.
+
+**Success:** Time-sensitive farmer evidence can prevent avoidable repeat requests or
+inspection without becoming mandatory surveillance or an automatic claim decision.
 
 ---
 
