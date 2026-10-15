@@ -15,7 +15,7 @@ data and model quality use the [AI/ML catalogue](ai-ml-checks.md).
 Each package's `test-plan.md` instantiates applicable checks below with exact resources,
 properties, expected values/thresholds, commands, input snapshot/parameter variants,
 gate, owner and evidence path. Reference the criterion IDs in the
-[design acceptance matrix](../../delivery/templates/design-release.md). A checklist tick or an
+[design acceptance matrix](templates/design-release.md). A checklist tick or an
 unresolved parameter expression is not evidence that a property has the required value.
 
 Required current-gate checks block on `FAIL`, `BLOCKED` or `NOT RUN`. A genuinely
@@ -32,9 +32,9 @@ behaviour must have later observed checks; they cannot be passed by static revie
 | WV03 | Verify published AVM paths/versions, required parameters/outputs and documented gaps; reconcile security/compliance requirements with the design | Bicep engineer supplies `feasibility.md`; tester references it and separate specialist dispositions | design-released |
 | WV04 | Produce a workload-specific implementation plan derived from reviewed architecture, with exact files, dependency graph/layers, parallel-write boundaries and acceptance/tests per task | Coordinator writes `development-plan.md`; architect/implementer accept contracts and sequencing; every required review finding has a disposition/task | design-released |
 
-The [architecture-review template](../../delivery/templates/architecture-review.md) and
-[development-plan template](../../delivery/templates/development-plan.md) define the reports.
-The [delivery backlog](../../delivery/tasks.md) supplies reference tasks; the plan fixes actual scope.
+The [architecture-review template](templates/architecture-review.md) and
+[development-plan template](templates/development-plan.md) define the reports.
+The [delivery backlog](tasks.md) supplies reference tasks; the plan fixes actual scope.
 Planning may identify remediation tasks, but unresolved required design blockers still
 prevent release. Material changes invalidate affected design reviews.
 

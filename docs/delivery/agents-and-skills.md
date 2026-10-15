@@ -60,12 +60,12 @@ automatically, read its `SKILL.md`. Skills provide instructions, not installed
 executables, cloud privileges or a promise that external services are reachable.
 
 The coordinator uses the
-[collaboration patterns](multi-agent-framework.md#selected-collaboration-model)
+[collaboration patterns](../../delivery/multi-agent-framework.md#selected-collaboration-model)
 to select specialists and route review/fix cycles; a simple request can be handled
-by one role. [Workload Guidance](workload-guidance.md) separately defines the standards
+by one role. [Workload Guidance](../../delivery/workload-guidance.md) separately defines the standards
 applied to the Azure artifacts they produce.
-The [workload checks](workload-checks.md) provide concrete expected evidence;
-[AI/ML checks](ai-ml-checks.md) cover application/model outputs;
+The [workload checks](../../delivery/workload-checks.md) provide concrete expected evidence;
+[AI/ML checks](../../delivery/ai-ml-checks.md) cover application/model outputs;
 [phase prompts](README.md#reusable-execution-prompts) provide repeatable entry points
 without replacing assignments or automatically running later phases.
 

@@ -44,9 +44,9 @@ Use the crop-classifier training procedure and public-data prototype plan.
 
 Return versioned pipeline code, manifest/contract paths, candidate/model references,
 reproducible author results and unresolved data/approval gaps to the coordinator.
-Follow `delivery/releases/README.md` and `docs/delivery/ai-ml-checks.md`.
+Follow `delivery/releases/README.md` and `delivery/ai-ml-checks.md`.
 Apply **5 total attempts** including the initial attempt to validation loops under
-`docs/delivery/multi-agent-framework.md#review-loop-limit`; retain the ledger across
+`delivery/multi-agent-framework.md#review-loop-limit`; retain the ledger across
 fixes, snapshots and reassignment. Stop on blockers or exhaustion.
 Do not edit application cases, Bicep, engineering-agent definitions or independent
 test verdicts. Do not download datasets, submit cloud jobs, promote/deploy a model

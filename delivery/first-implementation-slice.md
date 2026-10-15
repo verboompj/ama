@@ -3,7 +3,7 @@
 ## Status and Scope
 
 The proposed first build target is the existing
-[public-data crop prototype](../copernicus/crop-classification/public-data-crop-prototype-plan.md).
+[public-data crop prototype](../docs/copernicus/crop-classification/public-data-crop-prototype-plan.md).
 Owners and artifacts are defined below. Design release, data access, compute
 authority and implementation remain pending.
 
@@ -86,7 +86,7 @@ flowchart TD
 ```
 
 Design changes reopen affected review/release. Counter and final-test isolation
-rules survive every fix. S01-S08 in the [task catalogue](../../delivery/tasks.md#solution-slice-backlog)
+rules survive every fix. S01-S08 in the [task catalogue](tasks.md#solution-slice-backlog)
 prepare and implement the authorised scope.
 Local acceptance requires replay plus results against the approved targets, honest
 weak-label/coverage claims and a working evidence view. Live checks remain `NOT RUN`;

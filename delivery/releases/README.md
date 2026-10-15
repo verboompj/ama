@@ -45,7 +45,7 @@ references rather than copying credentials, claimant data or production logs.
 Generated build outputs stay outside committed evidence unless specifically needed.
 
 The coordinator's `ledger.md` also tracks each
-[review/test/validation loop](../../docs/delivery/multi-agent-framework.md#review-loop-limit):
+[review/test/validation loop](../multi-agent-framework.md#review-loop-limit):
 
 | Stable loop ID | Objective / reviewer / check scope / target gate | Maximum total attempts | Attempts used / remaining | Attempt IDs / input snapshots / results | State / blocker / user decision |
 |---|---|---|---|---|---|

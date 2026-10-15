@@ -22,16 +22,16 @@ delivery, stakeholder engagement, publication and scoring cannot be certified by
 
 ## Agent Collaboration Guidance
 
-See [Multi-Agent Framework and Orchestration](multi-agent-framework.md) for pattern
-selection, roles, rationale and primary sources. See [Handoffs and Gates](handoffs.md)
+See [Multi-Agent Framework and Orchestration](../../delivery/multi-agent-framework.md) for pattern
+selection, roles, rationale and primary sources. See [Handoffs and Gates](../../delivery/handoffs.md)
 for package states and evidence contracts.
 
 ## Azure Workload Guidance
 
-See [Workload Guidance](workload-guidance.md) for the Azure standards, existing
+See [Workload Guidance](../../delivery/workload-guidance.md) for the Azure standards, existing
 guardrails, AVM/Bicep approach, data/compliance boundaries, documentation and staged
 verification requirements. It contains the official workload-source links.
-The [validation catalogue](workload-checks.md) supplies concrete check IDs, report
+The [validation catalogue](../../delivery/workload-checks.md) supplies concrete check IDs, report
 requirements, Azure-context confirmation and stage-specific expected evidence.
 
 ## Microsoft Learn Access

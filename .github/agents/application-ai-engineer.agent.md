@@ -31,7 +31,7 @@ Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context`,
 - Author assigned application containers/manifests and adjacent unit/contract tests.
   Platform resources belong to the Bicep engineer; independent acceptance/evaluation
   suites belong to the tester. Publish exact artifacts for frozen-candidate review.
-- Implement planned AI01-AI06 assertions from `docs/delivery/ai-ml-checks.md`.
+- Implement planned AI01-AI06 assertions from `delivery/ai-ml-checks.md`.
   Author checks support implementation; they do not supply an independent pass.
 
 ## Output and Stop
@@ -39,7 +39,7 @@ Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context`,
 Use `delivery/releases/README.md` for exact ownership. Return runtime code, versioned
 interfaces, packaging references and reproducible local results to the coordinator.
 Apply **5 total attempts** including the initial attempt to local validation loops;
-follow `docs/delivery/multi-agent-framework.md#review-loop-limit` and the existing
+follow `delivery/multi-agent-framework.md#review-loop-limit` and the existing
 ledger. Preserve counts through fixes/snapshots; stop and escalate on exhaustion.
 Do not train/promote models, edit Bicep, patch independent verdicts, create pipelines,
 call paid models, deploy, mutate Azure or acquire external data without separate

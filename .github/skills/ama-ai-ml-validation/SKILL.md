@@ -5,7 +5,7 @@ description: Independently validate workload runtime AI, application contracts a
 
 # AMA Independent Application, AI and ML Validation
 
-1. Load `ama-context` and `ama-handoff`. Use `docs/delivery/ai-ml-checks.md` for
+1. Load `ama-context` and `ama-handoff`. Use `delivery/ai-ml-checks.md` for
    workload application/model artifacts.
 2. Before work, require the scoped assignment, frozen candidate/evaluation inputs,
    accepted risk path, owner-approved thresholds/tolerances, loop ledger and evidence

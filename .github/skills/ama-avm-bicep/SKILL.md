@@ -31,4 +31,4 @@ description: Implement or test released AMA infrastructure using native Bicep co
    data-plane changes, application bootstrap and GitHub Actions are separate work.
    What-if is neither a guarantee nor deployment authorisation; ARM is not transactional.
 10. Produce a module/version inventory, non-secret outputs and acceptance mapping.
-    Hand off through `docs/delivery/handoffs.md`; no self-approval or hidden exclusions.
+    Hand off through `delivery/handoffs.md`; no self-approval or hidden exclusions.

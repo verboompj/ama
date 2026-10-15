@@ -37,7 +37,7 @@ to the package's exact resources, properties, values/thresholds, commands/method
 evidence paths, owners and earliest required gate. Record applicability limitations
 and any specifically approved warning dispositions.
 For application/ML scope also instantiate AI01-AI06 and ML01-ML08 from
-`docs/delivery/ai-ml-checks.md`. Include API/event/scoring schemas, dataset/split and
+`delivery/ai-ml-checks.md`. Include API/event/scoring schemas, dataset/split and
 feature manifests, pinned environments/configuration, model/evaluation artifacts,
 replay commands and protected evidence locations. Identify human target/approval
 owners before evaluation; missing targets are blockers.

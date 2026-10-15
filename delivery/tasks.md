@@ -1,12 +1,12 @@
 # Workload Delivery Backlog
 
 **All tasks are pending.** The coordinator selects work for the authorised objective
-and accepted [risk path](../docs/delivery/handoffs.md#risk-based-review-paths).
+and accepted [risk path](handoffs.md#risk-based-review-paths).
 The actual development plan fixes files, contracts, reviewers and tests.
 
 ## Solution Slice Backlog
 
-S01-S08 support the proposed [public-data crop-evidence slice](../docs/delivery/first-implementation-slice.md).
+S01-S08 support the proposed [public-data crop-evidence slice](first-implementation-slice.md).
 Scope, data/compute authority and owner-approved targets must be resolved before
 implementation. The plan adds any triggered specialist or platform work with explicit
 dependencies and distinct write paths.
@@ -91,7 +91,7 @@ Authenticated/deployment/operational checks keep their later-gate owners and pen
 results; they are not waived or declared passed at D18.
 D19 supplies the dedicated five-pillar review for regulated infrastructure.
 Before D11, D20 converts the actual reviewed architecture into implementation tasks
-and instantiates [WV01-WV22](../docs/delivery/workload-checks.md) with resources, expected values,
+and instantiates [WV01-WV22](workload-checks.md) with resources, expected values,
 commands and evidence. WV15-WV22 remain future authenticated/live work, with their
 owners/confirmation prerequisites.
 

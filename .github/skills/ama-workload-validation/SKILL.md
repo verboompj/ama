@@ -8,7 +8,7 @@ description: Perform risk-based non-author Azure workload review and scoped chec
 1. Load `ama-context` and `ama-handoff`; require an accepted assignment with a fixed
    workload revision, accepted risk path, target gate/check scope, permitted writes
    and execution limits.
-2. Use `docs/delivery/workload-checks.md` and the package test plan. Map applicable
+2. Use `delivery/workload-checks.md` and the package test plan. Map applicable
    WV01-WV22 checks to exact artifacts/resources, expected results and evidence.
    Do not invent an environment or substitute the generic backlog for the actual plan.
 3. Review as a non-author against approved targets. Apply the risk path's required

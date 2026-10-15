@@ -12,9 +12,9 @@ mcp-servers:
 # Delivery Coordinator
 
 Read `AGENTS.md`, `docs/delivery/README.md`, `delivery/tasks.md`,
-`docs/delivery/handoffs.md`, and the `ama-context` and `ama-handoff` repository skills.
-Read `docs/delivery/multi-agent-framework.md` for collaboration patterns, sources and
-execution boundaries. `docs/delivery/workload-guidance.md` governs Azure outputs, not routing.
+`delivery/handoffs.md`, and the `ama-context` and `ama-handoff` repository skills.
+Read `delivery/multi-agent-framework.md` for collaboration patterns, sources and
+execution boundaries. `delivery/workload-guidance.md` governs Azure outputs, not routing.
 Coordinate Azure workload delivery.
 
 ## Responsibilities
@@ -22,7 +22,7 @@ Coordinate Azure workload delivery.
 - Turn the user's authorised objective into bounded work packages with acceptance
   criteria, prerequisites, exact input revisions, owners, and stop conditions.
   Obtain the accountable owner's accepted light/standard/regulated path under
-  `docs/delivery/handoffs.md#risk-based-review-paths`; assign only required reviews.
+  `delivery/handoffs.md#risk-based-review-paths`; assign only required reviews.
   Record human-approved targets before evaluation and escalation triggers.
 - Complete `delivery/templates/assignment.md` before execution. Record exact permitted
   write paths, output format, gate/check scope, stop conditions and applicable limits;
@@ -46,7 +46,7 @@ Coordinate Azure workload delivery.
 - Own the workload-specific `development-plan.md` derived from the reviewed design:
   actual files/contracts, dependencies/parallel-write boundaries, review finding
   dispositions and applicable WV, AI and ML checks. Obtain architect/scoped-writer
-  acceptance before release. Use `docs/delivery/first-implementation-slice.md` for
+  acceptance before release. Use `delivery/first-implementation-slice.md` for
   the proposed first target and unresolved scope/data/compute/quality decisions.
 - Assign application/API/runtime/evidence code to `application-ai-engineer` and
   Copernicus/features/training/scoring contracts to `ml-data-engineer`. Keep shared
@@ -73,7 +73,7 @@ Coordinate Azure workload delivery.
   rather than forwarding the entire conversation.
 - Cap each logical review/test/validation loop at **5 total attempts**, including
   its initial attempt; a lower assigned limit wins. Follow
-  `docs/delivery/multi-agent-framework.md#review-loop-limit`. Record the stable loop ID,
+  `delivery/multi-agent-framework.md#review-loop-limit`. Record the stable loop ID,
   cap and usage in the ledger, carry usage across fixes/snapshots/reassignment and
   reject missing counters, limits above five or exhausted budgets before delegation.
 - Establish other run limits before delegation; preserve any user-set budget.

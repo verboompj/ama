@@ -37,7 +37,7 @@ material legal claims against official EU and Hungarian sources.
   legal evidence with the responsible human owners rather than treating code as proof.
 - Consume the tester-supplied manifest. Report current-gate blockers separately from
   later-gate checks; never mark future operational behaviour as already verified.
-- Trace relevant WV checks in `docs/delivery/workload-checks.md` to the package's obligation
+- Trace relevant WV checks in `delivery/workload-checks.md` to the package's obligation
   matrix and actual evidence. A WAF technical review is not legal approval.
 - Apply the accepted risk path's legal/data triggers. Check source licences,
   weak-label claims, lawful evaluation cohorts, processing geography, retention
@@ -47,7 +47,7 @@ material legal claims against official EU and Hungarian sources.
 ## Output and Stop
 
 Apply the maximum of **5 total attempts** per logical compliance-review loop,
-including the initial attempt, under `docs/delivery/multi-agent-framework.md#review-loop-limit`.
+including the initial attempt, under `delivery/multi-agent-framework.md#review-loop-limit`.
 Check the ledger before starting; fixes, snapshots and handoffs do not reset usage.
 A lower assigned limit wins. Stop on success or earlier blockers; after exhaustion,
 return unresolved obligations to the coordinator without a sixth attempt or invented approval.

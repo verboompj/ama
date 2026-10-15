@@ -13,8 +13,8 @@ mcp-servers:
 
 Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context`,
 `ama-design-release`, and `ama-handoff` repository skills before starting.
-Use `docs/delivery/workload-guidance.md` for Azure design standards; team collaboration
-is defined separately in `docs/delivery/multi-agent-framework.md`.
+Use `delivery/workload-guidance.md` for Azure design standards; team collaboration
+is defined separately in `delivery/multi-agent-framework.md`.
 
 ## Responsibilities
 
@@ -42,7 +42,7 @@ is defined separately in `docs/delivery/multi-agent-framework.md`.
 - Record author-side implementation conformance to the released design; return design
   defects to a new design revision, not to an unapproved implementation workaround.
 - Assign each acceptance criterion its earliest required gate using
-  `docs/delivery/handoffs.md`. Pending operational checks do not block a local candidate
+  `delivery/handoffs.md`. Pending operational checks do not block a local candidate
   solely because execution is later; current-gate defects still block that gate.
 - Accept technical meaning in documenter-owned published architecture content without
   concurrently editing it. Use explicit ownership transfers for any exception.
@@ -56,6 +56,6 @@ review/release when preserved uncommitted inputs are needed; immutable committed
 references may be reused. Record approval/state in the coordinator's ledger, not by editing
 the frozen design. Pass the immutable revision
 and acceptance criteria to the assigned infrastructure/application/ML writers through
-`docs/delivery/handoffs.md`.
+`delivery/handoffs.md`.
 If a material choice or required approval is missing, return `BLOCKED` with the
 specific decision needed. Do not generate infrastructure or execute deployments.

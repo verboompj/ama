@@ -9,11 +9,11 @@ The coordinator accepts artifact handoffs and routes each authorised phase.
 
 ## Assignment Before Execution
 
-The coordinator prepares an [assignment](../../delivery/templates/assignment.md) before invoking
+The coordinator prepares an [assignment](templates/assignment.md) before invoking
 a specialist. It records input snapshot, target gate/check scope, permitted writes,
 artifact owner, output format, stop conditions, attempt limits, any user-set budget
 and required approvals. The specialist accepts or rejects those inputs before work.
-The separate [handoff](../../delivery/templates/handoff.md) records actual outputs and consumption.
+The separate [handoff](templates/handoff.md) records actual outputs and consumption.
 Missing required assignment fields are blockers, not permission to guess defaults.
 
 ## Risk-Based Review Paths
@@ -111,14 +111,14 @@ A completed review task can yield `FAIL`; the downstream gate remains blocked.
 
 ## Evidence Contract
 
-Use the [assignment](../../delivery/templates/assignment.md), [design release](../../delivery/templates/design-release.md),
-[architecture review](../../delivery/templates/architecture-review.md), [development plan](../../delivery/templates/development-plan.md), [handoff](../../delivery/templates/handoff.md)
-and [review](../../delivery/templates/review.md) templates in a future
-[work-package directory](../../delivery/releases/README.md).
+Use the [assignment](templates/assignment.md), [design release](templates/design-release.md),
+[architecture review](templates/architecture-review.md), [development plan](templates/development-plan.md), [handoff](templates/handoff.md)
+and [review](templates/review.md) templates in a future
+[work-package directory](releases/README.md).
 
 - Identify `WP-<number>`, task ID, design revision, and artifact paths.
 - The tester prepares committed/uncommitted snapshots under the
-  [snapshot protocol](../../delivery/releases/README.md#snapshot-protocol). Recipients use its
+  [snapshot protocol](releases/README.md#snapshot-protocol). Recipients use its
   manifest and preserved inputs, not hashes invented by roles without hashing tools.
 - Keep the design and candidate fixed during their respective reviews. Each reviewer
   records its own disposition, findings and evidence without changing implementation.

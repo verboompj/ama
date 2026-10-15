@@ -28,7 +28,7 @@ cloud operations beyond the user's recorded scope.
 | Snapshot producer / approved preservation location | infrastructure-tester / TODO |
 | Known blockers and dependencies | TODO |
 
-Use the [risk-based paths](../../docs/delivery/handoffs.md#risk-based-review-paths).
+Use the [risk-based paths](../handoffs.md#risk-based-review-paths).
 For light work, reference the existing released design/plan and record only relevant
 fields; justify inapplicable fields. This contract is not technical gate enforcement.
 
@@ -55,6 +55,6 @@ The coordinator records attempt consumption before retrying. Stop at the recorde
 limit or on repeated non-progress; a new assignment cannot silently reset the budget.
 For review/test/validation work, the limit must be an integer from 1 to 5 and includes
 the initial attempt, not five retries. Follow the
-[review-loop policy](../../docs/delivery/multi-agent-framework.md#review-loop-limit).
+[review-loop policy](../multi-agent-framework.md#review-loop-limit).
 Reject a missing loop ID/ledger, a limit above five or an exhausted counter. Other
 assignment types still require their own explicit applicable limits.

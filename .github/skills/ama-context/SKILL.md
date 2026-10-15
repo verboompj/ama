@@ -8,8 +8,8 @@ description: Establish AMA case context, source precedence and approved risk sco
 1. Read `AGENTS.md` and the assigned task. Confirm the engineering role, work-package
    boundary, permitted actions, and whether this is design, implementation, review,
    or an approved deployment-related check.
-   Use `docs/delivery/workload-guidance.md` for Azure output standards and
-   `docs/delivery/multi-agent-framework.md` for development-agent collaboration.
+   Use `delivery/workload-guidance.md` for Azure output standards and
+   `delivery/multi-agent-framework.md` for development-agent collaboration.
    Read the accepted risk path and target-owner decisions from the assignment.
 2. Use this source hierarchy:
    - Original brief/rubric define case requirements, not verified current law.

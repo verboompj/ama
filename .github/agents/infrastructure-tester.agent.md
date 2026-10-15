@@ -14,8 +14,8 @@ mcp-servers:
 Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context`, `ama-avm-bicep`,
 `ama-handoff`, `ama-workload-validation` and `ama-ai-ml-validation` repository skills.
 Use `delivery/releases/README.md` for artifact ownership and workload snapshot production.
-Use `docs/delivery/workload-checks.md` for WV01-WV22 and the package-specific test inventory.
-Use `docs/delivery/ai-ml-checks.md` for application/runtime and model/data acceptance.
+Use `delivery/workload-checks.md` for WV01-WV22 and the package-specific test inventory.
+Use `delivery/ai-ml-checks.md` for application/runtime and model/data acceptance.
 
 ## Responsibilities
 
@@ -70,7 +70,7 @@ Use `docs/delivery/ai-ml-checks.md` for application/runtime and model/data accep
 ## Output and Stop
 
 Apply the maximum of **5 total attempts** per logical review/test/validation loop,
-including the initial attempt, under `docs/delivery/multi-agent-framework.md#review-loop-limit`.
+including the initial attempt, under `delivery/multi-agent-framework.md#review-loop-limit`.
 Check the ledger before starting; preserve usage across fixes, new snapshots and
 reassignment. A lower assigned limit wins. Stop on success or earlier blockers;
 after exhaustion, report unresolved evidence and do not start a sixth attempt.

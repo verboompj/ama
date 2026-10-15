@@ -55,7 +55,7 @@ task. A small documentation change uses its assigned writer and relevant checks.
 | `compliance-reviewer` | Establishes applicability/obligations early and maps controls to evidence | Does not supply legal certification or invent applicability |
 | `architecture-documenter` | Maintains decisions, diagrams and guidance throughout; reconciles final docs to the candidate | Does not claim unobserved deployment or silently redesign the solution |
 
-The [agent/skill catalogue](agents-and-skills.md) defines artifact ownership and tools.
+The [agent/skill catalogue](../docs/delivery/agents-and-skills.md) defines artifact ownership and tools.
 
 ## Collaboration Across a Work Package
 
@@ -78,7 +78,7 @@ the designated non-author reviewer supplies the required technical verdict.
 must describe the same candidate. The coordinator reports evidence, exceptions and
 remaining blockers for the authorised next decision.
 
-The [task catalogue](../../delivery/tasks.md) contains scoped solution tasks and the
+The [task catalogue](tasks.md) contains scoped solution tasks and the
 regulated infrastructure reference path.
 
 ### Input to Candidate Release
@@ -189,7 +189,7 @@ Workload criteria are defined in [Workload Checks](workload-checks.md) and
 
 ## Reusable Phase Entry Points
 
-The numbered [prompt files](../../.github/prompts/) cover design, independent review,
+The numbered [prompt files](../.github/prompts) cover design, independent review,
 planning, design release, implementation, local validation, documentation,
 authenticated validation, live verification, application/runtime implementation, ML implementation and
 independent AI/ML acceptance. Each invocation executes its accepted assignment.
@@ -201,7 +201,7 @@ do not assume native `.prompt.md` discovery or identical cross-client behaviour.
 Each phase still requires accepted inputs, current approvals and bounded limits.
 See [prompt-file support](https://code.visualstudio.com/docs/agent-customization/prompt-files).
 For a concrete prompt-to-profile-to-skill example and CLI invocation, see
-[Using and Linking Prompts](README.md#using-and-linking-prompts).
+[Using and Linking Prompts](../docs/delivery/README.md#using-and-linking-prompts).
 
 ## Task and Handoff Contract
 
@@ -217,19 +217,19 @@ A specialist validates the inputs and returns a result with evidence, findings a
 remaining gaps. A malformed or unsupported output is rejected explicitly, not passed
 downstream because an agent sounded confident.
 
-The coordinator completes [assignment.md](../../delivery/templates/assignment.md) before work;
-the specialist's actual output is recorded in [handoff.md](../../delivery/templates/handoff.md).
+The coordinator completes [assignment.md](templates/assignment.md) before work;
+the specialist's actual output is recorded in [handoff.md](templates/handoff.md).
 The assignment records risk path, approved targets, applicable limits, attempts used,
 explicit ownership and the workload gate/check scope.
 
 Specialists return artifacts to the coordinator, which routes further authorised work.
 Use [Handoffs and Gates](handoffs.md) for
-states and the [handoff template](../../delivery/templates/handoff.md) for records.
+states and the [handoff template](templates/handoff.md) for records.
 
 ## Shared Context and Artifact Ownership
 
 Persist the minimum useful task state in the repository's
-[work-package records](../../delivery/releases/README.md): objective, revisions, task disposition,
+[work-package records](releases/README.md): objective, revisions, task disposition,
 findings, decisions and next owner. Do not rely on a long chat transcript as the
 authoritative state.
 
@@ -241,13 +241,13 @@ Only one writer owns an artifact at a time. Parallel work is safe when inputs ar
 fixed and output paths do not overlap. In particular, do not edit implementation
 while reviewers are evaluating a supposedly frozen candidate.
 
-Use the [artifact ownership table](../../delivery/releases/README.md#artifact-ownership): the architect
+Use the [artifact ownership table](releases/README.md#artifact-ownership): the architect
 owns design decisions; the Bicep, application and ML engineers own their scoped
 implementation artifacts and author tests. The tester owns independent acceptance
 suites; the documenter owns published explanations. Transfers identify exact paths,
 writers and return points.
 
-The tester prepares snapshots using the [snapshot protocol](../../delivery/releases/README.md#snapshot-protocol).
+The tester prepares snapshots using the [snapshot protocol](releases/README.md#snapshot-protocol).
 Committed inputs use full commit references; uncommitted candidates also require
 preserved bytes and scoped hashes. Other roles consume the producer's manifest.
 Changes invalidate affected approvals, tests and reviews. Approval/state metadata

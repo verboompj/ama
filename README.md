@@ -50,14 +50,16 @@ The [Azure delivery team](./docs/delivery/README.md) defines nine development ag
 shared repository skills, a staged task backlog, and explicit architecture-to-Bicep
 handover gates. It prepares the engineering workflow; infrastructure implementation
 and GitHub Actions remain separate, later work.
-The [workload guidance](./docs/delivery/workload-guidance.md) and
-[multi-agent framework and orchestration](./docs/delivery/multi-agent-framework.md)
+The [`delivery/` workspace](./delivery/README.md) holds operating contracts, plans
+and work-package evidence.
+The [workload guidance](delivery/workload-guidance.md) and
+[multi-agent framework and orchestration](delivery/multi-agent-framework.md)
 separate Azure solution standards from development-agent collaboration.
-The [workload validation catalogue](./docs/delivery/workload-checks.md) defines concrete
+The [workload validation catalogue](delivery/workload-checks.md) defines concrete
 checks and evidence for design review, local acceptance and later Azure/live stages.
-The [AI/ML checks](./docs/delivery/ai-ml-checks.md) cover runtime applications,
+The [AI/ML checks](delivery/ai-ml-checks.md) cover runtime applications,
 data/model quality and reproducibility. The
-[first implementation slice](./docs/delivery/first-implementation-slice.md) defines
+[first implementation slice](delivery/first-implementation-slice.md) defines
 the proposed public-data crop-evidence target and decisions needed before execution.
 
 ## Repository Structure
@@ -69,14 +71,14 @@ the proposed public-data crop-evidence target and decisions needed before execut
 │   ├── agents/              # Nine native Copilot agent profiles
 │   ├── skills/              # Reusable repository-local procedures
 │   └── prompts/             # Explicit phase entry points
-├── delivery/                # Workload tasks, templates & work-package records
+├── delivery/                # Operating contracts, checks, plans & work-package records
 ├── case/                    # Original case brief and assessment source material
 │   ├── casestudy/           # Participant case understanding & design questions
 │   └── rubrik/              # Assessment rubric
 ├── docs/
 │   ├── architecture/        # Proposed AI solution architecture (AKS + Azure AI services)
 │   ├── copernicus/          # Copernicus data/services/tools inventory
-│   ├── delivery/            # Engineering-team usage, collaboration & workload guides
+│   ├── delivery/            # Team usage, role catalogue & context guides
 │   ├── Persona/             # Role-based personas, requirements & journeys
 │   ├── regulatory-compliance/ # Regulatory & legal framework summaries
 │   └── research/            # Supporting research notes

@@ -4,7 +4,7 @@ Nine engineering roles deliver Azure infrastructure, applications, runtime AI,
 data/model pipelines, independent assurance and deployment guidance.
 
 **Current status:** profiles, skills, prompts and workload contracts are defined.
-Implementation starts from the [first-slice scope decisions](first-implementation-slice.md).
+Implementation starts from the [first-slice scope decisions](../../delivery/first-implementation-slice.md).
 Coordination is procedural; executable enforcement and deployment pipelines are deferred.
 
 ## Structure
@@ -15,17 +15,17 @@ AGENTS.md                     Shared repository instructions
 .github/skills/               Eight repository-local skills
 .github/prompts/              Twelve reusable phase entry points
 docs/delivery/
-  README.md                   Entry point and usage
+  README.md                   Team guide and usage
+  agents-and-skills.md        Role, tool and skill catalogue
+  context-and-tools.md        Source map and client setup guidance
+delivery/
+  README.md                   Operating-contract and record index
   workload-guidance.md        Azure design, implementation and verification standards
   workload-checks.md          WV01-WV22: explicit checks, reports and gate requirements
   ai-ml-checks.md             Application/runtime AI and model/data acceptance
   first-implementation-slice.md  Public-data crop-evidence scope and open decisions
   multi-agent-framework.md    Agent roles, orchestration patterns and control boundaries
-  agents-and-skills.md        Responsibilities, permissions, skill catalogue
-  context-and-tools.md        Source map, official guidance, Learn access
   handoffs.md                 State transitions and approval gates
-delivery/
-  README.md                   Operational artifact index
   tasks.md                    Workload task catalogue
   releases/README.md          Future work-package artifact layout
   templates/                  Design release, handoff, review templates
@@ -50,20 +50,23 @@ GitHub Actions design and deployment remain later, separately authorised work.
 
 See [agents and skills](agents-and-skills.md) for ownership and tool boundaries.
 
-## Guidance Documents
+## Operating Contracts
 
-- [Workload Guidance](workload-guidance.md): what the Azure solution must satisfy,
+[`delivery/`](../../delivery/README.md) contains the operating rules, standards,
+checks, plans and evidence used by the team.
+
+- [Workload Guidance](../../delivery/workload-guidance.md): what the Azure solution must satisfy,
   including WAF, AVM/Bicep, security/data boundaries and evidence requirements.
-- [Multi-Agent Framework and Orchestration](multi-agent-framework.md): how the
+- [Multi-Agent Framework and Orchestration](../../delivery/multi-agent-framework.md): how the
   development agents collaborate, why those patterns were selected, shared state,
   feedback loops, permissions and current implementation limits.
 
-The [risk-based paths](handoffs.md#risk-based-review-paths) define light, standard
-and regulated review depth. The [visual delivery flow](multi-agent-framework.md#input-to-candidate-release)
+The [risk-based paths](../../delivery/handoffs.md#risk-based-review-paths) define light, standard
+and regulated review depth. The [visual delivery flow](../../delivery/multi-agent-framework.md#input-to-candidate-release)
 shows scoped writers, required reviews, bounded fixes and approvals.
 Use [assignments](../../delivery/templates/assignment.md) before work and
 [handoffs](../../delivery/templates/handoff.md) for actual results.
-Use the [WV catalogue](workload-checks.md) and [AI/ML catalogue](ai-ml-checks.md)
+Use the [WV catalogue](../../delivery/workload-checks.md) and [AI/ML catalogue](../../delivery/ai-ml-checks.md)
 to instantiate checks against approved targets. Regulated designs use a dedicated
 architecture-review report; light work can reference an existing release.
 
@@ -72,7 +75,7 @@ architecture-review report; light work can reference an existing release.
 In Copilot CLI, open `/agent` and select `delivery-coordinator` (or a specialist).
 Start with a bounded request, for example:
 
-> Prepare S01 from delivery/tasks.md using docs/delivery/first-implementation-slice.md.
+> Prepare S01 from delivery/tasks.md using delivery/first-implementation-slice.md.
 > Record the proposed risk path and unresolved region, years, data, compute and
 > acceptance decisions. Stop before implementation, data acquisition or Azure access.
 
@@ -149,7 +152,7 @@ Review prompt 02 selects the coordinator, which delegates the required independe
 reviews and collects their results. A specialist returns to the coordinator.
 Required approvals block later phases until recorded.
 
-All review/test/validation loops use the [five-attempt ceiling](multi-agent-framework.md#review-loop-limit),
+All review/test/validation loops use the [five-attempt ceiling](../../delivery/multi-agent-framework.md#review-loop-limit),
 including security/compliance and fix/recheck handoffs. Attempt accounting is procedural.
 
 ## What the Templates Are For
@@ -174,7 +177,7 @@ handoffs. Light changes can reuse the approved baseline.
 ## First Work
 
 [S01](../../delivery/tasks.md#solution-slice-backlog) resolves the
-[first-slice decisions](first-implementation-slice.md). The infrastructure reference
+[first-slice decisions](../../delivery/first-implementation-slice.md). The infrastructure reference
 backlog supports packages that need Azure resources.
 
 Future release automation is authored by the Bicep engineer under a separate

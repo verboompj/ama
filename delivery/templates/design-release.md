@@ -55,15 +55,15 @@ private connectivity/DNS and effective control properties expected by the WV che
 |---|---|---|---|---|---|
 | AC-01 | TODO | TODO | TODO | local / authenticated / post-deployment | TODO |
 
-Map applicable WV01-WV22 checks from `docs/delivery/workload-checks.md` to exact package
+Map applicable WV01-WV22 checks from `delivery/workload-checks.md` to exact package
 criteria and evidence. The package plan instantiates properties, values and commands;
 generic checklist names are not completed validations.
 For application/data/model scope instantiate applicable AI01-AI06 and ML01-ML08
-from `docs/delivery/ai-ml-checks.md`, with human target owners and locked protocols.
+from `delivery/ai-ml-checks.md`, with human target owners and locked protocols.
 
 Gate values: `design-released`, `locally-validated`, `deployment-ready`,
 `operationally-verified`. Use the definitions in
-[Handoffs and Gates](../../docs/delivery/handoffs.md#gate-specific-acceptance); after copying this
+[Handoffs and Gates](../handoffs.md#gate-specific-acceptance); after copying this
 template, adjust relative links for the work-package location.
 Later-gate tests remain required later, not passed or waived at design release.
 

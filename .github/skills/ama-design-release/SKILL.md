@@ -11,7 +11,7 @@ description: Prepare a bounded Azure workload release with Well-Architected asse
 2. Research current official WAF, Azure service, and AVM guidance. Record URLs,
    access date, applicability, and version/capability limits. Discover Learn MCP
    tools first; use public technical queries without repository/private data.
-3. Apply the accepted light/standard/regulated path from `docs/delivery/handoffs.md`.
+3. Apply the accepted light/standard/regulated path from `delivery/handoffs.md`.
    Obtain approved targets from business/domain owners; the tester translates them
    into checks. Request scoped implementation feasibility and triggered specialist
    reviews through the coordinator.

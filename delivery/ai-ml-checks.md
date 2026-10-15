@@ -49,7 +49,7 @@ its API, access, evidence and failure contracts still require applicable tests.
 | ML07 | Model/scoring release bundle matches its claims and consumers | Model card, versioned input/output/taxonomy contract, supported windows, calibration/threshold report, limitations, consumer tests and promotion/rollback plan | locally-validated |
 | ML08 | Authorised model operation/promotion is supported by real evidence and human decisions | Recorded data-science/CAP/legal/data-protection/security owners' required approvals; actual scoring/monitoring/drift/rollback evidence for the requested stage | operationally-verified |
 
-Use the [training procedure](../copernicus/crop-classification/crop-classifier-training-procedure.md)
+Use the [training procedure](../docs/copernicus/crop-classification/crop-classifier-training-procedure.md)
 as the methodological source. Weak-label agreement is not inspected Hungarian
 accuracy. A five-attempt budget never permits tuning on a final-test set; failures
 require the approved isolation/protocol rules, not repeated adaptive testing.

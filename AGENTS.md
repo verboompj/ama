@@ -3,16 +3,16 @@
 ## Start Here
 
 This repository describes a fictional Hungarian CAP paying-agency solution. Read
-[docs/delivery/README.md](docs/delivery/README.md) for the engineering agents, task order,
-skills, and handover gates.
+[delivery/README.md](delivery/README.md) for operating contracts, plans and evidence.
+Use the [team guide](docs/delivery/README.md) for roles, skills and usage.
 
 Use the repository skill at
 [.github/skills/ama-context/SKILL.md](.github/skills/ama-context/SKILL.md)
 before designing or changing the solution. Read the relevant source documents, not
 every document indiscriminately.
 
-Use [Workload Guidance](docs/delivery/workload-guidance.md) for Azure artifact standards
-and [Multi-Agent Framework and Orchestration](docs/delivery/multi-agent-framework.md)
+Use [Workload Guidance](delivery/workload-guidance.md) for Azure artifact standards
+and [Multi-Agent Framework and Orchestration](delivery/multi-agent-framework.md)
 for development-team collaboration.
 
 The nine delivery roles produce and assess Azure infrastructure, applications,
@@ -43,10 +43,10 @@ separate user-authorised task.
 
 ## Evidence and Handoffs
 
-Use [coordinator-specialist collaboration](docs/delivery/multi-agent-framework.md)
-and the accepted [risk-based review path](docs/delivery/handoffs.md#risk-based-review-paths).
-Use [workload checks](docs/delivery/workload-checks.md) and
-[application/AI/ML checks](docs/delivery/ai-ml-checks.md) for the assigned outputs.
+Use [coordinator-specialist collaboration](delivery/multi-agent-framework.md)
+and the accepted [risk-based review path](delivery/handoffs.md#risk-based-review-paths).
+Use [workload checks](delivery/workload-checks.md) and
+[application/AI/ML checks](delivery/ai-ml-checks.md) for the assigned outputs.
 Business/domain owners approve acceptance targets. Required non-author reviews,
 scoped design/plan and applicable human approvals precede release. Light changes
 within an approved release can reference its existing design and plan.
@@ -57,7 +57,7 @@ attempt consumption, unresolved issues, and next owner.
 Every review, test or validation loop has a maximum of **5 total attempts**,
 including the initial attempt; a lower assigned limit takes precedence. This covers
 tester, security, compliance, design-quality and conformance checks. Follow the
-[review-loop policy](docs/delivery/multi-agent-framework.md#review-loop-limit): preserve
+[review-loop policy](delivery/multi-agent-framework.md#review-loop-limit): preserve
 the counter across fixes, snapshots and handoffs; stop and escalate on exhaustion.
 Distinguish `PASS`, `FAIL`, `BLOCKED`, `NOT RUN`, and justified `NOT APPLICABLE`.
 Missing tools, credentials, evidence, or approvals are not a successful check.

@@ -37,7 +37,7 @@ repository skills. This role reviews and records findings; it does not implement
 - Consume the tester-supplied manifest. Evaluate requirements due at the assignment's
   gate, retaining later checks as pending; current unresolved findings still block it.
 - Use the package's WV08-WV14 control assertions and later WV19-WV21 evidence from
-  `docs/delivery/workload-checks.md`. Report absent specific checks rather than accepting
+  `delivery/workload-checks.md`. Report absent specific checks rather than accepting
   a generic statement that private access, identity or TLS is configured.
 - Apply the accepted risk path's security triggers and assess relevant AI01-AI06
   evidence, runtime tool/data boundaries, model supply chain and scoring access.
@@ -47,7 +47,7 @@ repository skills. This role reviews and records findings; it does not implement
 ## Output and Stop
 
 Apply the maximum of **5 total attempts** per logical security-review loop,
-including the initial attempt, under `docs/delivery/multi-agent-framework.md#review-loop-limit`.
+including the initial attempt, under `delivery/multi-agent-framework.md#review-loop-limit`.
 Check the ledger before starting; fixes, snapshots and handoffs do not reset usage.
 A lower assigned limit wins. Stop on success or earlier blockers; after exhaustion,
 return unresolved findings to the coordinator without a sixth attempt or risk waiver.
