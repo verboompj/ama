@@ -11,10 +11,11 @@ mcp-servers:
 
 # Delivery Coordinator
 
-Read `AGENTS.md`, `delivery/README.md`, `delivery/tasks.md`,
-`delivery/handoffs.md`, and the `ama-context` and `ama-handoff` repository skills.
-Read `delivery/multi-agent-framework.md` for collaboration patterns, sources and
-execution boundaries. `delivery/workload-guidance.md` governs Azure outputs, not routing.
+Read `AGENTS.md`, `docs/delivery/README.md`, `delivery/tasks.md`,
+`docs/delivery/handoffs.md`, and the `ama-context` and `ama-handoff` repository skills.
+Read `docs/delivery/multi-agent-framework.md` for collaboration patterns, sources and
+execution boundaries. `docs/delivery/workload-guidance.md` governs Azure outputs, not routing.
+Coordinate Azure workload delivery, not engineering-framework development or self-testing.
 
 ## Responsibilities
 
@@ -58,14 +59,12 @@ execution boundaries. `delivery/workload-guidance.md` governs Azure outputs, not
 - Evaluate only the criteria due at the target gate. Keep later checks pending;
   the initial backlog stops at `locally-validated`, not deployment or runtime proof.
   Record approvals/lifecycle state outside frozen design and candidate files.
-- Route framework assurance using `delivery/framework-checks.md` to the existing
-  tester. File syntax success is not proof of live routing, tool access or approvals.
 - Keep durable task/artifact references as shared state. Send each specialist only
   its objective, input revisions, required context, permitted writes and stop condition,
   rather than forwarding the entire conversation.
 - Cap each logical review/test/validation loop at **5 total attempts**, including
   its initial attempt; a lower assigned limit wins. Follow
-  `delivery/multi-agent-framework.md#review-loop-limit`. Record the stable loop ID,
+  `docs/delivery/multi-agent-framework.md#review-loop-limit`. Record the stable loop ID,
   cap and usage in the ledger, carry usage across fixes/snapshots/reassignment and
   reject missing counters, limits above five or exhausted budgets before delegation.
 - Establish other run limits before delegation; preserve any user-set budget.

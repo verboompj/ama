@@ -4,16 +4,16 @@
 
 | Source | Role in delivery |
 |---|---|
-| [Original case](../case/case-study-47.md) | Issued scenario, business objectives and runtime agent brief; preserve unchanged |
-| [Participant rubric](../case/rubrik/AMA_Capstone_Rubric_Participants.md) | Acceptance/evidence framing, not a production compliance standard |
-| [Maintained architecture](../docs/architecture/aks-centered-foundry-architecture.md) | Technical baseline and decisions; not an approved IaC release by itself |
-| [Business process](../docs/architecture/business-process-flow.md) | Ownership, evidence, decision, treasury and appeal boundaries |
-| [Personas](../docs/Persona/personas-and-use-cases.md) | Stakeholders, permissions, journeys and requirements |
-| [Theme and presentation](../docs/Persona/farm-theme-and-persona-map.md) | Field & File visual identity and fictional setting |
-| [Training procedure](../docs/copernicus/crop-classification/crop-classifier-training-procedure.md) | As-of-date features, leakage controls, dataset and evaluation contracts |
-| [Ground/drone validation](../docs/copernicus/crop-classification/drone-survey-validation-process.md) | Independent findings, upload lifecycle, random/targeted inspection distinction |
-| [Payment calendar](../docs/research/cap-claim-and-payment-calendar.md) | Statutory windows, cohort KPIs and treasury integration |
-| [Regulatory research](../docs/regulatory-compliance/) | Participant summaries; verify applicable obligations and sign-off |
+| [Original case](../../case/case-study-47.md) | Issued scenario, business objectives and runtime agent brief; preserve unchanged |
+| [Participant rubric](../../case/rubrik/AMA_Capstone_Rubric_Participants.md) | Acceptance/evidence framing, not a production compliance standard |
+| [Maintained architecture](../architecture/aks-centered-foundry-architecture.md) | Technical baseline and decisions; not an approved IaC release by itself |
+| [Business process](../architecture/business-process-flow.md) | Ownership, evidence, decision, treasury and appeal boundaries |
+| [Personas](../Persona/personas-and-use-cases.md) | Stakeholders, permissions, journeys and requirements |
+| [Theme and presentation](../Persona/farm-theme-and-persona-map.md) | Field & File visual identity and fictional setting |
+| [Training procedure](../copernicus/crop-classification/crop-classifier-training-procedure.md) | As-of-date features, leakage controls, dataset and evaluation contracts |
+| [Ground/drone validation](../copernicus/crop-classification/drone-survey-validation-process.md) | Independent findings, upload lifecycle, random/targeted inspection distinction |
+| [Payment calendar](../research/cap-claim-and-payment-calendar.md) | Statutory windows, cohort KPIs and treasury integration |
+| [Regulatory research](../regulatory-compliance/) | Participant summaries; verify applicable obligations and sign-off |
 
 The rubric's A1–A3 guide contracts, trade-offs and control evidence. A4–A6 require
 working and measured evidence, not claims based on a successful Bicep compile.

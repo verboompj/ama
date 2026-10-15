@@ -46,14 +46,14 @@ The [business-process flow](./docs/architecture/business-process-flow.md) maps t
 activities to their owners and carries the claim through advance, final calculation,
 payment reconciliation, and appeal safeguards.
 
-The [Azure delivery team](./delivery/README.md) defines seven development agents,
+The [Azure delivery team](./docs/delivery/README.md) defines seven development agents,
 shared repository skills, a staged task backlog, and explicit architecture-to-Bicep
 handover gates. It prepares the engineering workflow; infrastructure implementation
 and GitHub Actions remain separate, later work.
-The [workload guidance](./delivery/workload-guidance.md) and
-[multi-agent framework and orchestration](./delivery/multi-agent-framework.md)
+The [workload guidance](./docs/delivery/workload-guidance.md) and
+[multi-agent framework and orchestration](./docs/delivery/multi-agent-framework.md)
 separate Azure solution standards from development-agent collaboration.
-The [workload validation catalogue](./delivery/workload-checks.md) defines concrete
+The [workload validation catalogue](./docs/delivery/workload-checks.md) defines concrete
 checks and evidence for design review, local acceptance and later Azure/live stages.
 
 ## Repository Structure
@@ -63,14 +63,16 @@ checks and evidence for design review, local acceptance and later Azure/live sta
 ├── AGENTS.md                # Shared engineering-agent instructions
 ├── .github/
 │   ├── agents/              # Seven native Copilot agent profiles
-│   └── skills/              # Reusable repository-local procedures
-├── delivery/                # Team catalogue, tasks, gates & artifact templates
+│   ├── skills/              # Reusable repository-local procedures
+│   └── prompts/             # Explicit phase entry points
+├── delivery/                # Workload tasks, templates & work-package records
 ├── case/                    # Original case brief and assessment source material
 │   ├── casestudy/           # Participant case understanding & design questions
 │   └── rubrik/              # Assessment rubric
 ├── docs/
 │   ├── architecture/        # Proposed AI solution architecture (AKS + Azure AI services)
 │   ├── copernicus/          # Copernicus data/services/tools inventory
+│   ├── delivery/            # Engineering-team usage, collaboration & workload guides
 │   ├── Persona/             # Role-based personas, requirements & journeys
 │   ├── regulatory-compliance/ # Regulatory & legal framework summaries
 │   └── research/            # Supporting research notes

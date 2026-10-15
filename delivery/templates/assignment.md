@@ -9,7 +9,7 @@ cloud operations beyond the user's recorded scope.
 | Package / task / attempt ID | TODO |
 | Coordinator / assigned specialist | TODO |
 | Authorised objective / user authorisation reference | TODO |
-| Target gate or framework-check scope | TODO |
+| Target workload gate / check scope | TODO |
 | Exact input revision / snapshot ID / manifest reference, or snapshot-preparation source set | TODO |
 | Required context and acceptance criterion IDs | TODO |
 | Artifact owner and permitted write paths | TODO |
@@ -48,6 +48,6 @@ The coordinator records attempt consumption before retrying. Stop at the recorde
 limit or on repeated non-progress; a new assignment cannot silently reset the budget.
 For review/test/validation work, the limit must be an integer from 1 to 5 and includes
 the initial attempt, not five retries. Follow the
-[review-loop policy](../multi-agent-framework.md#review-loop-limit).
+[review-loop policy](../../docs/delivery/multi-agent-framework.md#review-loop-limit).
 Reject a missing loop ID/ledger, a limit above five or an exhausted counter. Other
 assignment types still require their own explicit applicable limits.

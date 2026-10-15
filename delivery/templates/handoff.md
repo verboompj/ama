@@ -8,7 +8,7 @@ Template only. Copy into the authorised work package.
 | Package / design revision | TODO |
 | Sender / recipient role and task | TODO |
 | Handoff state | offered |
-| Target gate or framework-check scope | TODO |
+| Target workload gate / check scope | TODO |
 | Authorised objective / next action | TODO |
 | Input snapshot ID / producer / manifest reference | TODO |
 | Output revision / snapshot ID / manifest reference | TODO |

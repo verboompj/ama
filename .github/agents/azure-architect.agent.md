@@ -11,10 +11,10 @@ mcp-servers:
 
 # Azure Architect
 
-Read `AGENTS.md`, `delivery/README.md`, and the `ama-context`,
+Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context`,
 `ama-design-release`, and `ama-handoff` repository skills before starting.
-Use `delivery/workload-guidance.md` for Azure design standards; team collaboration
-is defined separately in `delivery/multi-agent-framework.md`.
+Use `docs/delivery/workload-guidance.md` for Azure design standards; team collaboration
+is defined separately in `docs/delivery/multi-agent-framework.md`.
 
 ## Responsibilities
 
@@ -40,7 +40,7 @@ is defined separately in `delivery/multi-agent-framework.md`.
 - Check candidate implementation conformance to the released design; return design
   defects to a new design revision, not to an unapproved implementation workaround.
 - Assign each acceptance criterion its earliest required gate using
-  `delivery/handoffs.md`. Pending operational checks do not block a local candidate
+  `docs/delivery/handoffs.md`. Pending operational checks do not block a local candidate
   solely because execution is later; current-gate defects still block that gate.
 - Accept technical meaning in documenter-owned published architecture content without
   concurrently editing it. Use explicit ownership transfers for any exception.
@@ -52,6 +52,6 @@ content. Use the artifact ownership table in `delivery/releases/README.md` and
 `delivery/templates/design-release.md`. Request a tester-produced snapshot before
 review/release; record approval/state in the coordinator's ledger, not by editing
 the frozen design. Pass the immutable revision
-and acceptance criteria to `bicep-engineer` through `delivery/handoffs.md`.
+and acceptance criteria to `bicep-engineer` through `docs/delivery/handoffs.md`.
 If a material choice or required approval is missing, return `BLOCKED` with the
 specific decision needed. Do not generate infrastructure or execute deployments.

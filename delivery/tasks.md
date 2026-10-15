@@ -70,12 +70,12 @@ Authenticated/deployment/operational checks keep their later-gate owners and pen
 results; they are not waived or declared passed at D18.
 D19 adds independent full-WAF review; it does not replace security/compliance findings.
 Before D11, D20 converts the actual reviewed architecture into implementation tasks
-and instantiates [WV01-WV22](workload-checks.md) with resources, expected values,
+and instantiates [WV01-WV22](../docs/delivery/workload-checks.md) with resources, expected values,
 commands and evidence. WV15-WV22 remain future authenticated/live work, with their
 owners/confirmation prerequisites; no deployer or pipeline is added.
 
-Framework-only checks use the tester's [framework check cases](framework-checks.md)
-under a separate bounded assignment. They do not require starting this infrastructure backlog.
+This backlog delivers the Azure workload only. Engineering-agent configuration,
+orchestration implementation and framework self-testing are not workload tasks.
 
 ## Decisions to Resolve Before Design Release
 

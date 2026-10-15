@@ -22,7 +22,6 @@ delivery/releases/WP-001/
   compliance-review.md
   conformance.md
   readiness.md
-  framework-review.md
   assignments/
     D02-attempt-01.md
   snapshots/
@@ -44,7 +43,7 @@ references rather than copying credentials, claimant data or production logs.
 Generated build outputs stay outside committed evidence unless specifically needed.
 
 The coordinator's `ledger.md` also tracks each
-[review/test/validation loop](../multi-agent-framework.md#review-loop-limit):
+[review/test/validation loop](../../docs/delivery/multi-agent-framework.md#review-loop-limit):
 
 | Stable loop ID | Objective / reviewer / check scope / target gate | Maximum total attempts | Attempts used / remaining | Attempt IDs / input snapshots / results | State / blocker / user decision |
 |---|---|---|---|---|---|
@@ -65,7 +64,7 @@ These are the defaults; a directory prefix does not grant every role write acces
 | `design.md`, `conformance.md` | azure-architect | Human design approval and independent reviews as required |
 | Published `docs/` content, diagrams, `documentation.md` | architecture-documenter | Architect accepts technical meaning; security/compliance accept affected assertions |
 | Approved `infra/`, `feasibility.md`, `implementation.md` | bicep-engineer | Architect conformance and independent assurance |
-| `architecture-review.md`, tests, `test-plan.md`, `test-review.md`, `framework-review.md`, `snapshots/` | infrastructure-tester | Independent findings; reviewer does not author the design; snapshot creation alone is not a pass |
+| `architecture-review.md`, infrastructure tests, `test-plan.md`, `test-review.md`, `snapshots/` | infrastructure-tester | Independent workload findings; reviewer does not author the design; snapshot creation alone is not a pass |
 | `security-requirements.md`, `security-design.md`, `security-review.md` | security-reviewer | Designated human risk owner handles acceptance of residual risk |
 | `compliance-requirements.md`, `compliance-design.md`, `compliance-review.md` | compliance-reviewer | Designated legal/policy owners handle required human decisions |
 

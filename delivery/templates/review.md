@@ -6,7 +6,7 @@ Template only. Copy into the authorised work package.
 |---|---|
 | Reviewer / task / review scope | TODO |
 | Accepted assignment / attempt ID | TODO |
-| Target gate or framework-check scope | TODO |
+| Target workload gate / check scope | TODO |
 | Instantiated check/criterion IDs and plan revision | TODO |
 | Design revision and exact reviewed candidate | TODO |
 | Input snapshot ID / producer / manifest reference | TODO |

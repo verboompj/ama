@@ -3,7 +3,7 @@
 ## Start Here
 
 This repository describes a fictional Hungarian CAP paying-agency solution. Read
-[delivery/README.md](delivery/README.md) for the engineering agents, task order,
+[docs/delivery/README.md](docs/delivery/README.md) for the engineering agents, task order,
 skills, and handover gates. These engineering agents are distinct from the five
 runtime application agents and the business personas.
 
@@ -12,9 +12,15 @@ Use the repository skill at
 before designing or changing the solution. Read the relevant source documents, not
 every document indiscriminately.
 
-Use [Workload Guidance](delivery/workload-guidance.md) for Azure artifact standards
-and [Multi-Agent Framework and Orchestration](delivery/multi-agent-framework.md)
+Use [Workload Guidance](docs/delivery/workload-guidance.md) for Azure artifact standards
+and [Multi-Agent Framework and Orchestration](docs/delivery/multi-agent-framework.md)
 for development-team collaboration. Do not use one as a substitute for the other.
+
+The seven delivery roles produce and assess the Azure workload. Engineering-agent
+definitions, skills, prompt configuration and orchestration internals are not their
+delivery outputs or test targets. Follow handoffs, approvals and loop limits as
+operating rules; do not turn those rules into deployment-team self-testing tasks.
+Changes to the engineering setup require a separate user-authorised maintenance task.
 
 ## Boundaries
 
@@ -39,10 +45,10 @@ for development-team collaboration. Do not use one as a substitute for the other
 ## Evidence and Handoffs
 
 Use the researched coordinator-specialist collaboration model in
-[delivery/multi-agent-framework.md](delivery/multi-agent-framework.md), not a fixed
-seven-role sequence. Follow [handoff contracts](delivery/handoffs.md) for evidence.
+[docs/delivery/multi-agent-framework.md](docs/delivery/multi-agent-framework.md), not a fixed
+seven-role sequence. Follow [handoff contracts](docs/delivery/handoffs.md) for evidence.
 Workload standards apply to Azure outputs, not agent orchestration.
-For Azure output validation, use [workload checks](delivery/workload-checks.md).
+For Azure output validation, use [workload checks](docs/delivery/workload-checks.md).
 Those domain criteria do not define agent roles, routing or framework quality.
 Design release requires independent review against the assigned criteria and an
 accepted actual development plan, not self-assessment or the generic delivery backlog.
@@ -53,7 +59,7 @@ attempt consumption, unresolved issues, and next owner.
 Every review, test or validation loop has a maximum of **5 total attempts**,
 including the initial attempt; a lower assigned limit takes precedence. This covers
 tester, security, compliance, design-quality and conformance checks. Follow the
-[review-loop policy](delivery/multi-agent-framework.md#review-loop-limit): preserve
+[review-loop policy](docs/delivery/multi-agent-framework.md#review-loop-limit): preserve
 the counter across fixes, snapshots and handoffs; stop and escalate on exhaustion.
 Distinguish `PASS`, `FAIL`, `BLOCKED`, `NOT RUN`, and justified `NOT APPLICABLE`.
 Missing tools, credentials, evidence, or approvals are not a successful check.

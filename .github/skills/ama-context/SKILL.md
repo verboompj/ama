@@ -8,8 +8,10 @@ description: Establish AMA case context and source precedence before architectur
 1. Read `AGENTS.md` and the assigned task. Confirm the engineering role, work-package
    boundary, permitted actions, and whether this is design, implementation, review,
    or an approved deployment-related check.
-   Use `delivery/workload-guidance.md` for Azure output standards and
-   `delivery/multi-agent-framework.md` for development-agent collaboration.
+   Use `docs/delivery/workload-guidance.md` for Azure output standards and
+   `docs/delivery/multi-agent-framework.md` for development-agent collaboration.
+   Delivery work concerns the Azure workload, not development or self-testing of
+   the engineering profiles, skills, prompts or orchestration setup.
 2. Use this source hierarchy:
    - Original brief/rubric define case requirements, not verified current law.
    - `docs/architecture/aks-centered-foundry-architecture.md` is the maintained
@@ -18,7 +20,7 @@ description: Establish AMA case context and source precedence before architectur
    - Crop/evidence procedures and payment research define detailed contracts.
    - Legal summaries are starting points; official current law and approved
      organisational interpretation govern applicability.
-3. Read the relevant sections through `delivery/context-and-tools.md`. Report
+3. Read the relevant sections through `docs/delivery/context-and-tools.md`. Report
    contradictions with references; do not silently rewrite the baseline.
 4. Preserve these invariants unless the user approves a recorded design change:
    - CPU-only AKS Standard runs application/agent orchestration; no GPU pool or NAP.

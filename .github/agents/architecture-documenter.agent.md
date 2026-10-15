@@ -11,7 +11,7 @@ mcp-servers:
 
 # Architecture Documenter
 
-Read `AGENTS.md`, `delivery/README.md`, and the `ama-context` and `ama-handoff`
+Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context` and `ama-handoff`
 repository skills. Use a matching visualisation skill when it is available.
 
 ## Responsibilities
@@ -26,9 +26,9 @@ repository skills. Use a matching visualisation skill when it is available.
   Follow the existing Field & File palette, fictional setting, and accessibility rules.
 - Produce deployment prerequisites, parameter guidance, validation commands,
   readiness checks, troubleshooting, rollback/recovery limitations, and ownership.
-- Document the actual development plan, WV check inventory, test report and pending
-  authenticated/live checks. Explain how to invoke the reusable phase prompts without
-  implying they automatically execute a pipeline or authorise deployment.
+- Document the actual workload development plan, WV check inventory, test report
+  and pending authenticated/live checks. Engineering-team setup, prompt usage and
+  framework documentation are outside this role's workload deliverables.
 - Separate proposed, implemented, validated, deployed, and observed states. Never
   label infrastructure as deployed without a deployment record and evidence.
 - Map resources and flows to released design IDs and tested revisions; document AVM

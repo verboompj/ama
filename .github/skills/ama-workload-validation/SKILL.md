@@ -6,8 +6,9 @@ description: Independently review all five WAF pillars and execute scoped AMA wo
 # AMA Workload Validation
 
 1. Load `ama-context` and `ama-handoff`; require an accepted assignment with a fixed
-   input snapshot, target gate/check scope, permitted writes and execution limits.
-2. Use `delivery/workload-checks.md` and the package test plan. Map applicable
+   workload input snapshot, target gate/check scope, permitted writes and execution limits.
+   Do not use this skill to validate engineering-agent configuration or orchestration.
+2. Use `docs/delivery/workload-checks.md` and the package test plan. Map applicable
    WV01-WV22 checks to exact artifacts/resources, expected results and evidence.
    Do not invent an environment or substitute the generic backlog for the actual plan.
 3. For design review, remain independent of the architect's design. Assess all five

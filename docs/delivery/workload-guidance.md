@@ -15,9 +15,9 @@ Azure operations or a GitHub Actions pipeline.
 
 | Source | Use |
 |---|---|
-| [Original case](../case/case-study-47.md) and [rubric](../case/rubrik/AMA_Capstone_Rubric_Participants.md) | Business objectives and assessment requirements; preserve original material |
-| [Maintained architecture](../docs/architecture/aks-centered-foundry-architecture.md) | Existing technical decisions and component boundaries |
-| [Business process](../docs/architecture/business-process-flow.md) and [personas](../docs/Persona/personas-and-use-cases.md) | Business ownership, authorised actions and user requirements |
+| [Original case](../../case/case-study-47.md) and [rubric](../../case/rubrik/AMA_Capstone_Rubric_Participants.md) | Business objectives and assessment requirements; preserve original material |
+| [Maintained architecture](../architecture/aks-centered-foundry-architecture.md) | Existing technical decisions and component boundaries |
+| [Business process](../architecture/business-process-flow.md) and [personas](../Persona/personas-and-use-cases.md) | Business ownership, authorised actions and user requirements |
 | [Well-Architected Framework](https://learn.microsoft.com/en-us/azure/well-architected/) | Workload quality requirements, controls and trade-offs |
 | [Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/) | Reference patterns and service-selection guidance |
 | [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/) | Published, reusable infrastructure modules and their actual contracts |
@@ -71,9 +71,9 @@ the detailed contracts. Material changes require an approved design amendment.
 | Inspection | Claimant photos and GPS are not independent proof; locked probability sampling/design weights remain distinct from risk-targeted inspections |
 | Decisions and payments | Authorised humans decide adverse/contested matters; treasury owns payment authorisation, execution and ledger; deterministic integration reconciles status |
 
-For details, use the [training procedure](../docs/copernicus/crop-classification/crop-classifier-training-procedure.md),
-[ground/drone process](../docs/copernicus/crop-classification/drone-survey-validation-process.md)
-and [payment calendar](../docs/research/cap-claim-and-payment-calendar.md).
+For details, use the [training procedure](../copernicus/crop-classification/crop-classifier-training-procedure.md),
+[ground/drone process](../copernicus/crop-classification/drone-survey-validation-process.md)
+and [payment calendar](../research/cap-claim-and-payment-calendar.md).
 
 ## Infrastructure as Code
 
@@ -109,7 +109,7 @@ ARM deployment is not transactional. Resource dependencies do not guarantee RBAC
 propagation, private DNS resolution or data-plane readiness; specify and verify those
 conditions separately.
 
-The reusable [AVM/Bicep skill](../.github/skills/ama-avm-bicep/SKILL.md) supplies the
+The reusable [AVM/Bicep skill](../../.github/skills/ama-avm-bicep/SKILL.md) supplies the
 implementation/review procedure; the [AVM quickstart](https://azure.github.io/Azure-Verified-Modules/usage/quickstart/bicep/)
 is official usage guidance, not approval to deploy its example.
 
@@ -133,7 +133,7 @@ Maintain architecture decisions, diagrams and operational guidance as the work
 evolves. Distinguish **proposed**, **implemented**, **validated**, **deployed** and
 **observed** states; only claim the state supported by actual evidence.
 Retain editable diagram sources and follow the existing
-[Field & File presentation guidance](../docs/Persona/farm-theme-and-persona-map.md).
+[Field & File presentation guidance](../Persona/farm-theme-and-persona-map.md).
 
 | Verification stage | What it establishes | What it does not establish |
 |---|---|---|

@@ -11,7 +11,7 @@ mcp-servers:
 
 # Bicep Engineer
 
-Read `AGENTS.md`, `delivery/README.md`, and the `ama-context`,
+Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context`,
 `ama-avm-bicep`, and `ama-handoff` repository skills.
 
 ## Entry Gates
