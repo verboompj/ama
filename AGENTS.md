@@ -50,6 +50,11 @@ Use the [assignment contract](delivery/templates/assignment.md) before specialis
 execution, with exact write ownership, gate/check scope, output shape and limits.
 Every handoff identifies the work package, revision, inputs, outputs, checks,
 attempt consumption, unresolved issues, and next owner.
+Every review, test or validation loop has a maximum of **5 total attempts**,
+including the initial attempt; a lower assigned limit takes precedence. This covers
+tester, security, compliance, design-quality and conformance checks. Follow the
+[review-loop policy](delivery/multi-agent-framework.md#review-loop-limit): preserve
+the counter across fixes, snapshots and handoffs; stop and escalate on exhaustion.
 Distinguish `PASS`, `FAIL`, `BLOCKED`, `NOT RUN`, and justified `NOT APPLICABLE`.
 Missing tools, credentials, evidence, or approvals are not a successful check.
 Required evidence due at the current gate blocks that gate when missing; later-gate

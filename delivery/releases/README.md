@@ -43,6 +43,17 @@ Keep evidence non-sensitive. Link to protected approval/test records using safe
 references rather than copying credentials, claimant data or production logs.
 Generated build outputs stay outside committed evidence unless specifically needed.
 
+The coordinator's `ledger.md` also tracks each
+[review/test/validation loop](../multi-agent-framework.md#review-loop-limit):
+
+| Stable loop ID | Objective / reviewer / check scope / target gate | Maximum total attempts | Attempts used / remaining | Attempt IDs / input snapshots / results | State / blocker / user decision |
+|---|---|---|---|---|---|
+| TODO | TODO | 5 or lower assigned limit | 0 / assigned limit for a new loop | None yet | Not started |
+
+Reserve the next slot before execution. Keep the same loop and consumed budget
+through fixes, new snapshots, sessions and reassignment; do not create a duplicate
+loop to bypass exhaustion. Assignment/handoff/review records reference this ledger.
+
 ## Artifact Ownership
 
 The coordinator records exact paths and any ownership transfer in each assignment.

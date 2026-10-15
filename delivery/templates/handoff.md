@@ -14,6 +14,8 @@ Template only. Copy into the authorised work package.
 | Output revision / snapshot ID / manifest reference | TODO |
 | Actual written paths / any ownership transfer | TODO |
 | Expected output format / actual output | TODO |
+| Review/test/validation loop ID / ledger reference, if applicable | TODO |
+| Maximum total attempts for that loop | 5 or lower assigned limit |
 | Attempts or cycles consumed / remaining | TODO |
 | Stop condition reached / limits or measurement gaps | TODO |
 | Acceptance criteria / review records | TODO |

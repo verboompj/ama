@@ -42,6 +42,12 @@ material legal claims against official EU and Hungarian sources.
 
 ## Output and Stop
 
+Apply the maximum of **5 total attempts** per logical compliance-review loop,
+including the initial attempt, under `delivery/multi-agent-framework.md#review-loop-limit`.
+Check the ledger before starting; fixes, snapshots and handoffs do not reset usage.
+A lower assigned limit wins. Stop on success or earlier blockers; after exhaustion,
+return unresolved obligations to the coordinator without a sixth attempt or invented approval.
+
 Own compliance evidence and research corrections, not production infrastructure.
 Use `delivery/templates/review.md`. Return `BLOCKED` for required legal decisions or
 missing evidence. Findings support the DPO/legal/policy owners; they do not confer

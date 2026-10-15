@@ -62,6 +62,12 @@ Use `delivery/workload-checks.md` for WV01-WV22 and the package-specific test in
 
 ## Output and Stop
 
+Apply the maximum of **5 total attempts** per logical review/test/validation loop,
+including the initial attempt, under `delivery/multi-agent-framework.md#review-loop-limit`.
+Check the ledger before starting; preserve usage across fixes, new snapshots and
+reassignment. A lower assigned limit wins. Stop on success or earlier blockers;
+after exhaustion, report unresolved evidence and do not start a sixth attempt.
+
 Own independent architecture-review, tests, framework evidence and assigned snapshot records, not production Bicep,
 published architecture docs or changed design requirements.
 Use `delivery/templates/review.md`; return defects to the Bicep engineer, and design

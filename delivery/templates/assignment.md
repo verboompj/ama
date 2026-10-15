@@ -18,7 +18,8 @@ cloud operations beyond the user's recorded scope.
 | Requested checks / expected evidence | TODO |
 | Required human decisions or approvals | TODO |
 | Stop condition / success condition | TODO |
-| Maximum attempts or review cycles / attempts used | TODO / 0 |
+| Review/test/validation loop ID / ledger reference | TODO; required for these loops |
+| Maximum attempts or review cycles / attempts used | 5 / 0 for a new review/test/validation loop; lower limits allowed; copy existing usage on continuation |
 | User-set time or cost limits, if any | Not specified; do not invent |
 | Host-enforced limits / measurement availability | TODO; do not claim unavailable accounting |
 | Snapshot producer / approved preservation location | infrastructure-tester / TODO |
@@ -45,3 +46,8 @@ Return results using the separate handoff template.
 
 The coordinator records attempt consumption before retrying. Stop at the recorded
 limit or on repeated non-progress; a new assignment cannot silently reset the budget.
+For review/test/validation work, the limit must be an integer from 1 to 5 and includes
+the initial attempt, not five retries. Follow the
+[review-loop policy](../multi-agent-framework.md#review-loop-limit).
+Reject a missing loop ID/ledger, a limit above five or an exhausted counter. Other
+assignment types still require their own explicit applicable limits.

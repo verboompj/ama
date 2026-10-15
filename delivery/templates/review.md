@@ -11,6 +11,8 @@ Template only. Copy into the authorised work package.
 | Design revision and exact reviewed candidate | TODO |
 | Input snapshot ID / producer / manifest reference | TODO |
 | Review output paths / artifact owner | TODO |
+| Stable review/test/validation loop ID / ledger reference | TODO |
+| Attempt number / maximum total attempts | TODO / 5 or lower assigned limit |
 | Attempts consumed / remaining / limits reached | TODO |
 | Overall disposition | BLOCKED |
 | Independence / limitations | TODO |

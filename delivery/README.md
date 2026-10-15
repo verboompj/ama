@@ -108,6 +108,50 @@ the named agent and ask it to read/apply the chosen prompt body with the assignm
 Native prompt discovery is client-specific; no file here starts an automatic
 pipeline. No deployment prompt, deployer agent or Azure access is added.
 
+### Using and Linking Prompts
+
+The relationship is **prompt -> agent profile -> relevant skills and contracts ->
+scoped artifacts/evidence**. For example,
+[local validation](../.github/prompts/iac-06-validate-local.prompt.md) declares:
+
+```yaml
+name: iac-06-validate-local
+agent: infrastructure-tester
+```
+
+The `agent` value names
+[the tester profile](../.github/agents/infrastructure-tester.agent.md), not the next
+prompt. That profile instructs the agent to read the relevant skills, including
+[workload validation](../.github/skills/ama-workload-validation/SKILL.md) and
+[handoff](../.github/skills/ama-handoff/SKILL.md). The prompt body narrows the selected
+phase; its accepted assignment supplies real input snapshots, outputs, permissions,
+check scope and loop budget. References are instructions, not automatic file imports
+or an executable dependency graph.
+
+In a supporting **VS Code Local** chat, invoke `/iac-06-validate-local` and provide
+the accepted assignment. In **Copilot CLI**, select the profile first:
+
+```text
+/agent infrastructure-tester
+```
+
+Then send a message such as:
+
+```text
+Read .github/prompts/iac-06-validate-local.prompt.md and apply its instructions
+to the accepted assignment at <assignment-path>. Use its fixed inputs and
+existing loop ledger. Stop at the assigned gate.
+```
+
+`<assignment-path>` is a placeholder, not an existing package or authorisation.
+Review prompt 02 selects the coordinator, which delegates the required independent
+reviews and collects their results. A specialist returns to the coordinator; it does
+not invoke the next numbered prompt. Required approvals still block later phases.
+
+All review/test/validation loops use the [five-attempt ceiling](multi-agent-framework.md#review-loop-limit),
+including security/compliance and fix/recheck handoffs. This is an instruction-level
+contract until an orchestration runtime enforces the ledger and counter.
+
 ## First Work
 
 [D01](tasks.md#initial-backlog) identifies what the repository already settles and

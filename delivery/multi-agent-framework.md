@@ -109,9 +109,9 @@ flowchart TD
   end
 
   QUALITY["Tester: independent design-quality review<br/>architecture-review.md"]
-  DGATE{"Required design findings resolved?"}
+  DGATE{"Required design findings resolved?<br/>Per review loop: max 5 attempts"}
   PLAN["Coordinator: actual implementation and validation plan<br/>development-plan.md"]
-  PACCEPT{"Architect and Bicep engineer accept plan?"}
+  PACCEPT{"Architect and Bicep engineer accept plan?<br/>Per review loop: max 5 attempts"}
   HUMAN{"Human approves design snapshot and plan revision?"}
   DREL["Architect releases design<br/>Coordinator records design-released"]
   BUILD["Bicep engineer: implement approved scope"]
@@ -124,7 +124,8 @@ flowchart TD
     CONF["Architect: conformance to released design"]
   end
 
-  CGATE{"All required current-gate checks,<br/>reviews and matching docs accepted?"}
+  CGATE{"All required current-gate checks,<br/>reviews and matching docs accepted?<br/>Per review loop: max 5 attempts"}
+  STOP["Stop and escalate: blocked or exhausted<br/>No automatic retry or budget reset"]
   CREL["Coordinator: local candidate release<br/>locally-validated"]
   LATER["Later authorised work only:<br/>deployment-ready, deployment, operationally-verified"]
 
@@ -133,10 +134,12 @@ flowchart TD
   DSNAP --> FEAS & DSEC & DCOMP & DTEST
   FEAS & DSEC & DCOMP & DTEST --> QUALITY
   QUALITY --> DGATE
-  DGATE -->|Changes required| DESIGN
+  DGATE -->|Changes required; budget remains| DESIGN
+  DGATE -->|Blocked or exhausted| STOP
   DGATE -->|Resolved| PLAN
   PLAN --> PACCEPT
-  PACCEPT -->|Changes required| PLAN
+  PACCEPT -->|Changes required; budget remains| PLAN
+  PACCEPT -->|Blocked or exhausted| STOP
   PLAN -.->|Material design change| DESIGN
   PACCEPT -->|Accepted| HUMAN
   HUMAN -->|Not approved| DESIGN
@@ -144,8 +147,9 @@ flowchart TD
   DREL --> BUILD --> CSNAP
   CSNAP --> CTEST & CSEC & CCOMP & CONF
   CTEST & CSEC & CCOMP & CONF --> CGATE
-  CGATE -->|Implementation defect| BUILD
-  CGATE -->|Design change required| DESIGN
+  CGATE -->|Implementation defect; budget remains| BUILD
+  CGATE -->|Design change required; budget remains| DESIGN
+  CGATE -->|Blocked or exhausted| STOP
   CGATE -->|Accepted| CREL
   CREL -.-> LATER
   DESIGN -.->|Design records| DOCS
@@ -158,7 +162,7 @@ flowchart TD
   classDef release fill:#F5F0E6,stroke:#52734D,stroke-width:2px,color:#000000;
   classDef future fill:#FFFFFF,stroke:#1E2521,stroke-dasharray:5 5,color:#000000;
   class FEAS,DSEC,DCOMP,DTEST,QUALITY,CTEST,CSEC,CCOMP,CONF review;
-  class DGATE,PACCEPT,HUMAN,CGATE gate;
+  class DGATE,PACCEPT,HUMAN,CGATE,STOP gate;
   class DREL,CREL release;
   class LATER future;
   style DESIGN_REVIEW fill:transparent,stroke:#1E2521
@@ -223,6 +227,8 @@ select the named profile and explicitly ask it to read/apply the chosen prompt b
 do not assume native `.prompt.md` discovery or identical cross-client behaviour.
 Each phase still requires accepted inputs, current approvals and bounded limits.
 See [prompt-file support](https://code.visualstudio.com/docs/agent-customization/prompt-files).
+For a concrete prompt-to-profile-to-skill example and CLI invocation, see
+[Using and Linking Prompts](README.md#using-and-linking-prompts).
 
 ## Task and Handoff Contract
 
@@ -279,6 +285,34 @@ belongs in the coordinator's ledger, not in frozen design/candidate files.
 An unsuccessful check returns to its artifact owner with reproducible evidence.
 The owner fixes the artifact; the relevant reviewer evaluates the new revision.
 The coordinator cannot edit the finding into a pass.
+
+### Review Loop Limit
+
+Every logical review, test or validation loop has a maximum of **5 total attempts**:
+the initial attempt plus at most four rechecks. This applies to all roles performing
+these checks, including security/compliance review, design-quality review, conformance,
+local tests and authorised environment validation. A lower assigned limit wins.
+
+- Identify each loop by a stable ID in the package ledger, with its objective,
+  reviewer/check scope and target gate. Distinct stages or independent review scopes
+  have separate budgets; do not split or rename a failing scope to gain more attempts.
+- Before execution, require an accepted assignment with the loop ID, ledger reference,
+  integer limit from 1 to 5, attempts used and remaining. Reserve the next attempt in
+  the ledger before the reviewer/tester starts; a started attempt consumes its slot.
+- An attempt executes the assigned check scope once, not once per planned command.
+  Re-execution after failed checks or tool failures consumes another attempt; do not
+  hide repeated retries inside one attempt. Missing prerequisites block before work.
+- Preserve usage across owner-fix handoffs, changed snapshots, sessions, task IDs and
+  reassignment. The owner corrects defects; the independent reviewer uses the same
+  loop's remaining budget. Changed inputs still invalidate affected evidence.
+- Stop on a valid pass, earlier blocker or non-progress; five is a ceiling, not a
+  target. A pass on attempt 5 succeeds. If that attempt does not satisfy the gate,
+  keep the actual findings/disposition, mark further execution blocked and escalate
+  to the user. No sixth attempt, waiver, additional agent or automatic budget reset.
+  Further work requires an explicit recorded user decision, not another prompt invocation.
+
+This is a prompt/contract rule, not a host-enforced iteration setting. No scheduler
+or runtime counter is implemented here. Other assignment limits remain explicit.
 
 Establish applicable run/iteration limits before delegated execution, honour user
 budgets and avoid unbounded review loops. Stop and surface the blocker when work

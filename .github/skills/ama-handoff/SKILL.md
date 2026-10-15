@@ -35,3 +35,8 @@ description: Produce or accept a revision-bound AMA work-package handoff with ex
    pipeline, commit, push, deployment or risk acceptance follows from a handoff.
    On failed checks, use a bounded owner-fix/reviewer-retest loop; stop on non-progress
    or exhausted run limits. Do not invoke every role for a simple single-role task.
+9. Apply the [review-loop policy](../../../delivery/multi-agent-framework.md#review-loop-limit):
+   at most **5 total attempts**, including the initial attempt, or the lower assigned
+   limit. Carry the stable loop ID and consumed/remaining attempts in every assignment
+   and handoff. Fixes, new snapshots, sessions or reassignment do not reset the budget.
+   Stop and escalate when exhausted; a handoff cannot authorise a sixth attempt.

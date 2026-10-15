@@ -63,7 +63,12 @@ execution boundaries. `delivery/workload-guidance.md` governs Azure outputs, not
 - Keep durable task/artifact references as shared state. Send each specialist only
   its objective, input revisions, required context, permitted writes and stop condition,
   rather than forwarding the entire conversation.
-- Establish run/review limits before delegation; preserve any user-set budget.
+- Cap each logical review/test/validation loop at **5 total attempts**, including
+  its initial attempt; a lower assigned limit wins. Follow
+  `delivery/multi-agent-framework.md#review-loop-limit`. Record the stable loop ID,
+  cap and usage in the ledger, carry usage across fixes/snapshots/reassignment and
+  reject missing counters, limits above five or exhausted budgets before delegation.
+- Establish other run limits before delegation; preserve any user-set budget.
   Stop on repeated non-progress, conflicting findings, unavailable tools or exhausted
   limits and surface the blocker instead of recursing or creating more agents.
 - Surface disagreements and risks to the user; do not resolve legal, cost, security,
