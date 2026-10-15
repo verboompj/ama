@@ -1,22 +1,23 @@
 ---
 name: ama-workload-validation
-description: Independently review all five WAF pillars and execute scoped AMA workload checks with explicit evidence, Azure-context confirmation and stage-specific acceptance.
+description: Perform risk-based non-author Azure workload review and scoped checks with explicit evidence, Azure-context confirmation and stage-specific acceptance.
 ---
 
 # AMA Workload Validation
 
 1. Load `ama-context` and `ama-handoff`; require an accepted assignment with a fixed
-   workload input snapshot, target gate/check scope, permitted writes and execution limits.
-   Do not use this skill to validate engineering-agent configuration or orchestration.
+   workload revision, accepted risk path, target gate/check scope, permitted writes
+   and execution limits.
 2. Use `docs/delivery/workload-checks.md` and the package test plan. Map applicable
    WV01-WV22 checks to exact artifacts/resources, expected results and evidence.
    Do not invent an environment or substitute the generic backlog for the actual plan.
-3. For design review, remain independent of the architect's design. Assess all five
-   WAF pillars and produce `delivery/templates/architecture-review.md`, preserving
-   security/compliance findings. Missing required targets/evidence block release.
-4. Check that `development-plan.md` derives from the reviewed architecture, covers
+3. Review as a non-author against approved targets. Apply the risk path's required
+   technical and specialist scope; regulated designs use the dedicated five-pillar
+   architecture report. Record fresh-context availability and shared-model limits.
+4. Check that the scoped plan derives from the reviewed architecture, covers
    findings, exact files/contracts, dependencies/parallel writers, parameter variants
-   and tests. Material design changes require affected review/approval again.
+   and tests. Light work can reference its approved baseline. Material design changes
+   require affected review/approval again.
 5. For local validation, build every scoped module/root and compile required
    parameter variants. Capture linter diagnostics separately from exit status.
    Errors or undispositioned warnings block; do not suppress rules to obtain a pass.
@@ -35,3 +36,6 @@ description: Independently review all five WAF pillars and execute scoped AMA wo
 10. Report current-gate results and later pending checks separately. Return defects
     to their artifact owners and independently retest changed snapshots. Never edit
     production code, invent approvals or claim unexecuted checks as passed.
+11. Use `ama-ai-ml-validation` for model/data quality and runtime AI checks. WV13
+    validates infrastructure representation/wiring; ML01-ML08 establish model/data
+    quality with domain-approved targets and independent evidence.

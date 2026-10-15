@@ -7,18 +7,17 @@ description: Produce or accept a revision-bound AMA work-package handoff with ex
 
 1. Read `docs/delivery/handoffs.md` and the current work-package state. Do not infer
    approval or task completion from conversation tone or an agent's confidence.
-   Handoff here means artifact acceptance, not permission for autonomous peer routing.
-   Specialists return results to the coordinator, which routes any further work.
+   Specialists return results to the coordinator, which routes further authorised work.
 2. Require an accepted `delivery/templates/assignment.md` contract before execution:
    exact inputs, permitted paths/owner, output format, target gate/check scope,
    applicable limits and stop conditions. The coordinator records attempt usage.
    Use `delivery/templates/handoff.md` to identify task/package, sender/recipient,
    exact input and output revisions, paths, acceptance criteria, checks, findings,
    remaining risks, and requested next action.
-3. Use the snapshot protocol in `delivery/releases/README.md`. The tester or an
-   explicitly authorised tool-capable host operator prepares hashes and preserved
-   inputs. Other roles consume that manifest; unavailable production is a blocker,
-   not permission to invent hashes. Lifecycle/approval records stay outside frozen inputs.
+3. Use immutable committed references or the snapshot protocol in
+   `delivery/releases/README.md`. For uncommitted inputs the tester or an authorised
+   tool-capable operator preserves bytes/hashes. Missing required preservation is a
+   blocker. Lifecycle/approval records stay outside frozen inputs.
 4. Use `PASS`, `FAIL`, `BLOCKED`, `NOT RUN`, or justified `NOT APPLICABLE` for each
    check. Record its earliest required gate and authenticated scope where relevant;
    redact sensitive output. Later checks remain `NOT RUN`; they do not block an
@@ -34,7 +33,7 @@ description: Produce or accept a revision-bound AMA work-package handoff with ex
 8. Stop at the requested gate. No automatic next-phase execution, agent swarm,
    pipeline, commit, push, deployment or risk acceptance follows from a handoff.
    On failed checks, use a bounded owner-fix/reviewer-retest loop; stop on non-progress
-   or exhausted run limits. Do not invoke every role for a simple single-role task.
+   or exhausted run limits.
 9. Apply the [review-loop policy](../../../docs/delivery/multi-agent-framework.md#review-loop-limit):
    at most **5 total attempts**, including the initial attempt, or the lower assigned
    limit. Carry the stable loop ID and consumed/remaining attempts in every assignment

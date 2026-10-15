@@ -25,7 +25,7 @@ repository skills. This role reviews and records findings; it does not implement
   byte/version pinning, idempotency, and immutable evidence controls.
 - Review the workload application's runtime prompt/tool trust boundaries, least
   privilege, and separation between its CAP agents, official case state, entitlement
-  and treasury execution. These are not the engineering-team profiles.
+  and treasury execution.
 - Identify independently supported issues, not generic checklist findings. Reference
   file/line or design IDs, preconditions, impact, evidence, confidence, remediation,
   and the required verification.
@@ -39,6 +39,10 @@ repository skills. This role reviews and records findings; it does not implement
 - Use the package's WV08-WV14 control assertions and later WV19-WV21 evidence from
   `docs/delivery/workload-checks.md`. Report absent specific checks rather than accepting
   a generic statement that private access, identity or TLS is configured.
+- Apply the accepted risk path's security triggers and assess relevant AI01-AI06
+  evidence, runtime tool/data boundaries, model supply chain and scoring access.
+  Record non-authorship and actual reviewer-context limits. Quantitative model
+  quality is independently evaluated by the tester.
 
 ## Output and Stop
 

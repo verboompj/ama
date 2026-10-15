@@ -4,29 +4,28 @@
 
 Every role reads [AGENTS.md](../../AGENTS.md), the relevant baseline, and its named
 skills. The profiles are the execution instructions; this table is the directory.
-All seven roles deliver the Azure workload. They do not develop, validate or
-maintain their own engineering-agent definitions as part of that delivery.
+The nine roles deliver workload artifacts under an accepted risk path.
 
 | Profile | Inputs | Outputs / write ownership | Cannot approve or perform |
 |---|---|---|---|
 | [azure-architect](../../.github/agents/azure-architect.agent.md) | Business scope, workload baseline/research, early specialist constraints and design reviews | Package `design.md`/`conformance.md`, module contracts, criteria; technical acceptance of published docs | Concurrent edits to documenter-owned files; its own security/legal approval; implementation/deployment |
-| [bicep-engineer](../../.github/agents/bicep-engineer.agent.md) | Draft design for feasibility; approved release for implementation | AVM feasibility, `infra/`, module inventory, implementation evidence | Infrastructure before release, architecture deviations, its own independent pass, CI or Azure writes |
+| [bicep-engineer](../../.github/agents/bicep-engineer.agent.md) | Scoped design/plan | AVM feasibility, `infra/`, module inventory; future authorised release automation | Unreleased infrastructure, self-approval, unauthorised CI or Azure writes |
+| [application-ai-engineer](../../.github/agents/application-ai-engineer.agent.md) | Released application/runtime scope and accepted scoring contracts | Services/UI integration, runtime tools/prompts, evidence adapters, packaging, adjacent author tests | Model tuning/promotion, infrastructure edits, independent verdicts |
+| [ml-data-engineer](../../.github/agents/ml-data-engineer.agent.md) | Released data/model scope and approved data/compute/evaluation protocol | Copernicus/features, training/scoring, data/scoring schemas, manifests/model cards/replay, adjacent author tests | Application case logic, final-test tuning, independent verdicts or human promotion approval |
 | [architecture-documenter](../../.github/agents/architecture-documenter.agent.md) | Requirements, evolving design, actual code, checks and deployment records if any | Workload docs and diagrams throughout; final deployment guidance | Engineering-team configuration/docs, design changes or claims of unobserved deployment |
-| [infrastructure-tester](../../.github/agents/infrastructure-tester.agent.md) | Assigned workload inputs, architect-authored Azure design or fixed infrastructure candidate | Independent design-quality report, workload snapshots/checks, evidence and testability review | Engineering-framework tests, authoring the reviewed design, production fixes or cloud deployment |
+| [infrastructure-tester](../../.github/agents/infrastructure-tester.agent.md) | Fixed workload inputs and owner-approved targets | Required non-author design review; independent infrastructure/application/AI/ML suites and results; snapshots when needed | Target self-approval, production fixes, model tuning or deployment |
 | [security-reviewer](../../.github/agents/security-reviewer.agent.md) | Workload design/candidate revision, threat/control requirements | Workload security reviews and findings only | Risk acceptance, production changes, live exploitation |
 | [compliance-reviewer](../../.github/agents/compliance-reviewer.agent.md) | Workload scope, obligations, official legal sources, control evidence | Applicability matrix, compliance findings, research corrections | Legal sign-off, certification, rewriting source legislation |
-| [delivery-coordinator](../../.github/agents/delivery-coordinator.agent.md) | Authorised workload objective, reviewed architecture and accepted evidence | Actual workload development plan, task states, ledger, handoffs and readiness summary | Engineering-framework development/testing, specialist passes, human approval, waivers or deployment |
+| [delivery-coordinator](../../.github/agents/delivery-coordinator.agent.md) | Authorised objective, accepted risk path and evidence | Actual plan, scoped assignments, ledger, handoffs and readiness | Specialist verdicts, human approval, waivers or deployment |
 
-Shared evidence is intentional; shared authority is not. The engineer's local checks
-do not replace independent testing. The tester executes technical assertions;
-security/compliance assess that evidence against their own scoped requirements.
-The independent architecture report references specialist findings rather than
-overruling them. The architect owns decisions and conformance; the documenter owns
-the assigned published explanation. The coordinator routes work, not specialist verdicts.
+Writers own production changes and adjacent author tests. The tester owns independent
+acceptance suites against business/domain-owner-approved targets. Required judgments
+use non-author reviewers with fresh context where supported. The architect's
+conformance is author-side evidence. Shared-model/context limits are recorded.
 
 All profiles have read/search, scoped-by-instruction editing, web research where
-supported, and the three allowlisted read-only Learn tools. Only the Bicep engineer,
-tester and documenter have shell execution for their stated local checks. Only the
+supported, and the three allowlisted read-only Learn tools. The Bicep, application and
+ML engineers, tester and documenter have shell execution for assigned local work. Only the
 coordinator has agent delegation. No profile hardcodes a model.
 The tester also prepares preserved snapshots; other roles consume its manifest.
 See [artifact ownership](../../delivery/releases/README.md#artifact-ownership) and
@@ -47,24 +46,37 @@ not relied upon for cross-client enforcement.
 
 | Skill | Used by | Reusable procedure |
 |---|---|---|
-| [ama-context](../../.github/skills/ama-context/SKILL.md) | All seven | Source precedence, case boundaries, runtime invariants |
+| [ama-context](../../.github/skills/ama-context/SKILL.md) | All nine | Source precedence, risk scope, case boundaries and runtime invariants |
 | [ama-design-release](../../.github/skills/ama-design-release/SKILL.md) | Architect | Workload WAF assessment, module contract and release gate |
 | [ama-avm-bicep](../../.github/skills/ama-avm-bicep/SKILL.md) | Bicep engineer, tester | Published module verification, composition and validation |
-| [ama-workload-validation](../../.github/skills/ama-workload-validation/SKILL.md) | Tester | Independent full-WAF review, WV01-WV22 control checks, context confirmation and evidence |
-| [ama-handoff](../../.github/skills/ama-handoff/SKILL.md) | All seven | Revision-bound evidence and acceptance protocol |
+| [ama-workload-validation](../../.github/skills/ama-workload-validation/SKILL.md) | Tester | Scoped non-author review, WV01-WV22 controls and environment confirmation |
+| [ama-ai-application](../../.github/skills/ama-ai-application/SKILL.md) | Application/AI engineer | Runtime application/tool/evidence contracts and author checks |
+| [ama-ml-lifecycle](../../.github/skills/ama-ml-lifecycle/SKILL.md) | ML/data engineer | Lineage, leakage-safe datasets/features, candidate training and replay |
+| [ama-ai-ml-validation](../../.github/skills/ama-ai-ml-validation/SKILL.md) | Tester | Independent AI01-AI06 and ML01-ML08 evaluation |
+| [ama-handoff](../../.github/skills/ama-handoff/SKILL.md) | All nine | Revision-bound evidence and acceptance protocol |
 
 Profiles name the skills to load; if the client does not activate a local skill
 automatically, read its `SKILL.md`. Skills provide instructions, not installed
 executables, cloud privileges or a promise that external services are reachable.
 
-Role ownership is not execution order. The coordinator uses the
+The coordinator uses the
 [collaboration patterns](multi-agent-framework.md#selected-collaboration-model)
 to select specialists and route review/fix cycles; a simple request can be handled
 by one role. [Workload Guidance](workload-guidance.md) separately defines the standards
 applied to the Azure artifacts they produce.
 The [workload checks](workload-checks.md) provide concrete expected evidence;
+[AI/ML checks](ai-ml-checks.md) cover application/model outputs;
 [phase prompts](README.md#reusable-execution-prompts) provide repeatable entry points
 without replacing assignments or automatically running later phases.
+
+## Release and Operational Ownership
+
+The Bicep engineer authors future release automation under a separately authorised
+pipeline assignment. Application and ML writers supply their image/manifests and
+job/scoring contracts. The tester independently verifies applicable release evidence.
+The coordinator records the actual authorised deployment operator and human service
+owner, including monitoring, incident response, rollback and model-drift ownership.
+Workflow implementation and execution are deferred.
 
 ## Optional Authoring Capabilities
 

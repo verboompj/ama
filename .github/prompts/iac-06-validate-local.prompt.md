@@ -9,6 +9,6 @@ released design and accepted development/test plans.
 Load `ama-workload-validation`. Execute WV05-WV14 for every scoped module/root and
 required parameter variant; record diagnostics, effective-property assertions,
 actual commands/results and later pending checks in `test-review.md`.
-Independent security/compliance reviews and architect conformance are separate
-required dispositions, not passes this role can invent. Return defects without
+Collect the accepted risk path's required specialist dispositions and the architect's
+author-side conformance as separate evidence. Return defects without
 editing production code. Do not contact Azure or automatically advance the gate.

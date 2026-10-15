@@ -17,8 +17,7 @@
 
 The rubric's A1–A3 guide contracts, trade-offs and control evidence. A4–A6 require
 working and measured evidence, not claims based on a successful Bicep compile.
-A7 concerns actual runtime agent behaviour; creating seven development profiles
-does not satisfy it. B6/B7 and D1/D2 motivate navigable, sourced materials. Executive
+A7 requires observed runtime agent behaviour. B6/B7 and D1/D2 motivate navigable, sourced materials. Executive
 delivery, stakeholder engagement, publication and scoring cannot be certified by agents.
 
 ## Agent Collaboration Guidance

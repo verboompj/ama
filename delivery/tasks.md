@@ -1,11 +1,33 @@
-# Initial Delivery Backlog
+# Workload Delivery Backlog
 
-**All tasks are pending.** This is a prerequisite catalogue for the first full
-infrastructure package, not a fixed agent sequence or permission to execute it.
-The coordinator selects tasks for the authorised objective and updates states only
-when work starts. No approved package or deployed infrastructure exists from setup.
+**All tasks are pending.** The coordinator selects work for the authorised objective
+and accepted [risk path](../docs/delivery/handoffs.md#risk-based-review-paths).
+The actual development plan fixes files, contracts, reviewers and tests.
+
+## Solution Slice Backlog
+
+S01-S08 support the proposed [public-data crop-evidence slice](../docs/delivery/first-implementation-slice.md).
+Scope, data/compute authority and owner-approved targets must be resolved before
+implementation. The plan adds any triggered specialist or platform work with explicit
+dependencies and distinct write paths.
+
+| ID | Owner | Depends on | Persistent output | Acceptance / blocking condition | Status |
+|---|---|---|---|---|---|
+| S01 | delivery-coordinator | None | Package context and decision/owner records | Accepted risk path; region/years/classes, data authority, compute/budget, human owners and quality-target decisions recorded; unresolved decisions block release | pending |
+| S02 | azure-architect | S01 | Scoped design and data/scoring/application contracts | Approved experimental boundaries, feasible compute/data route, lineage/test-isolation requirements and exact publisher/consumer ownership | pending |
+| S03 | delivery-coordinator | S02 | Accepted actual plan, review evidence and release references | Required non-author technical review and triggered specialist findings resolved; architect/scoped-writer acceptance and applicable human approval; AI/ML criteria instantiated before final evaluation | pending |
+| S04 | ml-data-engineer | S03 | Data/geometry/features, grouped splits, baseline/calibration/scoring code and replay bundle | ML01-ML07 candidate artifacts and adjacent author tests; declared limitations; locked final-test protocol preserved | pending |
+| S05 | application-ai-engineer | S03, S04 | Deterministic evidence view, scoring adapter, packaging and author tests | Accepted scoring version, explicit UNKNOWN/failure states, safe evidence/access boundaries and applicable AI01-AI05 author checks | pending |
+| S06 | infrastructure-tester | S04, S05 | Independent acceptance/evaluation suites and report | Approved-target metrics, independent replay, contract/error/access tests and required specialist evidence against a fixed candidate; missing competence or evidence blocks | pending |
+| S07 | architecture-documenter | S04, S05 | Run/replay guidance, visuals and limitations | Documentation matches the candidate; architect accepts technical meaning and supplies author-side conformance | pending |
+| S08 | delivery-coordinator | S06, S07 | Readiness and ledger update | Required local evidence accepted; later live/promotion checks remain pending; exact candidate, attempt usage and unresolved issues recorded | pending |
 
 ## Initial Backlog
+
+### Regulated Infrastructure Reference
+
+D01-D20 provide the full infrastructure path. Scope the applicable tasks for each
+package and use its own records.
 
 | ID | Owner | Depends on | Input | Persistent output | Acceptance / blocking condition | Status |
 |---|---|---|---|---|---|---|
@@ -33,9 +55,8 @@ when work starts. No approved package or deployed infrastructure exists from set
 Paths above are relative to `delivery/releases/` unless they explicitly name `infra/`
 or `docs/`. They describe future outputs; the package has not been created.
 Use the [templates](templates/) and [package layout](releases/README.md).
-IDs are stable identifiers, not execution order: D19/D20 add independent architecture
-review and actual workload planning before D11. The eighteen original rows alone
-were a delivery-process backlog, not a workload-specific implementation plan.
+Stable IDs identify tasks. D19/D20 supply independent architecture review and the
+actual implementation plan before D11.
 
 Dependencies mean usable prerequisite outputs, not merely a `done` status. D02–D05
 provide early input, D07–D10/D19 assess a draft, D20 plans implementation, and
@@ -44,38 +65,35 @@ These groups may run independently only where file ownership and input revisions
 permit. D05 produces initial docs rather than a completed implementation runbook.
 D17 does not wait for assurance to begin; D18 requires all final outputs to agree.
 
-This table captures prerequisites, not every iteration. Findings return through the
+Findings return through the
 coordinator to their owner; re-open affected tasks and bind reruns to the changed
 revision. A design change during implementation re-opens D06–D11 and D19/D20 as applicable.
-Documenting code that later changes re-opens D17. Never add a task dependency merely
-to force every agent to take a turn.
+Documenting code that later changes re-opens D17.
 
 ## Assignment, Snapshot and Gate Rules
 
 Before each specialist task, the coordinator creates an accepted assignment with
-exact write paths/owner, inputs, required output, target gate and attempt limits.
+exact write paths/owner, risk path, approved targets, required reviewers, inputs,
+output, target gate and attempt limits.
 Use [assignment.md](templates/assignment.md) and record consumption in the ledger.
 
 The coordinator assigns the tester snapshot preparation before D07–D10/D19 review the
 design and before D13–D17 review the candidate, using
 [the snapshot protocol](releases/README.md#snapshot-protocol). This evidence-preparation
-step does not require an already released design or candidate implementation and
-does not itself count as a review pass. The architect still owns the design and the
-Bicep engineer the implementation. Changed inputs require a new snapshot and reruns.
+step fixes reviewed inputs; an existing immutable commit reference is sufficient
+when it covers the full scope. The architect owns design and scoped writers own
+implementation. Changed inputs invalidate affected evidence.
 
 D08/D09 are the explicit design security/compliance checks before D11. D14/D15 are
 the explicit implementation security/compliance checks before D18; D13 executes
 the corresponding technical assertions. The backlog ends at `locally-validated`.
 Authenticated/deployment/operational checks keep their later-gate owners and pending
 results; they are not waived or declared passed at D18.
-D19 adds independent full-WAF review; it does not replace security/compliance findings.
+D19 supplies the dedicated five-pillar review for regulated infrastructure.
 Before D11, D20 converts the actual reviewed architecture into implementation tasks
 and instantiates [WV01-WV22](../docs/delivery/workload-checks.md) with resources, expected values,
 commands and evidence. WV15-WV22 remain future authenticated/live work, with their
-owners/confirmation prerequisites; no deployer or pipeline is added.
-
-This backlog delivers the Azure workload only. Engineering-agent configuration,
-orchestration implementation and framework self-testing are not workload tasks.
+owners/confirmation prerequisites.
 
 ## Decisions to Resolve Before Design Release
 
@@ -91,5 +109,7 @@ orchestration implementation and framework self-testing are not workload tasks.
   can be released with explicit prerequisites, but do not claim deployment feasibility
   has been verified without the relevant evidence.
 
-GitHub Actions, initial deployment, Kubernetes/application delivery, model promotion,
-real data onboarding and operational drills require later scoped tasks and approval.
+Future release automation belongs to the Bicep engineer under a separate assignment,
+consuming application packaging and ML job/scoring contracts. Name the authorised
+deployment operator and human operational owner before deployment. Workflows,
+deployment, promotion, real-case onboarding and operational drills require scoped approval.

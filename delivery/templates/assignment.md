@@ -10,6 +10,9 @@ cloud operations beyond the user's recorded scope.
 | Coordinator / assigned specialist | TODO |
 | Authorised objective / user authorisation reference | TODO |
 | Target workload gate / check scope | TODO |
+| Risk path / trigger rationale / accountable acceptance reference | light, standard or regulated / TODO / TODO |
+| Approved acceptance targets / business or domain owner | TODO; tester translates targets, not self-approves them |
+| Required non-author reviewer / triggered specialists / evidence | TODO; proportional to accepted risk path |
 | Exact input revision / snapshot ID / manifest reference, or snapshot-preparation source set | TODO |
 | Required context and acceptance criterion IDs | TODO |
 | Artifact owner and permitted write paths | TODO |
@@ -24,6 +27,10 @@ cloud operations beyond the user's recorded scope.
 | Host-enforced limits / measurement availability | TODO; do not claim unavailable accounting |
 | Snapshot producer / approved preservation location | infrastructure-tester / TODO |
 | Known blockers and dependencies | TODO |
+
+Use the [risk-based paths](../../docs/delivery/handoffs.md#risk-based-review-paths).
+For light work, reference the existing released design/plan and record only relevant
+fields; justify inapplicable fields. This contract is not technical gate enforcement.
 
 ## Artifact Ownership
 

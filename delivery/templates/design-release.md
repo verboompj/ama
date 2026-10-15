@@ -12,6 +12,7 @@ Template only. Replace placeholders; do not treat this file as an approved packa
 | Business owner / human design approver | TODO |
 | Required approval scope / external approval-record location | TODO; approval is recorded against the frozen snapshot |
 | Supersedes / affected earlier evidence | None / TODO |
+| Accepted risk path / accountable owner / required reviews | TODO |
 
 ## Scope and Sources
 
@@ -27,8 +28,9 @@ cost assumptions and budget; unresolved decisions with owners and blocking statu
 
 ## Workload Well-Architected Assessment
 
-Assess the Azure workload, not the agent collaboration model. Record existing
-platform dependencies and ownership without expanding the approved implementation scope.
+Record affected Azure workload properties and existing platform dependencies within
+the approved scope. Regulated designs assess every pillar; standard work assesses
+its scoped impact and targets.
 
 | WAF pillar | Requirement / target | Decision and alternatives | Trade-off | Acceptance check / owner |
 |---|---|---|---|---|
@@ -56,6 +58,8 @@ private connectivity/DNS and effective control properties expected by the WV che
 Map applicable WV01-WV22 checks from `docs/delivery/workload-checks.md` to exact package
 criteria and evidence. The package plan instantiates properties, values and commands;
 generic checklist names are not completed validations.
+For application/data/model scope instantiate applicable AI01-AI06 and ML01-ML08
+from `docs/delivery/ai-ml-checks.md`, with human target owners and locked protocols.
 
 Gate values: `design-released`, `locally-validated`, `deployment-ready`,
 `operationally-verified`. Use the definitions in
@@ -65,9 +69,11 @@ Later-gate tests remain required later, not passed or waived at design release.
 
 ## Review and Approval Evidence
 
-Security design disposition and findings; compliance applicability/control matrix;
-tester testability disposition; Bicep engineer AVM feasibility findings; design
-documentation revision; independent all-five-pillar `architecture-review.md`;
+Reviews required by the accepted risk path: security disposition and findings;
+compliance applicability/control matrix;
+tester testability disposition; scoped infrastructure/application/ML feasibility; design
+documentation revision; non-author technical review (dedicated all-five-pillar
+`architecture-review.md` for the regulated path);
 accepted workload `development-plan.md` revision and WV01-WV04 evidence;
 finding resolutions; required DPO/legal/risk-owner
 approvals or open blockers. Review records and human approval refer to the exact
@@ -76,7 +82,8 @@ snapshot from the external ledger; do not append approvals to the frozen design 
 ## Release and Handoff
 
 Architect release decision, immutable revision, approved implementation scope,
-accepted exceptions, prerequisites, Bicep engineer recipient, and handoff reference.
+accepted exceptions, prerequisites, scoped writer recipients and handoff reference.
 No release until required design-gate reviews and human approval are recorded against
 this snapshot in the ledger. The architect supplies the release decision; the
 coordinator records `design-released`. No deployment authority is granted.
+For light changes within an existing release, reference its approved design/plan.

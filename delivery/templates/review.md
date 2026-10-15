@@ -16,6 +16,8 @@ Template only. Copy into the authorised work package.
 | Attempts consumed / remaining / limits reached | TODO |
 | Overall disposition | BLOCKED |
 | Independence / limitations | TODO |
+| Risk path / approved target owner / non-authorship | TODO |
+| Reviewer context / actual model and tool limits, when available | TODO; fresh context requested, isolation not assumed |
 
 ## Criteria and Evidence
 
@@ -46,3 +48,5 @@ owner; they do not block an earlier gate solely because execution is scheduled l
 Do not move a discovered current-gate defect to a later gate to obtain a pass.
 Record human approval requirements, unresolved legal questions, risk-owner decisions,
 and downstream artifacts invalidated by changes. No certification or deployment approval.
+Separate deterministic results, non-author judgment and author-side conformance.
+Record shared-model/context limits on review independence.

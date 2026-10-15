@@ -46,7 +46,7 @@ The [business-process flow](./docs/architecture/business-process-flow.md) maps t
 activities to their owners and carries the claim through advance, final calculation,
 payment reconciliation, and appeal safeguards.
 
-The [Azure delivery team](./docs/delivery/README.md) defines seven development agents,
+The [Azure delivery team](./docs/delivery/README.md) defines nine development agents,
 shared repository skills, a staged task backlog, and explicit architecture-to-Bicep
 handover gates. It prepares the engineering workflow; infrastructure implementation
 and GitHub Actions remain separate, later work.
@@ -55,6 +55,10 @@ The [workload guidance](./docs/delivery/workload-guidance.md) and
 separate Azure solution standards from development-agent collaboration.
 The [workload validation catalogue](./docs/delivery/workload-checks.md) defines concrete
 checks and evidence for design review, local acceptance and later Azure/live stages.
+The [AI/ML checks](./docs/delivery/ai-ml-checks.md) cover runtime applications,
+data/model quality and reproducibility. The
+[first implementation slice](./docs/delivery/first-implementation-slice.md) defines
+the proposed public-data crop-evidence target and decisions needed before execution.
 
 ## Repository Structure
 
@@ -62,7 +66,7 @@ checks and evidence for design review, local acceptance and later Azure/live sta
 .
 ├── AGENTS.md                # Shared engineering-agent instructions
 ├── .github/
-│   ├── agents/              # Seven native Copilot agent profiles
+│   ├── agents/              # Nine native Copilot agent profiles
 │   ├── skills/              # Reusable repository-local procedures
 │   └── prompts/             # Explicit phase entry points
 ├── delivery/                # Workload tasks, templates & work-package records

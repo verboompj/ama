@@ -1,13 +1,14 @@
 ---
 name: iac-02-review
-description: Coordinate independent WAF, security, compliance and feasibility reviews of a fixed design.
+description: Coordinate required technical and triggered specialist reviews of a fixed workload design.
 agent: delivery-coordinator
 ---
 
 Read `AGENTS.md` and use the accepted design-review assignment and fixed snapshot.
-Provide bounded assignments to the Bicep engineer for feasibility, security and
-compliance reviewers for their findings, and infrastructure-tester for testability
-and an independent five-pillar `architecture-review.md`.
+Use its accepted risk path to select non-author technical review, scoped writer
+feasibility and triggered security/compliance findings. For regulated designs,
+require the tester's dedicated five-pillar architecture report. Request fresh
+reviewer context with fixed criteria/inputs and record actual limitations.
 Require WV01-WV03 and the corresponding report templates. Reconcile references and
 blocking findings without rewriting specialist dispositions. Respect recorded limits.
 Return the review summary; do not implement, approve the design, contact Azure or

@@ -1,6 +1,6 @@
 ---
 name: ama-context
-description: Establish AMA case context and source precedence before architecture, Bicep, testing, documentation, security, compliance or delivery coordination work.
+description: Establish AMA case context, source precedence and approved risk scope for infrastructure, applications, AI, ML and workload assurance.
 ---
 
 # AMA Context
@@ -10,8 +10,7 @@ description: Establish AMA case context and source precedence before architectur
    or an approved deployment-related check.
    Use `docs/delivery/workload-guidance.md` for Azure output standards and
    `docs/delivery/multi-agent-framework.md` for development-agent collaboration.
-   Delivery work concerns the Azure workload, not development or self-testing of
-   the engineering profiles, skills, prompts or orchestration setup.
+   Read the accepted risk path and target-owner decisions from the assignment.
 2. Use this source hierarchy:
    - Original brief/rubric define case requirements, not verified current law.
    - `docs/architecture/aks-centered-foundry-architecture.md` is the maintained
@@ -34,7 +33,9 @@ description: Establish AMA case context and source precedence before architectur
      independent probability-sample validation; GPS is provenance, not proof.
    - Official entitlement/adverse decisions and payment execution do not belong to
      an LLM. Treasury execution is separate from case readiness.
-5. Keep engineering agents separate from runtime agents and personas. The cast
+5. The engineering team has nine roles, including application/AI and ML/data
+   implementation specialists. Runtime CAP agents and business personas retain their
+   architecture-defined responsibilities. The cast
    references remain Jeremy as Farmer and Charlie as Adviser only.
 6. Check the worktree; leave unrelated files alone. Carry unresolved context and
    prerequisite gaps into the handoff rather than making up defaults.

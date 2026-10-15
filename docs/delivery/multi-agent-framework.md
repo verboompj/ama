@@ -2,18 +2,14 @@
 
 ## Purpose and Current Status
 
-This document defines how the repository's **engineering agents collaborate**.
-It does not design the five runtime CAP agents, create new business personas or
-prescribe Azure resources. Azure output standards live in
-[Workload Guidance](workload-guidance.md).
+The engineering team uses nine native profiles, eight local skills and twelve
+phase prompts to deliver Azure infrastructure, applications, runtime AI and ML/data
+artifacts. The coordinator selects specialists and review depth for the accepted
+[risk path](handoffs.md#risk-based-review-paths).
 
-The repository currently contains seven native Copilot profiles, five local skills,
-reusable phase prompts, task records and artifact templates. These are contracts, not a
-deployed multi-agent service or an executable orchestration engine.
-
-The team follows these operating rules to deliver the Azure workload. The rules,
-profiles and orchestration setup are not artifacts for the team to develop or test.
-Maintenance of this setup requires a separate user-authorised repository task.
+Coordination and gates are procedural. The accountable human verifies release
+evidence; executable enforcement is deferred. Azure output standards are defined
+in [Workload Guidance](workload-guidance.md).
 
 ## Research Basis
 
@@ -23,13 +19,11 @@ Primary sources checked on 15 October 2026:
 |---|---|---|
 | [Microsoft: AI agent orchestration patterns](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) | Choose the lowest necessary complexity; distinguishes sequential, concurrent, group-chat, handoff and manager-led patterns; covers context, state, failures and output validation | Select specialists by task; preserve artifact state; avoid a rigid chain where iteration is needed |
 | [Anthropic: Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) | Distinguishes predefined workflows from model-directed agents; describes orchestrator-workers and evaluator-optimizer patterns | Coordinator delegates bounded work; makers and independent reviewers use feedback loops |
-| [GitHub: custom agent configuration](https://docs.github.com/en/copilot/reference/custom-agents-configuration) | Native profile format, tool filters, model inheritance and client differences | Repository profiles declare capabilities without pretending to enforce an entire runtime |
+| [GitHub: custom agent configuration](https://docs.github.com/en/copilot/reference/custom-agents-configuration) | Native profile format, tool filters, model inheritance and client differences | Declare tools and model inheritance in native profiles |
 | [GitHub: agent skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) | Reusable on-demand instructions | Shared repository procedures rather than duplicated role prompts |
 
-These sources describe patterns and platform capabilities, **not a prescribed
-seven-role team or mandatory order**. The selection below is our project decision.
-Anthropic's article is foundational pattern guidance, not a current product/API manual.
-No workload-adoption framework is used as the basis for this agent design.
+The collaboration model combines coordinator-worker delegation, selective
+concurrency and evaluator feedback from these sources.
 
 ## Selected Collaboration Model
 
@@ -44,13 +38,8 @@ selective concurrent work and evaluator-optimizer feedback.
 | Artifact-based shared state | Tasks, designs, manifests, findings and approvals persist outside chat |
 | Human decisions | Scope/design approval and material legal/risk decisions remain with the designated human owners |
 
-This is not a claim to implement Microsoft's complete magentic pattern or a
-particular agent SDK. We do not adopt unrestricted group chat, peer-to-peer control
-transfer or a fixed pipeline that invokes every agent for every request.
-
-Seven profiles are available, not seven mandatory executions. A small documentation
-change can use the documenter and relevant checks alone. Full infrastructure work
-requires its applicable design and assurance gates.
+The accepted risk path determines the roles, reviews and evidence needed for each
+task. A small documentation change uses its assigned writer and relevant checks.
 
 ## Roles and Responsibility
 
@@ -59,88 +48,78 @@ requires its applicable design and assurance gates.
 | `delivery-coordinator` | Decomposes the objective, owns the actual workload development plan, selects specialists and consolidates evidence | Does not produce specialist approvals or waive findings |
 | `azure-architect` | Integrates requirements, owns design decisions, releases approved packages and checks implementation conformance | Does not replace independent review or human approval |
 | `bicep-engineer` | Checks AVM feasibility during design; implements released contracts afterward | No infrastructure generation from an unapproved design |
-| `infrastructure-tester` | Independently reviews Azure design quality, prepares workload snapshots and checks infrastructure criteria | Does not author the reviewed design, fix production code or test the engineering-agent setup |
+| `application-ai-engineer` | Implements applications, runtime agents/tools, evidence integrations and packaging | Consumes ML-owned scoring contracts; reviewers own independent verdicts |
+| `ml-data-engineer` | Implements data/features, training/calibration, scoring contracts and replay bundles | Preserves test isolation and obtains human promotion authority |
+| `infrastructure-tester` | Performs scoped non-author review and independent infrastructure/application/AI/ML tests | Uses owner-approved targets and returns production fixes to writers |
 | `security-reviewer` | Establishes threat/control requirements early, reviews design and implementation | Does not accept risk on behalf of its human owner |
 | `compliance-reviewer` | Establishes applicability/obligations early and maps controls to evidence | Does not supply legal certification or invent applicability |
 | `architecture-documenter` | Maintains decisions, diagrams and guidance throughout; reconciles final docs to the candidate | Does not claim unobserved deployment or silently redesign the solution |
 
-The [agent/skill catalogue](agents-and-skills.md) links to executable profile
-instructions and describes tool access. This table defines collaboration,
-not an organisational hierarchy or execution sequence.
+The [agent/skill catalogue](agents-and-skills.md) defines artifact ownership and tools.
 
 ## Collaboration Across a Work Package
 
-**Requirements:** security/compliance shape constraints before decisions are locked;
-the tester helps define measurable acceptance; the documenter starts the decision record.
+**Requirements:** business/domain owners approve targets; the tester turns them
+into checks. Triggered specialists supply constraints and the documenter records decisions.
 
-**Design:** the architect integrates those inputs, the Bicep engineer checks published
-module feasibility, and specialists review a fixed design revision. Feedback returns
-through the coordinator to the owning role. Documentation evolves with the design.
+**Design:** the architect integrates scoped feasibility and required non-author
+review. Infrastructure, application and ML writers supply interface/contracts.
+The coordinator returns findings to the owning role.
 
 **Planning:** the coordinator turns the reviewed architecture into an actual file/task
 dependency plan, incorporates findings and defines per-layer validation. Architect
 and implementer acceptance precede human approval and design release.
 
-**Implementation:** an approved architect release and accepted workload plan are
-prerequisites to infrastructure generation. Code, local checks and docs evolve together. Reviews
-evaluate fixed candidates; code defects return to the implementer and design defects
-return to the architect.
+**Implementation:** assigned writers implement the released scope. Independent
+acceptance evaluates fixed candidates. The architect supplies author-side conformance;
+the designated non-author reviewer supplies the required technical verdict.
 
 **Acceptance:** relevant tests/reviews, architect conformance and final documentation
 must describe the same candidate. The coordinator reports evidence, exceptions and
-remaining blockers for the authorised next decision. It does not use majority voting
-or completion of all agent turns as a definition of success.
+remaining blockers for the authorised next decision.
 
-The [task catalogue](../../delivery/tasks.md) records prerequisites for a full first package.
-Its rows are work items, not a hardcoded schedule for every request.
+The [task catalogue](../../delivery/tasks.md) contains scoped solution tasks and the
+regulated infrastructure reference path.
 
 ### Input to Candidate Release
 
-Every design, candidate and check below concerns the Azure workload, not the
-engineering-agent configuration. Handoffs and loop limits are operating controls,
-not objects of a deployment-team test programme.
+Only selected implementation branches and required reviews execute.
 
 ```mermaid
 flowchart TD
   INPUT["User input: objective and authorised scope"]
   COORD["Coordinator: workload assignment, owners, limits and ledger"]
-  REQ["Requirements: architect + security + compliance + tester"]
+  RISK{"Accepted risk path"}
+  LIGHT["Light: approved baseline and targeted checks"]
+  REQ["Owner-approved targets + scoped specialist inputs"]
   DESIGN["Architect: bounded Azure workload design"]
-  DSNAP["Tester: fixed design snapshot"]
+  DSNAP["Fixed design revision and required evidence"]
   DOCS["Documenter: workload decisions, diagrams and runbooks"]
 
-  subgraph DESIGN_REVIEW["Design review: before approval and design release"]
-    FEAS["Bicep engineer: implementation feasibility"]
-    DSEC["Security reviewer: threats and design controls"]
-    DCOMP["Compliance reviewer: obligations and design evidence"]
-    DTEST["Tester: acceptance criteria and testability"]
-  end
-
-  QUALITY["Tester: independent design-quality review<br/>architecture-review.md"]
+  QUALITY["Required non-author technical review<br/>Triggered specialists + scoped feasibility"]
   DGATE{"Required design findings resolved?<br/>Per review loop: max 5 attempts"}
   PLAN["Coordinator: actual implementation and validation plan<br/>development-plan.md"]
-  PACCEPT{"Architect and Bicep engineer accept plan?<br/>Per review loop: max 5 attempts"}
+  PACCEPT{"Architect and scoped writers accept plan?<br/>Per review loop: max 5 attempts"}
   HUMAN{"Human approves design snapshot and plan revision?"}
   DREL["Architect releases design<br/>Coordinator records design-released"]
-  BUILD["Bicep engineer: implement approved scope"]
-  CSNAP["Tester: fixed implementation candidate snapshot"]
+  BUILD{"Coordinator selects scoped writers"}
+  IAC["Bicep engineer: infrastructure"]
+  APP["Application/AI engineer: services + runtime"]
+  ML["ML/data engineer: pipelines + models"]
+  CSNAP["Fixed candidate reference<br/>Preserve uncommitted reviewed inputs"]
 
-  subgraph CANDIDATE_REVIEW["Candidate review: before local candidate release"]
-    CTEST["Tester: infrastructure validation,<br/>diagnostics and workload control assertions"]
-    CSEC["Security reviewer: actual configuration and mitigation evidence"]
-    CCOMP["Compliance reviewer: implemented controls and required approvals"]
-    CONF["Architect: conformance to released design"]
-  end
+  CTEST["Applicable deterministic tests + non-author judgment<br/>Triggered specialists + author-side conformance"]
 
   CGATE{"All required current-gate checks,<br/>reviews and matching docs accepted?<br/>Per review loop: max 5 attempts"}
   STOP["Stop and escalate: blocked or exhausted<br/>No automatic retry or budget reset"]
   CREL["Coordinator: local candidate release<br/>locally-validated"]
   LATER["Later authorised work only:<br/>deployment-ready, deployment, operationally-verified"]
 
-  INPUT --> COORD --> REQ --> DESIGN --> DSNAP
+  INPUT --> COORD --> RISK
+  RISK -->|Light| LIGHT --> BUILD
+  RISK -->|Standard or regulated| REQ --> DESIGN --> DSNAP
   REQ -.-> DOCS
-  DSNAP --> FEAS & DSEC & DCOMP & DTEST
-  FEAS & DSEC & DCOMP & DTEST --> QUALITY
+  DSNAP --> QUALITY
   QUALITY --> DGATE
   DGATE -->|Changes required; budget remains| DESIGN
   DGATE -->|Blocked or exhausted| STOP
@@ -152,9 +131,14 @@ flowchart TD
   PACCEPT -->|Accepted| HUMAN
   HUMAN -->|Not approved| DESIGN
   HUMAN -->|Approved| DREL
-  DREL --> BUILD --> CSNAP
-  CSNAP --> CTEST & CSEC & CCOMP & CONF
-  CTEST & CSEC & CCOMP & CONF --> CGATE
+  DREL --> BUILD
+  BUILD -.->|Infrastructure scope| IAC
+  BUILD -.->|Application scope| APP
+  BUILD -.->|Data/model scope| ML
+  IAC --> CSNAP
+  APP --> CSNAP
+  ML --> CSNAP
+  CSNAP --> CTEST --> CGATE
   CGATE -->|Implementation defect; budget remains| BUILD
   CGATE -->|Design change required; budget remains| DESIGN
   CGATE -->|Blocked or exhausted| STOP
@@ -169,66 +153,47 @@ flowchart TD
   classDef gate fill:#F5F0E6,stroke:#D9A441,stroke-width:2px,color:#000000;
   classDef release fill:#F5F0E6,stroke:#52734D,stroke-width:2px,color:#000000;
   classDef future fill:#FFFFFF,stroke:#1E2521,stroke-dasharray:5 5,color:#000000;
-  class FEAS,DSEC,DCOMP,DTEST,QUALITY,CTEST,CSEC,CCOMP,CONF review;
-  class DGATE,PACCEPT,HUMAN,CGATE,STOP gate;
+  class QUALITY,CTEST review;
+  class RISK,DGATE,PACCEPT,HUMAN,CGATE,STOP gate;
   class DREL,CREL release;
   class LATER future;
-  style DESIGN_REVIEW fill:transparent,stroke:#1E2521
-  style CANDIDATE_REVIEW fill:transparent,stroke:#1E2521
 ```
 
-Solid arrows show prerequisites and feedback; dotted arrows show ongoing documentation
-or later work. The coordinator routes work throughout, even where its node is not
-repeated. Review branches may run in parallel only with fixed inputs and separate
-writes; this is not permission for autonomous peer delegation.
-
-**Security and compliance are required at both labelled review gates.** Failed
-current-gate checks block progress. Technical checks are executed by the tester;
-security/compliance reviewers independently assess the evidence and their findings.
-If documentation changes reviewed inputs, create a new snapshot and rerun affected
-checks before accepting the candidate.
+Review scope follows the accepted risk matrix. Regulated packages require full
+design and candidate specialist evidence; standard packages use one non-author
+technical review plus triggered specialists. Parallel writes require fixed
+contracts and distinct paths. Changed inputs invalidate affected evidence.
 
 | Step / gate | Work and responsible roles | What permits progress |
 |---|---|---|
 | Input and assignment | Coordinator records authorised scope, exact inputs, owners, output shape, limits and target gate | Specialist accepts the assignment; missing inputs are resolved |
-| Requirements | Architect frames the capability; security defines threat/control requirements, compliance establishes obligations, tester defines checks, documenter records decisions | Requirements and material decisions are explicit |
-| Draft design and feasibility | Architect owns the design; Bicep engineer verifies AVM feasibility; documenter maintains the published explanation | Fixed design snapshot prepared for review |
-| **Design review gate** | Security/compliance review their scoped requirements; tester independently evaluates design quality and testability against the assignment's criteria | Required evidence and specialist dispositions accepted; no invented sign-off or self-reviewed design pass |
+| Requirements | Business/domain owners approve targets; scoped specialists supply constraints; tester defines checks | Approved targets and scope |
+| Draft design and feasibility | Architect owns the design; scoped writers verify feasibility | Fixed design revision |
+| **Design review gate** | Required non-author technical review and triggered specialist findings | Required evidence and dispositions accepted |
 | **Workload planning** | Coordinator derives actual files/contracts, dependencies, parallel boundaries and check inventory in `development-plan.md` | Plan completeness and architect/implementer acceptance; unresolved material findings still block |
 | **Design release** | Human approves exact design snapshot and plan revision; architect releases that scope; coordinator records `design-released` | Implementation assignment references approved design and accepted plan |
-| Implementation and fix loops | Bicep engineer writes released infrastructure; tester executes local checks; documentation evolves alongside code | Fixed candidate snapshot supplied to independent review |
-| **Candidate security/compliance gate** | Security reviews actual configuration and mitigation/test evidence; compliance verifies implemented controls and required procedural/legal evidence; tester runs executable control checks; architect checks conformance | All required current-gate checks and review dispositions accepted for the same candidate; defects return to their owner |
+| Implementation and fix loops | Bicep, application and ML writers implement assigned outputs; tester independently validates | Fixed candidate supplied for review |
+| **Candidate assurance gate** | Tester runs applicable deterministic checks and non-author review; required security/compliance specialists assess their scope; architect supplies author-side conformance | All required current-gate evidence accepted for the same candidate; defects return to their owner |
 | **Local candidate release** | Coordinator consolidates accepted evidence and matching documentation | `locally-validated` recorded with later checks still pending; no implied deployment permission |
 
-"Release" here identifies an approved design or evidence-backed candidate, not
-a Git tag, commit, push, pipeline execution or production release. Authenticated
-validation, deployment readiness and observed operational security/compliance
-checks belong to later authorised stages under [gate-specific acceptance](handoffs.md#gate-specific-acceptance).
+Release records identify the approved design or candidate. Authenticated validation,
+deployment and operational checks follow [gate-specific acceptance](handoffs.md#gate-specific-acceptance).
 
 Security/compliance reviewers own their findings. The tester executes requested
 technical assertions and supplies evidence; it cannot supply legal authority or
 approve residual risk. Post-deployment results cannot be claimed from code review.
 
-### Framework Versus Workload Criteria
-
-The framework specifies **how** a requirement is assigned, reviewed, evidenced and
-accepted. It does not supply domain quality standards or derive its roles/routing
-from them. The selected workload supplies **what** checks are required through its
-design, validation catalogue and accepted assignment.
-
-For this repository's Azure work, concrete checks and the later authenticated/live
-flow are in [Workload Guidance](workload-guidance.md#later-azure-validation-and-live-verification)
-and [Workload Checks](workload-checks.md). They assess produced artifacts and deployed
-behaviour, not whether the multi-agent collaboration framework is properly designed.
-No deployment runtime, deployer agent or pipeline is implemented by these documents.
+Workload criteria are defined in [Workload Checks](workload-checks.md) and
+[Application/AI/ML Checks](ai-ml-checks.md). Later Azure validation is described in
+[Workload Guidance](workload-guidance.md#later-azure-validation-and-live-verification).
 
 ## Reusable Phase Entry Points
 
 The numbered [prompt files](../../.github/prompts/) cover design, independent review,
 planning, design release, implementation, local validation, documentation,
-authenticated validation and live verification. They execute only the selected
-assignment; numbering is navigation, not an automatic pipeline or permission to
-invoke all phases. Documentation can run throughout.
+authenticated validation, live verification, application/runtime implementation, ML implementation and
+independent AI/ML acceptance. Each invocation executes its accepted assignment.
+Documentation evolves throughout.
 
 Supporting VS Code Local sessions can select these prompt files. In Copilot CLI,
 select the named profile and explicitly ask it to read/apply the chosen prompt body;
@@ -254,12 +219,11 @@ downstream because an agent sounded confident.
 
 The coordinator completes [assignment.md](../../delivery/templates/assignment.md) before work;
 the specialist's actual output is recorded in [handoff.md](../../delivery/templates/handoff.md).
-The assignment records applicable limits, attempts used and explicit path ownership,
-not just a general objective. Both records name the workload gate and check scope.
+The assignment records risk path, approved targets, applicable limits, attempts used,
+explicit ownership and the workload gate/check scope.
 
-"Handoff" here means **artifact-contract acceptance**, not autonomous transfer of
-control between peers. Specialists return to the coordinator; any further work is
-routed within the user's authorised scope. Use [Handoffs and Gates](handoffs.md) for
+Specialists return artifacts to the coordinator, which routes further authorised work.
+Use [Handoffs and Gates](handoffs.md) for
 states and the [handoff template](../../delivery/templates/handoff.md) for records.
 
 ## Shared Context and Artifact Ownership
@@ -278,9 +242,10 @@ fixed and output paths do not overlap. In particular, do not edit implementation
 while reviewers are evaluating a supposedly frozen candidate.
 
 Use the [artifact ownership table](../../delivery/releases/README.md#artifact-ownership): the architect
-owns package technical decisions, while the documenter writes published architecture
-content subject to technical acceptance. Temporary transfers must identify the exact
-path, writer and return point.
+owns design decisions; the Bicep, application and ML engineers own their scoped
+implementation artifacts and author tests. The tester owns independent acceptance
+suites; the documenter owns published explanations. Transfers identify exact paths,
+writers and return points.
 
 The tester prepares snapshots using the [snapshot protocol](../../delivery/releases/README.md#snapshot-protocol).
 Committed inputs use full commit references; uncommitted candidates also require
@@ -319,8 +284,7 @@ local tests and authorised environment validation. A lower assigned limit wins.
   to the user. No sixth attempt, waiver, additional agent or automatic budget reset.
   Further work requires an explicit recorded user decision, not another prompt invocation.
 
-This is a prompt/contract rule, not a host-enforced iteration setting. No scheduler
-or runtime counter is implemented here. Other assignment limits remain explicit.
+Attempt accounting is procedural. Runtime counter enforcement is deferred.
 
 Establish applicable run/iteration limits before delegated execution, honour user
 budgets and avoid unbounded review loops. Stop and surface the blocker when work
@@ -338,13 +302,11 @@ they are later. A known current defect cannot be relabelled as a later check.
 
 ## Permissions and Human Control
 
-Only the coordinator normally has agent delegation. Shell access is limited by role
-instructions to the Bicep engineer, tester and documenter for their relevant checks.
+Only the coordinator has agent delegation. The Bicep, application and ML engineers,
+tester and documenter have shell access for assigned local work.
 All roles inherit host model selection; no model or cloud identity is pinned.
 
-These restrictions are **not a filesystem, network or cloud security sandbox**.
-Enforce real boundaries through host permissions, tool approvals and scoped identities.
-Do not assume prompts prevent an edit-capable agent from changing another file.
+Host permissions, tool approvals and scoped identities enforce access boundaries.
 
 Required human approval cannot be inferred from silence. Record its owner, scope and
 reference. No role may autonomously deploy, commit, push, accept legal/security risk
@@ -362,6 +324,4 @@ or start a paid multi-agent runtime because a previous handoff was accepted.
 | Automatic scheduling, durable execution/retries, programmatic gates and budget accounting | No repository orchestration runtime implemented |
 | GitHub Actions and Azure deployment | Separate future work; not created or authorised by these documents |
 
-Automatic orchestration development and its testing would be separate engineering
-work requiring an explicit objective, owners and authorisation. It is not part of
-the Azure workload backlog and must not be assigned to the deployment team by default.
+Executable orchestration enforcement remains a separately authorised maintenance task.

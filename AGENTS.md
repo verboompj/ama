@@ -4,8 +4,7 @@
 
 This repository describes a fictional Hungarian CAP paying-agency solution. Read
 [docs/delivery/README.md](docs/delivery/README.md) for the engineering agents, task order,
-skills, and handover gates. These engineering agents are distinct from the five
-runtime application agents and the business personas.
+skills, and handover gates.
 
 Use the repository skill at
 [.github/skills/ama-context/SKILL.md](.github/skills/ama-context/SKILL.md)
@@ -14,13 +13,11 @@ every document indiscriminately.
 
 Use [Workload Guidance](docs/delivery/workload-guidance.md) for Azure artifact standards
 and [Multi-Agent Framework and Orchestration](docs/delivery/multi-agent-framework.md)
-for development-team collaboration. Do not use one as a substitute for the other.
+for development-team collaboration.
 
-The seven delivery roles produce and assess the Azure workload. Engineering-agent
-definitions, skills, prompt configuration and orchestration internals are not their
-delivery outputs or test targets. Follow handoffs, approvals and loop limits as
-operating rules; do not turn those rules into deployment-team self-testing tasks.
-Changes to the engineering setup require a separate user-authorised maintenance task.
+The nine delivery roles produce and assess Azure infrastructure, applications,
+runtime AI and data/model artifacts. Engineering-setup maintenance requires a
+separate user-authorised task.
 
 ## Boundaries
 
@@ -33,6 +30,8 @@ Changes to the engineering setup require a separate user-authorised maintenance 
 - No infrastructure generation without a released design for that work package.
   No Azure mutation, deployment, tenant changes, paid resource creation, destructive
   test, or GitHub Actions workflow without explicit user authorisation.
+- Data acquisition, remote model calls, training jobs and model promotion require
+  scoped authorisation for inputs, environment, identity, cost and intended use.
 - Agent findings and coordinator readiness decisions do not replace human design,
   security-risk, legal, compliance, or production-change approval.
 - Do not commit, push, or open a browser unless requested or required for an
@@ -44,14 +43,13 @@ Changes to the engineering setup require a separate user-authorised maintenance 
 
 ## Evidence and Handoffs
 
-Use the researched coordinator-specialist collaboration model in
-[docs/delivery/multi-agent-framework.md](docs/delivery/multi-agent-framework.md), not a fixed
-seven-role sequence. Follow [handoff contracts](docs/delivery/handoffs.md) for evidence.
-Workload standards apply to Azure outputs, not agent orchestration.
-For Azure output validation, use [workload checks](docs/delivery/workload-checks.md).
-Those domain criteria do not define agent roles, routing or framework quality.
-Design release requires independent review against the assigned criteria and an
-accepted actual development plan, not self-assessment or the generic delivery backlog.
+Use [coordinator-specialist collaboration](docs/delivery/multi-agent-framework.md)
+and the accepted [risk-based review path](docs/delivery/handoffs.md#risk-based-review-paths).
+Use [workload checks](docs/delivery/workload-checks.md) and
+[application/AI/ML checks](docs/delivery/ai-ml-checks.md) for the assigned outputs.
+Business/domain owners approve acceptance targets. Required non-author reviews,
+scoped design/plan and applicable human approvals precede release. Light changes
+within an approved release can reference its existing design and plan.
 Use the [assignment contract](delivery/templates/assignment.md) before specialist
 execution, with exact write ownership, gate/check scope, output shape and limits.
 Every handoff identifies the work package, revision, inputs, outputs, checks,
@@ -64,9 +62,8 @@ the counter across fixes, snapshots and handoffs; stop and escalate on exhaustio
 Distinguish `PASS`, `FAIL`, `BLOCKED`, `NOT RUN`, and justified `NOT APPLICABLE`.
 Missing tools, credentials, evidence, or approvals are not a successful check.
 Required evidence due at the current gate blocks that gate when missing; later-gate
-checks stay explicitly pending. Use the tester-produced
-[snapshot protocol](delivery/releases/README.md#snapshot-protocol) rather than
-requiring shell access for every role.
+checks stay explicitly pending. Use immutable committed references or the
+[snapshot protocol](delivery/releases/README.md#snapshot-protocol) for reviewed inputs.
 
-Agent instructions and tool lists are not an access-control sandbox. Use host
-permissions and scoped Azure identities as the actual security boundary.
+Host permissions, tool approvals and scoped Azure identities enforce access.
+Review context and procedural-enforcement limitations are recorded with the evidence.

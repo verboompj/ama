@@ -2,16 +2,15 @@
 
 ## Scope, Owners and Evidence
 
-These checks make [Workload Guidance](workload-guidance.md) executable as a review/test
-contract. They apply to the released scope, not a generic App Service/SQL example.
-The reviewed artifacts are Azure workload designs, Bicep, parameters and deployment
-evidence, not the engineering agents, skills, prompts or orchestration setup.
-No infrastructure, Azure connection or completed validation is implied by this catalogue.
+These checks instantiate [Workload Guidance](workload-guidance.md) for released Azure
+designs, Bicep, parameters and deployment evidence. The accepted
+[risk path](handoffs.md#risk-based-review-paths) determines review depth.
 
-The architect authors the design. The **infrastructure-tester independently reviews
-all five WAF pillars**, writes `architecture-review.md`, and executes technical checks.
-It must not author/change the design it reviews. Security and compliance retain their
-own findings; the coordinator consolidates evidence but cannot supply their passes.
+The architect authors the design. Required technical judgment uses a non-author
+reviewer. Regulated Azure designs require the tester's dedicated five-pillar
+`architecture-review.md`; standard designs use a scoped technical review plus
+triggered specialists. Security/compliance retain their findings. Application,
+data and model quality use the [AI/ML catalogue](ai-ml-checks.md).
 
 Each package's `test-plan.md` instantiates applicable checks below with exact resources,
 properties, expected values/thresholds, commands, input snapshot/parameter variants,
@@ -29,13 +28,13 @@ behaviour must have later observed checks; they cannot be passed by static revie
 | ID | Required check | Owner / evidence | Earliest required gate |
 |---|---|---|---|
 | WV01 | Design includes readable/syntax-checked diagrams, complete resource/SKU/region list, boundaries, module contracts, data flows and unresolved assumptions | Architect supplies design; tester checks snapshot completeness and diagram validation evidence | design-released |
-| WV02 | Independently assess Reliability, Security, Cost Optimization, Operational Excellence and Performance Efficiency against stated targets, alternatives and current official guidance | Tester writes all five pillar rows, specific findings and disposition in `architecture-review.md`; no WAF certification/health score invented | design-released |
+| WV02 | Perform the non-author technical assessment required by the accepted path; regulated Azure designs assess all five workload pillars | Scoped findings/disposition and context limitations; regulated work has every pillar in `architecture-review.md`; light work references the existing review and assesses its change impact | design-released |
 | WV03 | Verify published AVM paths/versions, required parameters/outputs and documented gaps; reconcile security/compliance requirements with the design | Bicep engineer supplies `feasibility.md`; tester references it and separate specialist dispositions | design-released |
 | WV04 | Produce a workload-specific implementation plan derived from reviewed architecture, with exact files, dependency graph/layers, parallel-write boundaries and acceptance/tests per task | Coordinator writes `development-plan.md`; architect/implementer accept contracts and sequencing; every required review finding has a disposition/task | design-released |
 
 The [architecture-review template](../../delivery/templates/architecture-review.md) and
 [development-plan template](../../delivery/templates/development-plan.md) define the reports.
-The generic [delivery backlog](../../delivery/tasks.md) is not a substitute for the workload plan.
+The [delivery backlog](../../delivery/tasks.md) supplies reference tasks; the plan fixes actual scope.
 Planning may identify remediation tasks, but unresolved required design blockers still
 prevent release. Material changes invalidate affected design reviews.
 
@@ -51,8 +50,8 @@ prevent release. Material changes invalidate affected design reviews.
 | WV10 | Reject public data-store access and verify the approved private connectivity/DNS configuration | Service-specific effective property/parameter assertions; appropriate private endpoint or approved private networking design; no assumption that creating an endpoint disables public access | locally-validated |
 | WV11 | Verify identity, RBAC and secret handling | AKS Workload Identity/managed identity and exact role scopes match design; no plaintext secrets/credential outputs; Entra-only SQL when SQL is in scope | locally-validated |
 | WV12 | Verify applicable TLS, subnet/NSG/egress and diagnostics controls | Supported TLS settings meet the approved minimum (at least TLS 1.2); allowed/denied paths and diagnostic destinations match design; no blanket NSG edits to platform-managed subnets | locally-validated |
-| WV13 | Verify repository-specific architecture restrictions and quality controls | CPU-only AKS/NAP restrictions, approved Foundry processing geography, state/evidence boundaries and specified model/data contracts are represented correctly | locally-validated |
-| WV14 | Independently reconcile implementation, security/compliance findings and documentation with the design | Separate candidate review dispositions, tester results, architect `conformance.md`, matching runbooks/diagrams; pending operational checks identified | locally-validated |
+| WV13 | Verify platform restrictions and model/data contract wiring | Applicable CPU-only AKS/NAP, Foundry geography, state/evidence and endpoint/version configuration assertions; AI/ML quality evidence uses AI01-AI06 and ML01-ML08 | locally-validated |
+| WV14 | Reconcile candidate, required reviews and documentation against the design | Tester results, required non-author/specialist dispositions, author-side architect conformance, matching runbooks/diagrams and pending operational checks | locally-validated |
 
 Instantiate assertions with service-specific paths and expected values in the plan.
 Inspect AVM implementation/defaults and compiled output where necessary: searching
@@ -118,11 +117,8 @@ future acceptance; this repository does not yet provide a deployment agent or pi
 | WV19 | Verify intended endpoints and TLS from approved network locations | Expected HTTPS/TLS responses through the intended application ingress; private management endpoints need not be publicly accessible | operationally-verified |
 | WV20 | Verify private connectivity and denied public access | Endpoint connection approved/connected, intended DNS resolves correctly from workload network, data connection works and public/unauthorised paths fail using safe authorised probes | operationally-verified |
 | WV21 | Verify effective identity/network/diagnostic behaviour | Least-privilege workload access succeeds, prohibited access fails, supported effective NSG/egress checks match design, and an approved test signal reaches monitoring | operationally-verified |
-| WV22 | Verify the package's operational and business targets | Approved performance/recovery/model/evidence checks with observed results and limitations; load/destructive/recovery drills need separate approval | operationally-verified |
+| WV22 | Verify the package's operational and business targets | Approved performance/recovery/evidence results; applicable runtime/model operation references AI06/ML08; load/destructive/recovery drills need separate approval | operationally-verified |
 
-**Reference comparison:** the
+**Checklist reference:** the
 [hackathon IaC workflow](https://github.com/pascalvanderheiden/energize-your-code-hackathon/blob/main/docs/use-case-iac.md#phase-5-execute-your-workflow)
-and its reviewer/tester examples informed this explicit checklist. Their example
-resource types, fixed task sequence, framework terminology and tester-edits-code
-pattern are not adopted. We retain seven roles, independent assurance and staged
-authorisation; no naming convention is justified by agent-orchestration guidance.
+and its reviewer/tester examples informed the explicit evidence inventory.

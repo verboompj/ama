@@ -1,6 +1,8 @@
 # Work-Package Records
 
-No package is released yet. Create a directory only when its task is authorised.
+No package is released yet. Create a directory when its task is authorised and select
+records for the accepted risk path. The layout below illustrates regulated infrastructure.
+Standard packages can combine scoped findings; light work references its approved baseline.
 
 ```text
 delivery/releases/WP-001/
@@ -33,8 +35,8 @@ delivery/releases/WP-001/
     ...
 ```
 
-Use the [templates](../templates/). Name additional handoffs by actual sender/recipient
-task; D01 supplies D02–D05, and the draft design supplies D07–D10. Revision control plus recorded
+Use the [templates](../templates/). Name handoffs by actual sender/recipient task.
+Revision control plus recorded
 commit/hash references identifies the evidence snapshot; the directory name alone
 does not make a release immutable.
 
@@ -64,7 +66,9 @@ These are the defaults; a directory prefix does not grant every role write acces
 | `design.md`, `conformance.md` | azure-architect | Human design approval and independent reviews as required |
 | Published `docs/` content, diagrams, `documentation.md` | architecture-documenter | Architect accepts technical meaning; security/compliance accept affected assertions |
 | Approved `infra/`, `feasibility.md`, `implementation.md` | bicep-engineer | Architect conformance and independent assurance |
-| `architecture-review.md`, infrastructure tests, `test-plan.md`, `test-review.md`, `snapshots/` | infrastructure-tester | Independent workload findings; reviewer does not author the design; snapshot creation alone is not a pass |
+| Assigned `src/`, application/API/event/tool contracts, `deploy/apps/` and adjacent author tests | application-ai-engineer | Architect accepts interfaces; tester owns independent acceptance; required specialist review |
+| Assigned `ml/`, `contracts/data/`, `contracts/scoring/`, manifests/model cards/replay and adjacent author tests | ml-data-engineer | Application writer accepts scoring-consumer contract; independent evaluation and applicable human decisions |
+| `architecture-review.md`, `tests/acceptance/`, `tests/evaluation/`, infrastructure tests, `test-plan.md`, `test-review.md`, `snapshots/` | infrastructure-tester | Approved targets and independent workload findings; author-side conformance remains separately identified |
 | `security-requirements.md`, `security-design.md`, `security-review.md` | security-reviewer | Designated human risk owner handles acceptance of residual risk |
 | `compliance-requirements.md`, `compliance-design.md`, `compliance-review.md` | compliance-reviewer | Designated legal/policy owners handle required human decisions |
 
@@ -78,6 +82,19 @@ The coordinator's `ledger.md` records target gate, package state, artifact owner
 accepted assignments, attempt limits/usage, snapshot references, human approvals,
 review dispositions and remaining later-gate checks. Frozen design/candidate files
 are not edited just to append approval or lifecycle metadata.
+
+Directory names above are proposed defaults; the released plan fixes actual paths.
+App/ML authors publish shared interfaces before consumers implement against them.
+Each contract has one writer and explicit consumer acceptance. Protected/raw datasets
+stay in approved storage; repository manifests contain safe version/hash references.
+
+## Future Release Ownership
+
+The Bicep engineer authors release automation under a separately authorised pipeline
+assignment. App and ML writers supply packaging, jobs and scoring contracts. The
+coordinator records the actual authorised deployment operator and human service owner,
+including monitoring, incidents, recovery, rollback and model-drift responsibilities.
+Pipeline implementation and deployment are deferred.
 
 ## Snapshot Protocol
 
@@ -113,5 +130,5 @@ record that producer and method. No available producer means `BLOCKED`.
    approval of the exact design snapshot in `ledger.md`, then mark the package
    `design-released` there.
 
-This is a local evidence procedure, not tamper-proof storage or a cryptographic
-approval system. No workload snapshot has been produced by defining it.
+Preserved files and hashes support local evidence integrity. Protected approvals
+and tamper-resistant storage require separately authorised controls.

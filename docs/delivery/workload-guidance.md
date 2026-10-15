@@ -3,8 +3,8 @@
 ## Purpose and Boundary
 
 This document defines the guidance applied to the **Azure solution that the
-engineering agents design, implement, document and verify**. It does not define
-the agent team, its routing or its execution order. Those belong in
+engineering agents design, implement, document and verify**. Team collaboration is
+defined in
 [Multi-Agent Framework and Orchestration](multi-agent-framework.md).
 
 The maintained architecture is the design baseline, not evidence of deployment.
@@ -30,8 +30,7 @@ to verify legal claims. The broader [source map](context-and-tools.md#repository
 identifies the relevant repository research.
 The [workload validation catalogue](workload-checks.md) turns these standards into
 named checks, owners, expected evidence and blocking rules (WV01-WV22).
-These criteria apply only to the produced Azure workload. They are not requirements
-for constructing, reviewing or accepting the multi-agent framework itself.
+The [AI/ML catalogue](ai-ml-checks.md) defines application/data/model acceptance.
 
 Record source URL, access date, version where relevant, supported decision and
 limitations. Report conflicts explicitly. Do not silently replace a baseline
@@ -39,8 +38,9 @@ decision, invent legal applicability or treat an older example as current produc
 
 ## Well-Architected Assessment
 
-Assess each released workload package against all five pillars. State measurable
-requirements and evidence, not just that a pillar has been considered.
+Assess affected workload properties against measurable targets under the accepted
+[risk path](handoffs.md#risk-based-review-paths). Regulated designs require all five
+pillars in a dedicated non-author review.
 
 | Pillar | Required design questions | Expected evidence |
 |---|---|---|
@@ -53,8 +53,8 @@ requirements and evidence, not just that a pillar has been considered.
 Unknown targets remain decisions with owners. Do not invent SLOs, RTO/RPO, budgets,
 quotas or service availability to complete a template. AVM defaults do not establish
 WAF alignment, regulatory compliance or production readiness.
-The architect's assessment is not the independent review: the tester produces
-`architecture-review.md` covering every pillar without authoring/modifying the design.
+Required independent judgment uses a non-author reviewer. For regulated Azure
+designs the tester produces `architecture-review.md` covering every pillar.
 
 ## Existing Solution Guardrails
 
@@ -127,6 +127,13 @@ is official usage guidance, not approval to deploy its example.
 - Treat AI Act classification and NIS2 status as applicability assessments requiring
   competent human decisions, not blanket conclusions about public-sector AI.
 
+The ML writer supplies machine-readable lineage, grouped splits, prefix features,
+locked environments, candidate/metric artifacts and replay commands. The application
+writer supplies versioned runtime/API/tool contracts and packaging. The tester
+independently evaluates approved targets; accountable domain owners supply thresholds
+and required promotion decisions. The
+[first slice](first-implementation-slice.md) scopes the public-data experiment.
+
 ## Documentation and Verification
 
 Maintain architecture decisions, diagrams and operational guidance as the work
@@ -151,16 +158,17 @@ Each acceptance criterion names its earliest required
 that gate. Future checks stay pending without being falsely passed, waived or used
 to block an earlier gate merely because execution belongs later.
 
-Security and compliance are reviewed against both the fixed design and the actual
-implementation candidate. The tester runs executable control assertions; the
+Required security/compliance reviews assess the fixed design and implementation
+candidate. The tester runs executable control assertions; the
 specialist reviewers assess findings and legal/procedural evidence independently.
 Post-deployment checks establish actual behaviour only after an authorised deployment.
 
 ## Release and Deployment Boundary
 
 Infrastructure implementation consumes a bounded, human-approved architect release
-with contracts, criteria, AVM feasibility, independent full-WAF/specialist reviews
-and an accepted workload-specific `development-plan.md`. The plan derives from the
+with contracts, criteria, AVM feasibility, risk-required non-author/specialist reviews
+and an accepted workload-specific plan. Light changes can reference the existing
+release/plan within its approved scope. The plan derives from the
 reviewed architecture and defines actual files/dependencies, finding dispositions,
 parameter variants and tests. The delivery-process backlog is not that plan.
 Early feasibility research does not require generating infrastructure.
@@ -172,9 +180,8 @@ what-if and approvals; it must not become a substitute resource dependency graph
 
 ## Later Azure Validation and Live Verification
 
-This is the Azure-specific continuation after a locally validated candidate, not
-the agent orchestration model. It defines future acceptance only; no deployer agent
-or pipeline is implemented. Every authenticated stage needs its own authorisation.
+After local acceptance, each authenticated stage requires its own authorisation.
+The diagram defines later Azure acceptance; implementation and execution are pending.
 
 ```mermaid
 flowchart TD

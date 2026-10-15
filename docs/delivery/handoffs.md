@@ -5,8 +5,7 @@ This document supplies the work-package states and evidence contracts used by th
 owns collaboration patterns, routing, feedback and research rationale.
 [Workload Guidance](workload-guidance.md) owns Azure output standards.
 
-Handoffs accept artifact contracts; they do not transfer control autonomously between
-specialists or authorise the next phase. The coordinator routes authorised work.
+The coordinator accepts artifact handoffs and routes each authorised phase.
 
 ## Assignment Before Execution
 
@@ -17,16 +16,59 @@ and required approvals. The specialist accepts or rejects those inputs before wo
 The separate [handoff](../../delivery/templates/handoff.md) records actual outputs and consumption.
 Missing required assignment fields are blockers, not permission to guess defaults.
 
+## Risk-Based Review Paths
+
+The coordinator proposes a path; the user or designated accountable owner accepts
+it with the scope and required evidence. Use the highest applicable risk, and
+escalate unresolved classification rather than silently selecting the light path.
+
+| Path | Suitable work | Required assurance |
+|---|---|---|
+| **Light** | Small, reversible changes within an existing released design and approved contracts; no new data source, model behaviour, trust boundary or production effect | Concise assignment referencing the baseline; applicable deterministic local checks; non-author judgment review when the change needs it; short evidence-linked handoff |
+| **Standard** | A bounded non-production capability, application/interface change or experimental public/synthetic-data model within approved boundaries | Scoped design/actual plan and approved targets; one named non-author technical reviewer; applicable deterministic workload tests; targeted security/compliance review when triggered |
+| **Regulated** | Production or personal/case data, entitlement/payment impact, consequential model use, or material changes to identity, trust, exposure or legal obligations | Full independent design-quality and security/compliance review, controlled snapshots, required human approvals, candidate assurance and matching operational evidence |
+
+New sources/licences, model processing geography, identity/tool permissions,
+public exposure, secrets or changes to human-decision boundaries trigger the relevant
+specialist review even in a standard experiment. Classify the actual data and impact.
+The full infrastructure backlog supplies the regulated reference path.
+
+Record the selected path, trigger rationale, acceptance-target owner, required
+reviewers/checks, approvals and evidence paths in the existing assignment/plan.
+Use only relevant templates; one reviewer may combine technical judgments into
+one report. Light work references the approved design/plan.
+Material deviations require a new release.
+
+All paths retain exact input revisions, honest results, applicable human decisions
+and the five-total-attempt ceiling. Committed references can identify fixed inputs;
+uncommitted reviewed bytes need preserved content/hashes. An existing immutable
+reference is sufficient when it identifies the complete reviewed input set.
+No path grants Azure writes, paid jobs, external acquisition or deployment authority.
+
+## Review Independence and Enforcement
+
+Review requires **non-authorship of the reviewed artifact**. Business/domain owners
+approve targets; the tester translates them into checks. Snapshot preparation is
+evidence handling. Architect conformance is author-side evidence.
+
+Use deterministic workload checks for hashes, schemas, builds, contracts, metrics
+and other objective assertions. Agent judgment covers design trade-offs, threat
+interpretation and evidence limitations. Reviewers should start a fresh host-supported
+context containing the assigned criteria, fixed inputs and necessary source material.
+Exclude the maker's conversation and asserted verdict. Record actual context/model/tool
+limitations; shared models/instructions can still cause correlated blind spots.
+
+Gates and counters are procedural. Executable enforcement is deferred to separately
+authorised maintenance/pipeline work. The accountable human checks release evidence.
+
 ## Gate-Specific Acceptance
 
-These gates apply to Azure workload packages. A workload-documentation-only
-assignment names its bounded check scope without implying the entire workload gate.
-Engineering-framework maintenance and self-testing are outside this team's scope.
+Each assignment names its workload gate and bounded check scope.
 
 | Gate | Required evidence at this gate | Work that remains later |
 |---|---|---|
-| `design-released` | Complete design, independent quality/specialist reviews, feasibility evidence, accepted implementation plan and genuine human approval | Candidate implementation and execution of its tests |
-| `locally-validated` | Required local validation, independent candidate reviews, conformance and matching documentation against a fixed revision | Authorised environment validation and observed behaviour |
+| `design-released` | Scoped design/plan, feasibility and non-author/specialist review required by the accepted risk path, and genuine applicable human approval | Candidate implementation and execution of its tests |
+| `locally-validated` | Applicable deterministic local validation, required non-author reviews, author-side conformance and matching documentation against a fixed revision | Authorised environment validation and observed behaviour |
 | `deployment-ready` | Required environment validation, inspected change preview, operational prerequisites and applicable approvals | Separately authorised deployment and observed runtime behaviour |
 | `operationally-verified` | Actual deployment record and required observed checks for the approved environment and scope | Anything outside the explicitly verified scope |
 
@@ -51,10 +93,10 @@ holds those domain-specific requirements separately.
 | State | Owner / entry condition | Allowed next state |
 |---|---|---|
 | `draft` | Architect integrates requirements, early specialist input and design records | `in-review`, `blocked` |
-| `in-review` | Fixed design revision supplied to all design reviewers | `draft`, `awaiting-approval`, `blocked` |
-| `awaiting-approval` | Independent architecture/specialist findings resolved, actual plan accepted; explicit human decision needed | `design-released`, `draft`, `blocked` |
+| `in-review` | Fixed design revision supplied to required reviewers | `draft`, `awaiting-approval`, `blocked` |
+| `awaiting-approval` | Required findings resolved, actual plan accepted; applicable human decisions due | `design-released`, `draft`, `blocked` |
 | `design-released` | Architect releases the approved design snapshot; coordinator records decision/approval in ledger | `implementing`, `superseded` |
-| `implementing` | Bicep engineer accepts released inputs | `validating`, `blocked`, `superseded` |
+| `implementing` | Scoped infrastructure/application/ML writers accept released inputs | `validating`, `blocked`, `superseded` |
 | `validating` | Fixed candidate; independent checks, architect conformance and matching docs | `implementing`, `locally-validated`, `blocked`, `superseded` |
 | `locally-validated` | Required evidence for the local candidate gate accepted | `deployment-ready`, `blocked`, `superseded` |
 | `deployment-ready` | Required environment validation and approvals recorded | `deployed`, `blocked`, `superseded` |
@@ -63,9 +105,9 @@ holds those domain-specific requirements separately.
 | `blocked` | Missing decision, prerequisite, access or required evidence recorded | Previously active state after documented resolution |
 | `superseded` | Replacement revision identified; no new work uses this revision | None |
 
-These are record states, not a running state machine. Task states in the backlog
-are separate: `pending`, `in-progress`, `blocked`, `done`. Completing a review task
-can yield `FAIL`; the downstream gate still remains blocked.
+Light work starts from its referenced released baseline and accepted assignment.
+Task states in the backlog are `pending`, `in-progress`, `blocked`, `done`.
+A completed review task can yield `FAIL`; the downstream gate remains blocked.
 
 ## Evidence Contract
 
@@ -107,9 +149,8 @@ absence of objections is not approval.
 
 ## Deployment Boundary
 
-The initial backlog stops at `locally-validated`, not deployed or legally certified.
-`deployment-ready` and `operationally-verified` are defined for later authorised work,
-not implemented or achieved by defining these contracts.
+The initial backlog targets `locally-validated`. Later authorised work targets
+`deployment-ready` and `operationally-verified`.
 A later deployment decision must establish environment, subscription, identity,
 budget, approvals, validation/what-if evidence, rollback/recovery and operational
-ownership. GitHub Actions orchestration is deliberately not defined here.
+ownership. Pipeline implementation is deferred.

@@ -39,6 +39,10 @@ material legal claims against official EU and Hungarian sources.
   later-gate checks; never mark future operational behaviour as already verified.
 - Trace relevant WV checks in `docs/delivery/workload-checks.md` to the package's obligation
   matrix and actual evidence. A WAF technical review is not legal approval.
+- Apply the accepted risk path's legal/data triggers. Check source licences,
+  weak-label claims, lawful evaluation cohorts, processing geography, retention
+  and human promotion/oversight records against relevant AI/ML evidence.
+  Technical model-quality targets belong to their domain owners and independent tester.
 
 ## Output and Stop
 

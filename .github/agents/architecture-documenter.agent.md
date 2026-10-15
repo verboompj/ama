@@ -26,9 +26,9 @@ repository skills. Use a matching visualisation skill when it is available.
   Follow the existing Field & File palette, fictional setting, and accessibility rules.
 - Produce deployment prerequisites, parameter guidance, validation commands,
   readiness checks, troubleshooting, rollback/recovery limitations, and ownership.
-- Document the actual workload development plan, WV check inventory, test report
-  and pending authenticated/live checks. Engineering-team setup, prompt usage and
-  framework documentation are outside this role's workload deliverables.
+- Document the actual workload development plan, applicable WV/AI/ML inventory, test report
+  and pending authenticated/live checks. Include dataset/model lineage references,
+  scoring compatibility, experimental limitations and operational ownership.
 - Separate proposed, implemented, validated, deployed, and observed states. Never
   label infrastructure as deployed without a deployment record and evidence.
 - Map resources and flows to released design IDs and tested revisions; document AVM

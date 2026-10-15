@@ -1,7 +1,7 @@
 # Independent Architecture Review: WP-<number>
 
-Template only. Tester writes this against a fixed architect-authored Azure workload design;
-do not modify that design while reviewing it.
+Template for regulated Azure design review. Tester assesses a fixed architect-authored
+design without modifying it.
 
 | Field | Value |
 |---|---|
@@ -9,6 +9,8 @@ do not modify that design while reviewing it.
 | Stable review loop ID / ledger reference | TODO |
 | Attempt number / maximum total attempts / remaining | TODO / 5 or lower assigned limit / TODO |
 | Design author / independence statement | TODO; reviewer did not author this design |
+| Accepted risk path / approved target owners | regulated / TODO |
+| Reviewer context / actual model and tool limits | TODO; use fresh context when supported |
 | Target gate | design-released |
 | WV01-WV03 evidence references | TODO |
 | Security/compliance design dispositions / AVM feasibility | TODO |
