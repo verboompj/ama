@@ -66,6 +66,36 @@
       --cp-sheen: rgba(255, 255, 255, 0.04);
       --cp-highlight: rgba(253, 142, 161, 0.12);
     }
+    /* This farmer draft deliberately keeps Field & File light in either host theme. */
+    html[data-theme] {
+      color-scheme: light;
+      --cp-bg: #f5f0e6;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f1f4ef;
+      --cp-border: #d1d5ca;
+      --cp-border-strong: #778371;
+      --cp-text: #1e2521;
+      --cp-text-muted: #50594f;
+      --cp-text-soft: #596355;
+      --cp-accent: #52734d;
+      --cp-accent-hover: #405d3c;
+      --cp-accent-soft: #eaf0e7;
+      --cp-accent-fg: #ffffff;
+      --cp-success: #405d3c;
+      --cp-danger: #a12727;
+      --cp-warning: #d9a441;
+      --cp-warning-soft: #fcf3df;
+      --cp-link: #315d70;
+      --cp-signal: #5b8fa8;
+      --cp-signal-soft: #eaf2f6;
+      --cp-shadow: 0 18px 48px rgba(30, 37, 33, 0.12);
+      --cp-overlay: rgba(245, 240, 230, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: #eaf0e7;
+    }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font: 16px/1.55 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
     button, input, select, textarea { font: inherit; }
@@ -85,6 +115,9 @@
     .logo { width: 244px; max-width: 100%; height: auto; display: block; border-radius: 8px; }
     .tools, .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
     .tools button { font-size: 13px; padding: 8px 12px; }
+    .language-control { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+    .language-control > span { font-size: 13px; margin-right: 4px; }
+    .language-control button[aria-pressed="true"] { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
     .layout { max-width: 1400px; margin: auto; display: grid; grid-template-columns: 224px minmax(0,1fr); }
     aside { padding: 28px 20px 28px 32px; border-right: 1px solid var(--cp-border); }
     .eyebrow { text-transform: uppercase; letter-spacing: .13em; font-size: 11px; font-weight: 750; color: var(--cp-text-muted); margin: 0 0 12px; }
@@ -104,24 +137,24 @@
     .intro { max-width: 680px; color: var(--cp-text-muted); margin-bottom: 28px; }
     .page-top { display: flex; justify-content: space-between; align-items: start; gap: 20px; flex-wrap: wrap; }
     .badge { display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--cp-border); background: var(--cp-surface); color: var(--cp-text); border-radius: 999px; padding: 5px 10px; font-size: 12px; font-weight: 600; white-space: nowrap; }
-    .badge.attention { border-color: var(--cp-accent); color: var(--cp-accent); background: var(--cp-accent-soft); }
+    .badge.attention { border-color: var(--cp-warning); color: var(--cp-text); background: var(--cp-warning-soft); }
     .grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; margin-bottom: 24px; }
     .grid.three { grid-template-columns: repeat(3,minmax(0,1fr)); }
     .card { border: 1px solid var(--cp-border); border-radius: 16px; padding: 24px; background: var(--cp-surface); }
     .card.soft { background: var(--cp-bg-elevated); }
-    .card.action-card { border-left: 4px solid var(--cp-accent); }
+    .card.action-card { border-left: 4px solid var(--cp-warning); }
     .stat { font-size: 32px; line-height: 1.3; letter-spacing: -.04em; margin: 12px 0 4px; font-weight: 650; }
     .note { border-left: 3px solid var(--cp-border-strong); padding: 12px 16px; background: var(--cp-surface-soft); border-radius: 0 .625rem .625rem 0; margin: 20px 0; font-size: 14px; }
-    .notice { padding: 12px 16px; background: var(--cp-accent-soft); border: 1px solid var(--cp-accent); border-radius: .625rem; margin-bottom: 24px; font-size: 14px; }
+    .notice { padding: 12px 16px; background: var(--cp-warning-soft); border: 1px solid var(--cp-warning); border-radius: .625rem; margin-bottom: 24px; font-size: 14px; }
     .hero { display: grid; grid-template-columns: 1.1fr 1fr; border: 1px solid var(--cp-border); background: var(--cp-surface); border-radius: 16px; overflow: hidden; margin-bottom: 24px; }
     .hero-copy { padding: 32px; align-self: center; }
     .hero h1 { font-size: clamp(36px,4vw,52px); }
-    .field-art { background: var(--cp-accent-soft); padding: 20px; display: grid; place-items: center; }
+    .field-art { background: var(--cp-signal-soft); padding: 20px; display: grid; place-items: center; }
     .field-art svg { width: 100%; height: auto; max-height: 300px; }
     .field-art path, .field-art rect { fill: var(--cp-bg-elevated); stroke: var(--cp-border-strong); stroke-width: 2; }
     .field-art .selected { fill: var(--cp-accent-soft); stroke: var(--cp-accent); stroke-width: 3; }
     .field-art text { fill: var(--cp-text); font-size: 13px; font-family: "Segoe UI", Aptos, sans-serif; }
-    .field-art .route { fill: none; stroke: var(--cp-border); stroke-width: 8; }
+    .field-art .route { fill: none; stroke: var(--cp-signal); stroke-width: 8; }
     label { display: block; font-weight: 600; margin-bottom: 8px; }
     input:not([type="checkbox"]), select, textarea { width: 100%; border: 1px solid var(--cp-border-strong); border-radius: .625rem; padding: 12px; background: var(--cp-bg-elevated); color: var(--cp-text); min-height: 48px; }
     textarea { min-height: 120px; resize: vertical; }
@@ -181,25 +214,30 @@
   </style>
 </head>
 <body>
-  <a href="#main" class="skip">Skip to content</a>
-  <div class="draft-bar">DESIGN DRAFT 0.1 · Synthetic examples only · No sign-in, submission or payment service connected</div>
+  <a href="#main" class="skip" data-copy="skip">Skip to content</a>
+  <div class="draft-bar" data-copy="draftBar">FICTIONAL DEMO · No real sign-in, submission or payment</div>
   <header>
     <div class="header-inner">
       <img class="logo" alt="Field &amp; File — From parcel to payment" width="960" height="280" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NjAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgOTYwIDI4MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2NyaXB0aW9uIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5GaWVsZCBhbmQgRmlsZSBsb2dvPC90aXRsZT4KICA8ZGVzYyBpZD0iZGVzY3JpcHRpb24iPkEgZ3JlZW4gZmllbGQsIGdvbGRlbiBjcm9wIHJvd3MsIGFuZCBhIGJsdWUgc2F0ZWxsaXRlIHNpZ25hbCBmb3JtaW5nIGEgY2hlY2tlZCBhZ3JpY3VsdHVyYWwgcGFyY2VsIGJlc2lkZSB0aGUgRmllbGQgYW5kIEZpbGUgd29yZG1hcmsuPC9kZXNjPgogIDxyZWN0IHdpZHRoPSI5NjAiIGhlaWdodD0iMjgwIiByeD0iMjgiIGZpbGw9IiNGNUYwRTYiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MiAzOCkiPgogICAgPHJlY3Qgd2lkdGg9IjIwNCIgaGVpZ2h0PSIyMDQiIHJ4PSIzNCIgZmlsbD0iIzFFMjUyMSIvPgogICAgPHBhdGggZD0iTTIyIDE0N0M2NCAxMDggMTE1IDkxIDE4MiA4OVYxNzhIMjJaIiBmaWxsPSIjNTI3MzREIi8+CiAgICA8cGF0aCBkPSJNMjIgMTc4QzY3IDE0MyAxMjAgMTI4IDE4MiAxMjdWMTgySDIyWiIgZmlsbD0iI0Q5QTQ0MSIvPgogICAgPHBhdGggZD0iTTQ1IDE3N0M4MCAxNTAgMTI0IDEzOCAxNzQgMTM4IiBmaWxsPSJub25lIiBzdHJva2U9IiNGNUYwRTYiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNNzAgMTgxQzk4IDE2MCAxMzIgMTUxIDE3NCAxNTEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y1RjBFNiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0xMDUgMTgyQzEyNSAxNjggMTQ3IDE2MyAxNzQgMTYyIiBmaWxsPSJub25lIiBzdHJva2U9IiNGNUYwRTYiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8Y2lyY2xlIGN4PSI2MiIgY3k9IjYwIiByPSIxMCIgZmlsbD0iIzVCOEZBOCIvPgogICAgPHBhdGggZD0iTTgwIDYwQzEwNSA2MCAxMjUgODAgMTI1IDEwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNUI4RkE4IiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTgwIDM5QzExNyAzOSAxNDYgNjggMTQ2IDEwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNUI4RkE4IiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTExOSAxMTJMMTQwIDEzMkwxNzggODkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y1RjBFNiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPC9nPgogIDxnIGZpbGw9IiMxRTI1MjEiPgogICAgPHRleHQgeD0iMjg2IiB5PSIxMzIiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCAnVGltZXMgTmV3IFJvbWFuJywgc2VyaWYiIGZvbnQtc2l6ZT0iNzYiIGZvbnQtd2VpZ2h0PSI3MDAiPkZpZWxkICZhbXA7IEZpbGU8L3RleHQ+CiAgICA8dGV4dCB4PSIyOTIiIHk9IjE4NCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI3IiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMyI+RlJPTSBQQVJDRUwgVE8gUEFZTUVOVDwvdGV4dD4KICA8L2c+CiAgPHBhdGggZD0iTTI5MiAyMDVIODg0IiBzdHJva2U9IiNEOUE0NDEiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=">
       <div class="tools">
+        <div class="language-control" role="group" aria-labelledby="language-label">
+          <span id="language-label" data-copy="language">Language</span>
+          <button type="button" data-language="en" lang="en" aria-pressed="true">English</button>
+          <button type="button" data-language="hu" lang="hu" aria-pressed="false">Magyar</button>
+        </div>
         <span class="badge" id="identity">Visitor · demo</span>
         <button id="connection" data-action="connection" aria-pressed="false">Simulate offline</button>
-        <button data-action="reset">Reset demo</button>
+        <button data-action="reset" data-copy="reset">Reset demo</button>
       </div>
     </div>
   </header>
   <div class="layout">
-    <aside aria-label="Farm and navigation">
-      <p class="eyebrow">Farmer workspace</p>
+    <aside aria-label="Farm and navigation" data-copy-aria-label="asideLabel">
+      <p class="eyebrow" data-copy="workspace">Farmer workspace</p>
       <p class="farm-name">Napraforgó Farm</p>
-      <small>Fictional farm · claim year 2026</small>
-      <nav aria-label="Farmer journey" id="navigation"></nav>
-      <div class="aside-note"><strong>Your field. Your explanation.</strong><p class="muted">A monitoring question is not a finding of wrongdoing.</p><small>English review copy. Hungarian localisation and assisted-service routes require validation.</small></div>
+      <small data-copy="farmYear">Fictional farm · claim year 2026</small>
+      <nav aria-label="Farmer journey" data-copy-aria-label="navLabel" id="navigation"></nav>
+      <div class="aside-note"><strong data-copy="asideTitle">Your field. Your explanation.</strong><p class="muted" data-copy="asideNote">A question about a parcel does not mean you have done anything wrong.</p><small data-copy="translationDraft">Draft wording · English and Hungarian need approval.</small></div>
     </aside>
     <main id="main" tabindex="-1"></main>
   </div>
@@ -207,126 +245,498 @@
   <dialog id="confirm" aria-labelledby="confirm-title">
     <h2 id="confirm-title"></h2>
     <div id="confirm-copy"></div>
-    <div class="actions"><button class="primary" id="confirm-action">Confirm demo action</button><button data-action="cancel">Go back</button></div>
+    <div class="actions"><button class="primary" id="confirm-action" data-copy="confirm">Confirm demo action</button><button data-action="cancel" data-copy="back">Go back</button></div>
   </dialog>
   <noscript><p>This offline prototype needs JavaScript to switch screens. No service is connected.</p></noscript>
   <script>
     "use strict";
-    const screens = [
-      ["welcome", "Start here"], ["overview", "My season"], ["claim", "My claim"],
-      ["parcels", "My parcels"], ["action", "Action needed"], ["evidence", "My evidence"],
-      ["case", "Case & decisions"], ["payments", "Payments"]
-    ];
+    const copy = {
+      title: ["Field & File | Farmer demo", "Field & File | Gazdálkodói bemutató"],
+      skip: ["Skip to content", "Ugrás a tartalomra"],
+      draftBar: ["FICTIONAL DEMO · No real sign-in, submission or payment", "CSAK BEMUTATÓ, KITALÁLT PÉLDÁKKAL · Nincs valódi bejelentkezés, beküldés vagy kifizetés"],
+      language: ["Language", "Nyelv"],
+      reset: ["Reset demo", "Bemutató újrakezdése"],
+      asideLabel: ["Farm and navigation", "Gazdaság és navigáció"],
+      navLabel: ["Farmer journey", "Gazdálkodói ügyintézés"],
+      workspace: ["Farmer workspace", "Gazdálkodói felület"],
+      farmYear: ["Fictional farm · application year 2026", "Kitalált gazdaság · 2026-os kérelmezési év"],
+      asideTitle: ["Your field. Your explanation.", "Az Ön földje. Az Ön magyarázata."],
+      asideNote: ["A question about a field does not mean you have done anything wrong.", "A táblával kapcsolatos kérdés nem jelenti azt, hogy Ön bármit helytelenül tett."],
+      translationDraft: ["Draft wording · English and Hungarian need approval.", "Szövegtervezet · az angol és a magyar változat jóváhagyásra vár."],
+      logoAlt: ["Field & File — From parcel to payment", "Field & File — A parcellától a kifizetésig"],
+      confirm: ["Confirm demo action", "Bemutatóművelet megerősítése"],
+      back: ["Go back", "Vissza"],
+      visitor: ["Visitor · demo", "Látogató · bemutató"],
+      farmer: ["Farmer · simulated session", "Gazdálkodó · bemutató"],
+      offlineButton: ["Simulate offline", "Kapcsolat nélküli mód kipróbálása"],
+      reconnect: ["Offline demo · reconnect", "Kapcsolat nélküli bemutató · újracsatlakozás"],
+      offlineNotice: ["Offline demo. You can write drafts here, but cannot send them. Nothing is received by the agency. Reloading clears this demo.", "Kapcsolat nélküli bemutató. Piszkozatot írhat, de nem küldheti be. A hivatal semmit nem kap meg. Az oldal újratöltése törli a bemutató adatait."],
+      season: ["2026 season · fictional example", "2026-os év · kitalált példa"],
+      footerBrand: ["Field & File · From parcel to payment", "Field & File · A parcellától a kifizetésig"],
+      footerDraft: ["UX draft 0.1 · No real records · Reloading clears all demo data", "Felületterv 0.1 · Nincsenek valódi iratok · Az újratöltés minden bemutatóadatot töröl"],
+      welcome: ["Start here", "Kezdés"],
+      overview: ["My season", "Az idei évem"],
+      claim: ["My application", "Kérelmem"],
+      parcels: ["My fields", "Tábláim"],
+      action: ["Action needed", "Teendő"],
+      evidence: ["My evidence", "Bizonyítékaim"],
+      case: ["Case & decisions", "Ügyem és döntések"],
+      payments: ["Payments", "Kifizetések"],
+      mapTitle: ["Diagram of three fictional fields. Field 12 has an unanswered crop question. Not a geographic map.", "Három kitalált tábla vázlata. A 12-es tábla növénye még tisztázandó. Ez nem földrajzi térkép."],
+      map10: ["10 / Wheat", "10 / Búza"],
+      map12: ["12 / Question", "12 / Kérdés"],
+      map14: ["14 / Maize", "14 / Kukorica"],
+      mapNote: ["Diagram only · not to scale", "Csak vázlat · nem méretarányos"],
+      welcomeTitle: ["Your land. Your application. Your next step.", "Az Ön földje. Az Ön kérelme. A következő lépés."],
+      welcomeIntro: ["Check your fields, explain changes and follow your application.", "Tekintse át tábláit, magyarázza el a változásokat, és kövesse kérelme állapotát."],
+      enter: ["Enter farmer demo", "Gazdálkodói bemutató indítása"],
+      prepare: ["1. Check your application", "1. Kérelem ellenőrzése"],
+      prepareCopy: ["Review your fields and check your draft before confirming.", "Tekintse át tábláit, és ellenőrizze a piszkozatot a megerősítés előtt."],
+      explain: ["2. Explain what happened", "2. A történtek leírása"],
+      explainCopy: ["Answer a question, correct a crop or add useful evidence.", "Válaszoljon a kérdésre, javítsa a növénykultúrát, vagy adjon hozzá bizonyítékot."],
+      follow: ["3. Follow your case", "3. Az ügy követése"],
+      followCopy: ["See what needs review and whether a payment has actually arrived.", "Nézze meg, mi vár elbírálásra, és melyik kifizetést teljesítették már."],
+      signinNote: ["No real sign-in. A future service would use an approved national electronic identity. Do not enter real credentials, farm details or personal information.", "Nincs valódi bejelentkezés. A későbbi szolgáltatás jóváhagyott nemzeti elektronikus azonosítást használna. Ne adjon meg valódi belépési, gazdasági vagy személyes adatokat."],
+      overviewTitle: ["Your next step", "A következő teendő"],
+      overviewIntro: ["Start with the question about field 12 at Napraforgó Farm.", "Kezdje a Napraforgó Farm 12-es táblájával kapcsolatos kérdéssel."],
+      scenarioDate: ["Example date: 20 June 2026", "A példa dátuma: 2026. június 20."],
+      invented: ["All dates, deadlines and amounts are invented.", "Minden dátum, határidő és összeg kitalált."],
+      claimReceived: ["Application received · demo", "Kérelem beérkezett · bemutató"],
+      holding: ["Your farm", "Az Ön gazdasága"],
+      threeParcels: ["3 fields", "3 tábla"],
+      areaTotal: ["18.4 hectares in this example", "A példában összesen 18,4 hektár"],
+      seeParcels: ["See my fields", "Táblák megtekintése"],
+      nextAction: ["Next step", "Következő lépés"],
+      inReview: ["Under review", "Elbírálás alatt"],
+      oneQuestion: ["1 question", "1 kérdés"],
+      parcelQuestion: ["Field 12 · crop question", "12-es tábla · a növény tisztázása"],
+      viewQuestion: ["View field question", "Kérdés megtekintése"],
+      payment: ["Payment", "Kifizetés"],
+      notEstablished: ["Not yet determined", "Még nincs megállapítva"],
+      noPayment: ["No confirmed payment in the base example", "Az alappéldában nincs igazolt kifizetés"],
+      seePayments: ["View payment status", "Kifizetés állapota"],
+      deadlineShort: ["Action needed · example deadline: 24 June", "Teendő · példabeli határidő: június 24."],
+      changedQuestion: ["Did field 12 change after sowing?", "Változott a 12-es tábla a vetés után?"],
+      changedCopy: ["You declared sunflower. Later images may show another crop, but they cannot confirm it.", "Napraforgót jelentett be. A későbbi felvételek más növényt mutathatnak, de ezt nem lehet biztosan megállapítani."],
+      notPenalty: ["This is a question, not a penalty. Explain, correct, add evidence or ask for human review.", "Ez kérdés, nem szankció. Írja le a történteket, javítsa az adatot, adjon hozzá bizonyítékot, vagy kérjen ügyintézői felülvizsgálatot."],
+      respond: ["Review and respond", "Áttekintés és válasz"],
+      notebook: ["Keep useful field records", "Hasznos feljegyzések a földről"],
+      notebookCopy: ["You do not need to photograph every field. Keep evidence of an important event or a required step in your support scheme.", "Nem kell minden táblát lefényképeznie. Őrizze meg a fontos események vagy a támogatási program előírt lépéseinek bizonyítékait."],
+      addSeasonal: ["Add evidence", "Bizonyíték hozzáadása"],
+      help: ["Help and adviser options", "Segítség és tanácsadó"],
+      claimTitle: ["Check your crop declaration", "A bejelentett növénykultúra ellenőrzése"],
+      claimIntro: ["The annual application has already been received in this example. A change stays separate from the original application. Nothing is sent until you confirm.", "Az éves kérelem már beérkezett ebben a példában. A módosítás elkülönül az eredeti kérelemtől. A megerősítéséig semmit nem küldünk el."],
+      stepReview: ["1. Review declaration", "1. Bejelentett adatok áttekintése"],
+      stepCheck: ["2. Check draft", "2. Piszkozat ellenőrzése"],
+      stepConfirm: ["3. Confirm correction", "3. Módosítás megerősítése"],
+      stepReceipt: ["4. Keep receipt", "4. Átvételi visszaigazolás megőrzése"],
+      original: ["Original declaration", "Eredeti bejelentés"],
+      claimLabel: ["Application", "Kérelem"],
+      version: ["version 1", "1. változat"],
+      receivedLabel: ["Received", "Beérkezett"],
+      originalDate: ["15 May 2026 · example receipt", "2026. május 15. · példabeli átvételi visszaigazolás"],
+      parcelLabel: ["Field", "Tábla"],
+      cropLabel: ["Crop", "Növénykultúra"],
+      sunflower: ["Sunflower", "Napraforgó"],
+      maize: ["Maize", "Kukorica"],
+      wheat: ["Wheat", "Búza"],
+      amendmentPreserved: ["Maize correction received; original sunflower declaration kept", "A kukoricára módosítás beérkezett; az eredeti napraforgó-bejelentés megmarad"],
+      guidance: ["Guidance before applying", "Tájékoztató a kérelmezés előtt"],
+      guidanceCopy: ["A real service must provide approved guidance for the support scheme and year. This draft does not check legal entitlement or whether a correction is allowed.", "A valódi szolgáltatásnak a támogatási programra és az adott évre jóváhagyott tájékoztatást kell adnia. Ez a tervezet nem ellenőrzi a jogosultságot vagy a módosítás megengedhetőségét."],
+      amendmentReceived: ["Correction received · demo", "Módosítás beérkezett · bemutató"],
+      amendmentDraft: ["Application change draft", "Kérelem módosításának piszkozata"],
+      amendmentPending: ["This demo records your change. Whether it can be accepted and how it affects the application still need checking.", "A bemutató rögzíti a módosítást. Elfogadhatósága és a kérelemre gyakorolt hatása még ellenőrzésre vár."],
+      caseHistory: ["View case history", "Ügytörténet megtekintése"],
+      correctedCrop: ["Corrected crop for field 12", "A 12-es tábla javított növénykultúrája"],
+      changed: ["What changed?", "Mi változott?"],
+      draftHelp: ["Use invented details only. Write at least 20 characters.", "Csak kitalált adatokat használjon. Írjon legalább 20 karaktert."],
+      prechecked: ["Draft completeness checked. This is not a decision on entitlement or whether the correction is allowed.", "A piszkozat kitöltöttségét ellenőriztük. Ez nem döntés a jogosultságról vagy a módosítás megengedhetőségéről."],
+      precheck: ["Check draft", "Piszkozat ellenőrzése"],
+      reviewAmendment: ["Review correction", "Módosítás áttekintése"],
+      explicitAction: ["An assistant may explain and help prepare a draft. In a real service, only your explicit action after identity verification can submit an application or change.", "Egy asszisztens magyarázatot adhat és segíthet a piszkozat elkészítésében. Valódi szolgáltatásban csak azonosítás utáni, kifejezett jóváhagyásával küldhető be kérelem vagy módosítás."],
+      parcelsTitle: ["Your fields at a glance", "Tábláinak áttekintése"],
+      parcelsIntro: ["A crop observation does not decide every condition of your application.", "A növénykultúrára vonatkozó megfigyelés nem dönti el kérelme minden feltételének teljesülését."],
+      selectedParcel: ["Selected field / 12", "Kiválasztott tábla / 12"],
+      possibleChange: ["A possible change, not a conclusion", "Lehetséges változás, nem végleges megállapítás"],
+      parcelArea: ["6.2 ha · declared sunflower", "6,2 ha · bejelentett növény: napraforgó"],
+      cloudLimit: ["Clouds and crop growth limit what the images can show. Your explanation may help.", "A felhők és a növény fejlődése korlátozzák a felvételek értelmezését. Az Ön magyarázata segíthet."],
+      registerCaption: ["Fictional field list · diagram, not official parcel data", "Kitalált táblalista · vázlat, nem hivatalos parcellaadatok"],
+      declaredCrop: ["Declared crop", "Bejelentett növénykultúra"],
+      area: ["Area", "Terület"],
+      monitoring: ["Crop check", "Növénykultúra ellenőrzése"],
+      consistent: ["Crop appears consistent", "A növénykultúra megfelelőnek látszik"],
+      unresolved: ["Unresolved · response requested", "Tisztázandó · választ várunk"],
+      maizeReceived: ["Maize (correction received)", "Kukorica (módosítás beérkezett)"],
+      sliceNote: ["This demo accepts evidence for field 12 only. It never attaches evidence to another field without your choice.", "Ez a bemutató csak a 12-es táblához fogad bizonyítékot. Az Ön választása nélkül nem kapcsol bizonyítékot más táblához."],
+      actionTitle: ["Help us understand field 12", "Segítsen tisztázni a 12-es tábla helyzetét"],
+      actionIntro: ["You can explain without agreeing with the observation. You can also ask for human review.", "A megfigyelés elfogadása nélkül is leírhatja a történteket. Ügyintézői felülvizsgálatot is kérhet."],
+      deadline: ["Example response deadline: 24 June 2026. This is not a real notice or legal deadline. Missing images do not prove a breach of the rules.", "Példabeli válaszadási határidő: 2026. június 24. Ez nem valódi értesítés vagy jogszabályi határidő. A hiányzó felvételek nem bizonyítanak szabálytalanságot."],
+      declared: ["What you declared", "Amit Ön bejelentett"],
+      declaredTitle: ["Sunflower on field 12", "Napraforgó a 12-es táblán"],
+      stormCopy: ["The example farmer may have replanted after storm damage. The original declaration and any correction stay separate.", "A példabeli gazdálkodó a viharkár után újravethetett. Az eredeti bejelentés és a módosítás elkülönül."],
+      correct: ["Review or correct declaration", "Bejelentés áttekintése vagy javítása"],
+      observed: ["Example observations", "Példabeli megfigyelések"],
+      uncertain: ["The crop is not yet confirmed", "A 12-es tábla növénye még nem azonosítható biztosan"],
+      observations: ["Example satellite images from 3 and 10 June suggest another crop. Clouds and timing limit certainty.", "A június 3-i és 10-i példabeli műholdképek más növényre utalnak. A felhők és a felvételek időpontja miatt ez nem biztos."],
+      affected: ["Question", "Kérdés"],
+      affectedCopy: ["Declared crop on field 12 only", "Csak a 12-es tábla bejelentett növénykultúrája"],
+      task: ["Task reference", "Feladatazonosító"],
+      noLegalRule: ["no verified legal rule supplied", "nincs megadva ellenőrzött jogszabály"],
+      decision: ["Decision", "Döntés"],
+      noAdverse: ["No adverse decision made", "Nem született hátrányos döntés"],
+      explanationTitle: ["Your explanation", "Az Ön magyarázata"],
+      demoReceived: ["received in demo", "beérkezett a bemutatóban"],
+      responsePending: ["Awaiting assessment. A receipt confirms arrival, not approval or whether the evidence is enough.", "Elbírálásra vár. Az átvételi visszaigazolás a beérkezést jelzi, nem a jóváhagyást vagy a bizonyíték elegendőségét."],
+      followCase: ["Follow case progress", "Az ügy követése"],
+      humanRequested: ["Human review requested", "Ügyintézői felülvizsgálat kérve"],
+      humanRequest: ["Ask for human review", "Ügyintézői felülvizsgálat kérése"],
+      happened: ["What happened in the field?", "Mi történt a földön?"],
+      responseHelp: ["Example: storm damage on 22 May, then maize replanted on 26 May. Write at least 20 characters. Do not enter real farm or personal information.", "Példa: május 22-én viharkár történt, majd május 26-án kukoricával újravetették a területet. Írjon legalább 20 karaktert. Ne adjon meg valódi gazdasági vagy személyes adatokat."],
+      reviewResponse: ["Review response", "Válasz áttekintése"],
+      addSupporting: ["Add supporting evidence", "Alátámasztó bizonyíték hozzáadása"],
+      anotherWay: ["Need another way to respond?", "Más módon szeretne válaszolni?"],
+      alternativeCopy: ["A photo may not answer the question or may be impossible to take. A real service must offer help and other approved evidence routes.", "Lehet, hogy egy fénykép nem tisztázza a kérdést, vagy nem készíthető el. A valódi szolgáltatásnak segítséget és más jóváhagyott bizonyítási módot is kell biztosítania."],
+      evidenceTitle: ["Add evidence from the field", "Bizonyíték hozzáadása a földről"],
+      evidenceIntro: ["Try a sample package for field 12. No real file, camera or location is accessed.", "Próbáljon ki egy mintacsomagot a 12-es táblához. Nem férünk hozzá valódi fájlhoz, kamerához vagy helyadatokhoz."],
+      evidenceDraft: ["Draft on this page", "Piszkozat ezen az oldalon"],
+      uploadReceived: ["Upload received", "Feltöltés beérkezett"],
+      checks: ["File checks", "Fájlellenőrzés"],
+      registered: ["Registered", "Nyilvántartásba véve"],
+      assessment: ["Evidence assessment", "Bizonyíték elbírálása"],
+      parcelEvidence: ["Field 12 · evidence draft", "12-es tábla · bizonyíték piszkozata"],
+      purpose: ["Why are you keeping this evidence?", "Miért őrzi meg ezt a bizonyítékot?"],
+      event: ["Important farm event", "Fontos gazdasági esemény"],
+      milestone: ["Required step in a support scheme", "A támogatási program előírt lépése"],
+      responsePurpose: ["Response to DEMO-R-01", "Válasz a DEMO-R-01 feladatra"],
+      photoAttached: ["Sample image attached · not a real photo", "Mintakép csatolva · nem valódi fénykép"],
+      photoEmpty: ["Use a sample image for this demo.", "Használjon mintaképet a bemutatóhoz."],
+      removePhoto: ["Remove sample photo", "Mintakép eltávolítása"],
+      addPhoto: ["Add sample photo", "Mintakép hozzáadása"],
+      evidenceNote: ["What should this evidence show?", "Mit mutasson be ez a bizonyíték?"],
+      keepDraft: ["Keep offline draft", "Kapcsolat nélküli piszkozat megtartása"],
+      reviewPackage: ["Review sample package", "Mintacsomag áttekintése"],
+      registeredPending: ["Registered · awaiting evidence assessment", "A bizonyíték bekerült az ügybe; az adott kérdés vizsgálata még hátravan"],
+      checksPending: ["Demo upload received · file checks pending", "A bizonyíték beérkezett; a biztonsági ellenőrzés még hátravan"],
+      simulateChecks: ["Simulate successful file checks", "Sikeres fájlellenőrzés kipróbálása"],
+      viewEvidence: ["View evidence in case file", "Bizonyíték megtekintése az ügyben"],
+      notProof: ["Useful evidence, not automatic proof", "Hasznos bizonyíték, nem automatikus igazolás"],
+      evidenceAdvice: ["Show the relevant crop or event. Avoid other people and unnecessary details. Follow the instructions for the task.", "Mutassa be az érintett növényt vagy eseményt. Ne szerepeljenek más személyek vagy szükségtelen részletek. Kövesse a feladat útmutatóját."],
+      evidenceBoundary: ["Received or registered does not mean sufficient evidence, compliance or approval. Location data can support where a photo came from, not prove its content. Independent random checks remain separate.", "A beérkezés vagy a nyilvántartásba vétel nem jelenti a bizonyíték elégségességét, a megfelelést vagy a jóváhagyást. A helyadat segíthet a fénykép eredetének megállapításában, de nem bizonyítja a tartalmát. A független véletlen mintás ellenőrzések elkülönülnek."],
+      technicalDetails: ["How evidence would be checked", "Hogyan történne a bizonyíték ellenőrzése?"],
+      technicalCopy: ["A real service must check permission and location accuracy, offer alternatives, keep capture time separate from receipt time, and verify every file against the fixed package list and hashes in quarantine before registration. This sample invents no capture metadata.", "A valódi szolgáltatásnak ellenőriznie kell az engedélyt és a helyadat pontosságát, más lehetőséget kell kínálnia, és el kell különítenie a rögzítés és a beérkezés idejét. Nyilvántartásba vétel előtt elkülönítve kell ellenőriznie minden fájlt a rögzített csomagjegyzék és ellenőrzőösszegek alapján. A minta nem tartalmaz kitalált rögzítési metaadatokat."],
+      caseTitle: ["Follow your case", "Kövesse az ügyét"],
+      caseIntro: ["See what was received and what still needs review. This is not an official case record.", "Nézze meg, mi érkezett be és mi vár még elbírálásra. Ez nem hivatalos ügyirat."],
+      chronology: ["Case history", "Ügytörténet"],
+      may15: ["15 May · example", "Május 15. · példa"],
+      june12: ["12 June · example", "Június 12. · példa"],
+      annualReceived: ["Annual application received", "Éves kérelem beérkezett"],
+      originalKept: ["Version 1 kept with a sample receipt.", "Az 1. változat minta átvételi visszaigazolással megőrizve."],
+      questionOpened: ["Crop question opened", "A növénykultúra tisztázása elindult"],
+      questionOpenCopy: ["Field 12 only. No adverse decision made.", "Csak a 12-es tábla érintett. Nem született hátrányos döntés."],
+      currentDemo: ["Current demo session", "A jelenlegi bemutatóban"],
+      amendmentHistory: ["Correction received", "Módosítás beérkezett"],
+      checksStillPending: ["awaiting required checks", "a szükséges ellenőrzésekre vár"],
+      responseHistory: ["Farmer response received", "Gazdálkodói válasz beérkezett"],
+      pendingAssessment: ["awaiting assessment", "elbírálásra vár"],
+      evidenceHistory: ["Evidence registered", "Bizonyíték nyilvántartásba véve"],
+      evidenceChecking: ["Evidence awaiting file checks", "A bizonyíték fájlellenőrzésre vár"],
+      receiptNotOutcome: ["A receipt does not resolve the crop question.", "Az átvételi visszaigazolás nem tisztázza a növénykultúra kérdését."],
+      awaitingOfficial: ["awaiting an authorised official", "jogosult ügyintézőre vár"],
+      separateExample: ["Separate adverse-decision example", "Hátrányos döntés külön példája"],
+      appealHistory: ["Demo appeal receipt created", "Bemutató-fellebbezés visszaigazolása létrehozva"],
+      appealNotFiled: ["no real filing; no automatic payment suspension", "nincs valódi benyújtás; nincs automatikus kifizetésfelfüggesztés"],
+      next: ["What happens next?", "Mi történik ezután?"],
+      nextReview: ["The caseworker or approved process assesses this question. If the evidence cannot resolve it, a person decides whether an independent inspection is needed.", "Az ügyintéző vagy a jóváhagyott eljárás értékeli ezt a kérdést. Ha a bizonyíték nem elegendő a tisztázáshoz, ember dönt a független helyszíni ellenőrzés szükségességéről."],
+      nextRespond: ["Respond to the crop question or ask for help. The caseworker must explain any payment hold and your next step.", "Válaszoljon a növénykultúrával kapcsolatos kérdésre, vagy kérjen segítséget. Az ügyintézőnek meg kell magyaráznia az esetleges kifizetési visszatartást és a következő lépést."],
+      noAIDecision: ["Neither this demo nor an AI assistant makes official decisions or imposes sanctions.", "Sem ez a bemutató, sem egy MI-asszisztens nem hoz hivatalos döntést és nem alkalmaz szankciót."],
+      returnQuestion: ["Return to field question", "Vissza a tábla kérdéséhez"],
+      download: ["Download demo case summary", "Bemutató-ügyösszefoglaló letöltése"],
+      disagree: ["If you disagree with an adverse decision", "Ha nem ért egyet a hátrányos döntéssel"],
+      appealCopy: ["A real decision must show reasons, facts, legal basis, evidence, the responsible official, date, and the valid appeal route and deadline. The base example has no adverse decision. The separate example below is not a real appeal route.", "A valódi döntésnek tartalmaznia kell az indokokat, tényeket, jogalapot, bizonyítékokat, a felelős ügyintézőt, a dátumot, valamint az érvényes jogorvoslati utat és határidőt. Az alappéldában nincs hátrányos döntés. Az alábbi külön példa nem valódi jogorvoslati lehetőség."],
+      tryAppeal: ["Try separate appeal example", "A külön fellebbezési példa kipróbálása"],
+      paymentsTitle: ["Understand your payment status", "A kifizetés állapotának értelmezése"],
+      paymentsIntro: ["An estimate is not a payment. A photo or crop observation cannot start a transfer.", "A becslés nem kifizetés. Egy fénykép vagy növénymegfigyelés nem indíthat átutalást."],
+      designerControls: ["Designer controls · separate payment examples", "Tervezői beállítások · külön kifizetési példák"],
+      preview: ["Preview a fictional read-only payment state", "Kitalált, csak olvasható kifizetési állapot megtekintése"],
+      pendingScenario: ["Base: checks pending", "Alappélda: ellenőrzésekre vár"],
+      authorisedScenario: ["Advance authorised, not yet paid", "Előleg kifizetése engedélyezve, még nincs kifizetve"],
+      advanceScenario: ["Advance payment confirmed", "Előleg kifizetése igazolva"],
+      finalScenario: ["Final amount and balance paid", "Végleges összeg és egyenleg kifizetve"],
+      previewOnly: ["This changes only the demo display. A farmer cannot authorise or execute a payment.", "Ez csak a bemutató megjelenését módosítja. A gazdálkodó nem engedélyezhet és nem hajthat végre kifizetést."],
+      estimate: ["Estimated amount", "Becsült összeg"],
+      estimateNote: ["Not a promise, legal calculation or approved amount", "Nem ígéret, jogszabály szerinti számítás vagy jóváhagyás"],
+      established: ["Amount determined for this stage", "Az adott szakaszra megállapított összeg"],
+      establishedNote: ["Only after the required checks", "Csak a szükséges ellenőrzések után"],
+      authorised: ["Authorised by the agency", "A kifizetés engedélyezve"],
+      authorisedNote: ["Authorised does not mean paid", "Az engedélyezés nem jelent kifizetést"],
+      paid: ["Confirmed paid", "Igazoltan kifizetve"],
+      paidNote: ["Only after confirmation and matching with the official payment records", "Csak a teljesítés igazolása és a hivatalos kifizetési nyilvántartással való egyeztetés után"],
+      advanceAmount: ["€960 advance", "960 € előleg"],
+      finalAmount: ["€2,400 final", "2 400 € végleges összeg"],
+      totalAmount: ["€2,400 total", "Összesen 2 400 €"],
+      pendingPayment: ["Checks and a reasoned outcome are needed before any payment can be authorised.", "Bármely kifizetés engedélyezése előtt ellenőrzések és indokolt döntés szükséges."],
+      authorisedPayment: ["The example advance is authorised, but payment is not confirmed. It is not shown as paid.", "A kifizetés engedélyezve – a teljesítés még nincs visszaigazolva. Nem jelenik meg kifizetettként."],
+      advancePayment: ["The example advance is paid. The final eligible amount and any balance still need checks.", "A példabeli előleget kifizették. A végleges jogosult összeg és az esetleges egyenleg még ellenőrzésre vár."],
+      finalPayment: ["Example final payment: €960 advance plus €1,440 balance. This is not a real entitlement calculation.", "Példabeli végleges kifizetés: 960 € előleg és 1 440 € egyenleg. Ez nem valódi jogosultságszámítás."],
+      paymentRoute: ["How payment happens", "Hogyan történik a kifizetés?"],
+      paymentSteps: ["Checks → eligible amount determined → agency authorisation → payment service transfer → payment confirmed → records matched.", "Ellenőrzések → jogosult összeg megállapítása → hivatali engedélyezés → átutalás a kifizetési szolgáltatással → teljesítés igazolása → nyilvántartások egyeztetése."],
+      paymentSafeguards: ["Advances may be possible under the applicable rules. One unresolved field does not automatically block every support payment. Recovery or offsets need safeguards and human authority.", "Az alkalmazandó szabályok szerint előleg lehetséges. Egy tisztázatlan tábla nem akadályoz automatikusan minden támogatási kifizetést. A visszaköveteléshez vagy beszámításhoz garanciák és emberi döntési jogosultság szükséges."],
+      viewDecisions: ["View decisions and open questions", "Döntések és nyitott kérdések"],
+      validationRequired: ["Please fill in this field using invented details only.", "Kérjük, töltse ki ezt a mezőt, kizárólag kitalált adatokkal."],
+      validationLength: ["Please write at least 20 characters.", "Kérjük, írjon legalább 20 karaktert."],
+      enterFirst: ["Enter the farmer demo first. No real identity is requested.", "Először indítsa el a gazdálkodói bemutatót. Nem kérünk valódi azonosítást."],
+      draftChanged: ["Draft changed. Check it again before reviewing the correction.", "A piszkozat megváltozott. A módosítás áttekintése előtt ellenőrizze újra."],
+      offlineKept: ["Draft kept only on this open page. Not sent or received. Reloading clears it.", "A piszkozat csak ezen a megnyitott oldalon marad meg. Nincs beküldve vagy beérkeztetve. Az újratöltés törli."],
+      chooseChanged: ["Choose the changed crop first. The original crop is sunflower.", "Először válassza ki a megváltozott növénykultúrát. Az eredeti növény napraforgó."],
+      runCheck: ["Check the draft before reviewing the correction.", "A módosítás áttekintése előtt ellenőrizze a piszkozatot."],
+      needPhoto: ["Add the sample photo first, or use another response route.", "Először adja hozzá a mintaképet, vagy válasszon más válaszadási módot."],
+      offlineEnabled: ["Offline demo enabled. Nothing can be sent.", "A kapcsolat nélküli bemutató bekapcsolva. Semmi nem küldhető be."],
+      reconnected: ["Demo connection restored. Drafts have not been sent automatically.", "A kapcsolat helyreállt. Semmit nem küldtünk el automatikusan."],
+      resetDone: ["Demo reset. No information retained.", "A bemutató újraindult. Nem őriztünk meg adatot."],
+      photoAdded: ["Sample image attached. No camera or location accessed.", "Mintakép csatolva. Nem fértünk hozzá kamerához vagy helyadatokhoz."],
+      photoRemoved: ["Sample image removed.", "Mintakép eltávolítva."],
+      registrationDone: ["Demo evidence registered. Its sufficiency and the case outcome are not yet assessed.", "A bemutatóbizonyíték nyilvántartásba véve. Elégségessége és az ügy kimenetele még nincs elbírálva."],
+      amendmentDone: ["DEMO-AMD-001 created. No real correction sent.", "DEMO-AMD-001 létrehozva. Nem küldtünk be valódi módosítást."],
+      responseDone: ["DEMO-RESPONSE-001 created. Assessment is still pending.", "DEMO-RESPONSE-001 létrehozva. Az elbírálás még folyamatban van."],
+      uploadDone: ["Demo upload received. File checks are still pending.", "A bemutatófeltöltés beérkezett. A fájlellenőrzés még hátravan."],
+      reviewDone: ["DEMO-REVIEW-001 created. Awaiting simulated human review.", "DEMO-REVIEW-001 létrehozva. Bemutatóbeli ügyintézői felülvizsgálatra vár."],
+      appealDone: ["DEMO-APPEAL-001 created for the separate example only.", "DEMO-APPEAL-001 kizárólag a külön példához létrehozva."],
+      helpDone: ["No adviser authorisation or support request was created.", "Nem jött létre tanácsadói meghatalmazás vagy segítségkérés."],
+      downloaded: ["Fictional summary downloaded. No real case records included.", "A kitalált összefoglaló letöltve. Nem tartalmaz valódi ügyiratokat."],
+      confirmAmendment: ["Confirm demo correction?", "Megerősíti a bemutatóbeli módosítást?"],
+      correctionTo: ["Correct field 12 crop to:", "A 12-es tábla javított növénykultúrája:"],
+      amendmentConfirmCopy: ["Only a demo receipt is created. The original declaration stays. Nothing is officially submitted and no entitlement decision is made.", "Csak bemutató-visszaigazolás jön létre. Az eredeti bejelentés megmarad. Nincs hivatalos beküldés vagy jogosultsági döntés."],
+      confirmResponse: ["Confirm demo response?", "Megerősíti a bemutatóbeli választ?"],
+      responseConfirmCopy: ["This records your explanation, not agreement with a finding. No official response is sent.", "Ez a magyarázatát rögzíti, nem egy megállapítás elfogadását. Nem küldünk hivatalos választ."],
+      confirmEvidence: ["Send sample package for demo file checks?", "Elküldi a mintacsomagot bemutatóbeli fájlellenőrzésre?"],
+      evidenceConfirmCopy: ["No real file, location or capture data is uploaded. Registration and assessment of whether the evidence is enough are separate later steps.", "Nem töltünk fel valódi fájlt, helyadatot vagy rögzítési adatot. A nyilvántartásba vétel és a bizonyíték elégségességének elbírálása külön, későbbi lépés."],
+      confirmReset: ["Reset this demo?", "Újrakezdi a bemutatót?"],
+      resetCopy: ["All drafts and demo receipts on this page will be cleared. No real records exist or change.", "Az oldalon lévő összes piszkozat és bemutató-visszaigazolás törlődik. Valódi iratok nem léteznek és nem változnak."],
+      confirmReview: ["Request human review in this demo?", "Ügyintézői felülvizsgálatot kér a bemutatóban?"],
+      reviewCopy: ["Your request appears in the demo history. No real official is contacted and no response time is promised.", "Kérése megjelenik a bemutató ügytörténetében. Nem értesítünk valódi ügyintézőt, és nem ígérünk válaszadási határidőt."],
+      confirmAppeal: ["Try the separate appeal example?", "Kipróbálja a külön fellebbezési példát?"],
+      appealConfirmCopy: ["This illustrates confirmation after a fictional adverse decision. Real decision references, grounds, evidence and legal deadline checks are not implemented. No appeal is filed and no payment is automatically suspended.", "Ez egy kitalált hátrányos döntés utáni megerősítést szemléltet. Valódi döntéshivatkozások, indokok, bizonyítékok és jogszabályi határidő-ellenőrzések nincsenek megvalósítva. Nem nyújtunk be fellebbezést, és nem függesztünk fel automatikusan kifizetést."],
+      helpTitle: ["Help with your own voice", "Segítség az Ön álláspontjának megőrzésével"],
+      helpCopy: ["A real service must offer accessible help and approved alternatives when digital evidence is unsuitable. An adviser uses their own identity and a limited authorisation you can revoke. No authorisation is created here. Real contacts and opening hours still need approval.", "A valódi szolgáltatásnak akadálymentes segítséget és jóváhagyott alternatívát kell kínálnia, ha a digitális bizonyíték nem megfelelő. A tanácsadó saját azonosítással és korlátozott, visszavonható meghatalmazással jár el. Itt nem jön létre meghatalmazás. A valódi elérhetőségek és nyitvatartás még jóváhagyásra várnak."],
+      exportTitle: ["FIELD & FILE — FICTIONAL DEMO — NOT AN OFFICIAL CASE RECORD", "FIELD & FILE — KITALÁLT BEMUTATÓ — NEM HIVATALOS ÜGYIRAT"],
+      exportOriginal: ["Original application received: example 15 May 2026. The crop question is unresolved.", "Eredeti kérelem beérkezése: példabeli 2026. május 15. A növénykultúra kérdése még tisztázatlan."],
+      exportAmendment: ["Application change receipt", "Kérelemmódosítás átvételi visszaigazolása"],
+      exportResponse: ["Response receipt", "Válasz átvételi visszaigazolása"],
+      exportEvidence: ["Evidence package", "Bizonyítékcsomag"],
+      exportReview: ["Human review request", "Ügyintézői felülvizsgálat kérése"],
+      none: ["none", "nincs"],
+      exportEnd: ["No adverse decision or real payment. This is a summary, not the complete case file.", "Nincs hátrányos döntés vagy valódi kifizetés. Ez összefoglaló, nem a teljes ügyirat."]
+    };
+    let language = new URLSearchParams(window.location.search).get("lang") === "hu" ? "hu" : "en";
+    const t = key => copy[key][language === "hu" ? 1 : 0];
+    const screens = ["welcome", "overview", "claim", "parcels", "action", "evidence", "case", "payments"];
     const initialState = () => ({
       signedIn: false, offline: false, amended: false, prechecked: false,
       explanation: "", responseSent: false, reviewRequested: false, appealSent: false,
-      crop: "Sunflower", amendmentReason: "", evidencePurpose: "Material farm event",
+      crop: "sunflower", amendmentReason: "", evidencePurpose: "event",
       photo: false, evidenceNote: "", evidenceStatus: "draft", paymentScenario: "pending"
     });
     let state = initialState();
     let view = "welcome";
     let pendingAction = null;
+    let feedbackKey = null;
     let feedbackTimer;
     const main = document.getElementById("main");
     const dialog = document.getElementById("confirm");
+    const languageControl = document.querySelector(".language-control");
+    const languageHome = languageControl.parentElement;
     const escape = value => String(value).replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" }[c]));
     const button = (label, action, primary = false, disabled = false) =>
       `<button type="button" data-action="${action}" class="${primary ? "primary" : ""}" ${disabled ? "disabled" : ""}>${label}</button>`;
     const badge = (text, attention = false) => `<span class="badge ${attention ? "attention" : ""}">${text}</span>`;
-    const pageTitle = (title, description, label = "2026 season · synthetic scenario") =>
-      `<p class="eyebrow">${label}</p><h1 tabindex="-1">${title}</h1><p class="intro">${description}</p>`;
+    const pageTitle = (title, description) =>
+      `<p class="eyebrow">${t("season")}</p><h1 tabindex="-1">${t(title)}</h1><p class="intro">${t(description)}</p>`;
+    const p = key => `<p>${t(key)}</p>`;
+    const b = (key, action, primary = false, disabled = false) => button(t(key), action, primary, disabled);
+    const options = (keys, selected) => keys.map(([value, key]) => `<option value="${value}" ${selected === value ? "selected" : ""}>${t(key)}</option>`).join("");
+    const cropOptions = [["sunflower", "sunflower"], ["maize", "maize"]];
+    const purposeOptions = [["event", "event"], ["milestone", "milestone"], ["response", "responsePurpose"]];
+    const purposeLabel = () => t(purposeOptions.find(([value]) => value === state.evidencePurpose)[1]);
     const received = () => state.evidenceStatus === "registered";
-    const fieldArt = () => `<div class="field-art"><svg viewBox="0 0 400 260" role="img" aria-labelledby="map-title"><title id="map-title">Schematic of three fictional parcels; parcel 12 has an unanswered monitoring question. Not a geographic map.</title><path class="route" d="M5 160L395 100M210 5L170 255"/><path d="M25 25L190 22L174 126L28 148Z"/><path class="selected" d="M220 24L372 38L370 87L202 117Z"/><path d="M198 145L373 119L369 235L183 237Z"/><text x="65" y="78">10 / Wheat</text><text x="230" y="68">12 / Question</text><text x="230" y="188">14 / Maize</text><text x="24" y="231">Schematic only · not to scale</text></svg></div>`;
-    function notify(message) {
+    const fieldArt = () => `<div class="field-art"><svg viewBox="0 0 400 260" role="img" aria-labelledby="map-title"><title id="map-title">${t("mapTitle")}</title><path class="route" d="M5 160L395 100M210 5L170 255"/><path d="M25 25L190 22L174 126L28 148Z"/><path class="selected" d="M220 24L372 38L370 87L202 117Z"/><path d="M198 145L373 119L369 235L183 237Z"/><text x="65" y="78">${t("map10")}</text><text x="230" y="68">${t("map12")}</text><text x="230" y="188">${t("map14")}</text><text x="24" y="231">${t("mapNote")}</text></svg></div>`;
+    function notify(key) {
       clearTimeout(feedbackTimer);
-      document.getElementById("feedback").textContent = message;
-      feedbackTimer = setTimeout(() => { document.getElementById("feedback").textContent = ""; }, 8000);
+      feedbackKey = key;
+      document.getElementById("feedback").textContent = t(key);
+      feedbackTimer = setTimeout(() => { feedbackKey = null; document.getElementById("feedback").textContent = ""; }, 8000);
     }
-    function confirmAction(title, copy, action) {
-      document.getElementById("confirm-title").textContent = title;
-      document.getElementById("confirm-copy").innerHTML = copy;
+    function confirmAction(action) {
       pendingAction = action;
+      renderConfirmation();
+      // Keep the same language buttons usable while the modal makes the header inert.
+      dialog.prepend(languageControl);
       dialog.showModal();
+      document.getElementById("confirm-action").focus();
+    }
+    function renderConfirmation() {
+      if (!pendingAction) return;
+      const content = {
+        amendment: ["confirmAmendment", `<p>${t("correctionTo")} <strong>${t(state.crop)}</strong></p><p>${escape(state.amendmentReason)}</p>${p("amendmentConfirmCopy")}`],
+        response: ["confirmResponse", `<p>${escape(state.explanation)}</p>${p("responseConfirmCopy")}`],
+        evidence: ["confirmEvidence", `<p>${t("parcelLabel")} 12 · ${purposeLabel()}</p><p>${escape(state.evidenceNote)}</p>${p("evidenceConfirmCopy")}`],
+        reset: ["confirmReset", p("resetCopy")],
+        review: ["confirmReview", p("reviewCopy")],
+        appeal: ["confirmAppeal", p("appealConfirmCopy")],
+        help: ["helpTitle", p("helpCopy")]
+      }[pendingAction];
+      document.getElementById("confirm-title").textContent = t(content[0]);
+      document.getElementById("confirm-copy").innerHTML = content[1];
+    }
+    function validateField(field) {
+      field.setCustomValidity(!field.value.trim() ? t("validationRequired") : field.value.length < field.minLength ? t("validationLength") : "");
+    }
+    function syncFields() {
+      main.querySelectorAll("[data-field]").forEach(field => updateField({target: field}));
+    }
+    function setLanguage(next) {
+      syncFields();
+      const active = document.activeElement;
+      const focusedId = active.id;
+      const selection = typeof active.selectionStart === "number" ? [active.selectionStart, active.selectionEnd] : null;
+      const openDetails = Array.from(main.querySelectorAll("details")).map(detail => detail.open);
+      language = next;
+      render();
+      main.querySelectorAll("details").forEach((detail, i) => { detail.open = openDetails[i]; });
+      const restored = focusedId && document.getElementById(focusedId);
+      if (restored) {
+        restored.focus();
+        if (selection) restored.setSelectionRange(...selection);
+      }
     }
     function show(screen, focus = true) {
       clearTimeout(feedbackTimer);
       document.getElementById("feedback").textContent = "";
-      view = screens.some(([id]) => id === screen) ? screen : "welcome";
+      feedbackKey = null;
+      view = screens.includes(screen) ? screen : "welcome";
       if (!state.signedIn && view !== "welcome") {
         view = "welcome";
-        notify("Enter the simulated farmer workspace first. No real identity is requested.");
+        notify("enterFirst");
       }
       render();
       if (focus) main.querySelector("h1").focus();
     }
     function render() {
-      document.getElementById("navigation").innerHTML = screens.map(([id,label], i) =>
-        `<button data-view="${id}" ${id === view ? 'aria-current="page"' : ""}><span class="nav-number">0${i + 1}</span>${label}</button>`).join("");
-      document.getElementById("identity").textContent = state.signedIn ? "Farmer · simulated session" : "Visitor · demo";
-      document.getElementById("connection").textContent = state.offline ? "Offline simulation · reconnect" : "Simulate offline";
+      document.documentElement.lang = language;
+      document.title = t("title");
+      document.querySelectorAll("[data-copy]").forEach(element => { element.textContent = t(element.dataset.copy); });
+      document.querySelectorAll("[data-copy-aria-label]").forEach(element => { element.setAttribute("aria-label", t(element.dataset.copyAriaLabel)); });
+      document.querySelector(".logo").alt = t("logoAlt");
+      document.querySelectorAll("[data-language]").forEach(element => { element.setAttribute("aria-pressed", String(element.dataset.language === language)); });
+      document.getElementById("navigation").innerHTML = screens.map((id, i) =>
+        `<button data-view="${id}" ${id === view ? 'aria-current="page"' : ""}><span class="nav-number">0${i + 1}</span>${t(id)}</button>`).join("");
+      document.getElementById("identity").textContent = t(state.signedIn ? "farmer" : "visitor");
+      document.getElementById("connection").textContent = t(state.offline ? "reconnect" : "offlineButton");
       document.getElementById("connection").setAttribute("aria-pressed", String(state.offline));
-      main.innerHTML = (state.offline ? `<div class="notice"><strong>Offline simulation.</strong> Drafts can be prepared in this open page, but cannot be sent. Nothing is received by the agency. Refreshing clears this demo.</div>` : "") +
+      main.innerHTML = (state.offline ? `<div class="notice">${t("offlineNotice")}</div>` : "") +
         views[view]() +
-        `<footer class="footer"><span>Field &amp; File · From parcel to payment</span><span>Design draft 0.1 · No real records · In-memory demo only</span></footer>`;
+        `<footer class="footer"><span>${t("footerBrand")}</span><span>${t("footerDraft")}</span></footer>`;
+      main.querySelectorAll("[data-field]").forEach(field => {
+        field.value = state[field.dataset.field];
+        if (field.matches("textarea[required]")) validateField(field);
+      });
+      renderConfirmation();
+      if (feedbackKey) document.getElementById("feedback").textContent = t(feedbackKey);
     }
     const views = {
       welcome: () => `
-        <div class="hero"><div class="hero-copy"><p class="eyebrow">A year on the farm. A clearer path through the file.</p><h1 tabindex="-1">Your land.<br>Your claim.<br>Your next step.</h1><p class="muted">Prepare with confidence, explain what happened in the field, and follow your claim without guessing.</p>${button("Enter farmer demo", "signin", true)}</div>${fieldArt()}</div>
-        <div class="grid three"><section class="card"><p class="eyebrow">01 / Prepare</p><h2>Know what you are declaring.</h2><p>Review your parcels, get guidance and check a draft before you confirm it.</p></section><section class="card"><p class="eyebrow">02 / Explain</p><h2>Give the field its context.</h2><p>Respond to a question, correct a mistake or preserve useful seasonal evidence.</p></section><section class="card"><p class="eyebrow">03 / Follow</p><h2>See what happens next.</h2><p>Track reviews, read decisions and distinguish a scheduled payment from money received.</p></section></div>
-        <div class="note"><strong>No real sign-in.</strong> Production would use an agency-approved national eID. This review prototype asks for no credentials, location, documents or real claimant information.</div>`,
-      overview: () => pageTitle("Good morning, Farmer.", "Here is what needs your attention at Napraforgó Farm. Start with the parcel question; the rest of your case stays visible.") + `
-        <div class="page-top"><p><strong>Scenario date: 20 June 2026</strong><br><small>All dates, deadlines and amounts are invented for this walkthrough.</small></p>${badge("Claim received · demo")}</div>
-        <div class="grid three"><section class="card"><p class="eyebrow">Your holding</p><div class="stat">3 parcels</div><p class="muted">18.4 hectares in this example</p>${button("See my parcels", "parcels")}</section><section class="card"><p class="eyebrow">Next action</p><div class="stat">${state.responseSent || state.reviewRequested ? "In review" : "1 question"}</div><p class="muted">Parcel 12 · crop observation</p>${button("View parcel question", "action")}</section><section class="card"><p class="eyebrow">Payment</p><div class="stat">Not established</div><p class="muted">No confirmed payment in the base scenario</p>${button("Understand payment status", "payments")}</section></div>
-        <div class="grid"><section class="card action-card"><p class="eyebrow">Action needed · example deadline 24 June</p><h2>Did parcel 12 change after sowing?</h2><p>Your declaration says sunflower. Later observations may show another crop, but the available imagery cannot settle the question.</p><p><strong>This is a question, not a penalty.</strong> Explain, correct, provide evidence or ask a person to help.</p>${button("Review and respond", "action", true)}</section><section class="card"><h2>A field notebook, when you need it.</h2><p>Keep evidence of a material event or an approved scheme milestone. You do not need to photograph every parcel.</p>${button("Add seasonal evidence", "evidence")}<hr><p class="muted">Need someone alongside you?</p>${button("Assistance & adviser options", "help")}</section></div>`,
-      claim: () => pageTitle("Check the file against the field.", "The original annual claim is already received in this scenario. Prepare a separate amendment for parcel 12; nothing changes until you explicitly confirm it.") + `
-        <div class="step-line"><span>1. Review declaration</span><span>2. Pre-check draft</span><span>3. Confirm amendment</span><span>4. Keep receipt</span></div>
-        <div class="grid"><section class="card"><h2>Original declaration</h2><dl><div class="rule"><dt>Claim</dt><dd class="mono">DEMO-CLAIM-2026-047 · version 1</dd></div><div class="rule"><dt>Received</dt><dd>15 May 2026 · example server receipt</dd></div><div class="rule"><dt>Parcel</dt><dd class="mono">HU-DEMO-047-12</dd></div><div class="rule"><dt>Crop</dt><dd>${state.amended ? "Maize amendment received; original sunflower declaration preserved" : "Sunflower · 6.2 ha"}</dd></div></dl><details><summary>Eligibility guidance before applying</summary><p>This is where approved, scheme-year-specific guidance and obligations would appear. No binding eligibility assessment or verified legal rule is provided in this draft.</p><p>For a new claim, the same review / pre-check / explicit confirmation pattern would apply.</p></details></section>
-        <section class="card"><h2>${state.amended ? "Amendment received · demo" : "Amendment draft"}</h2>${state.amended ? `<p class="mono">DEMO-AMD-001</p><p>Your amendment is recorded in this simulation. Acceptance of the change and its effect on the claim still need the applicable checks.</p>${button("View case history", "case", true)}` : `
-          <form id="claim-form"><div class="form-field"><label for="crop">Corrected crop for parcel 12</label><select id="crop" data-field="crop"><option ${state.crop === "Sunflower" ? "selected" : ""}>Sunflower</option><option ${state.crop === "Maize" ? "selected" : ""}>Maize</option></select></div><div class="form-field"><label for="amendmentReason">What changed?</label><textarea id="amendmentReason" data-field="amendmentReason" required minlength="20" maxlength="1200" aria-describedby="draft-help">${escape(state.amendmentReason)}</textarea><small id="draft-help">Use synthetic details only. Explain the change in at least 20 characters.</small></div>${state.prechecked ? `<div class="note" id="precheck-result">Draft completeness checked. This is not an eligibility decision or legal validation; amendment timing and applicable rules remain to be verified.</div>` : ""}<div class="actions">${button("Pre-check draft", "precheck")}<button class="primary" type="submit" ${state.offline ? "disabled" : ""}>Review amendment</button></div></form>`}</section></div>
-        <div class="note">A guidance assistant may explain and prepare. Only your explicit, authenticated action can submit an official claim or change in a future implementation.</div>`,
-      parcels: () => pageTitle("The field, beside the file.", "Look at each parcel in its own context. A consistent observation is not a decision on every condition of your claim.") + `
-        <div class="hero">${fieldArt()}<div class="hero-copy"><p class="eyebrow">Selected parcel / 12</p><h2>A possible change, not a conclusion.</h2><p>6.2 ha · declared sunflower</p><p class="muted">Cloud and crop development limit what the observations can tell us. Your explanation may help answer the specific question.</p>${button("Open parcel question", "action", true)}</div></div>
-        <section class="card"><div class="table-wrap"><table><caption class="eyebrow">Synthetic parcel register · schematic, not LPIS data</caption><thead><tr><th>Parcel</th><th>Declared crop</th><th>Area</th><th>Monitoring question</th><th>Evidence</th></tr></thead><tbody><tr><td class="mono">HU-DEMO-047-10</td><td>Wheat</td><td>7.4 ha</td><td>Consistent for crop question</td><td>${button("Add evidence", "evidence-general")}</td></tr><tr><td class="mono">HU-DEMO-047-12</td><td>${state.amended ? "Maize (amendment received)" : "Sunflower"}</td><td>6.2 ha</td><td>Unresolved · response requested</td><td>${button("Add evidence", "evidence")}</td></tr><tr><td class="mono">HU-DEMO-047-14</td><td>Maize</td><td>4.8 ha</td><td>Consistent for crop question</td><td>${button("Add evidence", "evidence-general")}</td></tr></tbody></table></div></section>
-        <div class="note">The working evidence flow in this first slice is scoped to parcel 12. Other parcel buttons explain the intended capability without attaching evidence to the wrong parcel.</div>`,
-      action: () => pageTitle("Help us understand parcel 12.", "Choose how to respond. You can explain without agreeing with the observation, and you can ask for human review.") + `
-        <div class="notice"><strong>Illustrative response deadline: 24 June 2026.</strong> This is a synthetic evidence task, not a real notice or statutory deadline. Missing imagery is not proof of non-compliance.</div>
-        <div class="grid"><section class="card"><p class="eyebrow">What you declared</p><h2>Sunflower on parcel 12</h2><p class="muted">Original claim · received 15 May</p><p>After storm damage, the farmer may have replanted. The original declaration and any amendment must remain distinct.</p>${button("Review or correct declaration", "claim")}</section><section class="card"><p class="eyebrow">What the agency observed · synthetic</p><h2>The crop cannot yet be confirmed.</h2><p>Example Sentinel observations dated 3 and 10 June suggest another crop; clouds and timing limit certainty.</p><dl><div class="rule"><dt>Affected question</dt><dd>Declared crop on parcel 12 only</dd></div><div class="rule"><dt>Task reference</dt><dd>DEMO-R-01 · no verified legal rule supplied</dd></div><div class="rule"><dt>Decision</dt><dd>No adverse decision made</dd></div></dl></section></div>
-        <section class="card"><h2>Your explanation</h2>${state.responseSent ? `<p class="mono">DEMO-RESPONSE-001 · received in simulation</p><p>${escape(state.explanation)}</p><p><strong>Pending assessment.</strong> A response receipt does not mean the question is resolved.</p><div class="actions">${button("Follow case progress", "case", true)}${button(state.reviewRequested ? "Human review requested" : "Ask for human review", "review", false, state.reviewRequested || state.offline)}</div>` : `<form id="response-form"><div class="form-field"><label for="explanation">What happened in the field?</label><textarea id="explanation" data-field="explanation" required minlength="20" maxlength="1200" aria-describedby="response-help">${escape(state.explanation)}</textarea><small id="response-help">Example: storm damage on 22 May led to replanting with maize on 26 May. Do not enter real farm or personal information.</small></div><div class="actions"><button class="primary" type="submit" ${state.offline ? "disabled" : ""}>Review response</button>${button("Add supporting evidence", "evidence")}${button(state.reviewRequested ? "Human review requested" : "Ask for human review", "review", false, state.reviewRequested || state.offline)}</div></form>`}</section>
-        <details><summary>Need another way to respond?</summary><p>A photograph may not answer this question or may be impossible to capture. An assisted-service route or another approved form of evidence must be available in the real service.</p>${button("Show assistance options", "help")}</details>`,
-      evidence: () => pageTitle("Keep the context from the field.", "Add a sample evidence package for parcel 12. Purpose, receipt and assessment stay separate. No real file, camera or location is accessed.") + `
-        <div class="step-line"><span>Draft on device</span><span>Upload received</span><span>Quarantine & checks</span><span>Registered</span><span>Scoped assessment</span></div>
-        <div class="grid"><section class="card"><h2>Parcel 12 · evidence draft</h2><p class="mono">HU-DEMO-047-12</p>${state.evidenceStatus === "draft" ? `
-          <form id="evidence-form"><div class="form-field"><label for="evidencePurpose">Why are you keeping this evidence?</label><select id="evidencePurpose" data-field="evidencePurpose">${["Material farm event","Approved scheme milestone","Response to DEMO-R-01"].map(x => `<option ${state.evidencePurpose === x ? "selected" : ""}>${x}</option>`).join("")}</select></div><div class="empty"><p>${state.photo ? "Sample image placeholder attached · no real photo" : "Use the synthetic image placeholder for this walkthrough."}</p>${button(state.photo ? "Remove sample photo" : "Add sample photo", "photo")}</div><div class="form-field"><label for="evidenceNote">Describe what the evidence is intended to show</label><textarea id="evidenceNote" data-field="evidenceNote" required minlength="20" maxlength="1200">${escape(state.evidenceNote)}</textarea></div><div class="actions"><button class="primary" type="submit">${state.offline ? "Keep offline draft" : "Review sample package"}</button></div></form>` : `
-          <div class="note"><strong>${received() ? "Registered · pending scoped assessment" : "Demo upload received · quarantine checks pending"}</strong><p class="mono">DEMO-EVIDENCE-001</p><p>${escape(state.evidencePurpose)}</p><p>${escape(state.evidenceNote)}</p></div>${!received() ? button("Simulate clean package checks", "register", true, state.offline) : button("View evidence in case file", "case", true)}`}</section>
-        <section class="card soft"><h2>Useful evidence, not automatic proof.</h2><p>Show the relevant crop or event without including other people or unnecessary details. Always follow the approved, task-specific instructions.</p><dl><div class="rule"><dt>Location</dt><dd>No GPS collected in this draft. Production must show permission, accuracy and an alternative route when capture is unsuitable</dd></div><div class="rule"><dt>Time</dt><dd>Capture time and server receipt are separate. No metadata is invented for the sample placeholder</dd></div><div class="rule"><dt>Integrity</dt><dd>Production validates the complete pinned package and hashes in quarantine before registration</dd></div><div class="rule"><dt>Meaning</dt><dd>GPS is provenance, not proof. Registered does not mean sufficient, compliant or approved</dd></div></dl><p class="muted">Independent random validation remains independent of claimant-supplied evidence.</p></section></div>`,
-      case: () => pageTitle("A case you can follow.", "See what was received, what still needs review, and who has authority to decide. Example history is not an official case record.") + `
-        <div class="grid"><section class="card"><h2>Case chronology</h2><ol class="timeline"><li><small>15 May · synthetic</small><h3>Annual claim received</h3><p>Version 1 preserved with a sample submission receipt.</p></li><li><small>12 June · synthetic</small><h3>Crop question opened</h3><p>Parcel 12 only. No adverse decision made.</p></li>${state.amended ? `<li><small>Current demo session</small><h3>Amendment received</h3><p class="mono">DEMO-AMD-001 · pending applicable checks</p></li>` : ""}${state.responseSent ? `<li><small>Current demo session</small><h3>Farmer response received</h3><p class="mono">DEMO-RESPONSE-001 · pending assessment</p></li>` : ""}${state.evidenceStatus !== "draft" ? `<li><small>Current demo session</small><h3>${received() ? "Evidence registered" : "Evidence in quarantine"}</h3><p>Receipt is not a finding that the crop question is resolved.</p></li>` : ""}${state.reviewRequested ? `<li><small>Current demo session</small><h3>Human review requested</h3><p class="mono">DEMO-REVIEW-001 · awaiting an authorised official</p></li>` : ""}${state.appealSent ? `<li><small>Separate adverse-decision example</small><h3>Appeal receipt simulated</h3><p>DEMO-APPEAL-001 · no real filing; no automatic payment suspension</p></li>` : ""}</ol></section>
-        <section class="card"><h2>What happens next?</h2><p>${state.responseSent || received() || state.reviewRequested ? "An approved workflow or caseworker assesses the scoped question. If evidence cannot resolve it, a person decides whether an independent inspection is needed." : "Respond to the crop question or ask for help. The caseworker must explain any affected hold and the next action."}</p><p><strong>No decision or sanction is made by this prototype or an AI assistant.</strong></p><div class="actions">${button("Return to parcel question", "action", true)}${button("Download demo case summary", "download")}</div><details><summary>If you disagree with an adverse decision</summary><p>The production view must show the reasoned decision, factual and legal basis, relevant evidence, issuing official, date and valid appeal route/deadline.</p><p><strong>Separate example:</strong> an adverse-decision scenario can demonstrate the confirmation and receipt interaction below. No real adverse decision exists in the base scenario, and this is not a real appeal route.</p>${button(state.appealSent ? "Demo appeal receipt created" : "Try separate appeal example", "appeal", false, state.offline || state.appealSent)}</details></section></div>`,
+        <div class="hero"><div class="hero-copy"><p class="eyebrow">${t("workspace")}</p><h1 tabindex="-1">${t("welcomeTitle")}</h1><p class="muted">${t("welcomeIntro")}</p>${b("enter", "signin", true)}</div>${fieldArt()}</div>
+        <div class="grid three">${[["prepare", "prepareCopy"], ["explain", "explainCopy"], ["follow", "followCopy"]].map(([title, text]) => `<section class="card"><h2>${t(title)}</h2>${p(text)}</section>`).join("")}</div>
+        <div class="note">${t("signinNote")}</div>`,
+      overview: () => pageTitle("overviewTitle", "overviewIntro") + `
+        <div class="page-top"><p><strong>${t("scenarioDate")}</strong><br><small>${t("invented")}</small></p>${badge(t("claimReceived"))}</div>
+        <div class="grid three"><section class="card"><p class="eyebrow">${t("holding")}</p><div class="stat">${t("threeParcels")}</div>${p("areaTotal")}${b("seeParcels", "parcels")}</section><section class="card"><p class="eyebrow">${t("nextAction")}</p><div class="stat">${t(state.responseSent || state.reviewRequested ? "inReview" : "oneQuestion")}</div>${p("parcelQuestion")}${b("viewQuestion", "action")}</section><section class="card"><p class="eyebrow">${t("payment")}</p><div class="stat">${t("notEstablished")}</div>${p("noPayment")}${b("seePayments", "payments")}</section></div>
+        <div class="grid"><section class="card action-card"><p class="eyebrow">${t("deadlineShort")}</p><h2>${t("changedQuestion")}</h2>${p("changedCopy")}${p("notPenalty")}${b("respond", "action", true)}</section><section class="card"><h2>${t("notebook")}</h2>${p("notebookCopy")}${b("addSeasonal", "evidence")}<hr>${b("help", "help")}</section></div>`,
+      claim: () => pageTitle("claimTitle", "claimIntro") + `
+        <div class="step-line">${["stepReview", "stepCheck", "stepConfirm", "stepReceipt"].map(key => `<span>${t(key)}</span>`).join("")}</div>
+        <div class="grid"><section class="card"><h2>${t("original")}</h2><dl>
+          <div class="rule"><dt>${t("claimLabel")}</dt><dd class="mono">DEMO-CLAIM-2026-047 · ${t("version")}</dd></div>
+          <div class="rule"><dt>${t("receivedLabel")}</dt><dd>${t("originalDate")}</dd></div>
+          <div class="rule"><dt>${t("parcelLabel")}</dt><dd class="mono">HU-DEMO-047-12</dd></div>
+          <div class="rule"><dt>${t("cropLabel")}</dt><dd>${state.amended ? t("amendmentPreserved") : `${t("sunflower")} · ${language === "hu" ? "6,2" : "6.2"} ha`}</dd></div></dl>
+          <details><summary>${t("guidance")}</summary>${p("guidanceCopy")}</details></section>
+        <section class="card"><h2>${t(state.amended ? "amendmentReceived" : "amendmentDraft")}</h2>${state.amended ? `<p class="mono">DEMO-AMD-001</p>${p("amendmentPending")}${b("caseHistory", "case", true)}` : `
+          <form id="claim-form"><div class="form-field"><label for="crop">${t("correctedCrop")}</label><select id="crop" data-field="crop">${options(cropOptions, state.crop)}</select></div>
+          <div class="form-field"><label for="amendmentReason">${t("changed")}</label><textarea id="amendmentReason" data-field="amendmentReason" required minlength="20" maxlength="1200" aria-describedby="draft-help">${escape(state.amendmentReason)}</textarea><small id="draft-help">${t("draftHelp")}</small></div>
+          ${state.prechecked ? `<div class="note" id="precheck-result">${t("prechecked")}</div>` : ""}
+          <div class="actions">${b("precheck", "precheck")}<button class="primary" type="submit" ${state.offline ? "disabled" : ""}>${t("reviewAmendment")}</button></div></form>`}</section></div>
+        <div class="note">${t("explicitAction")}</div>`,
+      parcels: () => pageTitle("parcelsTitle", "parcelsIntro") + `
+        <div class="hero">${fieldArt()}<div class="hero-copy"><p class="eyebrow">${t("selectedParcel")}</p><h2>${t("possibleChange")}</h2>${p("parcelArea")}${p("cloudLimit")}${b("viewQuestion", "action", true)}</div></div>
+        <section class="card"><div class="table-wrap"><table><caption class="eyebrow">${t("registerCaption")}</caption><thead><tr>${["parcelLabel", "declaredCrop", "area", "monitoring", "evidence"].map(key => `<th>${t(key)}</th>`).join("")}</tr></thead><tbody>
+        ${[["HU-DEMO-047-10", "wheat", 7.4], ["HU-DEMO-047-12", state.amended ? "maizeReceived" : "sunflower", 6.2], ["HU-DEMO-047-14", "maize", 4.8]].map(([id, crop, area]) => `<tr><td class="mono">${id}</td><td>${t(crop)}</td><td>${new Intl.NumberFormat(language, {minimumFractionDigits: 1}).format(area)} ha</td><td>${t(id.endsWith("-12") ? "unresolved" : "consistent")}</td><td>${b("addSeasonal", id.endsWith("-12") ? "evidence" : "evidence-general")}</td></tr>`).join("")}
+        </tbody></table></div></section><div class="note">${t("sliceNote")}</div>`,
+      action: () => pageTitle("actionTitle", "actionIntro") + `
+        <div class="notice">${t("deadline")}</div>
+        <div class="grid"><section class="card"><p class="eyebrow">${t("declared")}</p><h2>${t("declaredTitle")}</h2>${p("originalDate")}${p("stormCopy")}${b("correct", "claim")}</section>
+        <section class="card"><p class="eyebrow">${t("observed")}</p><h2>${t("uncertain")}</h2>${p("observations")}<dl>
+        <div class="rule"><dt>${t("affected")}</dt><dd>${t("affectedCopy")}</dd></div>
+        <div class="rule"><dt>${t("task")}</dt><dd>DEMO-R-01 · ${t("noLegalRule")}</dd></div>
+        <div class="rule"><dt>${t("decision")}</dt><dd>${t("noAdverse")}</dd></div></dl></section></div>
+        <section class="card"><h2>${t("explanationTitle")}</h2>${state.responseSent ? `<p class="mono">DEMO-RESPONSE-001 · ${t("demoReceived")}</p><p>${escape(state.explanation)}</p>${p("responsePending")}<div class="actions">${b("followCase", "case", true)}${b(state.reviewRequested ? "humanRequested" : "humanRequest", "review", false, state.reviewRequested || state.offline)}</div>` : `
+        <form id="response-form"><div class="form-field"><label for="explanation">${t("happened")}</label><textarea id="explanation" data-field="explanation" required minlength="20" maxlength="1200" aria-describedby="response-help">${escape(state.explanation)}</textarea><small id="response-help">${t("responseHelp")}</small></div>
+        <div class="actions"><button class="primary" type="submit" ${state.offline ? "disabled" : ""}>${t("reviewResponse")}</button>${b("addSupporting", "evidence")}${b(state.reviewRequested ? "humanRequested" : "humanRequest", "review", false, state.reviewRequested || state.offline)}</div></form>`}</section>
+        <details><summary>${t("anotherWay")}</summary>${p("alternativeCopy")}${b("help", "help")}</details>`,
+      evidence: () => pageTitle("evidenceTitle", "evidenceIntro") + `
+        <div class="step-line">${["evidenceDraft", "uploadReceived", "checks", "registered", "assessment"].map(key => `<span>${t(key)}</span>`).join("")}</div>
+        <div class="grid"><section class="card"><h2>${t("parcelEvidence")}</h2><p class="mono">HU-DEMO-047-12</p>${state.evidenceStatus === "draft" ? `
+        <form id="evidence-form"><div class="form-field"><label for="evidencePurpose">${t("purpose")}</label><select id="evidencePurpose" data-field="evidencePurpose">${options(purposeOptions, state.evidencePurpose)}</select></div>
+        <div class="empty">${p(state.photo ? "photoAttached" : "photoEmpty")}${b(state.photo ? "removePhoto" : "addPhoto", "photo")}</div>
+        <div class="form-field"><label for="evidenceNote">${t("evidenceNote")}</label><textarea id="evidenceNote" data-field="evidenceNote" required minlength="20" maxlength="1200" aria-describedby="evidence-help">${escape(state.evidenceNote)}</textarea><small id="evidence-help">${t("draftHelp")}</small></div>
+        <div class="actions"><button class="primary" type="submit">${t(state.offline ? "keepDraft" : "reviewPackage")}</button></div></form>` : `
+        <div class="note"><strong>${t(received() ? "registeredPending" : "checksPending")}</strong><p class="mono">DEMO-EVIDENCE-001</p><p>${purposeLabel()}</p><p>${escape(state.evidenceNote)}</p></div>${received() ? b("viewEvidence", "case", true) : b("simulateChecks", "register", true, state.offline)}`}</section>
+        <section class="card soft"><h2>${t("notProof")}</h2>${p("evidenceAdvice")}${p("evidenceBoundary")}<details><summary>${t("technicalDetails")}</summary>${p("technicalCopy")}</details></section></div>`,
+      case: () => {
+        const item = (date, title, body) => `<li><small>${t(date)}</small><h3>${t(title)}</h3>${body}</li>`;
+        return pageTitle("caseTitle", "caseIntro") + `
+        <div class="grid"><section class="card"><h2>${t("chronology")}</h2><ol class="timeline">
+        ${item("may15", "annualReceived", p("originalKept"))}${item("june12", "questionOpened", p("questionOpenCopy"))}
+        ${state.amended ? item("currentDemo", "amendmentHistory", `<p class="mono">DEMO-AMD-001 · ${t("checksStillPending")}</p>`) : ""}
+        ${state.responseSent ? item("currentDemo", "responseHistory", `<p class="mono">DEMO-RESPONSE-001 · ${t("pendingAssessment")}</p>`) : ""}
+        ${state.evidenceStatus !== "draft" ? item("currentDemo", received() ? "evidenceHistory" : "evidenceChecking", p("receiptNotOutcome")) : ""}
+        ${state.reviewRequested ? item("currentDemo", "humanRequested", `<p class="mono">DEMO-REVIEW-001 · ${t("awaitingOfficial")}</p>`) : ""}
+        ${state.appealSent ? item("separateExample", "appealHistory", `<p class="mono">DEMO-APPEAL-001 · ${t("appealNotFiled")}</p>`) : ""}</ol></section>
+        <section class="card"><h2>${t("next")}</h2>${p(state.responseSent || received() || state.reviewRequested ? "nextReview" : "nextRespond")}<p><strong>${t("noAIDecision")}</strong></p>
+        <div class="actions">${b("returnQuestion", "action", true)}${b("download", "download")}</div>
+        <details><summary>${t("disagree")}</summary>${p("appealCopy")}${b(state.appealSent ? "appealHistory" : "tryAppeal", "appeal", false, state.offline || state.appealSent)}</details></section></div>`;
+      },
       payments: () => {
+        const money = amount => new Intl.NumberFormat(language, {style: "currency", currency: "EUR", maximumFractionDigits: 0}).format(amount);
         const values = {
-          pending: ["€2,400","Not established","€0","€0","Remaining controls and a reasoned outcome are needed before any amount can be authorised."],
-          authorised: ["€2,400","€960 advance","€960","€0","Example advance authorised, but settlement is not confirmed. Do not describe this as paid."],
-          advance: ["€2,400","€960 advance","€960","€960","Example advance settled. The final eligible amount and any remaining balance still require their controls."],
-          final: ["€2,400","€2,400 final","€2,400 total","€2,400 total","Example final amount settled: €960 advance plus €1,440 balance. This is not a real entitlement calculation."]
+          pending: [money(2400), t("notEstablished"), money(0), money(0), "pendingPayment"],
+          authorised: [money(2400), t("advanceAmount"), money(960), money(0), "authorisedPayment"],
+          advance: [money(2400), t("advanceAmount"), money(960), money(960), "advancePayment"],
+          final: [money(2400), t("finalAmount"), t("totalAmount"), t("totalAmount"), "finalPayment"]
         }[state.paymentScenario];
-        return pageTitle("Know which amount means what.", "An estimate, an established amount, an authorised instruction and a settled payment are different. Neither a photo nor a crop observation triggers a transfer.") + `
-          <details><summary>Designer controls · separate payment scenarios</summary><label for="paymentScenario">Preview a synthetic read-only payment state</label><select id="paymentScenario" data-field="paymentScenario">${[["pending","Base: controls pending"],["authorised","Advance authorised, not settled"],["advance","Advance settlement confirmed"],["final","Final and balance settled"]].map(([id,label]) => `<option value="${id}" ${state.paymentScenario === id ? "selected" : ""}>${label}</option>`).join("")}</select><small>This preview changes only the mock display. A farmer cannot authorise or execute a payment.</small></details>
-          <div class="grid"><section class="card"><p class="eyebrow">Illustrative estimate</p><div class="stat">${values[0]}</div><small>Not a promise, legal calculation or approved amount</small></section><section class="card"><p class="eyebrow">Established for relevant stage</p><div class="stat">${values[1]}</div><small>Only after the required controls</small></section><section class="card"><p class="eyebrow">Authorised by agency</p><div class="stat">${values[2]}</div><small>Authorisation is not settlement</small></section><section class="card"><p class="eyebrow">Confirmed paid</p><div class="stat">${values[3]}</div><small>Requires reconciled settlement from the authoritative payment system</small></section></div>
-          <div class="note">${values[4]}</div><section class="card"><h2>The route to payment</h2><p>Relevant controls → established eligible amount → agency authorisation → payment-system execution → settlement confirmation → reconciliation.</p><p class="muted">Advances may apply before final settlement under the applicable rules. An unresolved parcel does not automatically hold every intervention. Any recovery or offset needs the appropriate safeguards and human authority.</p>${button("View decisions and outstanding questions", "case")}</section>`;
+        return pageTitle("paymentsTitle", "paymentsIntro") + `
+          <details><summary>${t("designerControls")}</summary><label for="paymentScenario">${t("preview")}</label><select id="paymentScenario" data-field="paymentScenario">${options([["pending", "pendingScenario"], ["authorised", "authorisedScenario"], ["advance", "advanceScenario"], ["final", "finalScenario"]], state.paymentScenario)}</select><small>${t("previewOnly")}</small></details>
+          <div class="grid">${[["estimate", "estimateNote"], ["established", "establishedNote"], ["authorised", "authorisedNote"], ["paid", "paidNote"]].map(([title, note], i) => `<section class="card"><p class="eyebrow">${t(title)}</p><div class="stat">${values[i]}</div><small>${t(note)}</small></section>`).join("")}</div>
+          <div class="note">${t(values[4])}</div><section class="card"><h2>${t("paymentRoute")}</h2>${p("paymentSteps")}${p("paymentSafeguards")}${b("viewDecisions", "case")}</section>`;
       }
     };
-    document.addEventListener("input", event => {
+    function updateField(event) {
       const field = event.target.dataset.field;
       if (field && Object.hasOwn(state, field)) {
+        const changed = state[field] !== event.target.value;
         state[field] = event.target.value;
-        if (field === "crop" || field === "amendmentReason") {
-          if (state.prechecked) notify("Draft changed. Run the pre-check again before reviewing the amendment.");
+        if (event.target.matches("textarea[required]")) validateField(event.target);
+        if (changed && (field === "crop" || field === "amendmentReason")) {
+          if (state.prechecked) notify("draftChanged");
           state.prechecked = false;
           document.getElementById("precheck-result")?.remove();
         }
       }
-    });
+    }
+    document.addEventListener("input", updateField);
+    document.addEventListener("invalid", event => {
+      if (event.target.matches("textarea[required]")) validateField(event.target);
+    }, true);
     document.addEventListener("change", event => {
+      updateField(event);
       if (event.target.dataset.field === "paymentScenario") {
         render();
         const select = document.getElementById("paymentScenario");
@@ -338,65 +748,74 @@
       event.preventDefault();
       if (!event.target.reportValidity()) return;
       if (state.offline) {
-        notify("Draft kept only in this open page. Not submitted, not received; refreshing clears it.");
+        notify("offlineKept");
         return;
       }
       if (event.target.id === "claim-form") {
-        if (state.crop === "Sunflower") { notify("Choose the changed crop before preparing this example amendment."); return; }
-        if (!state.prechecked) { notify("Run the draft pre-check before reviewing the amendment."); return; }
-        confirmAction("Confirm demo amendment?", `<p>Change parcel 12 to <strong>${escape(state.crop)}</strong>.</p><p>${escape(state.amendmentReason)}</p><p>Only a synthetic receipt will be created. The original declaration stays preserved; there is no official submission or eligibility decision.</p>`, () => { state.amended = true; show("case"); notify("DEMO-AMD-001 created. No real amendment sent."); });
+        if (state.crop === "sunflower") { notify("chooseChanged"); return; }
+        if (!state.prechecked) { notify("runCheck"); return; }
+        confirmAction("amendment");
       } else if (event.target.id === "response-form") {
-        confirmAction("Confirm demo response?", `<p>${escape(state.explanation)}</p><p>This records your explanation, not agreement with a finding. No official response will be sent.</p>`, () => { state.responseSent = true; show("case"); notify("DEMO-RESPONSE-001 created. Assessment remains pending."); });
+        confirmAction("response");
       } else if (event.target.id === "evidence-form") {
-        if (!state.photo) { notify("Add the synthetic photo placeholder first, or use the alternative response route."); return; }
-        confirmAction("Send sample package into demo quarantine?", `<p>Parcel 12 · ${escape(state.evidencePurpose)}</p><p>${escape(state.evidenceNote)}</p><p>No file, GPS or capture metadata is uploaded. Registration and scoped sufficiency remain separate later steps.</p>`, () => { state.evidenceStatus = "quarantine"; show("evidence"); notify("Demo upload received. Package checks still pending."); });
+        if (!state.photo) { notify("needPhoto"); return; }
+        confirmAction("evidence");
       }
     });
     document.addEventListener("click", event => {
       const target = event.target.closest("button");
       if (!target || target.disabled) return;
+      if (target.dataset.language) { setLanguage(target.dataset.language); return; }
       if (target.dataset.view) { show(target.dataset.view); return; }
       const action = target.dataset.action;
       if (action === "cancel") { pendingAction = null; dialog.close(); return; }
       if (action === "signin") { state.signedIn = true; show("overview"); return; }
-      if (screens.some(([id]) => id === action)) { show(action); return; }
-      if (action === "connection") { state.offline = !state.offline; render(); notify(state.offline ? "Offline simulation enabled. Nothing can be sent." : "Connection simulation restored. Drafts have not been sent automatically."); }
-      if (action === "reset") confirmAction("Reset this walkthrough?", "<p>All in-memory drafts and synthetic receipts will be cleared. No real records exist or will be changed.</p>", () => { state = initialState(); show("welcome"); notify("Demo reset. No information retained."); });
+      if (screens.includes(action)) { show(action); return; }
+      if (action === "connection") { state.offline = !state.offline; render(); notify(state.offline ? "offlineEnabled" : "reconnected"); }
+      if (action === "reset") confirmAction("reset");
       if (action === "precheck") {
         if (!document.getElementById("claim-form").reportValidity()) return;
-        if (state.crop === "Sunflower") { notify("This example amendment needs a changed crop; the original is sunflower."); return; }
-        state.prechecked = true; render(); notify("Draft completeness checked only. Not a rule or eligibility decision.");
+        if (state.crop === "sunflower") { notify("chooseChanged"); return; }
+        state.prechecked = true; render(); notify("prechecked");
       }
-      if (action === "photo") { state.photo = !state.photo; render(); notify(state.photo ? "Synthetic placeholder attached. No camera or location accessed." : "Sample placeholder removed."); }
-      if (action === "register" && !state.offline) { state.evidenceStatus = "registered"; render(); notify("Demo package registered. Sufficiency and case outcome remain unassessed."); }
-      if (action === "review" && !state.offline && !state.reviewRequested) confirmAction("Request human review in the demo?", "<p>Your request will appear in the synthetic case history. No real official is contacted and no resolution time is promised.</p>", () => { state.reviewRequested = true; show("case"); notify("DEMO-REVIEW-001 created. Awaiting simulated human review."); });
-      if (action === "appeal" && !state.offline && !state.appealSent) confirmAction("Try the separate appeal scenario?", "<p>This illustrates a filing confirmation after a hypothetical adverse decision. Real decision references, grounds, evidence and statutory deadline validation are not implemented.</p><p>No appeal is filed. No payment is automatically suspended.</p>", () => { state.appealSent = true; show("case"); notify("DEMO-APPEAL-001 created for the separate example only."); });
-      if (action === "help") confirmAction("Assistance without losing your voice.", "<p>The real service must offer accessible assistance and approved alternatives where digital evidence is unsuitable.</p><p>An adviser would use their own identity and a scoped, revocable delegation. No delegation is created here. Verified contact details and service hours are still to be agreed.</p>", () => { notify("No adviser delegation or support request was created."); });
-      if (action === "evidence-general") notify("This first draft works through parcel 12 only. Production must scope evidence to the selected parcel, never silently switch it.");
+      if (action === "photo") { state.photo = !state.photo; render(); notify(state.photo ? "photoAdded" : "photoRemoved"); }
+      if (action === "register" && !state.offline) { state.evidenceStatus = "registered"; render(); notify("registrationDone"); }
+      if (action === "review" && !state.offline && !state.reviewRequested) confirmAction("review");
+      if (action === "appeal" && !state.offline && !state.appealSent) confirmAction("appeal");
+      if (action === "help") confirmAction("help");
+      if (action === "evidence-general") notify("sliceNote");
       if (action === "download") {
         const summary = [
-          "FIELD & FILE - SYNTHETIC DESIGN DRAFT - NOT AN OFFICIAL CASE RECORD",
+          t("exportTitle"),
           "DEMO-CLAIM-2026-047 / HU-DEMO-047-12",
-          "Original claim received: example 15 May 2026. Crop question remains unresolved.",
-          `Amendment receipt: ${state.amended ? "DEMO-AMD-001" : "none"}`,
-          `Response receipt: ${state.responseSent ? "DEMO-RESPONSE-001" : "none"}`,
-          `Evidence package: ${state.evidenceStatus}; sufficiency not assessed`,
-          `Human review request: ${state.reviewRequested ? "DEMO-REVIEW-001" : "none"}`,
-          "No adverse decision or real payment. This export is a summary, not the complete case file."
+          t("exportOriginal"),
+          `${t("exportAmendment")}: ${state.amended ? "DEMO-AMD-001" : t("none")}`,
+          `${t("exportResponse")}: ${state.responseSent ? "DEMO-RESPONSE-001" : t("none")}`,
+          `${t("exportEvidence")}: ${t({draft: "evidenceDraft", quarantine: "checksPending", registered: "registeredPending"}[state.evidenceStatus])}; ${t("pendingAssessment")}`,
+          `${t("exportReview")}: ${state.reviewRequested ? "DEMO-REVIEW-001" : t("none")}`,
+          t("exportEnd")
         ].join("\n");
         const url = URL.createObjectURL(new Blob([summary], {type:"text/plain;charset=utf-8"}));
-        const link = document.createElement("a"); link.href = url; link.download = "field-and-file-DEMO-summary.txt";
+        const link = document.createElement("a"); link.href = url; link.download = `field-and-file-DEMO-${language}.txt`;
         link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-        notify("Synthetic summary downloaded. No real case records included.");
+        notify("downloaded");
       }
     });
     document.getElementById("confirm-action").addEventListener("click", () => {
       const action = pendingAction;
       pendingAction = null;
       dialog.close();
-      if (action) action();
+      if (state.offline && ["amendment", "response", "evidence", "review", "appeal"].includes(action)) { notify("offlineKept"); return; }
+      if (action === "amendment") { state.amended = true; show("case"); notify("amendmentDone"); }
+      if (action === "response") { state.responseSent = true; show("case"); notify("responseDone"); }
+      if (action === "evidence") { state.evidenceStatus = "quarantine"; show("evidence"); notify("uploadDone"); }
+      if (action === "review") { state.reviewRequested = true; show("case"); notify("reviewDone"); }
+      if (action === "appeal") { state.appealSent = true; show("case"); notify("appealDone"); }
+      if (action === "reset") { state = initialState(); show("welcome"); notify("resetDone"); }
+      if (action === "help") notify("helpDone");
     });
     dialog.addEventListener("cancel", () => { pendingAction = null; });
+    dialog.addEventListener("close", () => { languageHome.prepend(languageControl); });
     render();
   </script>
 </body>
