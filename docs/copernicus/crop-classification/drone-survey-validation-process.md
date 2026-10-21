@@ -500,7 +500,7 @@ flowchart LR
 | Authorise upload | `evidence-api` | Creates a short-lived, task-scoped upload session; does not proxy large files |
 | Upload | Field application directly to Blob quarantine | Uses encrypted resumable uploads to approved per-blob SAS URLs; content limits are checked in quarantine |
 | Finalise mission | `evidence-api`, Event Grid, approved scanner, Service Bus | Pins manifest/object versions, waits for complete clean content, then publishes one logical mission-ready event |
-| Validate and process | `drone-evidence-worker` on AKS CPU or approved geospatial service | Idempotently verifies the pinned manifest and chain of custody, then produces versioned derivatives and quality report; exhausted retries surface through a monitored dead-letter queue |
+| Validate and process | `drone-evidence-worker` on AKS or approved geospatial service | Idempotently verifies the pinned manifest and chain of custody, then produces versioned derivatives and quality report; exhausted retries surface through a monitored dead-letter queue |
 | Optional image analysis | Separate Azure ML managed batch model | Analyses approved derivatives; does not reuse the Sentinel model contract |
 | Store lineage | Evidence storage plus immutable audit log | Separates raw evidence, derivatives, findings, and decisions |
 | Independent finding | Surveyor UI through `evidence-api` | Locks pre-AI attestation before releasing predictions; preserves assisted reconciliation separately |
@@ -509,9 +509,8 @@ flowchart LR
 | Audit | `audit-pack-worker` and Audit Evidence Agent | Compiles a draft package for authorised approval |
 
 Drone photogrammetry can be CPU- and memory-intensive. Small targeted jobs may run as
-resource-limited AKS Jobs on a dedicated CPU node pool; larger jobs may use an approved
-managed batch or geospatial-processing service. This does not require a GPU node pool
-for the baseline.
+resource-limited AKS Jobs on a dedicated node pool; larger jobs may use an approved
+managed batch or geospatial-processing service.
 
 ### 8.1 Edge and central responsibility
 

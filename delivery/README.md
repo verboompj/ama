@@ -13,6 +13,7 @@ delivery. The [team guide](../docs/delivery/README.md) explains roles, skills an
 | [Tasks](tasks.md) | Authorised-work prerequisites and initial workload backlog |
 | [Templates](templates/) | Assignments, design/review/plan contracts and handoff records |
 | [Work-package records](releases/README.md) | Artifact ownership, snapshots, evidence and loop ledgers |
+| [WP-001 foundation](releases/WP-001/context.md) | Draft non-production foundation scope and [open decisions](releases/WP-001/decisions.md) |
 
 Explanatory team guides live under [`docs/delivery/`](../docs/delivery/).
 Native agent, skill and prompt definitions live under `.github/` for client discovery.

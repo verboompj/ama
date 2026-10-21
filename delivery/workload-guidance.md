@@ -63,7 +63,7 @@ the detailed contracts. Material changes require an approved design amendment.
 
 | Area | Baseline |
 |---|---|
-| Compute | AKS Standard, CPU-only, explicit node pools, NAP disabled; Azure CNI Overlay/Cilium, Workload Identity and the approved HPA/KEDA/Cluster Autoscaler design |
+| Compute | AKS Standard, explicit node pools, NAP disabled; Azure CNI Overlay/Cilium, Workload Identity and the approved HPA/KEDA/Cluster Autoscaler design |
 | Foundation models | Managed Microsoft Foundry inference, not foundation models hosted in AKS; approved EU Regional/EU Data Zone processing for case/personal data, not Global deployments |
 | Custom models and raster work | Azure ML crop classification; separate optional drone vision; Copernicus Data Space APIs for appropriate raster processing |
 | State | Prediction, authoritative case and conversation state remain distinct; agents do not own entitlement or the official payment ledger |

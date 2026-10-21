@@ -17,7 +17,7 @@ description: Implement or test released AMA infrastructure using native Bicep co
    use `dependsOn` only where no data reference expresses a real dependency.
    Keep environment differences in parameter files and avoid cyclic RBAC wiring.
 5. Apply the released identities, private endpoints/DNS, egress, narrow role scopes,
-   diagnostics, CPU-only compute restrictions, retention, tags and naming.
+   diagnostics, approved compute configuration, retention, tags and naming.
    An AVM default does not automatically satisfy WAF or regulatory requirements.
 6. Use managed identity and secret references; never output credentials. For any
    approved Azure SQL implementation, use Entra-only authentication without SQL

@@ -32,7 +32,7 @@ Use `delivery/ai-ml-checks.md` for application/runtime and model/data acceptance
   WV/AI/ML checks. Light work can reference its existing approved plan.
 - Independently run available Bicep restore/build/lint, parameter compilation, and
   contract/policy assertions. Check module pins, environment variants, identities,
-  network rules, diagnostic wiring, CPU-only AKS restrictions, and output sensitivity.
+  network rules, diagnostic wiring, approved AKS configuration, and output sensitivity.
 - Build every scoped module/root, compile every required parameter variant and
   inspect warnings even when exit status is zero. Errors and undispositioned warnings
   block; verify effective service properties/AVM defaults, not just wrapper text.

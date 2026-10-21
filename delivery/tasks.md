@@ -1,8 +1,13 @@
 # Workload Delivery Backlog
 
-**All tasks are pending.** The coordinator selects work for the authorised objective
+**Reference tasks below are pending.** The coordinator selects work for the authorised objective
 and accepted [risk path](handoffs.md#risk-based-review-paths).
 The actual development plan fixes files, contracts, reviewers and tests.
+
+The tables below are reference catalogues. Live foundation preparation is tracked
+as F01-F07 in [WP-001](releases/WP-001/context.md#planned-work), with current state in
+its [ledger](releases/WP-001/ledger.md) and outstanding choices in its
+[decision register](releases/WP-001/decisions.md).
 
 ## Solution Slice Backlog
 

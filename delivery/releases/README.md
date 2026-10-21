@@ -4,6 +4,10 @@ No package is released yet. Create a directory when its task is authorised and s
 records for the accepted risk path. The layout below illustrates regulated infrastructure.
 Standard packages can combine scoped findings; light work references its approved baseline.
 
+[WP-001](WP-001/context.md) contains authorised non-production foundation planning.
+Its [decision register](WP-001/decisions.md) collects environment and owner choices;
+the [ledger](WP-001/ledger.md) records current state and approval boundaries.
+
 ```text
 delivery/releases/WP-001/
   context.md

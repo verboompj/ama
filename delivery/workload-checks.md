@@ -50,7 +50,7 @@ prevent release. Material changes invalidate affected design reviews.
 | WV10 | Reject public data-store access and verify the approved private connectivity/DNS configuration | Service-specific effective property/parameter assertions; appropriate private endpoint or approved private networking design; no assumption that creating an endpoint disables public access | locally-validated |
 | WV11 | Verify identity, RBAC and secret handling | AKS Workload Identity/managed identity and exact role scopes match design; no plaintext secrets/credential outputs; Entra-only SQL when SQL is in scope | locally-validated |
 | WV12 | Verify applicable TLS, subnet/NSG/egress and diagnostics controls | Supported TLS settings meet the approved minimum (at least TLS 1.2); allowed/denied paths and diagnostic destinations match design; no blanket NSG edits to platform-managed subnets | locally-validated |
-| WV13 | Verify platform restrictions and model/data contract wiring | Applicable CPU-only AKS/NAP, Foundry geography, state/evidence and endpoint/version configuration assertions; AI/ML quality evidence uses AI01-AI06 and ML01-ML08 | locally-validated |
+| WV13 | Verify platform restrictions and model/data contract wiring | Approved AKS configuration with NAP disabled, Foundry geography, state/evidence and endpoint/version assertions; AI/ML quality evidence uses AI01-AI06 and ML01-ML08 | locally-validated |
 | WV14 | Reconcile candidate, required reviews and documentation against the design | Tester results, required non-author/specialist dispositions, author-side architect conformance, matching runbooks/diagrams and pending operational checks | locally-validated |
 
 Instantiate assertions with service-specific paths and expected values in the plan.

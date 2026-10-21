@@ -7,7 +7,7 @@ services for the models and data capabilities that do not benefit from self-host
 
 The recommended split is:
 
-- **AKS CPU nodes** host the web application, agent orchestration, deterministic CAP
+- **AKS** hosts the web application, agent orchestration, deterministic CAP
   services, integrations, evidence APIs, and background workers.
 - **Microsoft Foundry model deployments** provide foundation-model inference.
 - **Azure Machine Learning managed compute and endpoints** train and serve the custom
@@ -107,7 +107,7 @@ flowchart TB
         EXTERNALID[Optional Entra External ID\napproved federation broker]
     end
 
-    subgraph AKS["AKS Standard - CPU Only"]
+    subgraph AKS["AKS Standard"]
         INGRESS[Gateway API / App Routing]
         BFF[web-bff]
         INTERACTIVE[interactive-agent-api]
@@ -678,7 +678,7 @@ Use openEO or Sentinel Hub for:
 - temporal aggregation;
 - archive-scale processing.
 
-### AKS CPU
+### AKS
 
 Use AKS jobs for:
 
@@ -706,20 +706,19 @@ windows are sufficient.
 | Decision | Recommendation |
 |---|---|
 | SKU | **AKS Standard**: explicit node pools, scaling, maintenance, and policy controls support the platform-learning objective |
-| Node pools | System pool plus CPU user pool; no GPU pool |
+| Node pools | Explicit system and user pools sized for approved workloads |
 | Networking | Azure CNI Overlay powered by Cilium |
 | Ingress | App Routing/Gateway API |
 | Identity | Microsoft Entra Workload Identity |
 | Secrets | Key Vault plus Secrets Store CSI Driver only where managed identity is not possible |
-| Scaling | HPA for APIs, KEDA for queue workers, Cluster Autoscaler for CPU node pools; do not enable NAP |
+| Scaling | HPA for APIs, KEDA for queue workers, Cluster Autoscaler for node pools; do not enable NAP |
 | Availability | Availability Zones, topology spread, PodDisruptionBudgets |
 | Images | Private ACR, signed/scanned images, managed-identity pulls |
 | Policy | Azure Policy/Gatekeeper rejects `nvidia.com/gpu`, GPU tolerations/runtime classes, privileged workloads, and unapproved images |
 | Observability | Managed Prometheus/Grafana, Container Insights, Application Insights/OpenTelemetry |
 
-CPU-only operation is an enforced platform rule, not merely the absence of a GPU pool.
-Restrict allowed VM families/SKUs in infrastructure code and subscription policy, and
-reject workload specifications that request or tolerate GPU resources.
+Restrict allowed VM families/SKUs in infrastructure code and subscription policy
+to the released design, and validate workload resource requests against that scope.
 
 ## 13. Agent Scaling
 
@@ -875,7 +874,7 @@ The deployment pipeline should require:
 
 Main cost levers:
 
-- AKS CPU baseline and autoscaling;
+- AKS baseline and autoscaling;
 - Foundry model tokens/capacity;
 - Azure AI Search tier;
 - AML training jobs;
@@ -901,7 +900,7 @@ disabled outside demonstration/interactive periods where operationally acceptabl
 
 ## 20. MVP Sequence
 
-1. Deploy an AKS CPU cluster with Workload Identity, ingress, ACR, and monitoring.
+1. Deploy an AKS cluster with Workload Identity, ingress, ACR, and monitoring.
 2. Deploy `web-bff`, `interactive-agent-api`, `agent-worker`, `case-api`,
    `rules-service`, and `evidence-api`.
 3. Deploy an EU Regional or EU Data Zone Foundry chat model and grant the agent
@@ -935,13 +934,13 @@ The architecture still works:
    contract even though AML and AKS have different authentication and scoring APIs.
 5. Move it to Azure ML later without changing the agent tool.
 
-This puts one additional workload on AKS, but still requires no GPU nodes.
+This puts one additional workload on AKS.
 
 ## 22. Recommendation
 
 Adopt an **AKS-centered, Foundry-backed architecture**:
 
-- agents and deterministic application services run on AKS CPU;
+- agents and deterministic application services run on AKS;
 - foundation models remain managed in Foundry;
 - crop training and serving use Azure ML managed compute/endpoints;
 - raster-heavy processing uses Copernicus APIs or managed batch compute;

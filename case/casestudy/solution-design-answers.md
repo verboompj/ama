@@ -490,7 +490,7 @@ Trust should be measured using:
 
 | Capability | Recommended platform |
 |---|---|
-| Farmer/staff portal, case APIs, rules, evidence, and agent orchestration | CPU-only AKS |
+| Farmer/staff portal, case APIs, rules, evidence, and agent orchestration | AKS |
 | Foundation-model inference and embeddings | Microsoft Foundry managed model deployments |
 | Crop/activity model training and batch/online inference | Azure Machine Learning |
 | Sentinel catalogue and large raster processing | Copernicus Data Space services |

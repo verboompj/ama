@@ -22,7 +22,7 @@ description: Establish AMA case context, source precedence and approved risk sco
 3. Read the relevant sections through `docs/delivery/context-and-tools.md`. Report
    contradictions with references; do not silently rewrite the baseline.
 4. Preserve these invariants unless the user approves a recorded design change:
-   - CPU-only AKS Standard runs application/agent orchestration; no GPU pool or NAP.
+   - AKS Standard runs application/agent orchestration with explicit node pools and NAP disabled.
    - Foundry handles managed foundation models; Azure ML handles the custom crop
      classifier. Copernicus APIs handle appropriate raster-heavy processing.
    - Case/personal model processing uses approved EU Regional/EU Data Zone options,
