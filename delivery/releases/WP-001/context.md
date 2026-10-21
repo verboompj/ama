@@ -51,10 +51,13 @@ SKUs, regional topology, AVM versions or a bill of materials.
 
 ## Risk and Acceptance
 
-Risk classification is **pending accountable-owner acceptance**. Non-production
-scope alone does not determine the path: identity, network exposure and trust changes
-must be assessed under [the risk matrix](../../handoffs.md#risk-based-review-paths).
-Assign required technical and specialist reviews after classification.
+The requesting user accepted the **regulated review path** on 21 October 2026
+for the foundation's network, identity and RBAC boundaries under
+[the risk matrix](../../handoffs.md#risk-based-review-paths). The infrastructure-tester
+provides non-author technical review, security/compliance agents provide scoped
+findings, and the requesting user retains human approval. Reviews apply to the
+non-production/public-synthetic-data scope. Required corporate controls remain
+subject to discovery; review execution needs its assignment and fixed inputs.
 
 The architect derives exact acceptance criteria from approved decisions. At minimum,
 the design must identify complete resources/interfaces, verified published AVM

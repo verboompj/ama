@@ -24,31 +24,31 @@ Any authenticated discovery needs its own authority and confirmed Azure context.
 | ID | Decision / information needed | Accountable owner | Required answer / evidence | Status |
 |---|---|---|---|---|
 | FND-01 | Design approver, platform/network/security owners, deployment operator and operational service owner | Requesting user | User confirmed ownership of all listed responsibilities and the budget-owner role on 21 October 2026; see accepted record below | ACCEPTED |
-| FND-02 | Tenant/subscription and deployment scope | Platform owner | Target subscription selected in the 21 October 2026 environment form; tenant/immutable subscription IDs, deployment scope and authority remain unverified | PROPOSED |
+| FND-02 | Tenant/subscription and deployment scope | Platform owner | Target subscription selected; dedicated POC resource group(s) accepted 21 October 2026. Exact tenant/subscription IDs and permissions remain unverified; pipeline identity choice deferred | PROPOSED |
 | FND-03 | Existing platform services and constraints | Platform owner with network/security owners | User reports no existing platform services; inherited policy, network constraints and permitted SKUs/regions remain unverified | PROPOSED |
 | FND-04 | Environment and permitted data | Business/data owner | Single non-production POC; public and synthetic data only, no real claimant/case data; accepted 21 October 2026 | ACCEPTED |
-| FND-05 | Risk path and required reviewers | Accountable owner with coordinator | Accepted classification and triggers, named non-author reviewer, required specialist/human approvals | OPEN |
+| FND-05 | Risk path and required reviewers | Accountable owner with coordinator | Regulated foundation review accepted 21 October 2026; infrastructure-tester supplies non-author technical review, security/compliance agents supply scoped findings, requesting user retains human approval | ACCEPTED |
 
 ## 2. Location, Network and Access
 
 | ID | Decision / information needed | Accountable owner | Required answer / evidence | Status |
 |---|---|---|---|---|
-| FND-06 | Primary region and availability assumptions | Platform owner with architect | Approved EU region, zone strategy and permitted alternatives; later official service/SKU availability and quota evidence | OPEN |
-| FND-07 | Addressing and platform attachment | Network owner | Approved non-overlapping VNet/subnet, pod/service ranges, future private-endpoint capacity and hub/peering routes; reference protected inventory | OPEN |
-| FND-08 | AKS API and operator connectivity | Platform/security owners | Private/public API decision, authorised operator and test-runner access, DNS resolution and emergency access; restricted exposure requires explicit approval | OPEN |
-| FND-09 | Egress and private DNS ownership | Network/security owners | Existing firewall/NAT route versus new components, allowed external dependencies, DNS zones/links/forwarding and owning team; cost implications | OPEN |
-| FND-10 | Application ingress and certificates | Platform/security owners | Public/private application entry, DNS zone owner, TLS issuance/renewal, controller choice and implementation package; baseline contract for later apps | OPEN |
-| FND-11 | Registry connectivity and identity boundaries | Platform/security owners | ACR reuse/SKU/networking, image pull/build identities, Entra groups, RBAC scopes and federated workload contract; no credentials in outputs | OPEN |
+| FND-06 | Primary region and availability assumptions | Platform owner with architect | Sweden Central preferred; single region accepted 21 October 2026. Zone topology/cost to be assessed; policy, service/SKU availability and quotas remain unverified | PROPOSED |
+| FND-07 | Addressing and platform attachment | Network owner | Dedicated POC VNet proposed subject to corporate approval; exact VNet/subnet/pod/service ranges, overlap checks and future endpoint capacity pending | PROPOSED |
+| FND-08 | AKS API and operator connectivity | Platform/security owners | Compare private API with restricted-public API before selecting; no existing private access route known. Operator/runner connectivity, DNS and emergency access remain unresolved | OPEN |
+| FND-09 | Egress and private DNS ownership | Network/security owners | NAT Gateway selected for the POC; POC-owned private DNS zones proposed subject to corporate approval. Egress restrictions, approved dependencies, DNS links/forwarding and costs pending | PROPOSED |
+| FND-10 | Application ingress and certificates | Platform/security owners | Private-network-only application access accepted 21 October 2026; no domain ready. Propose hostname/TLS options and costs; ingress/controller and private client access route pending | PROPOSED |
+| FND-11 | Registry connectivity and identity boundaries | Platform/security owners | Compare private endpoint and restricted-public ACR before selection; build/pull identities, Entra groups, role scopes and access paths remain to be designed | OPEN |
 
 ## 3. Capacity, Cost and Operations
 
 | ID | Decision / information needed | Accountable owner | Required answer / evidence | Status |
 |---|---|---|---|---|
-| FND-12 | Initial and maximum capacity | Platform owner with application/ML input | Node-pool roles, SKU candidates, node minima/maxima, expected pods/concurrency, autoscaling boundaries and resource quota requirements | OPEN |
-| FND-13 | Monthly budget and permitted running hours | Budget owner | EUR ceiling, currency/tax assumptions, shared-service allocation, alert recipients and action owner; shutdown/restart expectations and residual charges | OPEN |
-| FND-14 | Availability and recovery targets | Business/platform owners | Operating window, tolerable downtime, RTO/RPO where applicable, rebuild/restore strategy and permitted test methods | OPEN |
-| FND-15 | Diagnostics and operational responsibilities | Operational/security owners | Reused/new destinations, selected logs/metrics, retention/ingestion limits, alerts, incidents, maintenance/upgrade windows and recovery ownership | OPEN |
-| FND-16 | Naming, tags and lifecycle | Platform/budget owners | Naming rules and environment/workload/owner/costCenter values, resource protection, expiry/review date and authorised cleanup process | OPEN |
+| FND-12 | Initial and maximum capacity | Platform owner with application/ML input | Very small POC, maximum 3 users; concurrency/background workload and node roles/SKUs/counts/scaling limits require design and feasibility evidence | PROPOSED |
+| FND-13 | Monthly budget and permitted running hours | Budget owner | No monetary ceiling specified; business/demo hours preferred. Produce costed options with supported stop/start, residual charges, alerts and explicit deployment cost approval | PROPOSED |
+| FND-14 | Availability and recovery targets | Business/platform owners | Manual rebuild acceptable; no HA target requested. Propose recovery time and data protection; actual RTO/RPO and corporate requirements unresolved | PROPOSED |
+| FND-15 | Diagnostics and operational responsibilities | Operational/security owners | Basic actionable health/error/security monitoring requested; propose collection, retention/ingestion limits and baseline-stack disposition. No automatic scheduling required now | PROPOSED |
+| FND-16 | Naming, tags and lifecycle | Platform/budget owners | Review/expiry unknown; naming/tag values and resource protection pending. Cleanup requires explicit authorisation | OPEN |
 
 Budget alerts notify; they do not impose a hard spending cap. Scale-down decisions
 must account for the AKS tier, network services, registry, disks and stored telemetry
@@ -94,11 +94,100 @@ Azure access or deployment.
 |---|---|
 | Source | User's direct answers to the environment form, 21 October 2026 |
 | Target reference | User-selected internal Azure subscription; exact display name is retained in the conversation rather than copied into public planning records |
-| FND-02 status | PROPOSED: intended subscription selected; tenant/subscription identity, resource-group creation versus existing scope, permissions and discovery authority pending |
+| FND-02 status | PROPOSED overall: intended subscription selected and dedicated POC resource group(s) accepted; tenant/subscription identity, permissions and discovery authority pending |
 | Existing platform | User reports none to reuse; design starts from that declaration |
 | FND-03 status | PROPOSED: actual inherited Azure policies, restrictions, quotas and networking constraints still need authorised verification |
 | FND-04 status | ACCEPTED: single non-production POC environment, public/synthetic data only; no real claimant/case data |
 | Execution boundary | No Azure login/discovery, identity creation, RBAC assignment, workflow creation or deployment authorised by these answers |
+
+### FND-02: Resource Organisation and Access Follow-Up
+
+| Field | Recorded answer / remaining work |
+|---|---|
+| Source | User's direct answers to the scope/access form, 21 October 2026 |
+| Resource organisation | ACCEPTED: create dedicated resource group(s) for this POC; exact group count/names and deployment-root scope to be proposed in the design |
+| Current permissions | Not yet verified |
+| Corporate constraints | Unknown; require separately authorised discovery |
+| Pipeline identity | Choice deferred; no OIDC, service principal or managed-identity option selected |
+| Bootstrap requirement | Resource-group creation and any later identity/RBAC setup need an appropriately authorised operator and explicit scope |
+| Authority | Planning decisions only; no Azure inspection, mutation or workflow execution authorised |
+
+### FND-05: Foundation Review Path
+
+| Field | Recorded decision |
+|---|---|
+| Status / approval | ACCEPTED by requesting user in the review-scope form, 21 October 2026 |
+| Path / rationale | Regulated review for the bounded foundation's network, identity and RBAC trust boundaries |
+| Non-author technical reviewer | infrastructure-tester; dedicated five-pillar architecture review and testability evidence |
+| Specialist reviewers | security-reviewer and compliance-reviewer; findings scoped to the public/synthetic-data, non-production foundation |
+| Feasibility / human approval | bicep-engineer verifies published AVM contracts; requesting user approves the fixed design/plan |
+| Limits | Shared-model/context limitations must be recorded. Actual corporate requirements remain subject to discovery |
+| Execution boundary | Reviewer arrangement accepted; no review execution, Azure access or deployment approved by this decision |
+
+### FND-06: Region and Footprint
+
+| Field | Recorded decision / remaining evidence |
+|---|---|
+| Source | User's direct answers to the region form, 21 October 2026 |
+| Preferred region | Sweden Central |
+| Regional footprint | ACCEPTED: one region; assess availability-zone options and cost during design |
+| Overall status | PROPOSED: corporate policy, service/SKU availability and quota still require verification; zone topology remains open |
+| Dependency boundary | Later Foundry and ML packages verify their own availability, geography and connectivity requirements |
+| Cost boundary | Earlier West Europe ML POC pricing is not a Sweden Central foundation estimate |
+| Authority | Design preference only; no Azure access or resource creation authorised |
+
+### FND-07/FND-08: Network and Operator Access
+
+| Field | Recorded answer / remaining work |
+|---|---|
+| Source | User's direct answers to the network/access form, 21 October 2026 |
+| Network direction | PROPOSED: dedicated POC VNet, subject to corporate network approval |
+| Address plan | Unassigned; verify overlap, policy and approved subnet/pod/service capacity before selection |
+| AKS API choice | OPEN: architect to compare private and restricted-public API options, including security, operator access, cost and runner connectivity |
+| Existing private connectivity | No existing route known; no VPN, connected runner or management host assumed |
+| Exposure boundary | Restricted-public access is an option for assessment only; no public API or firewall rule approved |
+| Related choices | Private DNS/egress FND-09 and application ingress FND-10 remain separate decisions |
+
+### FND-09/FND-10: Egress, DNS and Application Access
+
+| Field | Recorded answer / remaining work |
+|---|---|
+| Source | User's direct answers to the egress/DNS/ingress form, 21 October 2026 |
+| Outbound connectivity | ACCEPTED design direction: use NAT Gateway for the POC; verify corporate policy, supported AKS configuration, public IP requirements, dependencies and regional costs |
+| Egress controls | NAT provides outbound connectivity and stable source addresses, not destination filtering; architect/security reviewer must specify required filtering and evidence. A policy conflict requires an explicit decision |
+| Private DNS | PROPOSED: POC-owned private DNS zones, subject to corporate approval; links, forwarding and client resolution remain to be designed |
+| Application audience | ACCEPTED: only users on an approved private network; no public application ingress authorised |
+| Hostname and certificates | No domain ready; propose hostname, certificate trust/issuance/renewal and costs, including any necessary domain ownership |
+| Access dependency | No existing private route is known. Compare an approved VPN, connected workstation/runner or other authorised access path before claiming the application is reachable |
+| Scope boundary | Design the private ingress/TLS contract and identify which foundation or later application package implements each component; AKS management API selection remains FND-08 |
+| Overall status | PROPOSED until private access, DNS/TLS, effective egress controls, cost and corporate constraints are resolved; no Azure configuration changes authorised |
+
+### FND-11-FND-13: Registry, Capacity and Cost
+
+| Field | Recorded answer / remaining work |
+|---|---|
+| Source | User's direct answers to the registry/capacity/budget form, 21 October 2026 |
+| Registry access | OPEN: compare private endpoint and restricted-public ACR access, including SKU, DNS, image build/pull paths and cost |
+| Expected usage | Very small POC; maximum 3 users. This is user population, not a measured concurrency, pod-count or compute requirement |
+| Capacity status | PROPOSED: architect selects node roles/SKUs/counts and bounded scaling from application/background workload and platform requirements; no sizing approved yet |
+| Operating window | Business/demo hours; assess supported AKS stop/start, startup delay, scheduling ownership and residual costs |
+| Budget | User specified no monetary limit. No numeric ceiling is set; provide a cost estimate and obtain explicit cost/deployment approval before provisioning |
+| Cost boundary | Absence of a ceiling does not authorise unrestricted consumption or new resources. Include AKS tier, nodes, NAT/public IP, registry, private access, disks, DNS and monitoring |
+| Remaining controls | Alert thresholds/recipients, operating schedule/timezone, restart readiness and approved resource limits remain to be agreed |
+
+### FND-14-FND-16: Recovery, Monitoring and Lifecycle
+
+| Field | Recorded answer / remaining work |
+|---|---|
+| Source | User's direct answers to the recovery/operations/lifecycle form, 21 October 2026 |
+| Recovery direction | Manual rebuild acceptable; no high-availability target requested for the POC. Propose recovery time and data protection rather than inventing RTO/RPO values |
+| Resilience disposition | Architect must reconcile this preference with the maintained availability-zone baseline, corporate requirements, stateful dependencies and documented recovery limitations |
+| Monitoring direction | Basic actionable health/error/security monitoring; propose retention, ingestion limits, alerts and cost |
+| Monitoring disposition | Architect must explicitly assess any reduced collection/stack against the maintained Prometheus/Grafana, Container Insights and Application Insights/OpenTelemetry baseline before design approval |
+| Scheduling | No automatic scheduling required at present; propose operator-controlled start/stop with readiness checks. Exact operating hours/timezone remain unspecified |
+| Lifecycle | Review/expiry date unknown; naming/tag values, protection and cleanup process remain open |
+| Ownership | Requesting user remains the operational owner under FND-01 |
+| Authority | No recovery drill, scheduling implementation or deletion authorised by these answers |
 
 ### Format for Further Decisions
 

@@ -10,17 +10,17 @@
 | Authorised scope | Repository planning records only; user instruction of 21 October 2026 referenced in [context](context.md) |
 | Baseline input | `ffa66c5b0efc7d144170db9464957123faef6eb5`, scoped architecture and delivery contracts |
 | Current planning outputs | Working-tree versions of context, decisions, ledger and F01 assignment; no immutable candidate review reference yet |
-| Risk path | Pending accountable-owner acceptance |
+| Risk path | Regulated foundation review accepted by requesting user, 21 October 2026; see FND-05 |
 | Design release / human approval | Not recorded |
 | Azure discovery / validation / deployment | NOT RUN; not authorised by this preparation task |
-| Next owner | User resolves FND-02 scope/authority and FND-05 risk path; authorised discovery later verifies FND-02/FND-03 facts |
+| Next owner | Coordinator prepares the scoped architecture assignment from recorded preferences; resolve or explicitly bound target/policy discovery prerequisites first. Architect proposes access, sizing, cost, recovery and monitoring options; no automatic design release |
 
 ## Task State
 
 | Task | State | Evidence / blocker |
 |---|---|---|
 | F01 | done | [Context](context.md), [decision register](decisions.md), this ledger and [accepted preparation assignment](assignments/F01-scope.md); decision preparation only |
-| F02 | blocked | Ownership and non-production/public-synthetic data boundary accepted; target subscription selected and no existing platform reported; deployment scope/authority, inherited constraints and accepted risk path pending |
+| F02 | blocked | Ownership, dedicated POC resource groups, public/synthetic-data scope and regulated review path accepted; target subscription selected and no existing platform reported; permissions and inherited constraints unverified |
 | F03-F07 | pending | Their prerequisites and assignments remain pending |
 
 ## Decisions and Approvals
@@ -29,9 +29,20 @@
 |---|---|---|
 | User instruction, 21 October 2026 | Bounded foundation scope and decision-record preparation accepted | Repository planning only |
 | FND-01 | ACCEPTED | Requesting user confirmed all foundation owner/operator roles and budget ownership in the 21 October 2026 ownership form; independent review remains separate |
-| FND-02 / FND-03 | PROPOSED | User selected the intended subscription and reports no existing platform; exact context/scope/permissions and inherited constraints remain unverified |
+| FND-02 / FND-03 | PROPOSED | Intended subscription and dedicated POC resource groups selected; no existing platform reported. Exact context/permissions and inherited constraints remain unverified; pipeline identity choice deferred |
 | FND-04 | ACCEPTED | One non-production POC; public/synthetic data only, no real claimant/case data; 21 October 2026 environment form |
-| FND-05-FND-19 | OPEN | See decision register; no design/deployment approval inferred |
+| FND-05 | ACCEPTED | Regulated foundation review; infrastructure-tester non-author technical review and scoped security/compliance findings; requesting user retains human approval |
+| FND-06 | PROPOSED | Sweden Central preference, one-region footprint; availability-zone options/cost, corporate policy, service/SKU availability and quota require assessment |
+| FND-07 | PROPOSED | Dedicated POC VNet subject to corporate approval; exact addressing and overlap checks pending |
+| FND-08 | OPEN | Compare private and restricted-public AKS API; no existing private route known; no exposure approved |
+| FND-09 | PROPOSED | NAT Gateway selected for POC egress; POC-owned private DNS subject to corporate approval; effective egress controls, DNS integration and costs unresolved |
+| FND-10 | PROPOSED | Private-network-only application audience accepted; no domain ready; hostname/TLS options and private access route need design |
+| FND-11 | OPEN | Compare private endpoint and restricted-public ACR; identities and connectivity require design |
+| FND-12 | PROPOSED | Very small POC, max 3 users; node sizing/scaling and actual workload envelope unresolved |
+| FND-13 | PROPOSED | Business/demo hours; no monetary ceiling specified. Supported stop/start, full cost estimate, residual charges and explicit cost approval still required |
+| FND-14 | PROPOSED | Manual rebuild acceptable; no HA target requested. Recovery time, data protection and baseline/corporate resilience disposition need design |
+| FND-15 | PROPOSED | Basic actionable monitoring; retention/ingestion and baseline-stack disposition pending. No automatic scheduling required now |
+| FND-16-FND-19 | OPEN | Lifecycle/naming details and later release/execution approvals unresolved; no deployment approval inferred |
 
 ## Review / Test / Validation Loops
 
