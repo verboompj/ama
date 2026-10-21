@@ -33,7 +33,7 @@ Any authenticated discovery needs its own authority and confirmed Azure context.
 
 | ID | Decision / information needed | Accountable owner | Required answer / evidence | Status |
 |---|---|---|---|---|
-| FND-06 | Primary region and availability assumptions | Platform owner with architect | Sweden Central preferred; single region accepted. [Assessment](assessment.md) records regional quota, candidate node SKUs/zones and AKS versions; topology/cost, service-specific feasibility and remaining constraints still require design | PROPOSED |
+| FND-06 | Primary region and availability assumptions | Platform owner with architect | Sweden Central preferred; single region accepted. [Assessment](assessment.md) records regional quota, sampled VM SKU/zone availability and AKS versions, not sizing recommendations; topology/cost, service-specific feasibility and remaining constraints still require design | PROPOSED |
 | FND-07 | Addressing and platform attachment | Network owner | Dedicated POC VNet proposed subject to corporate approval; exact VNet/subnet/pod/service ranges, overlap checks and future endpoint capacity pending | PROPOSED |
 | FND-08 | AKS API and operator connectivity | Platform/security owners | Compare private API with restricted-public API before selecting; no existing private access route known. Operator/runner connectivity, DNS and emergency access remain unresolved | OPEN |
 | FND-09 | Egress and private DNS ownership | Network/security owners | NAT Gateway selected for the POC; POC-owned private DNS zones proposed subject to corporate approval. Egress restrictions, approved dependencies, DNS links/forwarding and costs pending | PROPOSED |
@@ -141,7 +141,7 @@ Azure access or deployment.
 | Inherited policies | Two observed management-group assignments enforce MFA for human create/update and delete operations; effective authorisation and complete constraints remain unverified |
 | Denies / exemptions | Both `atScope()` listings returned zero entries, one page each, no nextLink; limited to caller-visible at/above-subscription coverage, not future child scopes or corporate attestation |
 | Existing estate | Attempt-1 inventory confirms a non-empty estate; no inventory reproduced here and no reuse approved. Resource-level deletion locks observed |
-| Regional capacity | Sweden Central total regional vCPU usage 0 / limit 20; DSv5 and DASv5 families each 0 / limit 20. Four D4/D8 candidate SKUs list no restrictions and zones 1-3; allocation is not guaranteed |
+| Regional capacity | Sweden Central total regional vCPU usage 0 / limit 20; DSv5 and DASv5 families each 0 / limit 20. Four sampled D4/D8 SKUs list no restrictions and zones 1-3; these are availability observations, not a design shortlist or sizing recommendation. Allocation is not guaranteed |
 | AKS and tooling | Regional versions returned, with minor 1.36 marked default; Azure CLI 2.84.0 and existing CLI-managed Bicep 0.43.8 available. No version/SKU chosen or tool installed |
 | Status impact | FND-02, FND-03 and FND-06 stay PROPOSED; evidence narrows unknowns but does not approve permissions, topology, cost or service configuration |
 | Next owner | Coordinator integrates completed F02 and separately assigns bounded F03 options to architect. Platform/network/security owner supplies required design-specific constraint decisions; budget/topology choices remain unaccepted |
@@ -165,7 +165,7 @@ Azure access or deployment.
 | Source | User's direct answers to the region form, 21 October 2026 |
 | Preferred region | Sweden Central |
 | Regional footprint | ACCEPTED: one region; assess availability-zone options and cost during design |
-| Overall status | PROPOSED: initial quota, node-SKU/zone and AKS-version evidence recorded in [assessment](assessment.md); remaining constraints, design-specific service feasibility and zone topology remain open |
+| Overall status | PROPOSED: initial quota, sampled VM SKU/zone availability and AKS-version evidence recorded in [assessment](assessment.md); no node sizing recommended or selected. Remaining constraints, design-specific service feasibility and zone topology remain open |
 | Dependency boundary | Later Foundry and ML packages verify their own availability, geography and connectivity requirements |
 | Cost boundary | Earlier West Europe ML POC pricing is not a Sweden Central foundation estimate |
 | Authority | Design preference only; no Azure access or resource creation authorised |

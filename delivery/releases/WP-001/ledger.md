@@ -32,7 +32,7 @@
 | FND-02 / FND-03 | PROPOSED overall; F02 inputs complete | Accepted target and dedicated-group/no-reuse direction retained. [Assessment](assessment.md) records enabled subscription/spending limit, inherited MFA policies, existing estate/providers and successful permissions/deny/exemption reads. Exact organisation/candidate constraints remain F03/design-acceptance work; pipeline identity deferred |
 | FND-04 | ACCEPTED | One non-production POC; public/synthetic data only, no real claimant/case data; 21 October 2026 environment form |
 | FND-05 | ACCEPTED | Regulated foundation review; infrastructure-tester non-author technical review and scoped security/compliance findings; requesting user retains human approval |
-| FND-06 | PROPOSED | Sweden Central regional quota, four candidate node SKUs/zones and AKS versions observed in [assessment](assessment.md); actual sizing, topology/cost, service-specific feasibility and constraints remain unresolved |
+| FND-06 | PROPOSED | Sweden Central regional quota, sampled availability for four VM SKUs/zones and AKS versions observed in [assessment](assessment.md); not a design shortlist or sizing recommendation. Actual sizing, topology/cost, service-specific feasibility and constraints remain unresolved |
 | FND-07 | PROPOSED | Dedicated POC VNet subject to corporate approval; exact addressing and overlap checks pending |
 | FND-08 | OPEN | Compare private and restricted-public AKS API; no existing private route known; no exposure approved |
 | FND-09 | PROPOSED | NAT Gateway selected for POC egress; POC-owned private DNS subject to corporate approval; effective egress controls, DNS integration and costs unresolved |

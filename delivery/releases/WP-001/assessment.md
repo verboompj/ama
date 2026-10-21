@@ -38,7 +38,7 @@ gate.
 | Foundation provider registration | PASS | Compute, ContainerService, ContainerRegistry, Network, ManagedIdentity, OperationalInsights, Insights, Monitor, Dashboard, PolicyInsights, Authorization, Resources, Storage and KeyVault were registered |
 | Existing resources | PASS | Attempt-1 inventory establishes a non-empty subscription; no resource inventory is reproduced here. User requests no reuse; no existing-resource reuse or change is approved |
 | Sweden Central compute quota | PASS | Total regional vCPU usage 0 / limit 20; DSv5 and DASv5 family usage each 0 / limit 20. These limits overlap rather than add together |
-| Candidate VM SKU listing | PASS | `Standard_D4s_v5`, `Standard_D4as_v5`, `Standard_D8s_v5` and `Standard_D8as_v5` returned no SKU restrictions and listed zones 1, 2 and 3; details below |
+| Sampled VM SKU availability listing | PASS | `Standard_D4s_v5`, `Standard_D4as_v5`, `Standard_D8s_v5` and `Standard_D8as_v5` returned no SKU restrictions and listed zones 1, 2 and 3; availability observations only, not sizing recommendations |
 | AKS version listing | PASS | Regional API returned version/support-plan information; minor 1.36 was marked default with patches 1.36.0-1.36.4. No version selected or pinned |
 | Local Azure CLI | PASS | Installed Azure CLI 2.84.0; quota extension 1.0.0 |
 | Local Bicep | PASS | Existing Azure CLI-managed executable returned Bicep 0.43.8; standalone `bicep` was not on PATH. Nothing installed or upgraded |
@@ -48,14 +48,20 @@ gate.
 
 ### Capacity Inputs
 
-| Candidate SKU | vCPUs | Memory | Architecture | Listed zones | Listed restrictions |
+**Sampled availability observations, not sizing recommendations.** These four
+sizes were sampled during discovery, not derived from workload requirements.
+The sample is not a design shortlist or a complete regional SKU inventory and
+establishes neither workload suitability nor affordability.
+
+| Sampled VM SKU | vCPUs | Memory | Architecture | Listed zones | Listed restrictions |
 |---|---|---|---|---|---|
 | Standard_D4s_v5 | 4 | 16 GB | x64 | 1, 2, 3 | None returned |
 | Standard_D4as_v5 | 4 | 16 GB | x64 | 1, 2, 3 | None returned |
 | Standard_D8s_v5 | 8 | 32 GB | x64 | 1, 2, 3 | None returned |
 | Standard_D8as_v5 | 8 | 32 GB | x64 | 1, 2, 3 | None returned |
 
-These are candidates for architecture assessment, not approved node sizes.
+No node size, count or scaling configuration has been selected. Sizing belongs to
+F03 and must follow workload requirements, node-pool design and cost assessment.
 The design must account for every pool, autoscaler maximum, upgrade surge and any
 other regional compute within the 20-vCPU total and applicable family limits.
 Quota and zone/SKU listings do not reserve capacity or guarantee allocation.
