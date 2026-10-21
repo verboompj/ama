@@ -23,10 +23,10 @@ Any authenticated discovery needs its own authority and confirmed Azure context.
 
 | ID | Decision / information needed | Accountable owner | Required answer / evidence | Status |
 |---|---|---|---|---|
-| FND-01 | Design approver, platform/network/security owners, deployment operator and operational service owner | User / accountable sponsor | Safe owner/group references, responsibilities and approval authority; identify gaps | OPEN |
-| FND-02 | Tenant/subscription and deployment scope | Platform owner | Approved target reference, resource-group versus subscription deployment authority; actual context confirmation before authenticated work | OPEN |
-| FND-03 | Existing platform services and constraints | Platform owner with network/security owners | Reuse/create inventory for hub, DNS, policy, registry, monitoring and identity; inherited policies, locks and allowed regions/SKUs | OPEN |
-| FND-04 | Environment and permitted data | Business/data owner | One non-production environment; public/synthetic-only proposal accepted or revised; exclude real claimant/case data until separately authorised | OPEN |
+| FND-01 | Design approver, platform/network/security owners, deployment operator and operational service owner | Requesting user | User confirmed ownership of all listed responsibilities and the budget-owner role on 21 October 2026; see accepted record below | ACCEPTED |
+| FND-02 | Tenant/subscription and deployment scope | Platform owner | Target subscription selected in the 21 October 2026 environment form; tenant/immutable subscription IDs, deployment scope and authority remain unverified | PROPOSED |
+| FND-03 | Existing platform services and constraints | Platform owner with network/security owners | User reports no existing platform services; inherited policy, network constraints and permitted SKUs/regions remain unverified | PROPOSED |
+| FND-04 | Environment and permitted data | Business/data owner | Single non-production POC; public and synthetic data only, no real claimant/case data; accepted 21 October 2026 | ACCEPTED |
 | FND-05 | Risk path and required reviewers | Accountable owner with coordinator | Accepted classification and triggers, named non-author reviewer, required specialist/human approvals | OPEN |
 
 ## 2. Location, Network and Access
@@ -67,7 +67,40 @@ options can be explored while remaining targets are open; no design release occu
 until material choices and required feasibility/review evidence are resolved.
 FND-18 and FND-19 remain later-gate decisions and do not block drafting the design.
 
-## Decision Record Format
+## Decision Records
+
+### FND-01: Foundation Ownership
+
+| Field | Recorded decision |
+|---|---|
+| Status | ACCEPTED |
+| Scope | WP-001 non-production foundation |
+| Accountable owner / human design approver | Requesting user |
+| Platform / network / security owners | Requesting user |
+| Budget owner | Requesting user |
+| Deployment operator | Requesting user; execution requires separate explicit authorisation |
+| Operational service owner | Requesting user |
+| Approval reference | User's direct answers to the FND-01 ownership form, 21 October 2026 |
+| Review boundary | Required non-author technical review remains separate from implementation; reviewer assignment pending FND-05 |
+| Affected revision | WP-001 planning records based on `a497c1381fabe22588a0b05de89b906bd6093060`; design not released |
+
+The repository uses the role reference "requesting user" for the confirmed owner.
+This decision assigns responsibility; it does not approve the design, budget amount,
+Azure access or deployment.
+
+### FND-02-FND-04: Target and Environment
+
+| Field | Recorded answer / remaining work |
+|---|---|
+| Source | User's direct answers to the environment form, 21 October 2026 |
+| Target reference | User-selected internal Azure subscription; exact display name is retained in the conversation rather than copied into public planning records |
+| FND-02 status | PROPOSED: intended subscription selected; tenant/subscription identity, resource-group creation versus existing scope, permissions and discovery authority pending |
+| Existing platform | User reports none to reuse; design starts from that declaration |
+| FND-03 status | PROPOSED: actual inherited Azure policies, restrictions, quotas and networking constraints still need authorised verification |
+| FND-04 status | ACCEPTED: single non-production POC environment, public/synthetic data only; no real claimant/case data |
+| Execution boundary | No Azure login/discovery, identity creation, RBAC assignment, workflow creation or deployment authorised by these answers |
+
+### Format for Further Decisions
 
 Append one concise record per decision as answers arrive:
 
