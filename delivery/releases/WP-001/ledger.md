@@ -5,22 +5,22 @@
 | Field | Value |
 |---|---|
 | Package | Non-production foundation |
-| State | `draft` |
-| Current activity | Scope/decision preparation |
-| Authorised scope | Repository planning; user additionally authorised existing CLI context inspection and accessible subscription listing on 21 October 2026. Target-specific discovery requires confirmed context |
+| State | `blocked` |
+| Current activity | Read-only prerequisite assessment recorded; effective-permissions evidence blocked |
+| Authorised scope | Repository planning plus read-only subscription assessment; exact refreshed Visual Studio Enterprise - MSFT subscription/tenant confirmed by user on 21 October 2026 |
 | Baseline input | `ffa66c5b0efc7d144170db9464957123faef6eb5`, scoped architecture and delivery contracts |
-| Current planning outputs | Working-tree versions of context, decisions, ledger and F01 assignment; no immutable candidate review reference yet |
+| Current planning outputs | Context, decisions, assignments, ledger and [subscription assessment](assessment.md); no immutable candidate review reference yet |
 | Risk path | Regulated foundation review accepted by requesting user, 21 October 2026; see FND-05 |
 | Design release / human approval | Not recorded |
-| Azure discovery / validation / deployment | Context inspection/listing performed; user now selects the previously displayed Visual Studio subscription. Target-specific discovery NOT RUN; refreshed context confirmation and authority pending. Validation/deployment NOT RUN |
-| Next owner | Display and reconfirm exact CLI context for Visual Studio Enterprise - MSFT before target-specific read-only discovery; no login or context switch assumed necessary |
+| Azure discovery / validation / deployment | Read-only attempt 1 recorded under [F02 assignment](assignments/F02-discovery.md); effective permissions BLOCKED by CLI account-cache error; validation/deployment NOT RUN |
+| Next owner | Requesting user/platform owner resolves authentication and authority evidence; coordinator completes F02 within the existing loop budget before assigning F03 |
 
 ## Task State
 
 | Task | State | Evidence / blocker |
 |---|---|---|
 | F01 | done | [Context](context.md), [decision register](decisions.md), this ledger and [accepted preparation assignment](assignments/F01-scope.md); decision preparation only |
-| F02 | blocked | Visual Studio Enterprise - MSFT now selected; refresh/confirm exact context and discovery authority. Permissions, inherited constraints and target feasibility remain unverified |
+| F02 | blocked | [Assessment](assessment.md) records subscription, policies, providers, quota/SKUs and tools; effective permissions could not be retrieved. Remaining constraints and target decisions stay explicit |
 | F03-F07 | pending | Their prerequisites and assignments remain pending |
 
 ## Decisions and Approvals
@@ -29,10 +29,10 @@
 |---|---|---|
 | User instruction, 21 October 2026 | Bounded foundation scope and decision-record preparation accepted | Repository planning only |
 | FND-01 | ACCEPTED | Requesting user confirmed all foundation owner/operator roles and budget ownership in the 21 October 2026 ownership form; independent review remains separate |
-| FND-02 / FND-03 | PROPOSED | Visual Studio Enterprise - MSFT and dedicated POC resource groups selected; existing-resource declaration, permissions, inherited constraints and feasibility require verification against this target. Pipeline identity choice deferred |
+| FND-02 / FND-03 | PROPOSED | Exact target confirmed; [assessment](assessment.md) records enabled subscription with spending limit on, inherited MFA policies, existing resources and provider registration. Effective permissions BLOCKED; reuse and remaining constraints unresolved. Pipeline identity choice deferred |
 | FND-04 | ACCEPTED | One non-production POC; public/synthetic data only, no real claimant/case data; 21 October 2026 environment form |
 | FND-05 | ACCEPTED | Regulated foundation review; infrastructure-tester non-author technical review and scoped security/compliance findings; requesting user retains human approval |
-| FND-06 | PROPOSED | Sweden Central preference, one-region footprint; availability-zone options/cost, corporate policy, service/SKU availability and quota require assessment |
+| FND-06 | PROPOSED | Sweden Central regional quota, four candidate node SKUs/zones and AKS versions observed in [assessment](assessment.md); actual sizing, topology/cost, service-specific feasibility and constraints remain unresolved |
 | FND-07 | PROPOSED | Dedicated POC VNet subject to corporate approval; exact addressing and overlap checks pending |
 | FND-08 | OPEN | Compare private and restricted-public AKS API; no existing private route known; no exposure approved |
 | FND-09 | PROPOSED | NAT Gateway selected for POC egress; POC-owned private DNS subject to corporate approval; effective egress controls, DNS integration and costs unresolved |
@@ -55,6 +55,8 @@
 | Stop condition | Intended subscription not present in the current CLI list; target discovery BLOCKED |
 | Boundary | No login, browser opening, subscription switch, provider registration, identity/RBAC change or deployment performed |
 | Subsequent target decision | User selected the previously displayed Visual Studio Enterprise - MSFT subscription on 21 October 2026; earlier mismatch is resolved at selection level. Refresh/confirm exact context before discovery |
+| Confirmed assessment target | Exact refreshed subscription/tenant confirmed by user; pre-query context matched and read-only target queries executed |
+| Assessment result | [Attempt 1 report](assessment.md): useful design inputs obtained, but permissions query failed with a cached-account error; no authentication change or retry performed |
 
 Full identifiers remain in the authorised interaction rather than public planning
 records. This context preflight supplies no workload validation pass and starts no
@@ -62,13 +64,14 @@ design/candidate review loop.
 
 ## Review / Test / Validation Loops
 
-No workload design, candidate or environment review loop has started. Create a stable
-loop row when its assignment and fixed input set are ready; reserve a slot before
-execution. Maximum **5 total attempts**, including the initial attempt, or a lower
-assigned limit. Preserve counters across fixes, snapshots, sessions and reassignment.
+No workload design/candidate review has started. The prerequisite-assessment loop
+below consumed its initial attempt. Maximum **5 total attempts**, including the
+initial attempt, or a lower assigned limit. Preserve counters across fixes,
+snapshots, sessions and reassignment.
 
 | Stable loop ID | Objective / reviewer / gate | Maximum total attempts | Used / remaining | Attempt / fixed inputs / result |
 |---|---|---|---|---|
+| F02-DISCOVERY | Read-only subscription prerequisites / current authorised session / design inputs | 5 | 1 / 4 | Attempt 1 complete; input `f9ae67f5b495440db314a99bb37022875714e657` and confirmed live target; overall BLOCKED by effective-permissions query authentication error; [results](assessment.md). No failed-query retry |
 
 Documentation author checks on these planning records do not supply workload review
 or release evidence. Record future review/test reports and genuine human approvals

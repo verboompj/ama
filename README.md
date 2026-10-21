@@ -22,6 +22,10 @@ The original case brief (`case/case-study-47.md` and its source scan
 agentic architecture brief, expected outcomes, and the business case, as issued for the
 capstone exercise.
 
+The [whole-case visual](./case/README.md) connects business context, personas,
+use cases, technology context, applications, machine learning and Azure in one
+picture, with governance and human authority across the lifecycle.
+
 Everything else in this repository — case understanding write-ups, solution design
 questions, regulatory research, Copernicus reference material, and the proposed AI
 architecture — is participant work produced *in response to* that case, not part of the
@@ -45,6 +49,8 @@ connects normal farmer-photo capture, exception handling, and random validation 
 The [business-process flow](./docs/architecture/business-process-flow.md) maps those
 activities to their owners and carries the claim through advance, final calculation,
 payment reconciliation, and appeal safeguards.
+The [farmer journey draft](./docs/ux/farmer-journey/README.md) adds a self-contained
+clickable UX walkthrough using the Field & File logo and synthetic case data.
 
 The [Azure delivery team](./docs/delivery/README.md) defines nine development agents,
 shared repository skills, a staged task backlog, and explicit architecture-to-Bicep
