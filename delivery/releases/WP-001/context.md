@@ -5,8 +5,9 @@
 | Field | Value |
 |---|---|
 | Objective | Prepare the bounded foundation for the main AMA workload |
-| Current phase | Scope and decision preparation |
+| Current phase | Foundation design and early specialist requirements; implementation waits for reviewed design/plan and human cost approval |
 | Authorisation | User, 21 October 2026: "yes on bounded foundation, lets structure the decisions" |
+| Coordinated continuation | User, 21 October 2026: coordinate WP-001 through design, review, implementation, validation and deployment; submit reviewed design, implementation plan and complete cost for approval before implementation, then confirm Azure scope and obtain separate deployment approval |
 | Baseline | Commit `ffa66c5b0efc7d144170db9464957123faef6eb5`; maintained architecture sections 12-16 and 20 |
 | Package state / approvals | [Ledger](ledger.md) |
 | Environment decisions | [Decision register](decisions.md) |
