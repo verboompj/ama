@@ -9,12 +9,12 @@ claimant records, model calls or payment services are connected.
 
 ## Design Basis
 
-The primary persona is the [Farmer / CAP applicant](../../Persona/personas-and-use-cases.md#4-primary-persona-the-farmer--cap-applicant),
+The primary persona is the [Farmer / CAP applicant](../../docs/Persona/personas-and-use-cases.md#4-primary-persona-the-farmer--cap-applicant),
 with an authorised adviser as a supporting route. The fictional setting, original
 logo, plain-spoken voice and field/file motif come from the existing
-[Field & File identity](../../Persona/farm-theme-and-persona-map.md).
+[Field & File identity](../../docs/Persona/farm-theme-and-persona-map.md).
 The logo is embedded unchanged from
-[`assets/field-and-file-logo.svg`](../../../assets/field-and-file-logo.svg).
+[`assets/field-and-file-logo.svg`](../../assets/field-and-file-logo.svg).
 The interface uses light cream and white surfaces, Crop green (`#52734D`) for
 primary actions, Harvest gold (`#D9A441`) for attention and Signal blue (`#5B8FA8`)
 for the field diagram. Gold and blue accents are paired with dark text rather
@@ -48,8 +48,8 @@ the farmer-facing field, while the fictional parcel IDs remain unchanged.
 Both language versions are **draft translations/copy requiring native-speaker
 and domain-owner approval**, not approved agency notices or legal guidance.
 
-The flow follows the maintained [business process](../../architecture/business-process-flow.md)
-and [application architecture](../../architecture/aks-centered-foundry-architecture.md#511-user-authentication-and-client-channels).
+The flow follows the maintained [business process](../../docs/architecture/business-process-flow.md)
+and [application architecture](../../docs/architecture/aks-centered-foundry-architecture.md#511-user-authentication-and-client-channels).
 This is outside WP-001's infrastructure assessment and does not release app
 implementation, change the platform or authorise a deployment.
 
