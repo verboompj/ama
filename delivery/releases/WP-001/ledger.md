@@ -7,20 +7,20 @@
 | Package | Non-production foundation |
 | State | `draft` |
 | Current activity | Scope/decision preparation |
-| Authorised scope | Repository planning records only; user instruction of 21 October 2026 referenced in [context](context.md) |
+| Authorised scope | Repository planning; user additionally authorised existing CLI context inspection and accessible subscription listing on 21 October 2026. Target-specific discovery requires confirmed context |
 | Baseline input | `ffa66c5b0efc7d144170db9464957123faef6eb5`, scoped architecture and delivery contracts |
 | Current planning outputs | Working-tree versions of context, decisions, ledger and F01 assignment; no immutable candidate review reference yet |
 | Risk path | Regulated foundation review accepted by requesting user, 21 October 2026; see FND-05 |
 | Design release / human approval | Not recorded |
-| Azure discovery / validation / deployment | NOT RUN; not authorised by this preparation task |
-| Next owner | Coordinator prepares the scoped architecture assignment from recorded preferences; resolve or explicitly bound target/policy discovery prerequisites first. Architect proposes access, sizing, cost, recovery and monitoring options; no automatic design release |
+| Azure discovery / validation / deployment | Context inspection/listing performed; user now selects the previously displayed Visual Studio subscription. Target-specific discovery NOT RUN; refreshed context confirmation and authority pending. Validation/deployment NOT RUN |
+| Next owner | Display and reconfirm exact CLI context for Visual Studio Enterprise - MSFT before target-specific read-only discovery; no login or context switch assumed necessary |
 
 ## Task State
 
 | Task | State | Evidence / blocker |
 |---|---|---|
 | F01 | done | [Context](context.md), [decision register](decisions.md), this ledger and [accepted preparation assignment](assignments/F01-scope.md); decision preparation only |
-| F02 | blocked | Ownership, dedicated POC resource groups, public/synthetic-data scope and regulated review path accepted; target subscription selected and no existing platform reported; permissions and inherited constraints unverified |
+| F02 | blocked | Visual Studio Enterprise - MSFT now selected; refresh/confirm exact context and discovery authority. Permissions, inherited constraints and target feasibility remain unverified |
 | F03-F07 | pending | Their prerequisites and assignments remain pending |
 
 ## Decisions and Approvals
@@ -29,7 +29,7 @@
 |---|---|---|
 | User instruction, 21 October 2026 | Bounded foundation scope and decision-record preparation accepted | Repository planning only |
 | FND-01 | ACCEPTED | Requesting user confirmed all foundation owner/operator roles and budget ownership in the 21 October 2026 ownership form; independent review remains separate |
-| FND-02 / FND-03 | PROPOSED | Intended subscription and dedicated POC resource groups selected; no existing platform reported. Exact context/permissions and inherited constraints remain unverified; pipeline identity choice deferred |
+| FND-02 / FND-03 | PROPOSED | Visual Studio Enterprise - MSFT and dedicated POC resource groups selected; existing-resource declaration, permissions, inherited constraints and feasibility require verification against this target. Pipeline identity choice deferred |
 | FND-04 | ACCEPTED | One non-production POC; public/synthetic data only, no real claimant/case data; 21 October 2026 environment form |
 | FND-05 | ACCEPTED | Regulated foundation review; infrastructure-tester non-author technical review and scoped security/compliance findings; requesting user retains human approval |
 | FND-06 | PROPOSED | Sweden Central preference, one-region footprint; availability-zone options/cost, corporate policy, service/SKU availability and quota require assessment |
@@ -44,6 +44,21 @@
 | FND-15 | PROPOSED | Basic actionable monitoring; retention/ingestion and baseline-stack disposition pending. No automatic scheduling required now |
 | FND-16 | PROPOSED | Naming direction and tag values/coverage accepted in the 21 October 2026 form; canonical values in [FND-16](decisions.md#fnd-16-naming-and-tagging). Exact names, corporate-policy verification, AKS-managed-resource coverage/exceptions, review/expiry and protection remain pending |
 | FND-17-FND-19 | OPEN | Later release/execution approvals unresolved; no deployment approval inferred |
+
+## Context Discovery: 21 October 2026
+
+| Action | Result / authority |
+|---|---|
+| Existing context inspection | User authorised `az account show`; existing context was a different subscription from the intended target |
+| Target confirmation | User explicitly rejected the displayed subscription; no target-specific resource queries performed |
+| Accessible subscription listing | User authorised `az account list`; it returned only the rejected subscription |
+| Stop condition | Intended subscription not present in the current CLI list; target discovery BLOCKED |
+| Boundary | No login, browser opening, subscription switch, provider registration, identity/RBAC change or deployment performed |
+| Subsequent target decision | User selected the previously displayed Visual Studio Enterprise - MSFT subscription on 21 October 2026; earlier mismatch is resolved at selection level. Refresh/confirm exact context before discovery |
+
+Full identifiers remain in the authorised interaction rather than public planning
+records. This context preflight supplies no workload validation pass and starts no
+design/candidate review loop.
 
 ## Review / Test / Validation Loops
 

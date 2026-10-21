@@ -24,7 +24,7 @@ Any authenticated discovery needs its own authority and confirmed Azure context.
 | ID | Decision / information needed | Accountable owner | Required answer / evidence | Status |
 |---|---|---|---|---|
 | FND-01 | Design approver, platform/network/security owners, deployment operator and operational service owner | Requesting user | User confirmed ownership of all listed responsibilities and the budget-owner role on 21 October 2026; see accepted record below | ACCEPTED |
-| FND-02 | Tenant/subscription and deployment scope | Platform owner | Target subscription selected; dedicated POC resource group(s) accepted 21 October 2026. Exact tenant/subscription IDs and permissions remain unverified; pipeline identity choice deferred | PROPOSED |
+| FND-02 | Tenant/subscription and deployment scope | Platform owner | Visual Studio Enterprise - MSFT selected by user on 21 October 2026; dedicated POC resource group(s) accepted. Refresh/confirm exact CLI context before discovery; permissions remain unverified and pipeline identity choice deferred | PROPOSED |
 | FND-03 | Existing platform services and constraints | Platform owner with network/security owners | User reports no existing platform services; inherited policy, network constraints and permitted SKUs/regions remain unverified | PROPOSED |
 | FND-04 | Environment and permitted data | Business/data owner | Single non-production POC; public and synthetic data only, no real claimant/case data; accepted 21 October 2026 | ACCEPTED |
 | FND-05 | Risk path and required reviewers | Accountable owner with coordinator | Regulated foundation review accepted 21 October 2026; infrastructure-tester supplies non-author technical review, security/compliance agents supply scoped findings, requesting user retains human approval | ACCEPTED |
@@ -93,8 +93,8 @@ Azure access or deployment.
 | Field | Recorded answer / remaining work |
 |---|---|
 | Source | User's direct answers to the environment form, 21 October 2026 |
-| Target reference | User-selected internal Azure subscription; exact display name is retained in the conversation rather than copied into public planning records |
-| FND-02 status | PROPOSED overall: intended subscription selected and dedicated POC resource group(s) accepted; tenant/subscription identity, permissions and discovery authority pending |
+| Target reference | Visual Studio Enterprise - MSFT, selected in the user's subscription revision on 21 October 2026; exact IDs remain in the authorised interaction |
+| FND-02 status | PROPOSED overall: target selection and dedicated POC resource groups accepted; refreshed context confirmation, permissions and target-specific discovery authority pending |
 | Existing platform | User reports none to reuse; design starts from that declaration |
 | FND-03 status | PROPOSED: actual inherited Azure policies, restrictions, quotas and networking constraints still need authorised verification |
 | FND-04 status | ACCEPTED: single non-production POC environment, public/synthetic data only; no real claimant/case data |
@@ -111,6 +111,20 @@ Azure access or deployment.
 | Pipeline identity | Choice deferred; no OIDC, service principal or managed-identity option selected |
 | Bootstrap requirement | Resource-group creation and any later identity/RBAC setup need an appropriately authorised operator and explicit scope |
 | Authority | Planning decisions only; no Azure inspection, mutation or workflow execution authorised |
+
+### FND-02: Target Subscription Selection
+
+| Field | Recorded decision / remaining work |
+|---|---|
+| Source | User instruction, 21 October 2026: revise the target to the previously displayed Visual Studio subscription |
+| Selected subscription | Visual Studio Enterprise - MSFT |
+| Identity reference | The subscription/tenant IDs displayed in the authorised CLI context inspection; keep identifiers out of public planning records |
+| Selection status | ACCEPTED: this is the intended POC target |
+| Supersedes | Earlier internal-subscription selection and rejection of this displayed subscription as the target |
+| Change impact | Revalidate permissions, policy, quotas, existing resources, regional availability and subscription-offer restrictions against this target; no earlier assumption establishes those facts |
+| Retained requirements | Dedicated POC resource groups, Sweden Central preference, public/synthetic-only data, agreed tags and other recorded design requirements |
+| Next prerequisite | Refresh and confirm the exact CLI context before target-specific discovery |
+| Authority boundary | Parameter update only; no login, context switch, identity/RBAC change or deployment performed or authorised by this instruction |
 
 ### FND-05: Foundation Review Path
 
