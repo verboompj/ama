@@ -5,22 +5,22 @@
 | Field | Value |
 |---|---|
 | Package | Non-production foundation |
-| State | `blocked` |
-| Current activity | Read-only prerequisite assessment recorded; effective-permissions evidence blocked |
+| State | `draft` |
+| Current activity | Attempt-2 evidence handoff complete; documentation integration confirms F02 discovery/target exit criterion met for bounded F03 options. No onward design started |
 | Authorised scope | Repository planning plus read-only subscription assessment; exact refreshed Visual Studio Enterprise - MSFT subscription/tenant confirmed by user on 21 October 2026 |
 | Baseline input | `ffa66c5b0efc7d144170db9464957123faef6eb5`, scoped architecture and delivery contracts |
 | Current planning outputs | Context, decisions, assignments, ledger and [subscription assessment](assessment.md); no immutable candidate review reference yet |
 | Risk path | Regulated foundation review accepted by requesting user, 21 October 2026; see FND-05 |
 | Design release / human approval | Not recorded |
-| Azure discovery / validation / deployment | Read-only attempt 1 recorded under [F02 assignment](assignments/F02-discovery.md); effective permissions BLOCKED by CLI account-cache error; validation/deployment NOT RUN |
-| Next owner | Requesting user/platform owner resolves authentication and authority evidence; coordinator completes F02 within the existing loop budget before assigning F03 |
+| Azure discovery / validation / deployment | Attempt 1 preserved; [attempt-2 recheck](assignments/F02-recheck.md) PASS for assigned observations, authentication gap resolved; validation/deployment NOT RUN |
+| Next owner | Coordinator integrates handoff and separately assigns bounded F03 options to architect; owner decisions/corporate constraints remain explicit for design acceptance |
 
 ## Task State
 
 | Task | State | Evidence / blocker |
 |---|---|---|
 | F01 | done | [Context](context.md), [decision register](decisions.md), this ledger and [accepted preparation assignment](assignments/F01-scope.md); decision preparation only |
-| F02 | blocked | [Assessment](assessment.md) records subscription, policies, providers, quota/SKUs and tools; effective permissions could not be retrieved. Remaining constraints and target decisions stay explicit |
+| F02 | done | Discovery/target prerequisites complete for bounded options, including successful attempt-2 permissions/deny/exemption reads; [assessment](assessment.md). Accepted target, dedicated POC groups, owner roles, no-reuse direction and review path retained; no missing current prerequisite identified. Design-specific corporate constraints and exact organisation belong to F03/design acceptance |
 | F03-F07 | pending | Their prerequisites and assignments remain pending |
 
 ## Decisions and Approvals
@@ -29,7 +29,7 @@
 |---|---|---|
 | User instruction, 21 October 2026 | Bounded foundation scope and decision-record preparation accepted | Repository planning only |
 | FND-01 | ACCEPTED | Requesting user confirmed all foundation owner/operator roles and budget ownership in the 21 October 2026 ownership form; independent review remains separate |
-| FND-02 / FND-03 | PROPOSED | Exact target confirmed; [assessment](assessment.md) records enabled subscription with spending limit on, inherited MFA policies, existing resources and provider registration. Effective permissions BLOCKED; reuse and remaining constraints unresolved. Pipeline identity choice deferred |
+| FND-02 / FND-03 | PROPOSED overall; F02 inputs complete | Accepted target and dedicated-group/no-reuse direction retained. [Assessment](assessment.md) records enabled subscription/spending limit, inherited MFA policies, existing estate/providers and successful permissions/deny/exemption reads. Exact organisation/candidate constraints remain F03/design-acceptance work; pipeline identity deferred |
 | FND-04 | ACCEPTED | One non-production POC; public/synthetic data only, no real claimant/case data; 21 October 2026 environment form |
 | FND-05 | ACCEPTED | Regulated foundation review; infrastructure-tester non-author technical review and scoped security/compliance findings; requesting user retains human approval |
 | FND-06 | PROPOSED | Sweden Central regional quota, four candidate node SKUs/zones and AKS versions observed in [assessment](assessment.md); actual sizing, topology/cost, service-specific feasibility and constraints remain unresolved |
@@ -57,6 +57,9 @@
 | Subsequent target decision | User selected the previously displayed Visual Studio Enterprise - MSFT subscription on 21 October 2026; earlier mismatch is resolved at selection level. Refresh/confirm exact context before discovery |
 | Confirmed assessment target | Exact refreshed subscription/tenant confirmed by user; pre-query context matched and read-only target queries executed |
 | Assessment result | [Attempt 1 report](assessment.md): useful design inputs obtained, but permissions query failed with a cached-account error; no authentication change or retry performed |
+| Recheck authority and context | User reports Azure CLI re-authentication and requests resumed assessment; refreshed exact context still matches the previously confirmed subscription/tenant. Attempt 2 reserved; no login or context change performed by the assistant |
+| Attempt-2 outcome | Executor independently refreshed context and matched the confirmed target/Enabled state. Permissions, inherited deny assignments and policy exemptions each queried once, all exit zero with empty stderr; one page each, no nextLink. Prior cached-account blocker resolved |
+| Remaining boundary | Broad action coverage is not an Owner-role assertion, write proof, condition/PIM/MFA satisfaction, corporate approval or budget/design acceptance. No Azure mutation, formal validation, deployment or data-plane probe |
 
 Full identifiers remain in the authorised interaction rather than public planning
 records. This context preflight supplies no workload validation pass and starts no
@@ -65,17 +68,42 @@ design/candidate review loop.
 ## Review / Test / Validation Loops
 
 No workload design/candidate review has started. The prerequisite-assessment loop
-below consumed its initial attempt. Maximum **5 total attempts**, including the
+below has consumed two attempts. Maximum **5 total attempts**, including the
 initial attempt, or a lower assigned limit. Preserve counters across fixes,
 snapshots, sessions and reassignment.
 
 | Stable loop ID | Objective / reviewer / gate | Maximum total attempts | Used / remaining | Attempt / fixed inputs / result |
 |---|---|---|---|---|
-| F02-DISCOVERY | Read-only subscription prerequisites / current authorised session / design inputs | 5 | 1 / 4 | Attempt 1 complete; input `f9ae67f5b495440db314a99bb37022875714e657` and confirmed live target; overall BLOCKED by effective-permissions query authentication error; [results](assessment.md). No failed-query retry |
+| F02-DISCOVERY | Read-only subscription prerequisites / infrastructure-tester recheck / design inputs | 5 | 2 / 3 | Attempt 1 BLOCKED on input `f9ae67f5b495440db314a99bb37022875714e657`, history retained; attempt 2 completed on `fe983de9444e808388c9815e9414400604e640aa` plus preserved parent assignment/reservation: PASS for bounded read-only scope, authentication gap resolved. [Assignment](assignments/F02-recheck.md), [evidence/disposition](assessment.md#attempt-2-recheck-methods-and-disposition). F02 complete for bounded options; no attempt 3 started |
+
+Same-task integration correction: the initial attempt-2 handoff overclassified
+unfinished corporate/design details as F02 blockers. The assessment now traces
+the exit criterion to `context.md:76-77` and the existing accepted decision records.
+No new current prerequisite is identified. F02 is done and the package returns to
+draft for separately assigned bounded F03 options, without corporate, budget,
+design-release or deployment approval. No new Azure query, attempt or SQL state
+change accompanies this documentation correction; subscription-recheck stays done.
+
+Attempt-2 raw commands, per-command times/exits/errors, exact pre-edit bytes and
+SHA-256 manifests are session-local in `foundation-recheck-20261021`; no raw
+identifiers or hashes are published here. Copies were byte-verified. Attempt-1
+evidence remains unchanged. Assigned output ownership for this recheck is limited
+to `assessment.md`, `decisions.md` and this ledger; coordinator retains the assignment.
+The report records actual context/tool limits and separates deterministic reads from
+judgment; this is not independent workload design/candidate or security approval.
+
+Later WV01-WV22 and application/ML checks remain NOT RUN at their respective gates
+as scoped in the assessment. They are not failed current discovery checks.
 
 Documentation author checks on these planning records do not supply workload review
 or release evidence. Record future review/test reports and genuine human approvals
 against exact inputs. Gate/counter accounting is procedural.
+
+Scoped recheck author checks: PASS for `git diff --check --` on the three assigned
+output paths; PASS for all 23 relative Markdown links/anchors and UUID-redaction
+checks; PASS for verification of the 30 preserved evidence-manifest entries.
+Commands, results and output hashes are retained locally in `author-checks.json`.
+Root README and the parent-owned assignment were not edited by this executor.
 
 ## Resume and Change Rules
 

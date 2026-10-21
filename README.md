@@ -58,6 +58,13 @@ handover gates. It prepares the engineering workflow; infrastructure implementat
 and GitHub Actions remain separate, later work.
 The [`delivery/` workspace](./delivery/README.md) holds operating contracts, plans
 and work-package evidence.
+Its [work-package records](./delivery/releases/README.md) and
+[templates](./delivery/templates/) support that workflow; a directory under
+`releases/` is not evidence of release approval or deployment.
+Native [agent profiles](./.github/agents/), [skills](./.github/skills/) and
+[phase prompts](./.github/prompts/) live under `.github/`.
+The [process screenshots](./docs/deployment/process/) are reference images, not
+deployment records.
 The [workload guidance](delivery/workload-guidance.md) and
 [multi-agent framework and orchestration](delivery/multi-agent-framework.md)
 separate Azure solution standards from development-agent collaboration.
@@ -77,17 +84,27 @@ the proposed public-data crop-evidence target and decisions needed before execut
 │   ├── agents/              # Nine native Copilot agent profiles
 │   ├── skills/              # Reusable repository-local procedures
 │   └── prompts/             # Explicit phase entry points
-├── delivery/                # Operating contracts, checks, plans & work-package records
-├── case/                    # Original case brief and assessment source material
+├── delivery/                # Operating contracts, checks & plans (see README.md)
+│   ├── releases/            # Work-package records; directory presence is not approval
+│   │   └── WP-001/          # Non-production foundation planning & assessment records
+│   └── templates/           # Assignment, design, plan, review & handoff forms
+├── case/                    # Original sources alongside distinct participant work
+│   ├── case-study-47.md     # Original case brief; .jpg is its source scan
+│   ├── README.md            # Participant whole-case visual guide
+│   ├── case-overview.excalidraw # Editable participant visual; .png/.svg viewing copies
 │   ├── casestudy/           # Participant case understanding & design questions
-│   └── rubrik/              # Assessment rubric
+│   └── rubrik/              # Original assessment rubric (Markdown & Word)
 ├── docs/
 │   ├── architecture/        # Proposed AI solution architecture (AKS + Azure AI services)
 │   ├── copernicus/          # Copernicus data/services/tools inventory
 │   ├── delivery/            # Team usage, role catalogue & context guides
+│   ├── deployment/
+│   │   └── process/         # Reference screenshots; not deployment evidence
 │   ├── Persona/             # Role-based personas, requirements & journeys
 │   ├── regulatory-compliance/ # Regulatory & legal framework summaries
-│   └── research/            # Supporting research notes
+│   ├── research/            # Supporting research notes
+│   └── ux/
+│       └── farmer-journey/  # Illustrative UX draft: README.md & self-contained index.html
 └── assets/                  # Repository media (logo, etc.)
 ```
 

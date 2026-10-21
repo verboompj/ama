@@ -24,8 +24,8 @@ Any authenticated discovery needs its own authority and confirmed Azure context.
 | ID | Decision / information needed | Accountable owner | Required answer / evidence | Status |
 |---|---|---|---|---|
 | FND-01 | Design approver, platform/network/security owners, deployment operator and operational service owner | Requesting user | User confirmed ownership of all listed responsibilities and the budget-owner role on 21 October 2026; see accepted record below | ACCEPTED |
-| FND-02 | Tenant/subscription and deployment scope | Platform owner | Visual Studio Enterprise - MSFT exact target confirmed; dedicated POC resource group(s) accepted. [Assessment](assessment.md) found spending limit on; effective-permissions query BLOCKED by cached-account error. Pipeline identity choice deferred | PROPOSED |
-| FND-03 | Existing platform services and constraints | Platform owner with network/security owners | No reuse requested; [assessment](assessment.md) confirms existing resources, inherited MFA policies, resource-level locks and registered foundation providers. Reuse, effective authority and remaining constraints unresolved | PROPOSED |
+| FND-02 | Tenant/subscription and deployment scope | Platform owner | Visual Studio Enterprise - MSFT exact target confirmed; dedicated POC resource group(s) accepted. [Assessment](assessment.md) recheck succeeded with broad current management-action coverage; no write proof or role inference. Exact group/root scope and future execution authority remain to be fixed; pipeline identity deferred | PROPOSED |
+| FND-03 | Existing platform services and constraints | Platform owner with network/security owners | No-reuse direction retained; [assessment](assessment.md) confirms a non-empty estate, inherited MFA policies, resource-level locks and registered providers. No visible at/above-subscription denies/exemptions. Discovery complete for options; design-specific corporate constraint disposition remains unresolved | PROPOSED |
 | FND-04 | Environment and permitted data | Business/data owner | Single non-production POC; public and synthetic data only, no real claimant/case data; accepted 21 October 2026 | ACCEPTED |
 | FND-05 | Risk path and required reviewers | Accountable owner with coordinator | Regulated foundation review accepted 21 October 2026; infrastructure-tester supplies non-author technical review, security/compliance agents supply scoped findings, requesting user retains human approval | ACCEPTED |
 
@@ -66,6 +66,10 @@ FND-01 through FND-05 establish whether scoped design can proceed. Architecture
 options can be explored while remaining targets are open; no design release occurs
 until material choices and required feasibility/review evidence are resolved.
 FND-18 and FND-19 remain later-gate decisions and do not block drafting the design.
+F02 discovery/target inputs are complete following attempt 2. FND-02/FND-03 retain
+PROPOSED overall statuses only for unfinished design/acceptance details; this does
+not reopen accepted target, dedicated POC resource groups, ownership or no-reuse
+direction, and does not block bounded F03 options. Corporate approval is not inferred.
 
 ## Decision Records
 
@@ -94,9 +98,9 @@ Azure access or deployment.
 |---|---|
 | Source | User's direct answers to the environment form, 21 October 2026 |
 | Target reference | Visual Studio Enterprise - MSFT, selected in the user's subscription revision on 21 October 2026; exact IDs remain in the authorised interaction |
-| FND-02 status | PROPOSED overall: target and dedicated POC resource groups accepted; exact refreshed context and read-only discovery confirmed. Effective permissions remain blocked; see assessment below |
+| FND-02 status | PROPOSED overall: target and dedicated POC resource groups accepted; refreshed context and read-only permissions recheck succeeded. F02 complete for bounded options; exact group/root scope belongs to F03, execution authority to later authorised checks |
 | Existing platform | User reports none to reuse; discovery found existing resources, not an empty subscription. No reuse or change to them is authorised |
-| FND-03 status | PROPOSED: partial policy/provider/quota evidence recorded; effective authority, reuse and remaining constraints unresolved |
+| FND-03 status | PROPOSED overall: F02 observations complete for bounded options; no-reuse direction retained. Design-specific corporate constraints/approval remain unresolved for F03/design acceptance, not a new discovery prerequisite |
 | FND-04 status | ACCEPTED: single non-production POC environment, public/synthetic data only; no real claimant/case data |
 | Execution boundary | No Azure login/discovery, identity creation, RBAC assignment, workflow creation or deployment authorised by these answers |
 
@@ -106,7 +110,7 @@ Azure access or deployment.
 |---|---|
 | Source | User's direct answers to the scope/access form, 21 October 2026 |
 | Resource organisation | ACCEPTED: create dedicated resource group(s) for this POC; exact group count/names and deployment-root scope to be proposed in the design |
-| Current permissions | BLOCKED: authorised ARM permissions query failed with an MSAL cached-account error; no login or retry performed |
+| Current permissions | PASS for attempt-2 read-only retrieval: three entries including management `*`, all with empty exclusions/data actions; no role identity or successful write inferred. Attempt-1 cached-account error is historical and resolved |
 | Corporate constraints | Partial read-only evidence in [assessment](assessment.md): inherited MFA enforcement and existing resource-level locks; completeness and candidate applicability remain unverified |
 | Pipeline identity | Choice deferred; no OIDC, service principal or managed-identity option selected |
 | Bootstrap requirement | Resource-group creation and any later identity/RBAC setup need an appropriately authorised operator and explicit scope |
@@ -123,23 +127,24 @@ Azure access or deployment.
 | Supersedes | Earlier internal-subscription selection and rejection of this displayed subscription as the target |
 | Change impact | Revalidate permissions, policy, quotas, existing resources, regional availability and subscription-offer restrictions against this target; no earlier assumption establishes those facts |
 | Retained requirements | Dedicated POC resource groups, Sweden Central preference, public/synthetic-only data, agreed tags and other recorded design requirements |
-| Next prerequisite | Resolve effective-permissions evidence after the confirmed read-only assessment; exact context was refreshed and confirmed before queries |
+| Next action | Coordinator separately assigns F03 bounded options; accepted target/dedicated-group direction need not be re-asked. Corporate constraints and exact organisation are design/acceptance work; reconfirm scope-specific authority for later authorised execution |
 | Authority boundary | Parameter update only; no login, context switch, identity/RBAC change or deployment performed or authorised by this instruction |
 
 ### FND-02/FND-03/FND-06: Discovery Evidence
 
 | Field | Observed evidence / remaining work |
 |---|---|
-| Source | [F02 assessment](assessment.md), 21 October 2026; attempt 1 of 5 |
+| Source | [F02 assessment](assessment.md), 21 October 2026; attempt 1 retained, [attempt-2 recheck](assignments/F02-recheck.md) completed; 2 used / 3 remaining |
 | Authority | User separately authorised read-only assessment and confirmed the exact refreshed target; no Azure writes authorised |
 | Subscription | Enabled; Visual Studio offer metadata returned `spendingLimit=On`. Remaining credit, offer terms and foundation costs are not established |
-| Permissions | BLOCKED by a CLI cached-account error on the effective-permissions request; successful reads do not prove resource creation or RBAC grant authority |
+| Permissions | PASS for bounded read-only discovery: three entries, including management `*` with no `notActions`; empty data-action arrays. Cached-account failure resolved by fresh evidence. No Owner role inferred; conditions/PIM/MFA and later scope-specific authority remain unproven |
 | Inherited policies | Two observed management-group assignments enforce MFA for human create/update and delete operations; effective authorisation and complete constraints remain unverified |
-| Existing estate | 19 resource groups and 114 ARM resources observed; no reuse approved. Three resource-level deletion locks returned |
+| Denies / exemptions | Both `atScope()` listings returned zero entries, one page each, no nextLink; limited to caller-visible at/above-subscription coverage, not future child scopes or corporate attestation |
+| Existing estate | Attempt-1 inventory confirms a non-empty estate; no inventory reproduced here and no reuse approved. Resource-level deletion locks observed |
 | Regional capacity | Sweden Central total regional vCPU usage 0 / limit 20; DSv5 and DASv5 families each 0 / limit 20. Four D4/D8 candidate SKUs list no restrictions and zones 1-3; allocation is not guaranteed |
 | AKS and tooling | Regional versions returned, with minor 1.36 marked default; Azure CLI 2.84.0 and existing CLI-managed Bicep 0.43.8 available. No version/SKU chosen or tool installed |
 | Status impact | FND-02, FND-03 and FND-06 stay PROPOSED; evidence narrows unknowns but does not approve permissions, topology, cost or service configuration |
-| Next owner | Requesting user/platform owner for authentication/authority and reuse facts; architect for bounded options after F02 prerequisites are resolved |
+| Next owner | Coordinator integrates completed F02 and separately assigns bounded F03 options to architect. Platform/network/security owner supplies required design-specific constraint decisions; budget/topology choices remain unaccepted |
 
 ### FND-05: Foundation Review Path
 
