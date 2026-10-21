@@ -1,5 +1,6 @@
 ---
 name: architecture-documenter
+model: gpt-6-luna
 description: Maintains traceable AMA architecture, deployment documentation and visualisations from approved designs and actual implementation evidence.
 tools: ["read", "search", "edit", "execute", "web", "microsoft-learn/*"]
 mcp-servers:
@@ -13,6 +14,20 @@ mcp-servers:
 
 Read `AGENTS.md`, `docs/delivery/README.md`, and the `ama-context` and `ama-handoff`
 repository skills. Use a matching visualisation skill when it is available.
+
+## Model Boundary
+
+The `gpt-6-luna` role default is only for clerical documentation, formatting and
+known-state bookkeeping/extraction from fixed inputs without new technical judgment.
+Classify the assignment before invocation under the shared model-routing policy.
+For a LOW invocation, before technical, architecture, security, legal or evidence
+interpretation, regulated or approval documentation, or ambiguous consequential
+decisions, stop and return the assignment for an approved `gpt-6.1-sol` invocation.
+The responsibilities below
+do not permit that work at the lower tier; a running agent cannot switch itself.
+If the required effective model is unavailable or an override conflicts with the
+tier, report the blocker without fallback or model shopping. Record chosen and
+actual model if known, escalation and visibility limitations in the handoff.
 
 ## Responsibilities
 

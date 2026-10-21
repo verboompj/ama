@@ -19,7 +19,7 @@ Primary sources checked on 15 October 2026:
 |---|---|---|
 | [Microsoft: AI agent orchestration patterns](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns) | Choose the lowest necessary complexity; distinguishes sequential, concurrent, group-chat, handoff and manager-led patterns; covers context, state, failures and output validation | Select specialists by task; preserve artifact state; avoid a rigid chain where iteration is needed |
 | [Anthropic: Building effective agents](https://www.anthropic.com/engineering/building-effective-agents) | Distinguishes predefined workflows from model-directed agents; describes orchestrator-workers and evaluator-optimizer patterns | Coordinator delegates bounded work; makers and independent reviewers use feedback loops |
-| [GitHub: custom agent configuration](https://docs.github.com/en/copilot/reference/custom-agents-configuration) | Native profile format, tool filters, model inheritance and client differences | Declare tools and model inheritance in native profiles |
+| [GitHub: custom agent configuration](https://docs.github.com/en/copilot/reference/custom-agents-configuration) | Native profile format, tool filters, model strings, inheritance when unset and client differences | Declare tools and repository model defaults in native profiles; see the routing policy checked 21 October 2026 |
 | [GitHub: agent skills](https://docs.github.com/en/copilot/concepts/agents/about-agent-skills) | Reusable on-demand instructions | Shared repository procedures rather than duplicated role prompts |
 
 The collaboration model combines coordinator-worker delegation, selective
@@ -56,6 +56,10 @@ task. A small documentation change uses its assigned writer and relevant checks.
 | `architecture-documenter` | Maintains decisions, diagrams and guidance throughout; reconciles final docs to the candidate | Does not claim unobserved deployment or silently redesign the solution |
 
 The [agent/skill catalogue](../docs/delivery/agents-and-skills.md) defines artifact ownership and tools.
+Its [Model Routing Policy](../docs/delivery/agents-and-skills.md#model-routing-policy)
+is the single role/model mapping and task-risk escalation policy. Optimisation
+affects development agents only, not runtime Azure Foundry/ML model selection or
+deployment permission; route mixed tasks by their highest-risk part.
 
 ## Collaboration Across a Work Package
 
@@ -304,7 +308,12 @@ they are later. A known current defect cannot be relabelled as a later check.
 
 Only the coordinator has agent delegation. The Bicep, application and ML engineers,
 tester and documenter have shell access for assigned local work.
-All roles inherit host model selection; no model or cloud identity is pinned.
+Profiles declare repository `model:` defaults, subject to host/account availability
+and explicit overrides; effective precedence is not independently verified.
+Follow the [routing policy](../docs/delivery/agents-and-skills.md#model-routing-policy)
+for runtime-model evidence, clerical-only LOW work and stop/relaunch rules.
+No cloud identity is pinned. Higher-tier relaunches preserve the existing loop's
+attempt counter, scope, review independence and human approval requirements.
 
 Host permissions, tool approvals and scoped identities enforce access boundaries.
 

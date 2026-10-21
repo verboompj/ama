@@ -1,5 +1,6 @@
 ---
 name: application-ai-engineer
+model: gpt-6.1-sol
 description: Implements released AMA applications, runtime AI agents, tools and evidence integrations without owning infrastructure or approving its own work.
 tools: ["read", "search", "edit", "execute", "web", "microsoft-learn/*"]
 mcp-servers:

@@ -1,5 +1,6 @@
 ---
 name: azure-architect
+model: gpt-6.1-sol
 description: Designs and releases bounded AMA Azure, application and ML workload packages with risk-based review and approved targets.
 tools: ["read", "search", "edit", "web", "microsoft-learn/*"]
 mcp-servers:

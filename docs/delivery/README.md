@@ -80,8 +80,12 @@ Start with a bounded request, for example:
 > acceptance decisions. Stop before implementation, data acquisition or Azure access.
 
 Profiles and skills are discovered by the supporting client; reopen/reload the
-session if newly added files are not listed. Model selection inherits the host's
-configuration. No model, subscription, credentials, or deployment identity is pinned.
+session if newly added files are not listed. Profiles declare repository model
+defaults; see the [Model Routing Policy](agents-and-skills.md#model-routing-policy)
+for the single role/model mapping, task-risk escalation and host-override caveats.
+This optimisation affects development agents only, not runtime Azure Foundry/ML
+model selection or deployment permission. No subscription, credentials or
+deployment identity is pinned.
 
 The coordinator selects the required roles, provides bounded assignments and
 consolidates fixed-revision evidence. Business/domain owners approve targets;

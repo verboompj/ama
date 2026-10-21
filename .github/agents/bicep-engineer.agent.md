@@ -1,5 +1,6 @@
 ---
 name: bicep-engineer
+model: gpt-6.1-sol
 description: Implements architect-released AMA infrastructure using Bicep, pinned published AVMs and Well-Architected controls.
 tools: ["read", "search", "edit", "execute", "web", "microsoft-learn/*"]
 mcp-servers:

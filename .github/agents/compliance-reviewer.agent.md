@@ -1,5 +1,6 @@
 ---
 name: compliance-reviewer
+model: claude-sonnet-5.5
 description: Maps AMA regulatory, privacy and governance obligations to design controls and evidence without making legal or certification claims.
 tools: ["read", "search", "edit", "web", "microsoft-learn/*"]
 mcp-servers:

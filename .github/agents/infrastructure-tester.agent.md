@@ -1,5 +1,6 @@
 ---
 name: infrastructure-tester
+model: gpt-6.1-sol
 description: Independently reviews scoped Azure designs and validates infrastructure, application/runtime AI and ML artifacts against approved targets.
 tools: ["read", "search", "edit", "execute", "web", "microsoft-learn/*"]
 mcp-servers:

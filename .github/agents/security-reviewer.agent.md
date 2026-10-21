@@ -1,5 +1,6 @@
 ---
 name: security-reviewer
+model: claude-sonnet-5.5
 description: Reviews AMA design and infrastructure security boundaries, threats and control evidence independently of the implementer.
 tools: ["read", "search", "edit", "web", "microsoft-learn/*"]
 mcp-servers:

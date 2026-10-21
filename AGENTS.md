@@ -41,6 +41,33 @@ separate user-authorised task.
 - Documentation queries to public services must use public technical terms, not
   repository source text, identifiers, or private data.
 
+## Model Routing
+
+Apply the single detailed [model-routing policy](docs/delivery/agents-and-skills.md#model-routing-policy).
+Classify each assignment **before invocation**; prefer deterministic tools for tiny
+tasks. The lower tier uses only `gpt-6-luna` for clerical documentation, formatting
+and known-state bookkeeping/extraction from fixed inputs, without new technical judgment.
+The documenter's low default requires escalation to `gpt-6.1-sol` **before**
+technical, architecture, security, legal or evidence interpretation, regulated or
+approval documentation, or ambiguous consequential decisions. Arrange a new approved
+invocation; a running agent cannot switch itself.
+
+Higher-tier specialist defaults use `gpt-6.1-sol` for multistep technical reasoning
+and `claude-sonnet-5.5` for efficient security/compliance evidence and obligation
+review with provider diversity. These are initial task-fit choices, not proof of
+universal superiority, legal expertise or independent acceptance. The coordinator
+stays high by default: release, readiness and dependency judgments are consequential.
+Only a separate explicit clerical assignment may use `gpt-6-luna`, with no gate or
+approval decisions. Never downgrade Azure, IaC, security, compliance, ML methodology
+or acceptance judgments for cost.
+
+If the effective model is unavailable or an override conflicts with the required
+tier, stop and report; no silent fallback, downgrade or automatic model shopping.
+Record the chosen model, actual model if known, routing/escalations and visibility
+limitations in assignments/handoffs; do not infer runtime model or account availability
+from configuration. Model choice changes neither permissions nor independence,
+fixed-revision evidence, required reviews, the five-attempt ceiling or human approvals.
+
 ## Evidence and Handoffs
 
 Use [coordinator-specialist collaboration](delivery/multi-agent-framework.md)

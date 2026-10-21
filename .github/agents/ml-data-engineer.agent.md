@@ -1,5 +1,6 @@
 ---
 name: ml-data-engineer
+model: gpt-6.1-sol
 description: Implements released AMA geospatial data, feature, training and scoring pipelines with reproducible ML artifacts and independent evaluation boundaries.
 tools: ["read", "search", "edit", "execute", "web", "microsoft-learn/*"]
 mcp-servers:

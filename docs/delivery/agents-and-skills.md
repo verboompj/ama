@@ -26,7 +26,8 @@ conformance is author-side evidence. Shared-model/context limits are recorded.
 All profiles have read/search, scoped-by-instruction editing, web research where
 supported, and the three allowlisted read-only Learn tools. The Bicep, application and
 ML engineers, tester and documenter have shell execution for assigned local work. Only the
-coordinator has agent delegation. No profile hardcodes a model.
+coordinator has agent delegation. Profiles declare repository model defaults under
+the [Model Routing Policy](#model-routing-policy).
 The tester also prepares preserved snapshots; other roles consume its manifest.
 See [artifact ownership](../../delivery/releases/README.md#artifact-ownership) and
 [snapshot protocol](../../delivery/releases/README.md#snapshot-protocol) for the
@@ -41,6 +42,77 @@ must use available official-source access or remain blocked with the missing sou
 Shell access is broad, not a safe read-only boundary. Use host tool approvals,
 repository permissions and scoped cloud identities. Native IDE handoff buttons are
 not relied upon for cross-client enforcement.
+
+## Model Routing Policy
+
+These cost-optimised defaults apply to **development agents only**, not runtime
+Azure Foundry/ML model selection, account entitlement or deployment permission.
+The version-controlled `model:` frontmatter in
+`.github/agents/<role>.agent.md` declares each default; [AGENTS.md](../../AGENTS.md)
+provides the central task-risk guard. LOW means clerical work only; HIGH retains
+consequential reasoning and judgment.
+
+| Role | Model ID | Tier | Initial task-fit rationale |
+|---|---|---|---|
+| `architecture-documenter` | `gpt-6-luna` | LOW, clerical only | Fast formatting, extraction and known-data documentation; escalate consequential writing |
+| `delivery-coordinator` | `gpt-6.1-sol` | HIGH | Complex decisions, dependencies, handoffs and readiness |
+| `azure-architect` | `gpt-6.1-sol` | HIGH | Architecture trade-offs, contracts and release judgment |
+| `bicep-engineer` | `gpt-6.1-sol` | HIGH | Azure/IaC implementation and dependency reasoning |
+| `application-ai-engineer` | `gpt-6.1-sol` | HIGH | Application/runtime tools and evidence-boundary implementation |
+| `ml-data-engineer` | `gpt-6.1-sol` | HIGH | Data leakage, ML methodology and reproducible pipelines |
+| `infrastructure-tester` | `gpt-6.1-sol` | HIGH | Independent acceptance and infrastructure/AI/ML validation |
+| `security-reviewer` | `claude-sonnet-5.5` | HIGH | Initial review fit, token/tool efficiency and provider diversity |
+| `compliance-reviewer` | `claude-sonnet-5.5` | HIGH | Initial obligation/evidence review fit and provider diversity |
+
+**Route by the highest-risk part of a mixed task**, not its Markdown extension or
+role name. LOW GPT-6 Luna is restricted to clerical documentation, known-data
+bookkeeping, formatting and extraction. Do tiny deterministic work directly rather
+than spawning another agent. Azure/IaC, security, compliance, ML methodology and
+acceptance judgment remain HIGH.
+
+Before consequential technical, legal, security, architecture, evidence or
+regulated-approval writing, stop the LOW documenter and have the host explicitly
+relaunch the assignment on GPT-6.1 Sol. Agents cannot switch their own runtime
+model. The coordinator remains HIGH by default; a host may explicitly route only
+a **separate clerical assignment** to Luna, never readiness or gate decisions.
+
+Sonnet is an initial task-fit/token-efficiency/provider-diversity judgment, not a
+universal benchmark result or legal qualification. Provider diversity alone does
+not establish independence: retain non-author reviewers, fixed input revisions,
+appropriate review context and human approval boundaries.
+
+**Host operation:** `/subagents` configures host overrides, including per-agent
+`subagents.agents.<agent-name>` model, effort and context fields; `/model` selects
+the session model and `/usage` reports consumption. Host/account policy,
+availability and explicit overrides can affect the effective invocation. Exact
+precedence across these controls has not been independently verified; do not
+assume a profile always wins. This maintenance changed no local/global CLI
+settings and did not retrofit any already-running agent.
+
+Record the actual runtime model when exposed; otherwise record `NOT VERIFIED`.
+Profile/configuration validation is not proof of account enablement or a paid
+inference benchmark; actual runtime model selection has not been verified here.
+If the configured model is unavailable or the effective tier conflicts with the
+assignment, stop and report: no silent switch, downgrade or budget reset.
+A deliberate higher-tier relaunch preserves scope, reviewer independence, human
+approvals and the same [review-loop counter](../../delivery/multi-agent-framework.md#review-loop-limit):
+at most **5 total attempts**, including the initial attempt, or a lower assigned
+limit. Escalation creates no separate retry budget.
+
+Keep context small: hand off fixed artifacts and scoped evidence, not whole chats.
+Parallelise only useful independent reviews; do not automatically request long
+context or maximum effort. Measure cost, latency and rework **per accepted result**,
+not token price alone. Account plan, credits and exact billing remain unknown;
+no guaranteed task-cost saving or paid inference benchmark is claimed.
+
+Sources checked **21 October 2026**:
+[custom-agent configuration](https://docs.github.com/en/copilot/reference/custom-agents-configuration)
+(`model` is a string; unset profiles inherit the default);
+[model comparison](https://docs.github.com/en/copilot/reference/ai-models/model-comparison)
+(Luna: simple/fast; GPT-6.1 Sol: complex coding; Sonnet 5.5: fewer steps/tokens/tool calls);
+[models and pricing](https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing)
+(published default-tier pricing is not an account-specific bill).
+Local `copilot help config` recognises all three IDs and the per-agent fields above.
 
 ## Repository Skills
 
