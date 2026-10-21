@@ -49,7 +49,8 @@ connects normal farmer-photo capture, exception handling, and random validation 
 The [business-process flow](./docs/architecture/business-process-flow.md) maps those
 activities to their owners and carries the claim through advance, final calculation,
 payment reconciliation, and appeal safeguards.
-The [interactive farmer journey draft](./prototypes/farmer-journey/README.md) adds a self-contained
+The [prototype collection](./prototypes/README.md) holds interactive journey drafts.
+The [farmer journey draft](./prototypes/farmer-journey/README.md) adds a self-contained
 clickable UX walkthrough using the Field & File logo and synthetic case data.
 
 The [Azure delivery team](./docs/delivery/README.md) defines nine development agents,
@@ -104,6 +105,7 @@ the proposed public-data crop-evidence target and decisions needed before execut
 │   ├── regulatory-compliance/ # Regulatory & legal framework summaries
 │   └── research/            # Supporting research notes
 ├── prototypes/              # Interactive drafts, not production applications
+│   ├── README.md            # Prototype catalogue
 │   └── farmer-journey/
 │       ├── README.md        # Prototype guide
 │       └── index.html       # Self-contained interactive UX draft
