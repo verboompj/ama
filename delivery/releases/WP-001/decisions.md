@@ -48,7 +48,7 @@ Any authenticated discovery needs its own authority and confirmed Azure context.
 | FND-13 | Monthly budget and permitted running hours | Budget owner | No monetary ceiling specified; business/demo hours preferred. Produce costed options with supported stop/start, residual charges, alerts and explicit deployment cost approval | PROPOSED |
 | FND-14 | Availability and recovery targets | Business/platform owners | Manual rebuild acceptable; no HA target requested. Propose recovery time and data protection; actual RTO/RPO and corporate requirements unresolved | PROPOSED |
 | FND-15 | Diagnostics and operational responsibilities | Operational/security owners | Basic actionable health/error/security monitoring requested; propose collection, retention/ingestion limits and baseline-stack disposition. No automatic scheduling required now | PROPOSED |
-| FND-16 | Naming, tags and lifecycle | Platform/budget owners | Review/expiry unknown; naming/tag values and resource protection pending. Cleanup requires explicit authorisation | OPEN |
+| FND-16 | Naming, tags and lifecycle | Platform/budget owners | Tag values, coverage and naming direction accepted 21 October 2026; see FND-16 record. Exact names, corporate-policy verification, review/expiry and protection remain pending; cleanup requires explicit authorisation | PROPOSED |
 
 Budget alerts notify; they do not impose a hard spending cap. Scale-down decisions
 must account for the AKS tier, network services, registry, disks and stored telemetry
@@ -185,9 +185,38 @@ Azure access or deployment.
 | Monitoring direction | Basic actionable health/error/security monitoring; propose retention, ingestion limits, alerts and cost |
 | Monitoring disposition | Architect must explicitly assess any reduced collection/stack against the maintained Prometheus/Grafana, Container Insights and Application Insights/OpenTelemetry baseline before design approval |
 | Scheduling | No automatic scheduling required at present; propose operator-controlled start/stop with readiness checks. Exact operating hours/timezone remain unspecified |
-| Lifecycle | Review/expiry date unknown; naming/tag values, protection and cleanup process remain open |
+| Lifecycle | Review/expiry date unknown; naming/tag decisions are recorded in the FND-16 follow-up below. Protection and cleanup process remain open |
 | Ownership | Requesting user remains the operational owner under FND-01 |
 | Authority | No recovery drill, scheduling implementation or deletion authorised by these answers |
+
+### FND-16: Naming and Tagging
+
+| Field | Recorded decision / remaining work |
+|---|---|
+| Source / approval | User's direct answers to the naming/tagging form, 21 October 2026 |
+| Accepted scope | WP-001 POC resource groups and all taggable in-scope resources |
+| Naming direction | Propose Azure-compatible names using `ama`, `poc`, resource type and region, with unique suffixes where required |
+| Exact names | Pending service-specific character/length/uniqueness checks and corporate-policy verification; region abbreviation not selected |
+| Tag propagation | Apply explicitly through Bicep and supported service settings; resource-group tags do not automatically inherit to resources |
+| AKS-managed resources | Verify node-resource-group and managed-resource coverage separately using supported AKS settings; document service-specific exceptions rather than assuming coverage |
+| Verification | Instantiate WV09 for expected tags on each taggable resource and WV18 for deployed inventory; assess supported AKS tag propagation and changes at relevant gates |
+| Remaining decisions | Review/expiry date, resource protection and authorised cleanup process; overall FND-16 stays PROPOSED |
+| Execution boundary | Approved naming/tagging requirements only; no Azure tags or resources created or changed |
+
+Accepted tag values:
+
+| Tag key | Value |
+|---|---|
+| `environment` | `poc` |
+| `workload` | `ama` |
+| `workPackage` | `WP-001` |
+| `owner` | `paverboo` |
+| `costCenter` | `10122` |
+
+Preserve `costCenter` as a string in infrastructure parameters. Corporate-policy
+conflicts require an explicit resolution; do not silently replace approved values.
+The design records per-resource applicability and any required additional corporate
+tags. Sensitive credentials and case data never belong in tags.
 
 ### Format for Further Decisions
 

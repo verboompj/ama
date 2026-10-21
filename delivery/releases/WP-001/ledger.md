@@ -42,7 +42,8 @@
 | FND-13 | PROPOSED | Business/demo hours; no monetary ceiling specified. Supported stop/start, full cost estimate, residual charges and explicit cost approval still required |
 | FND-14 | PROPOSED | Manual rebuild acceptable; no HA target requested. Recovery time, data protection and baseline/corporate resilience disposition need design |
 | FND-15 | PROPOSED | Basic actionable monitoring; retention/ingestion and baseline-stack disposition pending. No automatic scheduling required now |
-| FND-16-FND-19 | OPEN | Lifecycle/naming details and later release/execution approvals unresolved; no deployment approval inferred |
+| FND-16 | PROPOSED | Naming direction and tag values/coverage accepted in the 21 October 2026 form; canonical values in [FND-16](decisions.md#fnd-16-naming-and-tagging). Exact names, corporate-policy verification, AKS-managed-resource coverage/exceptions, review/expiry and protection remain pending |
+| FND-17-FND-19 | OPEN | Later release/execution approvals unresolved; no deployment approval inferred |
 
 ## Review / Test / Validation Loops
 
