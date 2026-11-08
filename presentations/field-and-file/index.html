@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Field &amp; File — From parcel to payment</title>
+  <script>
+    (() => {
+      const param = new URLSearchParams(window.location.search).get("clawpilotTheme");
+      const theme =
+        param || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
+  <style>
+    :root {
+      color-scheme: light;
+      --cp-bg: #f7f4ef;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f5f5f5;
+      --cp-border: #dedede;
+      --cp-border-strong: #919191;
+      --cp-text: #242424;
+      --cp-text-muted: #5c5c5c;
+      --cp-text-soft: #6f6f6f;
+      --cp-accent: #b11f4b;
+      --cp-accent-hover: #9a1a41;
+      --cp-accent-soft: rgba(177, 31, 75, 0.08);
+      --cp-accent-fg: #ffffff;
+      --cp-success: #16a34a;
+      --cp-danger: #dc2626;
+      --cp-warning: #f59e0b;
+      --cp-link: #0078d4;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+      --cp-overlay: rgba(255, 255, 255, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: rgba(177, 31, 75, 0.12);
+    }
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --cp-bg: #3d3b3a;
+      --cp-bg-elevated: #343231;
+      --cp-surface: #292929;
+      --cp-surface-soft: #2e2e2e;
+      --cp-border: #474747;
+      --cp-border-strong: #5f5f5f;
+      --cp-text: #dedede;
+      --cp-text-muted: #919191;
+      --cp-text-soft: #b0b0b0;
+      --cp-accent: #fd8ea1;
+      --cp-accent-hover: #fb7b91;
+      --cp-accent-soft: rgba(253, 142, 161, 0.14);
+      --cp-accent-fg: #1a1a1a;
+      --cp-success: #4ade80;
+      --cp-danger: #f87171;
+      --cp-warning: #fbbf24;
+      --cp-link: #4da6ff;
+      --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+      --cp-overlay: rgba(41, 41, 41, 0.88);
+      --cp-panel: rgba(41, 41, 41, 0.72);
+      --cp-panel-strong: rgba(41, 41, 41, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.04);
+      --cp-highlight: rgba(253, 142, 161, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font: 18px/1.45 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
+    button, select { font: inherit; }
+    button { border: 1px solid var(--cp-border); background: var(--cp-surface); color: var(--cp-text); border-radius: .625rem; padding: 8px 14px; cursor: pointer; min-height: 40px; }
+    button:hover { background: var(--cp-surface-soft); border-color: var(--cp-border-strong); }
+    button:disabled { opacity: .45; cursor: default; }
+    :focus-visible { outline: 3px solid var(--cp-link); outline-offset: 4px; }
+    a { color: var(--cp-link); text-underline-offset: 3px; }
+    .primary { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+    .primary:hover { background: var(--cp-accent-hover); color: var(--cp-accent-fg); }
+    .toolbar { min-height: 60px; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
+    .toolbar .label { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+    .toolbar .label strong { font-size: 17px; }
+    .toolbar .tools { display: flex; gap: 8px; }
+    .toolbar button { font-size: 13px; }
+    .workspace { display: grid; place-items: center; padding: 20px 16px 12px; min-height: calc(100dvh - 124px); }
+    #canvas-shell { position: relative; }
+    #slides { transform-origin: top left; }
+    .slide { width: 1280px; height: 720px; padding: 32px 44px 24px; display: flex; flex-direction: column; background: var(--cp-bg-elevated); border: 1px solid var(--cp-border); overflow: hidden; }
+    .slide[hidden] { display: none !important; }
+    .slide.hero-slide { background: var(--cp-surface); }
+    .slide-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 34px; margin-bottom: 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; letter-spacing: -.03em; }
+    .brand svg { width: 34px; height: 34px; }
+    .chapter, .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--cp-text-muted); }
+    .chapter { text-align: right; }
+    .section-kicker { font: 13px/1.3 Consolas, "Courier New", Courier, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--cp-accent); margin: 0 0 8px; }
+    h1 { font-size: 43px; line-height: 1.08; letter-spacing: -.04em; font-weight: 650; margin: 0 0 12px; max-width: 1140px; }
+    h2 { font-size: 24px; line-height: 1.2; letter-spacing: -.02em; margin: 0 0 12px; font-weight: 650; }
+    h3 { font-size: 18px; margin: 0 0 8px; }
+    p { margin: 0 0 12px; }
+    .subtitle { font-size: 19px; max-width: 1040px; color: var(--cp-text-muted); margin-bottom: 24px; }
+    .body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 18px; }
+    .body > * { flex-shrink: 0; }
+    .compact-slide .slide-head { margin-bottom: 16px; }
+    .compact-slide .subtitle { margin-bottom: 16px; }
+    .compact-slide .body { gap: 14px; }
+    .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; min-height: 0; }
+    .columns.wide-left { grid-template-columns: 1.2fr .8fr; }
+    .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+    .card { padding: 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); box-shadow: 0 1px 2px var(--cp-border); }
+    .card.soft { background: var(--cp-surface-soft); box-shadow: none; }
+    .card.accent { background: var(--cp-accent-soft); border-color: var(--cp-accent); }
+    .card p:last-child { margin-bottom: 0; }
+    .card.small { padding: 16px; font-size: 16px; }
+    .muted { color: var(--cp-text-muted); }
+    .small-text { font-size: 15px; line-height: 1.45; }
+    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--cp-border); border-radius: .625rem; font-size: 12px; font-weight: 650; background: var(--cp-surface); color: var(--cp-text); }
+    .badge.proposed { color: var(--cp-accent); border-color: var(--cp-accent); background: var(--cp-accent-soft); }
+    .badge.blocked { color: var(--cp-danger); border-color: var(--cp-danger); }
+    .badge.ready { color: var(--cp-success); border-color: var(--cp-success); }
+    .persona { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .avatar { width: 40px; height: 40px; display: inline-grid; place-items: center; border-radius: .625rem; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); color: var(--cp-accent); flex-shrink: 0; }
+    .avatar svg { width: 23px; height: 23px; }
+    .persona strong { font-size: 17px; }
+    .speech { font-size: 25px; line-height: 1.3; letter-spacing: -.025em; font-weight: 600; margin: 0 0 20px; }
+    .speech::before { content: "“"; color: var(--cp-accent); }
+    .speech::after { content: "”"; color: var(--cp-accent); }
+    .dialogue-line { padding: 10px 0; display: grid; grid-template-columns: 110px 1fr; gap: 16px; border-top: 1px solid var(--cp-border); font-size: 17px; }
+    .dialogue-line strong { color: var(--cp-accent); font-size: 15px; }
+    .hero-title { font-size: 62px; line-height: 1.02; max-width: 660px; margin: 10px 0 20px; }
+    .hero-tagline { font-size: 25px; line-height: 1.4; max-width: 600px; }
+    .big-number { font-size: 41px; line-height: 1.08; font-weight: 650; letter-spacing: -.05em; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+    .metrics .metric { padding: 14px 0 0; }
+    .metrics p { font-size: 15px; color: var(--cp-text-muted); margin: 6px 0 0; }
+    .field-map { position: relative; min-height: 262px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px; padding: 18px; border-radius: 16px; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); }
+    .parcel { border: 2px solid var(--cp-border-strong); border-radius: .625rem; background: repeating-linear-gradient(125deg, var(--cp-bg-elevated) 0 12px, var(--cp-border) 12px 14px); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; min-height: 98px; }
+    .parcel.selected { background: repeating-linear-gradient(125deg, var(--cp-accent-soft) 0 12px, var(--cp-highlight) 12px 14px); border-color: var(--cp-accent); grid-row: span 2; }
+    .parcel span { align-self: flex-start; background: var(--cp-surface); border-radius: .625rem; padding: 4px 8px; font-size: 14px; }
+    .parcel strong { background: var(--cp-surface); border-radius: .625rem; padding: 4px 8px; font-size: 16px; align-self: flex-start; }
+    .map-caption { padding-top: 10px; font-size: 13px; color: var(--cp-text-muted); }
+    .phone { width: 100%; max-width: 360px; margin: auto; border: 2px solid var(--cp-border-strong); border-radius: 16px; padding: 18px; background: var(--cp-surface); }
+    .phone-top { display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 14px; }
+    .phone .field-map { min-height: 128px; padding: 10px; gap: 6px; }
+    .phone .parcel { min-height: 50px; padding: 8px; }
+    .phone .parcel span, .phone .parcel strong { font-size: 11px; }
+    .compact-slide .phone { padding: 14px; }
+    .compact-slide .phone-top { margin-bottom: 10px; }
+    .compact-slide .phone .field-map { min-height: 100px; padding: 8px; }
+    .compact-slide .phone .parcel { min-height: 38px; padding: 6px; }
+    .compact-slide .phone .screen-row { margin: 8px 0; }
+    .compact-slide .phone .small-text { font-size: 14px; line-height: 1.35; }
+    .screen-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 15px; margin: 12px 0; }
+    .screen-action { display: block; text-align: center; background: var(--cp-accent); color: var(--cp-accent-fg); border-radius: .625rem; padding: 9px 12px; font-size: 14px; font-weight: 650; }
+    .steps { display: flex; gap: 12px; align-items: stretch; }
+    .step { flex: 1; border: 1px solid var(--cp-border); border-radius: 16px; padding: 16px; background: var(--cp-surface); min-width: 0; }
+    .step .number { font: 14px Consolas, "Courier New", Courier, monospace; color: var(--cp-accent); display: block; margin-bottom: 8px; }
+    .step h3 { font-size: 17px; }
+    .step p { font-size: 15px; margin: 0; color: var(--cp-text-muted); }
+    .takeaway { padding: 12px 16px; background: var(--cp-accent-soft); border: 1px solid var(--cp-accent); border-radius: .625rem; font-size: 18px; }
+    .takeaway strong { color: var(--cp-accent); }
+    .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .comparison .card { padding: 18px; }
+    .signal { display: flex; gap: 8px; align-items: flex-end; height: 65px; padding: 8px 0; margin: 10px 0; }
+    .signal span { flex: 1; background: var(--cp-border); border-radius: 4px; height: 36%; }
+    .signal span:nth-child(2) { height: 52%; }
+    .signal span:nth-child(3) { height: 77%; }
+    .signal span:nth-child(4) { height: 60%; }
+    .signal span:nth-child(5) { height: 40%; background: var(--cp-accent); }
+    .signal span:nth-child(6) { height: 28%; background: var(--cp-accent); }
+    .compact-slide .signal { height: 52px; margin: 8px 0; }
+    .lane { display: grid; grid-template-columns: 150px 1fr; align-items: center; gap: 16px; border: 1px solid var(--cp-border); padding: 14px 16px; background: var(--cp-surface); border-radius: .625rem; font-size: 16px; }
+    .lane strong { color: var(--cp-accent); font-size: 15px; }
+    .role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .role { border: 1px solid var(--cp-border); border-radius: .625rem; padding: 10px 12px; background: var(--cp-surface); font-size: 14px; font-weight: 650; }
+    .gate { padding: 18px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); }
+    .gate.active { border-color: var(--cp-danger); }
+    .gate h3 { font-size: 17px; margin: 12px 0 8px; }
+    .gate p { font-size: 15px; color: var(--cp-text-muted); }
+    .code { margin: 0; padding: 18px; background: var(--cp-surface-soft); border: 1px solid var(--cp-border); border-radius: .625rem; color: var(--cp-text); white-space: pre-wrap; overflow-wrap: anywhere; font: 16px/1.5 Consolas, "Courier New", Courier, monospace; }
+    .status-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 0; border-top: 1px solid var(--cp-border); font-size: 16px; }
+    #slide-9 .card { padding: 16px; }
+    #slide-9 .code { padding: 12px; font-size: 14px; }
+    #slide-9 .status-row { padding: 7px 0; }
+    #slide-9 .metrics .metric { padding-top: 4px; }
+    .referee { display: grid; grid-template-columns: 1fr 1.05fr 1fr; gap: 18px; align-items: center; }
+    .referee .center { padding: 24px; text-align: center; background: var(--cp-accent-soft); border: 1px solid var(--cp-accent); border-radius: 16px; }
+    .referee .center .avatar { width: 56px; height: 56px; margin-bottom: 12px; }
+    .referee .center .avatar svg { width: 32px; height: 32px; }
+    .referee .side { display: grid; gap: 10px; }
+    .compact-slide .referee .center { padding: 14px; }
+    .compact-slide .referee .center .avatar { width: 44px; height: 44px; margin-bottom: 8px; }
+    .compact-slide .referee .center p { font-size: 17px; line-height: 1.35; margin-bottom: 8px; }
+    .compact-slide .referee .card.small, .compact-slide .three .card.small { padding: 14px; }
+    .slide-footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 18px; padding-top: 10px; border-top: 1px solid var(--cp-border); font-size: 12px; color: var(--cp-text-muted); min-height: 32px; }
+    .slide-footer .footer-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+    .source-button { padding: 3px 8px; font-size: 11px; min-height: 26px; }
+    .navigation { min-height: 52px; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 8px 16px; }
+    .navigation button { font-size: 14px; }
+    #progress { font: 13px Consolas, "Courier New", Courier, monospace; min-width: 72px; text-align: center; }
+    .dots { display: flex; gap: 5px; }
+    .dots button { padding: 0; min-height: 24px; width: 24px; font: 11px Consolas, "Courier New", Courier, monospace; }
+    .dots button[aria-current="step"] { background: var(--cp-accent); color: var(--cp-accent-fg); border-color: var(--cp-accent); }
+    dialog { width: min(820px, calc(100% - 32px)); max-height: 85dvh; overflow-y: auto; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); color: var(--cp-text); padding: 28px; }
+    dialog::backdrop { background: var(--cp-overlay); }
+    dialog .dialog-head { display: flex; justify-content: space-between; gap: 16px; align-items: start; margin-bottom: 20px; }
+    dialog h2 { font-size: 26px; }
+    dialog h3 { font-size: 19px; margin-top: 24px; }
+    dialog p, dialog li { font-size: 16px; }
+    dialog li { margin-bottom: 10px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    html:not([data-ready]) .slide { width: min(1280px, 100%); height: auto; min-height: 720px; margin: 20px auto; }
+    html:not([data-ready]) .toolbar, html:not([data-ready]) .navigation { display: none; }
+    html:not([data-ready]) .source-button { display: none; }
+    .static-sources { max-width: 1190px; margin: 24px auto; padding: 24px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); }
+    @media (max-width: 760px) {
+      .toolbar { padding: 10px 12px; flex-wrap: wrap; gap: 8px; }
+      .toolbar .label { font-size: 12px; }
+      .toolbar .tools { gap: 6px; }
+      .toolbar .tools button { font-size: 12px; padding: 7px 10px; }
+      .workspace { display: block; min-height: 0; padding: 12px; }
+      #canvas-shell, #slides { width: 100% !important; height: auto !important; transform: none !important; }
+      .slide { width: 100%; height: auto; min-height: 0; padding: 22px; overflow: visible; border-radius: 16px; }
+      .slide-head { align-items: start; gap: 12px; margin-bottom: 24px; }
+      .brand { font-size: 15px; white-space: nowrap; }
+      .brand svg { width: 28px; height: 28px; }
+      .chapter { font-size: 9px; letter-spacing: .08em; max-width: 100px; }
+      h1 { font-size: 31px; }
+      .hero-title { font-size: 43px; }
+      h2 { font-size: 22px; }
+      .subtitle, .hero-tagline { font-size: 17px; }
+      .columns, .columns.wide-left, .three, .four, .comparison, .referee { grid-template-columns: 1fr; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .big-number { font-size: 34px; }
+      .body { gap: 18px; }
+      .speech { font-size: 22px; }
+      .steps { flex-direction: column; }
+      .lane { grid-template-columns: 1fr; gap: 4px; }
+      .role-grid { grid-template-columns: 1fr 1fr; }
+      .dialogue-line { grid-template-columns: 80px 1fr; gap: 10px; font-size: 16px; }
+      .slide-footer { align-items: start; }
+      .slide-footer .footer-right { gap: 8px; }
+      .navigation { gap: 8px; flex-wrap: wrap; }
+      .dots { order: 3; width: 100%; justify-content: center; }
+      .phone { max-width: none; }
+      .code { font-size: 13px; }
+    }
+    @page { size: 13.333333in 7.5in; margin: 0; }
+    @media print {
+      html, body { width: 1280px; margin: 0; }
+      .toolbar, .navigation, dialog, .source-button, .sr-only, .static-sources { display: none !important; }
+      .workspace { display: block; padding: 0; min-height: 0; }
+      #canvas-shell, #slides { width: 1280px !important; height: auto !important; transform: none !important; }
+      .slide, .slide[hidden], html:not([data-ready]) .slide { display: flex !important; width: 1280px; height: 720px; margin: 0; border: 0; border-radius: 0; break-after: page; page-break-after: always; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .slide:last-child { break-after: auto; page-break-after: auto; }
+      .columns { grid-template-columns: 1fr 1fr; }
+      .columns.wide-left { grid-template-columns: 1.2fr .8fr; }
+      .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .steps { flex-direction: row; }
+      .referee { grid-template-columns: 1fr 1.05fr 1fr; }
+      .comparison { grid-template-columns: 1fr 1fr; }
+      .metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .role-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="field-mark" viewBox="0 0 204 204">
+        <rect width="204" height="204" rx="34" fill="var(--cp-text)"/>
+        <path d="M22 147C64 108 115 91 182 89V178H22Z" fill="var(--cp-accent)"/>
+        <path d="M22 178C67 143 120 128 182 127V182H22Z" fill="var(--cp-border-strong)"/>
+        <path d="M45 177C80 150 124 138 174 138M70 181C98 160 132 151 174 151M105 182C125 168 147 163 174 162" fill="none" stroke="var(--cp-bg)" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="62" cy="60" r="10" fill="var(--cp-bg)"/>
+        <path d="M80 60C105 60 125 80 125 105M80 39C117 39 146 68 146 105" fill="none" stroke="var(--cp-bg)" stroke-width="9" stroke-linecap="round"/>
+        <path d="M119 112L140 132L178 89" fill="none" stroke="var(--cp-bg)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="person" viewBox="0 0 24 24">
+        <circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M4 22v-3a8 8 0 0 1 16 0v3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      </symbol>
+      <symbol id="shield" viewBox="0 0 24 24">
+        <path d="M12 2 3 6v6c0 5 5 8 9 10 4-2 9-5 9-10V6Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="m7 12 3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      </symbol>
+      <symbol id="file" viewBox="0 0 24 24">
+        <path d="M5 2h10l4 4v16H5Zm10 0v5h4M8 12h8M8 16h8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      </symbol>
+    </defs>
+  </svg>
+  <header class="toolbar" aria-label="Presentation controls">
+    <div class="label"><strong>Field &amp; File</strong><span>Customer story + project retrospective</span></div>
+    <div class="tools">
+      <button id="notes-button" type="button" aria-keyshortcuts="N">Talk track <span aria-hidden="true">N</span></button>
+      <button id="theme-button" type="button">Change theme</button>
+      <button id="fullscreen-button" type="button" aria-keyshortcuts="F">Fullscreen</button>
+      <button id="print-button" type="button">Print / PDF</button>
+    </div>
+  </header>
+  <main class="workspace">
+    <div id="canvas-shell">
+      <div id="slides">
+
+        <section class="slide hero-slide" id="slide-1" aria-labelledby="title-1" data-chapter="Customer · 1 of 6">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">The proposed customer solution<br>Case Study 47 · Fictional Hungary</div></header>
+          <div class="body">
+            <div class="columns wide-left">
+              <div>
+                <p class="section-kicker">01 / The thesis</p>
+                <h1 class="hero-title" id="title-1">From parcel<br>to payment.</h1>
+                <p class="hero-tagline">Make the exception the unit of work.<br>Monitor broadly. Ask early. Decide fairly.</p>
+                <p class="muted small-text">A proposed CAP service that connects what happens in the field to decisions farmers can understand.</p>
+              </div>
+              <div>
+                <div class="field-map" role="img" aria-label="Illustrative farm map: one parcel requires clarification while other parcels continue monitoring">
+                  <div class="parcel selected"><span>P-17 · Clarify</span><strong>The signal needs context.</strong></div>
+                  <div class="parcel"><span>P-18</span><strong>Monitoring</strong></div>
+                  <div class="parcel"><span>P-19</span><strong>Monitoring</strong></div>
+                </div>
+                <p class="map-caption">Napraforgó Farm · illustrative parcels, not real claimant data.</p>
+                <div class="card accent small"><strong>Executive proposition</strong><p>Turn scarce inspection capacity into focused, defensible human intervention—not blanket manual review.</p></div>
+              </div>
+            </div>
+            <div class="metrics">
+              <div class="metric"><div class="big-number">160k</div><p>farmers in the case brief</p></div>
+              <div class="metric"><div class="big-number">€2bn</div><p>annual CAP payments in the brief</p></div>
+              <div class="metric"><div class="big-number">2 months</div><p>earlier payment ambition</p></div>
+              <div class="metric"><div class="big-number">−40%</div><p>inspection-cost ambition</p></div>
+            </div>
+          </div>
+          <footer class="slide-footer"><span>Brief figures and outcome targets—not verified agency facts or achieved results.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>01 / 10</span></div></footer>
+        </section>
+
+        <section class="slide compact-slide" id="slide-2" aria-labelledby="title-2" data-chapter="Customer · 2 of 6">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Winter → spring<br>The Farmer + The Adviser</div></header>
+          <p class="section-kicker">02 / Start from the farmer’s question</p>
+          <h1 id="title-2">“What do I need to do—and by when?”</h1>
+          <p class="subtitle">The product is an understandable next step, not another form or an unexplained AI score.</p>
+          <div class="body">
+            <div class="columns wide-left">
+              <div class="card">
+                <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span><strong>The Farmer / authorised Adviser</strong><span class="badge proposed">Proposed experience</span></div>
+                <div class="dialogue-line"><strong>Farmer</strong><span>“Help me prepare the claim for this season.”</span></div>
+                <div class="dialogue-line"><strong>Guidance</strong><span>“Check these parcels, obligations and dates. Here is the rule behind each action.”</span></div>
+                <div class="dialogue-line"><strong>Adviser</strong><span>“I can correct the draft within my delegated authority.”</span></div>
+                <div class="dialogue-line"><strong>Service</strong><span>“Submission received. Keep this receipt and track the case.”</span></div>
+                <p class="small-text muted" style="margin-top:16px">Hungarian-first, accessible and assisted channels. Mobile/offline drafts are useful—but only a server receipt means “submitted”.</p>
+              </div>
+              <div class="phone" aria-label="Illustrative proposed farmer mobile screen">
+                <div class="phone-top"><strong>Napraforgó Farm</strong><span class="badge">Draft</span></div>
+                <h3>Your season, clearly</h3>
+                <div class="field-map" aria-hidden="true"><div class="parcel selected"><span>P-17</span><strong>Maize declared</strong></div><div class="parcel"><span>P-18</span></div><div class="parcel"><span>P-19</span></div></div>
+                <div class="screen-row"><span>Claim checklist</span><strong>Review</strong></div>
+                <div class="screen-row"><span>Adviser access</span><strong>Scoped</strong></div>
+                <div class="screen-action">Record a field event</div>
+                <p class="small-text muted" style="margin:12px 0 0">Purposeful evidence capture throughout the season—not a universal photo obligation.</p>
+              </div>
+            </div>
+            <div class="takeaway"><strong>Farmer value:</strong> fewer avoidable mistakes, clear deadlines and a visible route to assistance.</div>
+          </div>
+          <footer class="slide-footer"><span>Original illustrative dialogue; farmer UX in the repo is a synthetic prototype, not a live service.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>02 / 10</span></div></footer>
+        </section>
+
+        <section class="slide compact-slide" id="slide-3" aria-labelledby="title-3" data-chapter="Customer · 3 of 6">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Summer · the anomaly<br>The Farmer + The Caseworker</div></header>
+          <p class="section-kicker">03 / A satellite signal is not a verdict</p>
+          <h1 id="title-3">“The parcel changed. The declaration did not.”</h1>
+          <p class="subtitle">A storm and replanting create an evidence question—not an automatic finding of non-compliance.</p>
+          <div class="body">
+            <div class="comparison">
+              <div class="card">
+                <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><strong>The Caseworker’s view</strong></div>
+                <div class="signal" role="img" aria-label="Illustrative signal pattern only, not measured satellite observations"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="screen-row"><span>Declared</span><strong>Maize · P-17</strong></div>
+                <div class="screen-row"><span>Monitoring</span><span class="badge blocked">UNKNOWN</span></div>
+                <p class="small-text muted">Dated observations, model version and limitations travel together. The crop classifier can abstain.</p>
+              </div>
+              <div class="card accent">
+                <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span><strong>The Farmer’s response</strong></div>
+                <p class="speech">A storm damaged this field. We replanted.</p>
+                <p>The service explains what is in question, the relevant rule and response window.</p>
+                <p class="small-text"><strong>Respond:</strong> explain · correct · submit suitable evidence · ask for human review.</p>
+                <p class="small-text muted">A geo-tag supports provenance. It does not prove eligibility.</p>
+              </div>
+            </div>
+            <div class="steps">
+              <div class="step"><span class="number">1 / NOTICE</span><h3>Ask a scoped question</h3><p>Plain language, dates, uncertainty and an action.</p></div>
+              <div class="step"><span class="number">2 / EVIDENCE</span><h3>Validate the response</h3><p>Quarantine, integrity, receipt and versioned case record.</p></div>
+              <div class="step"><span class="number">3 / RESOLUTION</span><h3>Close or escalate</h3><p>Routine rules may resolve the issue; disputes go to a human.</p></div>
+            </div>
+          </div>
+          <footer class="slide-footer"><span>Synthetic P-17 scenario and signal; consistent monitoring does not prove every scheme condition.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>03 / 10</span></div></footer>
+        </section>
+
+        <section class="slide" id="slide-4" aria-labelledby="title-4" data-chapter="Customer · 4 of 6">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Independent evidence<br>The Inspector + Decision Guardian</div></header>
+          <p class="section-kicker">04 / Resolve uncertainty without weakening fairness</p>
+          <h1 id="title-4">“Show me the facts. Let me hear the farmer.”</h1>
+          <p class="subtitle">Inspection establishes a scoped finding. An accountable official determines the consequence.</p>
+          <div class="body">
+            <div class="three">
+              <div class="card">
+                <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span><strong>The Inspector</strong></div>
+                <p class="speech">Which question needs a visit?</p>
+                <p class="small-text">A human approves the task and proportionate ground or authorised drone route.</p>
+                <p class="small-text muted">Task-scoped access, raw evidence and capture lineage. Lock the independent finding before revealing model suggestions.</p>
+              </div>
+              <div class="card soft">
+                <p class="eyebrow">Two separate control lanes</p>
+                <h2>Targeted ≠ random</h2>
+                <div class="status-row"><strong>Targeted inspection</strong><span class="badge">Resolve a risk</span></div>
+                <div class="status-row"><strong>Probability sample</strong><span class="badge">Test the system</span></div>
+                <p class="small-text muted" style="margin-top:16px">Random validation includes apparently consistent cases. Farmer photos cannot replace independent sample observations.</p>
+              </div>
+              <div class="card accent">
+                <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#shield"/></svg></span><strong>The Decision Guardian</strong></div>
+                <p class="speech">Was the farmer heard?</p>
+                <p class="small-text">Notice, evidence access, response, human review and a reasoned decision with an appeal route.</p>
+                <p class="small-text"><strong>No LLM-issued sanctions, reductions or entitlement decisions.</strong></p>
+              </div>
+            </div>
+            <div class="takeaway"><strong>Public-service value:</strong> focus field capacity while retaining independent assurance and due process.</div>
+          </div>
+          <footer class="slide-footer"><span>Proposed control design; actual national procedures, sampling targets and drone permissions need approval.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>04 / 10</span></div></footer>
+        </section>
+
+        <section class="slide" id="slide-5" aria-labelledby="title-5" data-chapter="Customer · 5 of 6">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Payment + accountability<br>Operations · policy · audit · safeguards</div></header>
+          <p class="section-kicker">05 / Complete the journey, not just the classification</p>
+          <h1 id="title-5">“Why was this amount paid—and can we prove it?”</h1>
+          <p class="subtitle">One traceable case connects evidence, decisions and the actual settlement record.</p>
+          <div class="body">
+            <div class="steps">
+              <div class="step"><span class="number">EVIDENCE</span><h3>Versioned inputs</h3><p>Claim, rules, imagery, model, response and findings.</p></div>
+              <div class="step"><span class="number">READINESS</span><h3>Eligible amount</h3><p>Deterministic controls and authorised human decisions.</p></div>
+              <div class="step"><span class="number">PAYMENT</span><h3>Treasury executes</h3><p>Advance/balance instruction under existing authority.</p></div>
+              <div class="step"><span class="number">RECONCILIATION</span><h3>Settlement confirmed</h3><p>Transaction references, exceptions and safe retries.</p></div>
+            </div>
+            <div class="four">
+              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Operations Lead</h3><p>See aging queues, blocked amounts and next actions—not just “AI accuracy”.</p></div>
+              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Policy Owner</h3><p>Version scheme rules and assess service outcomes, including accessibility.</p></div>
+              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Auditor</h3><p>Reconstruct the case. Approve a reproducible audit pack, not an unreviewed AI draft.</p></div>
+              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#shield"/></svg></span><h3 style="margin-top:12px">Safeguards Officer</h3><p>Challenge data use, retention, rights and unequal outcomes alongside farmer advocates.</p></div>
+            </div>
+            <div class="takeaway"><strong>Critical boundary:</strong> case readiness ≠ payment instruction ≠ settled payment. Agents cannot execute funds.</div>
+          </div>
+          <footer class="slide-footer"><span>Earlier-payment ambition is conditional on the relevant controls and authorised payment rules—not crop dates.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>05 / 10</span></div></footer>
+        </section>
+
+        <section class="slide compact-slide" id="slide-6" aria-labelledby="title-6" data-chapter="Customer · 6 of 6">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">How the proposed service fits together<br>Platform + Earth Observation specialists</div></header>
+          <p class="section-kicker">06 / One service, deliberately different responsibilities</p>
+          <h1 id="title-6">“Use AI to explain. Use evidence to decide.”</h1>
+          <p class="subtitle">The platform connects the personas without giving technical services administrative authority.</p>
+          <div class="body">
+            <div class="columns">
+              <div style="display:grid;gap:12px">
+                <div class="lane"><strong>User channels</strong><span>Farmer PWA + adviser access · staff workspace · inspector mobile · audit views</span></div>
+                <div class="lane"><strong>AKS runtime</strong><span>Portal, agents, case/evidence APIs, deterministic rules and controlled payment adapter</span></div>
+                <div class="lane"><strong>Managed models</strong><span>Foundry for language; Azure ML for crop classification; approved EU processing</span></div>
+                <div class="lane"><strong>Earth observation</strong><span>Copernicus/Sentinel time-series and appropriate raster-heavy processing</span></div>
+              </div>
+              <div class="card">
+                <p class="eyebrow">Five business agents · proposed, not deployed</p>
+                <div class="status-row"><strong>Guidance</strong><span>Explain + pre-check</span></div>
+                <div class="status-row"><strong>Monitoring</strong><span>Classify or abstain</span></div>
+                <div class="status-row"><strong>Resolution</strong><span>Resolve within rules</span></div>
+                <div class="status-row"><strong>Inspection</strong><span>Recommend only</span></div>
+                <div class="status-row"><strong>Audit evidence</strong><span>Draft for approval</span></div>
+                <p class="small-text muted" style="margin-top:14px">The platform operator restores services; the EO specialist evaluates models. Neither can approve a claim or sanction.</p>
+              </div>
+            </div>
+            <div class="takeaway"><strong>Proposed customer value:</strong> understandable actions for farmers; focused work for staff; traceable decisions for the agency.</div>
+          </div>
+          <footer class="slide-footer"><span>Maintained proposed architecture. Foundation models/GPU serving are not hosted inside AKS.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>06 / 10</span></div></footer>
+        </section>
+
+        <section class="slide compact-slide" id="slide-7" aria-labelledby="title-7" data-chapter="Project · 1 of 3">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">The actual repository project<br>Structure + delivery agents</div></header>
+          <p class="section-kicker">07 / How we organised the work</p>
+          <h1 id="title-7">The service agents are not the build team.</h1>
+          <p class="subtitle">Nine delivery roles turn a case brief into scoped artifacts, fixed handoffs and explicit decisions.</p>
+          <div class="body">
+            <div class="columns">
+              <div class="card">
+                <p class="eyebrow">Development-team roles in .github/agents</p>
+                <div class="role-grid">
+                  <div class="role">Coordinator</div><div class="role">Azure architect</div><div class="role">Bicep engineer</div>
+                  <div class="role">Application / AI</div><div class="role">ML / data</div><div class="role">Documenter</div>
+                  <div class="role">Infrastructure tester</div><div class="role">Security reviewer</div><div class="role">Compliance reviewer</div>
+                </div>
+                <p class="small-text muted" style="margin-top:16px">Profiles, shared skills, phase prompts and assignments are defined. Actual host/model behaviour is not guaranteed by configuration.</p>
+              </div>
+              <div class="card soft">
+                <h2>One owner per artifact</h2>
+                <p class="small-text">Independent work can run in parallel after contracts freeze. Reviews return to the owner; they do not silently rewrite the baseline.</p>
+                <h3>Risk-fit model routing</h3>
+                <p class="small-text muted">Lower-tier GPT for clerical work only. Higher-capability technical roles; distinct security/compliance reviewer defaults. Technical documentation escalates.</p>
+                <p class="small-text"><strong>Important limit:</strong> coordination and gate enforcement are procedural, not a fully automated delivery platform.</p>
+              </div>
+            </div>
+            <div class="steps">
+              <div class="step"><span class="number">CASE → SCOPE</span><h3>Targets + ownership</h3><p>Brief, personas, decisions and bounded assignment.</p></div>
+              <div class="step"><span class="number">DESIGN → RELEASE</span><h3>Review + approval</h3><p>Feasibility, actual plan, fixed revision and human authority.</p></div>
+              <div class="step"><span class="number">BUILD → EVIDENCE</span><h3>Candidate + checks</h3><p>Author work, independent assurance and explicit blockers.</p></div>
+            </div>
+          </div>
+          <footer class="slide-footer"><span>Delivery sequence agreed: infrastructure → Azure ML → application/runtime. Separate scopes, not one deployment.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>07 / 10</span></div></footer>
+        </section>
+
+        <section class="slide" id="slide-8" aria-labelledby="title-8" data-chapter="Project · 2 of 3">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Assurance + approval boundaries<br>What a gate actually means</div></header>
+          <p class="section-kicker">08 / Strong evidence, proportionate to the experiment</p>
+          <h1 id="title-8">Compliance is a design input—not a stamp.</h1>
+          <p class="subtitle">The repo preserves requirements and findings, but the current PoC is intentionally technical and uncertified.</p>
+          <div class="body">
+            <div class="four">
+              <div class="gate"><span class="badge ready">Recorded</span><h3>Design released</h3><p>Exact design/plan, feasibility, scoped reviews and user local-authoring approval.</p></div>
+              <div class="gate active"><span class="badge blocked">Blocked</span><h3>Locally validated</h3><p>Compiler success is not enough. Effective author contracts fail; independent acceptance is pending.</p></div>
+              <div class="gate"><span class="badge">Not run</span><h3>Deployment ready</h3><p>Actual target, identity, scope, funding, authorised validation and inspected what-if.</p></div>
+              <div class="gate"><span class="badge">Not run</span><h3>Operationally verified</h3><p>Separately approved execution and observed behaviour in the real environment.</p></div>
+            </div>
+            <div class="columns">
+              <div class="card small">
+                <h2>Traceability over confidence</h2>
+                <p>Source precedence, versioned decisions, preserved bytes/hashes, non-author reviews and honest <strong>PASS / FAIL / BLOCKED / NOT RUN</strong> labels.</p>
+              </div>
+              <div class="card small accent">
+                <h2>Deliberate PoC boundary</h2>
+                <p>Historical security/compliance requirements remain reference evidence. Certification campaigns are not PoC outcomes; scoped safety and later applicable obligations still matter.</p>
+              </div>
+            </div>
+            <p class="small-text muted">Review/test loops stop at five total attempts. Preparation accounting was clarified separately; it does not reset a failing workload check.</p>
+          </div>
+          <footer class="slide-footer"><span>No claim of GDPR, AI Act, CAP or production certification. Source summaries are not legislation.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>08 / 10</span></div></footer>
+        </section>
+
+        <section class="slide compact-slide" id="slide-9" aria-labelledby="title-9" data-chapter="Project · 3 of 3">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">What we actually built<br>Committed baseline · 4a37a94</div></header>
+          <p class="section-kicker">09 / Reusable infrastructure, honest maturity</p>
+          <h1 id="title-9">Actual Bicep. Not an actual Azure deployment.</h1>
+          <p class="subtitle">WP-001 now has a compiled private-foundation candidate—while the end-product application remains proposed.</p>
+          <div class="body">
+            <div class="metrics">
+              <div class="metric"><div class="big-number">10</div><p>Bicep files · root + nine modules</p></div>
+              <div class="metric"><div class="big-number">20</div><p>distinct pinned published AVMs</p></div>
+              <div class="metric"><div class="big-number">23</div><p>AVM module declarations</p></div>
+              <div class="metric"><div class="big-number">0</div><p>WP-001 Azure deployments</p></div>
+            </div>
+            <div class="columns">
+              <div class="card">
+                <p class="eyebrow">Visible reuse—not an assumption</p>
+                <pre class="code">module vnet
+  'br/public:avm/res/network/virtual-network:0.10.2'
+  = { /* project parameters */ }</pre>
+                <p class="small-text muted" style="margin-top:14px">Logical modules compose AVMs. Documented native exceptions cover AKS, VPN and extension-resource gaps.</p>
+                <p class="small-text"><strong>Root:</strong> <code>infra/main.bicep</code><br><strong>Parameters:</strong> local environment + synthetic fixture.</p>
+              </div>
+              <div class="card soft">
+                <div class="status-row"><strong>Ten template builds</strong><span class="badge ready">Compile</span></div>
+                <div class="status-row"><strong>Two parameter files</strong><span class="badge">Synthetic only</span></div>
+                <div class="status-row"><strong>Restore / lint</strong><span class="badge">Warnings recorded</span></div>
+                <div class="status-row"><strong>Effective contract suite</strong><span class="badge blocked">FAIL · 5/5 stop</span></div>
+                <p class="small-text muted" style="margin-top:14px">An unresolved ARM-evaluator input aborts the suite. Independent acceptance, conformance, actual what-if and live checks are not run.</p>
+              </div>
+            </div>
+            <div class="takeaway"><strong>AVM ≠ guaranteed quality:</strong> exact pins and compiled artifacts still need project-specific evidence.</div>
+          </div>
+          <footer class="slide-footer"><span>Published source baseline: commit 4a37a94. Native API availability and real environment parameters are unverified.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>09 / 10</span></div></footer>
+        </section>
+
+        <section class="slide hero-slide compact-slide" id="slide-10" aria-labelledby="title-10" data-chapter="Learnings">
+          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">The retrospective<br>What the experience taught us</div></header>
+          <p class="section-kicker">10 / Human in the loop—twice</p>
+          <h1 id="title-10">The human became the referee.</h1>
+          <p class="subtitle">Customer decisions need human oversight by design. Engineering coordination also needed it—more than intended.</p>
+          <div class="body">
+            <div class="referee">
+              <div class="side">
+                <div class="card small"><strong>Implementation goal</strong><p>“Produce a bounded technical PoC.”</p></div>
+                <div class="card small"><strong>Assurance demands</strong><p>Different agents treated different evidence and approvals as prerequisites.</p></div>
+              </div>
+              <div class="center">
+                <span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span>
+                <h2>The accountable human</h2>
+                <p>Clarified the goal.<br>Resolved conflicting interpretations.<br>Changed the authorised scope.</p>
+                <span class="badge proposed">User’s retrospective</span>
+              </div>
+              <div class="side">
+                <div class="card small accent"><strong>What helped</strong><p>Explicit ownership, visible blockers, recorded decisions and no false deployment claims.</p></div>
+                <div class="card small"><strong>What cost time</strong><p>Heavyweight standards, recursive coordination and a complex test evaluator.</p></div>
+              </div>
+            </div>
+            <div class="three">
+              <div class="card small"><h3>1 / Fit assurance to risk</h3><p>Set the experiment boundary before agents debate production-grade obligations.</p></div>
+              <div class="card small"><h3>2 / Automate facts first</h3><p>Prefer simple deterministic checks; reuse tooling before building another evaluator.</p></div>
+              <div class="card small"><h3>3 / Escalate once, clearly</h3><p>One conflict owner, a bounded decision and fewer routine human dispatches.</p></div>
+            </div>
+            <div class="takeaway"><strong>Learning:</strong> governance should make authority clearer—not turn the sponsor into the orchestration engine.</div>
+          </div>
+          <footer class="slide-footer"><span>User reflection + recorded project blockers. Improvements are recommendations, not implemented policy or waived checks.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>10 / 10</span></div></footer>
+        </section>
+      </div>
+    </div>
+  </main>
+  <noscript>
+    <aside class="static-sources" aria-labelledby="static-sources-title">
+      <h2 id="static-sources-title">Presentation sources</h2>
+      <p>All ten slides remain readable without JavaScript. Interactive navigation and presenter notes require JavaScript. Sources refer to the fixed published baseline <code>4a37a94</code>.</p>
+      <ul>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/case/case-study-47.md">Original case brief and outcome ambitions</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/docs/Persona/personas-and-use-cases.md">Personas, requirements and authority</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/docs/Persona/farm-theme-and-persona-map.md">Field &amp; File visual identity and fictional farm</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/docs/architecture/business-process-flow.md">Business process, independent evidence and payment boundaries</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/docs/architecture/aks-centered-foundry-architecture.md">Maintained proposed solution architecture</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/delivery/multi-agent-framework.md">Delivery framework, ownership and review limits</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/docs/delivery/agents-and-skills.md">Nine delivery roles and model-routing policy</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/delivery/releases/WP-001/poc-direction.md">Recorded technical PoC scope and staged delivery</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/delivery/releases/WP-001/design-release.md">Local-authoring design release</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/delivery/releases/WP-001/implementation.md">Actual Bicep, AVM and validation results</a></li>
+        <li><a href="https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/delivery/releases/WP-001/ledger.md">Work-package state and exhausted check budget</a></li>
+      </ul>
+    </aside>
+  </noscript>
+  <nav class="navigation" aria-label="Slide navigation">
+    <button id="previous" type="button" aria-keyshortcuts="ArrowLeft">← Previous</button>
+    <span id="progress">01 / 10</span>
+    <div class="dots" id="dots" aria-label="Jump to slide"></div>
+    <button id="next" class="primary" type="button" aria-keyshortcuts="ArrowRight">Next →</button>
+  </nav>
+  <p class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></p>
+  <dialog id="context-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head"><div><p class="section-kicker" id="dialog-kicker"></p><h2 id="dialog-title"></h2></div><button id="close-dialog" type="button" aria-label="Close talk track and sources">Close</button></div>
+    <h3>Talk track</h3><p id="talk-track"></p>
+    <h3>Conversation bridge</h3><p id="bridge"></p>
+    <h3>Source and evidence notes</h3><p id="evidence-note"></p>
+    <ul id="sources"></ul>
+  </dialog>
+  <script>
+    const base = "https://github.com/verboompj/ama/blob/4a37a946ff4be175dde20aa1802946b9799f26c5/";
+    const common = {
+      case: ["Original case brief", "case/case-study-47.md"],
+      personas: ["Role-based personas and use cases", "docs/Persona/personas-and-use-cases.md"],
+      theme: ["Field & File original visual identity", "docs/Persona/farm-theme-and-persona-map.md"],
+      flow: ["Business process: evidence, decisions and payment", "docs/architecture/business-process-flow.md"],
+      architecture: ["Maintained proposed AKS-centred architecture", "docs/architecture/aks-centered-foundry-architecture.md"],
+      implementation: ["Actual implementation results and failed checks", "delivery/releases/WP-001/implementation.md"],
+      ledger: ["Work-package state and attempt ledger", "delivery/releases/WP-001/ledger.md"],
+      release: ["Actual local-authoring design release", "delivery/releases/WP-001/design-release.md"],
+      framework: ["Delivery framework, handoffs and review limits", "delivery/multi-agent-framework.md"],
+      routing: ["Agent roles, skills and model-routing policy", "docs/delivery/agents-and-skills.md"],
+      poc: ["Recorded technical PoC and staged-delivery direction", "delivery/releases/WP-001/poc-direction.md"]
+    };
+    const narrative = [
+      {
+        talk: "Open with the public-service thesis, not Azure products. The brief describes a large paying-agency workload, slow payments and scarce inspection capacity. The proposed change is to monitor broadly and turn differences or missing evidence into early, explainable work. The target is not autonomous sanctions: it is a fairer, more traceable path from the physical field to the official case. The scale and savings numbers shown are case assumptions and ambitions, not measurements from a real Hungarian agency or from our PoC.",
+        bridge: "To understand that proposition, follow one fictional farm through a season. Start with the question a farmer and adviser ask before submitting anything.",
+        note: "Six customer slides describe a proposed end product. The four remaining slides describe the actual development project and its retrospective. Farm, parcels and dialogue are illustrative.",
+        sources: ["case", "theme", "personas"]
+      },
+      {
+        talk: "For the farmer, this is a cash-flow and confidence problem. For the adviser, it is a correctness and delegation problem. Guidance translates approved scheme-year rules into a practical checklist, identifies avoidable draft issues and preserves the submitted version and receipt. Evidence capture is available throughout the season for an approved purpose. It must not quietly become a photo obligation for every farmer. Low bandwidth, Hungarian language, accessibility and assisted routes are service requirements. An offline draft is not a received submission.",
+        bridge: "Now the farmer has submitted a claim. During the summer, reality changes faster than the declaration. That is where monitoring must ask a question rather than issue a verdict.",
+        note: "The existing farmer journey is a clickable synthetic HTML prototype. This slide is an original illustrative mock-up, not a live portal screenshot or promise of delivered functionality.",
+        sources: ["personas", "architecture", ["Existing farmer UX prototype", "prototypes/farmer-journey/README.md"]]
+      },
+      {
+        talk: "Use P-17 as the recurring example: maize was declared, but a storm and replanting complicate the monitoring result. The crop classifier can abstain rather than pretending it has sufficient evidence. The farmer sees the observation dates, relevant question and response window—not just a score. They can explain, correct, offer suitable evidence or seek human review. The caseworker sees provenance and limitations. Submitted evidence is validated and linked to the same case. A routine question may close under deterministic rules; uncertainty or dispute goes to a person.",
+        bridge: "If the response does not resolve the question, the next step is not a harsher model. It is proportionate independent evidence and the correct human decision path.",
+        note: "The signal bars are illustrative; they are not Sentinel measurements, confidence values or a demonstrated trained-model result. Missing imagery is not evidence of non-compliance.",
+        sources: ["flow", "architecture", "personas"]
+      },
+      {
+        talk: "The inspector needs a specific factual question, authorised access and a suitable method. Ground work or an authorised drone mission can add evidence the satellite cannot provide. Independent findings must be locked before model suggestions are shown. Separately, a probability-based quality sample tests the control system—including cases that looked consistent. It cannot be replaced by targeted yield or persuasive farmer photos. The legal and sanctions officer then protects notice, response, evidence access, reasoned decisions and appeal rights. A factual finding does not itself authorise a sanction.",
+        bridge: "Once the relevant controls establish an amount, the case enters payment. Operations and audit must still be able to explain what happened and confirm that funds actually settled.",
+        note: "These are proposed procedural and authority boundaries. Actual national rules, sample protocols, thresholds and drone permissions require the responsible owners; this presentation does not supply legal approval.",
+        sources: ["flow", ["Independent ground and drone validation", "docs/copernicus/crop-classification/drone-survey-validation-process.md"], "personas"]
+      },
+      {
+        talk: "The agency does not buy a classifier; it needs a reliable public-service chain. Operations needs deadlines, blocked amounts and actionable queues. Policy owners need versioned rules and service outcomes. Safeguards officers and farmer advocates need visibility into access, rights and unequal outcomes. Auditors need reproducible lineage. The case service establishes readiness; the existing authorised payment system executes and keeps the transaction ledger. A sent instruction is not a paid amount. Reconciliation, idempotency and human authority remain essential. Audit agents prepare drafts for authorised approval.",
+        bridge: "That division of responsibility determines the technology choices. The architecture should support every persona without letting an AI conversation become an administrative or payment authority.",
+        note: "The earlier-payment benefit is a target contingent on relevant-stage controls and authorised rules. Not every unresolved parcel necessarily blocks every intervention; the appropriate rules decide that.",
+        sources: ["flow", "architecture", ["CAP claim and payment calendar", "docs/research/cap-claim-and-payment-calendar.md"]]
+      },
+      {
+        talk: "AKS is the proposed application and agent runtime, not a GPU model-serving cluster. Foundry provides managed language-model inference; Azure ML provides the custom crop classifier; Copernicus services handle appropriate raster-heavy work. Deterministic rules and case/payment services retain the authoritative boundaries. The five business agents have bounded tasks: explain, classify or abstain, resolve routine questions, recommend inspections and draft audit packs. They are distinct from the development agents used to build this repository. Models and technical operators do not acquire eligibility or sanction authority.",
+        bridge: "That completes the customer proposition. Now switch lenses: what did we actually build, and how did the development process shape the outcome?",
+        note: "The full service architecture is proposed. Foundry, ML, application runtime, integration stores and business agents have not been deployed under the foundation package.",
+        sources: ["architecture", "personas", "poc"]
+      },
+      {
+        talk: "The repository separates the five business agents from nine delivery roles. The coordinator creates bounded assignments; the architect owns design; implementers own their paths; non-author reviewers assess fixed evidence; the documenter keeps explanations aligned. Profiles, repository skills and phase prompts are real version-controlled artifacts, but their presence is not proof of a fully automated orchestrator or guaranteed host model selection. Model routing reserves the lower tier for clerical work and keeps consequential technical work high. The actual sequence is infrastructure, then ML, then application—not one blanket deployment.",
+        bridge: "A structured approach is useful only if its gates mean something precise. The next slide explains both the safeguards and the boundaries we had to clarify for a technical PoC.",
+        note: "Model policy is an intended routing contract, not an independently measured cost saving, runtime attestation or permission change. Procedural coordination still depends on the host and accountable people.",
+        sources: ["routing", "framework", "poc"]
+      },
+      {
+        talk: "The repo preserves the original brief and treats participant legal summaries as research, not legislation. Design release, local acceptance, deployment readiness and observed verification are separate. For the current ARM-only technical PoC, the user removed certification campaigns as requested outcomes while retaining historical requirements and scoped safety/applicability dispositions. That is not a legal exemption. Fixed revisions, hashes and explicit result labels make the limits visible. We also clarified evidence-preparation accounting separately so successful preservation did not become a lifetime artifact ceiling; failing workload checks still retained their budget.",
+        bridge: "With those boundaries established, the question becomes concrete: where are the actual artifacts, which AVMs are used, and what has or has not passed?",
+        note: "The current status is blocked at local candidate acceptance. Design release authorises local writing only. No Azure mutation, validate/what-if or deployment approval follows from it.",
+        sources: ["release", "ledger", ["Accepted evidence-accounting disposition", "delivery/releases/WP-001/evidence-accounting-resolution.md"], "poc"]
+      },
+      {
+        talk: "There is actual Bicep in infra: one subscription root and nine logical modules, with two parameter variants and an author test runner. The source explicitly contains twenty distinct AVM pins across twenty-three declarations. AKS, VPN and certain extension resources are documented native exceptions, not claims of AVM-only infrastructure. All ten files compile, both parameter files compile with synthetic bindings, and restore/lint finish with recorded warnings. The effective ARM evaluator still aborts its contract suite and the five-attempt loop stopped. No independent local acceptance or actual Azure deployment should be inferred.",
+        bridge: "That combination—useful artifacts, honest evidence and real friction—sets up the retrospective. The hardest lesson was not only technical; it was the human coordination burden.",
+        note: "Source example is abbreviated only for presentation; the linked connectivity file contains the actual AVM invocation and parameters. All implementation-status claims are dated to 8 November 2026 and commit 4a37a94.",
+        sources: ["implementation", ["Actual VNet AVM declaration", "infra/modules/connectivity.bicep"], ["Foundation root and guide", "infra/README.md"], "ledger"]
+      },
+      {
+        talk: "This is the user's retrospective, not a universal claim that compliance is bad. Heavyweight assurance standards led agents to conflict over prerequisites, and the user had to arbitrate scope and progress. Human oversight was already necessary for customer decisions; the build process demanded another human-in-the-loop role as referee. The records also exposed tool/transport interruptions and a complex evaluator that blocked otherwise compiling artifacts. Keep the benefits—ownership, provenance and explicit limits—but set the experiment boundary early, automate factual checks simply and give each disagreement one accountable escalation route.",
+        bridge: "Close with the original thesis: clearer next actions for farmers and officials, and a delivery process that makes authority clearer instead of adding another layer of uncertainty.",
+        note: "The human-referee learning is supplied by the user in this presentation request. Other friction is supported by the recorded interruptions, scope decisions and failed author checks. The three improvements are recommendations; no framework policy or exhausted check has been changed for this deck.",
+        sources: ["poc", "ledger", "implementation", ["Recorded specialist interruption", "delivery/releases/WP-001/handoffs/U001-implementation-interruption.md"]]
+      }
+    ];
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const dialog = document.getElementById("context-dialog");
+    const previous = document.getElementById("previous");
+    const next = document.getElementById("next");
+    const dots = document.getElementById("dots");
+    let index = 0;
+    const buttons = slides.map((slide, i) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.textContent = String(i + 1);
+      button.setAttribute("aria-label", `Slide ${i + 1}: ${slide.querySelector("h1").textContent.trim()}`);
+      button.addEventListener("click", () => show(i));
+      dots.append(button);
+      return button;
+    });
+    function resize() {
+      if (window.matchMedia("(max-width: 760px)").matches) return;
+      const availableHeight = window.innerHeight - document.querySelector(".toolbar").offsetHeight - document.querySelector(".navigation").offsetHeight - 36;
+      const scale = Math.max(.1, Math.min((window.innerWidth - 32) / 1280, availableHeight / 720, 1.5));
+      document.getElementById("slides").style.transform = `scale(${scale})`;
+      document.getElementById("canvas-shell").style.width = `${1280 * scale}px`;
+      document.getElementById("canvas-shell").style.height = `${720 * scale}px`;
+    }
+    function show(requested, updateHash = true) {
+      index = Math.min(slides.length - 1, Math.max(0, requested));
+      slides.forEach((slide, i) => { slide.hidden = i !== index; });
+      buttons.forEach((button, i) => {
+        if (i === index) button.setAttribute("aria-current", "step");
+        else button.removeAttribute("aria-current");
+      });
+      previous.disabled = index === 0;
+      next.disabled = index === slides.length - 1;
+      document.getElementById("progress").textContent = `${String(index + 1).padStart(2, "0")} / ${slides.length}`;
+      document.getElementById("announcement").textContent = `Slide ${index + 1} of ${slides.length}: ${slides[index].querySelector("h1").textContent.trim()}`;
+      if (updateHash) history.replaceState(null, "", `#slide-${index + 1}`);
+      resize();
+    }
+    function fromHash() {
+      const match = window.location.hash.match(/^#slide-(\d+)$/);
+      show(match ? Number(match[1]) - 1 : 0, false);
+    }
+    function openContext() {
+      const content = narrative[index];
+      document.getElementById("dialog-kicker").textContent = `${slides[index].dataset.chapter} · slide ${index + 1}`;
+      document.getElementById("dialog-title").textContent = slides[index].querySelector("h1").textContent.trim();
+      document.getElementById("talk-track").textContent = content.talk;
+      document.getElementById("bridge").textContent = content.bridge;
+      document.getElementById("evidence-note").textContent = content.note;
+      const list = document.getElementById("sources");
+      list.replaceChildren();
+      for (const source of content.sources) {
+        const [label, path] = typeof source === "string" ? common[source] : source;
+        const li = document.createElement("li");
+        const link = document.createElement("a");
+        link.textContent = label;
+        link.href = base + path;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        li.append(link);
+        list.append(li);
+      }
+      dialog.showModal();
+    }
+    previous.addEventListener("click", () => show(index - 1));
+    next.addEventListener("click", () => show(index + 1));
+    document.getElementById("notes-button").addEventListener("click", openContext);
+    document.querySelectorAll(".source-button").forEach(button => button.addEventListener("click", openContext));
+    document.getElementById("close-dialog").addEventListener("click", () => dialog.close());
+    document.getElementById("theme-button").addEventListener("click", () => {
+      document.documentElement.dataset.theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    });
+    document.getElementById("fullscreen-button").addEventListener("click", async () => {
+      try {
+        if (document.fullscreenElement) await document.exitFullscreen();
+        else await document.documentElement.requestFullscreen();
+      } catch { document.getElementById("announcement").textContent = "Fullscreen is unavailable in this browser."; }
+    });
+    document.getElementById("print-button").addEventListener("click", () => window.print());
+    document.addEventListener("keydown", event => {
+      if (dialog.open || event.altKey || event.ctrlKey || event.metaKey || event.target.closest("input, textarea, select, a")) return;
+      if (["ArrowRight", "PageDown", "ArrowLeft", "PageUp", "Home", "End"].includes(event.key)) event.preventDefault();
+      if (event.key === "ArrowRight" || event.key === "PageDown") show(index + 1);
+      if (event.key === "ArrowLeft" || event.key === "PageUp") show(index - 1);
+      if (event.key === "Home") show(0);
+      if (event.key === "End") show(slides.length - 1);
+      if (event.key.toLowerCase() === "n") openContext();
+      if (event.key.toLowerCase() === "f") document.getElementById("fullscreen-button").click();
+    });
+    window.addEventListener("resize", resize);
+    window.addEventListener("hashchange", fromHash);
+    let beforePrintTheme;
+    window.addEventListener("beforeprint", () => {
+      beforePrintTheme = document.documentElement.dataset.theme;
+      document.documentElement.dataset.theme = "light";
+    });
+    window.addEventListener("afterprint", () => {
+      if (beforePrintTheme) document.documentElement.dataset.theme = beforePrintTheme;
+      resize();
+    });
+    document.documentElement.dataset.ready = "true";
+    fromHash();
+  </script>
+</body>
+</html>
