@@ -13,7 +13,15 @@ delivery. The [team guide](../docs/delivery/README.md) explains roles, skills an
 | [Tasks](tasks.md) | Authorised-work prerequisites and initial workload backlog |
 | [Templates](templates/) | Assignments, design/review/plan contracts and handoff records |
 | [Work-package records](releases/README.md) | Artifact ownership, snapshots, evidence and loop ledgers |
-| [WP-001 foundation](releases/WP-001/context.md) | Draft non-production foundation scope and [open decisions](releases/WP-001/decisions.md) |
+| [WP-001 foundation](releases/WP-001/context.md) | Released local-authoring design; [ledger](releases/WP-001/ledger.md) tracks the blocked candidate and remaining decisions |
+| [Foundation IaC](../infra/README.md) | Ten compiling Bicep files, synthetic parameter checks and unresolved author-contract failure |
+
+WP-001 has actual [architect release](releases/WP-001/design-release.md) and
+user approval for local templates, not Azure execution. Its
+[implementation report](releases/WP-001/implementation.md) records successful
+compilation but failed effective ARM contract checks and an exhausted 5/5 author
+loop. Independent local acceptance and deployment remain pending. Delivery is
+staged: infrastructure, then Azure ML, then application/runtime.
 
 Explanatory team guides live under [`docs/delivery/`](../docs/delivery/).
 Native agent, skill and prompt definitions live under `.github/` for client discovery.

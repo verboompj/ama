@@ -4,7 +4,12 @@ Nine engineering roles deliver Azure infrastructure, applications, runtime AI,
 data/model pipelines, independent assurance and deployment guidance.
 
 **Current status:** profiles, skills, prompts and workload contracts are defined.
-Implementation starts from the [first-slice scope decisions](../../delivery/first-implementation-slice.md).
+WP-001's [foundation design is released for local authoring](../../delivery/releases/WP-001/design-release.md)
+and its [Bicep templates](../../infra/README.md) compile. Effective author
+contract checks are blocked at the five-attempt limit; independent local
+acceptance and Azure execution remain pending. The
+[first-slice scope decisions](../../delivery/first-implementation-slice.md)
+still govern the separate future ML/data work.
 Coordination is procedural; executable enforcement and deployment pipelines are deferred.
 
 ## Structure
@@ -27,11 +32,13 @@ delivery/
   multi-agent-framework.md    Agent roles, orchestration patterns and control boundaries
   handoffs.md                 State transitions and approval gates
   tasks.md                    Workload task catalogue
-  releases/README.md          Future work-package artifact layout
+  releases/README.md          Work-package records, release boundaries and evidence
   templates/                  Design release, handoff, review templates
 ```
 
-Future `infra/` implementation starts only after a bounded architect release.
+`infra/` contains the locally authored WP-001 foundation following architect
+release; see its [implementation results](../../delivery/releases/WP-001/implementation.md).
+The agreed stages are infrastructure, Azure ML, then application/runtime.
 GitHub Actions design and deployment remain later, separately authorised work.
 
 ## Team

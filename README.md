@@ -55,8 +55,8 @@ clickable UX walkthrough using the Field & File logo and synthetic case data.
 
 The [Azure delivery team](./docs/delivery/README.md) defines nine development agents,
 shared repository skills, a staged task backlog, and explicit architecture-to-Bicep
-handover gates. It prepares the engineering workflow; infrastructure implementation
-and GitHub Actions remain separate, later work.
+handover gates. The first foundation Bicep templates now exist; independent local
+acceptance, Azure execution and GitHub Actions remain separate, later work.
 The [`delivery/` workspace](./delivery/README.md) holds operating contracts, plans
 and work-package evidence.
 Its [work-package records](./delivery/releases/README.md) and
@@ -76,6 +76,31 @@ data/model quality and reproducibility. The
 [first implementation slice](delivery/first-implementation-slice.md) defines
 the proposed public-data crop-evidence target and decisions needed before execution.
 
+## Current Implementation Status
+
+**WP-001 is an ARM-only, non-production technical-validation PoC, not a compliant
+or production-ready deployment.** Its [design and implementation plan were
+approved and released for local IaC authoring](delivery/releases/WP-001/design-release.md).
+The [foundation templates](infra/README.md) contain a subscription root and nine
+modules for private AKS, networking, certificate VPN, DNS, ACR, Key Vault,
+identities and monitoring, using twenty pinned published AVMs and documented
+native-resource exceptions.
+
+All ten Bicep files compile, restore and lint complete with documented warnings,
+and both parameter files compile with **synthetic bindings only**. The author
+contract suite fails in its ARM-expression evaluator; its five-attempt budget is
+exhausted. **The candidate is not locally validated or deployment-ready.**
+Independent acceptance, architect conformance and matching operational
+documentation remain pending. See the [implementation results](delivery/releases/WP-001/implementation.md)
+and [current ledger](delivery/releases/WP-001/ledger.md) for the exact blocker,
+evidence and remaining approvals.
+
+The agreed delivery sequence is **infrastructure -> Azure ML -> application/runtime**,
+with separate scopes and approvals. No Azure foundation deployment, ML job,
+Foundry deployment or application release has occurred under WP-001.
+Historical security/compliance requirements remain available as reference;
+the technical PoC does not claim certification or waive applicable obligations.
+
 ## Repository Structure
 
 ```
@@ -87,8 +112,13 @@ the proposed public-data crop-evidence target and decisions needed before execut
 │   └── prompts/             # Explicit phase entry points
 ├── delivery/                # Operating contracts, checks & plans (see README.md)
 │   ├── releases/            # Work-package records; directory presence is not approval
-│   │   └── WP-001/          # Non-production foundation planning & assessment records
+│   │   └── WP-001/          # Foundation design release, implementation & blocked checks
 │   └── templates/           # Assignment, design, plan, review & handoff forms
+├── infra/                   # Compiling foundation IaC; not locally accepted or deployed
+│   ├── main.bicep           # Subscription root for the two project resource groups
+│   ├── modules/             # Nine logical Bicep modules with pinned AVMs/native gaps
+│   ├── environments/        # Local protected-context parameter bindings
+│   └── tests/               # Synthetic fixture & currently failing author contracts
 ├── case/                    # Original sources alongside distinct participant work
 │   ├── case-study-47.md     # Original case brief; .jpg is its source scan
 │   ├── README.md            # Participant whole-case visual guide

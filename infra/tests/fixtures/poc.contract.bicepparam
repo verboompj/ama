@@ -1,0 +1,19 @@
+using '../../main.bicep'
+
+param tenantId = '11111111-1111-4111-8111-111111111111'
+param operatorPrincipalId = '22222222-2222-4222-8222-222222222222'
+param observerPrincipalId = '33333333-3333-4333-8333-333333333333'
+param operatorPrincipalType = 'User'
+param observerPrincipalType = 'Group'
+param alertEmail = 'operations@example.invalid'
+param sshPublicKey = 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAUBRYneUmaghaERqArbcwQhWq0Oc4XajcRE5xY5C4G3'
+// Synthetic, public-only certificate; issuance private key was never persisted.
+param vpnRoots = [
+  {
+    name: 'synthetic-root'
+    publicCertData: 'MIICtDCCAZwCCQDSRbIL/CuoZTANBgkqhkiG9w0BAQsFADAcMRowGAYDVQQDDBFzeW50aGV0aWMuaW52YWxpZDAeFw0yNjExMDgxNTQ2NDFaFw0yNzExMDgxNTQ2NDFaMBwxGjAYBgNVBAMMEXN5bnRoZXRpYy5pbnZhbGlkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0UcheXEGrFfHBvcyYWwbKNp/rhbHxdufQ2TgnTxjhQkLCjbAFzE63/4qtcVAqT3y24YXqscrLXy4tPwH1vOm55JZTekIeXKKPgNbIZrKt20gwa1ERkNGMWmhcbwExNqsm6zjQQnNz1YnE8zLYORzuzCDFdQqL/vaYE05abboG8mnmInfRP95JMs/N6CCtHhvEbD13qu4AN7mLl37swV7/sFb8ONk4G1aHOgnEsNvodpfGY1VNYqOeB156PEIoZCm39mNrwUYi9IY+DLZempzoH/StD8us6t3UyIu5aNVJ8tZk8mtveAUbQoLpGRlDbDk8vOZFojxSrC72c8dPt2fhwIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQCabOrTkojBEoJR09rzoeeCZWK4ptMWnDmVGDusd/nc4WgN8eq9Hjs45ufS9zNJACnTOloOx9HOYRieqwk5vFGlAeUrIHvVDBcyw+mdB/lJTRu6rETQp78wEjb9DBA7JmEFPypXwIdU4Qj4HXKDQ7nCghz9C/pmsIheWYFzCvmEhDge+G3JtILcCKYqF0iKpMqLH/RvuW63tdiEOdMDBl3BmZvkr34ua/CuGmepA5R1no7Iku3p3quh3AcTwJ7AoWLD5SivKyGy7rraM8DTZvCK2rKapmRcw7C5DtmB62tmtsTj6uLBNJ5KHnwEsn7M64Ld9oUNFHQVjTYM5yQuzS1O'
+  }
+]
+param vpnRevokedClients = []
+param systemNodeCount = 2
+param userNodeCount = 1

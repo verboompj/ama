@@ -288,6 +288,40 @@ local tests and authorised environment validation. A lower assigned limit wins.
   to the user. No sixth attempt, waiver, additional agent or automatic budget reset.
   Further work requires an explicit recorded user decision, not another prompt invocation.
 
+#### Evidence Preparation and Integrity Checks
+
+Routine preparation, indexing and copying of fixed inputs is necessary evidence
+handling, not a workload technical or independent review `PASS`. A successfully
+completed preparation is not a failed workload review and does not consume an
+accumulating package-wide allowance of five artifacts or successful input sets.
+Distinct, legitimately new inputs may need preparation after a prior preparation
+has completed `PASS`; that alone is not a retry of the completed preparation.
+
+Actual integrity verification remains required under the
+[snapshot protocol](releases/README.md#snapshot-protocol). Its assigned logical
+check objective has a stable ID and a maximum of five total attempts, initial
+included (or the lower assigned limit). Record the preparation and integrity
+result separately from downstream workload verdicts. Stop on a valid integrity
+`PASS`, blocker, non-progress or exhaustion.
+
+If integrity verification fails, subsequent verification of attempted fixes
+continues the same objective and consumed budget across changed candidate bytes,
+files, hashes, sets, paths, sessions, agents and assignments. A new file or hash
+does not earn its own fresh budget. The coordinator must distinguish genuinely
+new preparation after completed success from continuation of an unresolved
+integrity defect; record the rationale and escalate ambiguity before execution.
+No failed or exhausted actual check may be renamed, split, reclassified as mere
+preparation or given a new scope to evade its limit. No sixth attempt or reset is
+permitted, including by explicit user decision.
+
+This clarification does not retroactively amend accepted assignments or counts.
+An existing broader administrative bucket requires explicit recorded,
+user-authorised prospective adjudication, retaining its contracts, executions,
+results and stop; it cannot simply be ignored. See the proposed
+[WP-001 application](releases/WP-001/evidence-accounting-resolution.md).
+Neither preparation nor its integrity `PASS` supplies workload acceptance,
+publication authority or human approval; workload checks retain their own budgets.
+
 Attempt accounting is procedural. Runtime counter enforcement is deferred.
 
 Establish applicable run/iteration limits before delegated execution, honour user

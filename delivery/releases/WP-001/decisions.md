@@ -61,6 +61,10 @@ that may remain chargeable.
 | FND-17 | Candidate design acceptance | Human design approver | Exact design/plan revisions, applicable WV01-WV04 evidence, verified AVM feasibility, cost inventory and resolved required findings | OPEN |
 | FND-18 | Authenticated validation authority | Platform owner / user | Exact tenant/subscription, environment, identity, scope, parameters and permitted read/validate/what-if actions; WV15 context confirmation | OPEN |
 | FND-19 | Deployment and operational acceptance | User / change authority and service owner | Accepted what-if, operator, cost approval, recovery/rollback and live-check plan; explicit deployment permission and actual result recorded separately | OPEN |
+| FND-20 | Workable test-only planning scope | Requesting user | Empty-foundation qualification and selected engineering directions in [definition](definition.md); acceptance is for planning, not a campaign, integrated design, budget or deployment | ACCEPTED |
+| FND-21 | Preservation-accounting disposition | Requesting user / separately authorised maintenance | Explicitly authorised prospective clarification [accepted after non-author review](ledger.md#maintenance-policy-acceptance). Historical successful 5/5 bucket closed unchanged, no sixth old-loop execution or reset; normal legitimate new preparation may be assigned | ACCEPTED |
+| FND-22 | Technical-validation PoC assurance objective | Requesting user | 8 November: preserve requirements/findings but do not require completion of regulatory/security-certification campaigns for this PoC. Non-compliance accepted as a scope decision, not a legal exemption, technical PASS or waiver of binding safety/release instructions | ACCEPTED |
+| FND-23 | Staged implementation direction | Requesting user | Infrastructure first, Azure ML second, application/runtime third. Previously WP-001 excluded ML/app; exact ordering now recorded in [PoC direction](poc-direction.md). No single all-workload release or authority to start ML/jobs/apps | ACCEPTED |
 
 FND-01 through FND-05 establish whether scoped design can proceed. Architecture
 options can be explored while remaining targets are open; no design release occurs
@@ -251,6 +255,65 @@ Preserve `costCenter` as a string in infrastructure parameters. Corporate-policy
 conflicts require an explicit resolution; do not silently replace approved values.
 The design records per-resource applicability and any required additional corporate
 tags. Sensitive credentials and case data never belong in tags.
+
+### FND-20: Empty-Foundation Planning Direction
+
+| Field | Recorded decision |
+|---|---|
+| Status / date | ACCEPTED for planning, 21 October 2026 |
+| Approval reference | User: "ok for now go with suggestions, log them, and make it a workable, non blocking definition" |
+| Selected scope | Option A: private, empty non-production foundation qualification, public/synthetic business data only; no farmer app, business Route/session, application admission, Foundry or ML |
+| Canonical scope / queue | [Working definition](definition.md): selected directions, named engineering owners/dependencies, N-01 through N-05 dispositions and gate matrix |
+| AVM/native direction | One bounded compatible-published-AVM check, then specific native Bicep exceptions for genuine gaps, retaining AVMs elsewhere. Exact contracts and exception approvals are design-release prerequisites; none implemented here |
+| Ingress / capacity / lifecycle | Managed routing for finite test-only observations, fixed resource ceilings and a short campaign. Measure managed footprints during qualification; do not invent static capacity evidence, continuing TLS assurance or supported daily restart savings |
+| DNS / monitoring / image trust | Consistent Firewall DNS proxy design, minimal one-owner monitoring, one verified pinned signing/admission stack. Preview APIs and secure nested outputs receive specific reviewed dispositions; output names/cycles/defaults are engineering corrections |
+| Required staged decisions | Exact reviewed design/actual plan/full cost and narrow evidence deviation before release; actual identity, funded numeric ceiling, campaign ID/window/UTC expiry and final expiring residual-risk acknowledgement before execution. Unknown execution values do not block scope drafting |
+| Limits made explicit | Empirical TLS results are historical only; changed/unobserved managed builds may process bounded probes, including the pod path; procedural role separation may involve one human; no app permission follows a campaign pass |
+| Change impact | Direction for the next integrated design/cost, not a rewrite or approval of r1, EP-r2, independent reports or any snapshot. Existing regulated reviews and human release/execution gates remain |
+| Not authorised | Infrastructure/manifests/workflows, Azure actions, budget/spend, campaign opening, cleanup, publication or a counter reset |
+
+### FND-21: Separate Evidence-Accounting Examination
+
+| Field | Recorded disposition |
+|---|---|
+| Examination authority | Same 21 October 2026 instruction accepts the recommended separate accounting examination |
+| Executor / result | Separate non-delivery maintenance executor; [report](evidence-accounting.md), MAINT-WP001-EVIDENCE-ACCOUNTING 1/1 complete |
+| Historical findings | Five distinct successful preservations, not five failed deployments; 47 archived copied entries and 88 dependency references examined. The assignments explicitly charged all five to the same preservation loop |
+| Counter treatment | No evidence-backed numerical correction; WP001-DESIGN-SNAPSHOT remains 5/5, all prior results preserved. F03-AUTHOR 4/5, F04-AVM 2/5 and both method reviews 2/5 unchanged |
+| Planning permitted now | Record accepted directions, the working definition and owned engineering backlog from existing records. This is not a sixth preservation or changed-input release review |
+| Subsequent explicit authority | User selected "Authorise the targeted clarification and its explicit application to WP-001", 21 October 2026. This separately authorises the policy/application change; the examination alone did not |
+| Prospective application | [Resolution](evidence-accounting-resolution.md) accepted after parent non-author conformance review 1/5. Clarified framework/protocol distinguish successful completed preparation from actual bounded integrity/workload checks |
+| Historical bucket | WP001-DESIGN-SNAPSHOT stays 5/5 with all five PASS results and original contracts intact; closed as completed, with no further execution. No refunded attempts, arithmetic correction, renamed failing check or sixth old-loop attempt |
+| Future evidence | Legitimately new complete inputs may be prepared under a bounded accepted assignment and the normal immutable-reference/byte-preservation protocol. Failed integrity checks carry the same budget across fixes/changed inputs; publication alone grants neither authority nor extra attempts |
+| Still forbidden | Hidden reset, renamed failing scope, sixth execution under the exhausted loop, publication-as-bypass, inferred design/security PASS or automatic deployment |
+| Overall status | ACCEPTED prospective policy/application disposition; administrative preparation-count block resolved. Real engineering/review/approval gates are unchanged; no design or execution pass follows |
+
+### FND-22/FND-23: Technical PoC and Implementation Sequence
+
+User instruction, 8 November 2026: "drop the requirements for security and
+compliance. we will keep them but no loger use them for a poc deployment. The
+poc accepts a non compliant state and is uded for a technical validation."
+
+The accepted **objective** is technical validation, with historical
+security/compliance reports retained, not overwritten or marked PASS.
+Regulatory/security-certification campaigns are no longer requested PoC outcomes.
+[Design r2](design.md) proposes concrete ARM-only amendments: defer authored
+Kubernetes/Gateway/TLS/admission bootstrap, legacy TLS and full ongoing managed-build
+campaigns to later runtime work; retain only service/resource technical controls.
+These exact design changes are offered for approval, not yet released.
+
+The new objective supersedes the older definition's assurance-campaign preference,
+but **does not silently amend the binding review-path contract**. FND-05's
+required non-author and triggered safety/applicability checks remain a stated
+release conflict until the applicable scoped disposition is accepted. No global
+framework changes, real-data processing, secrets disclosure, policy bypass,
+unauthorised resource changes or paid execution follow from accepted non-compliance.
+
+Stage 1 produces foundation Bicep after scoped design release. Stage 2 separately
+defines and implements Azure ML resources/contracts; acquisition/training/scoring
+needs its own authority. Stage 3 separately implements application/runtime,
+scoring integration and Foundry interfaces. One infrastructure Bicep composition
+root is not a single deployment of all three workloads.
 
 ### Format for Further Decisions
 

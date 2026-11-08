@@ -1,10 +1,17 @@
 # Work-Package Records
 
-No package is released yet. Create a directory when its task is authorised and select
-records for the accepted risk path. The layout below illustrates regulated infrastructure.
+WP-001 has an actual [design release](WP-001/design-release.md) for local IaC
+authoring. Its [templates](../../infra/README.md) compile, but the
+[implementation](WP-001/implementation.md) has a failed author contract suite
+and no independent local acceptance or Azure deployment. A design release is
+not a deployment release.
+
+Create a directory when its task is authorised and select records for the
+accepted risk path. The layout below illustrates regulated infrastructure.
 Standard packages can combine scoped findings; light work references its approved baseline.
 
-[WP-001](WP-001/context.md) contains authorised non-production foundation planning.
+[WP-001](WP-001/context.md) contains authorised non-production foundation
+design, implementation and evidence records.
 Its [decision register](WP-001/decisions.md) collects environment and owner choices;
 the [ledger](WP-001/ledger.md) records current state and approval boundaries.
 
@@ -136,3 +143,31 @@ record that producer and method. No available producer means `BLOCKED`.
 
 Preserved files and hashes support local evidence integrity. Protected approvals
 and tamper-resistant storage require separately authorised controls.
+
+### Preparation Accounting
+
+Apply the [evidence-preparation clarification](../multi-agent-framework.md#evidence-preparation-and-integrity-checks):
+preparation/indexing/copying is evidence handling, not technical or independent
+workload acceptance. Successful completed preparation does not impose a cumulative
+maximum of five successful sets for the lifetime of a package. Distinct legitimate
+new preparation after prior success still requires an accepted assignment, stopped
+writers, complete input coverage and actual integrity verification under this
+protocol; it is not automatically authorised by a new snapshot ID.
+
+Assign integrity verification a stable logical objective and bounded check budget
+(at most five total attempts, initial included); record its result and consumption.
+Failed integrity checks and attempted fixes carry that same budget across changed
+files, hashes, candidates, input sets, assignments, sessions and agents. Do not
+allocate a fresh allowance per changed file/hash or rename/split an unresolved or
+exhausted objective. Stop on valid `PASS`, blocker, non-progress or exhaustion.
+Changing evidence format from copied bytes to full committed references does not
+reset a check or remove coverage/integrity requirements.
+
+Historical broader accounting remains intact unless explicitly adjudicated
+prospectively by the authorised user and recorded by the coordinator; no sixth
+execution under an exhausted bucket is allowed. The
+[WP-001 application record](WP-001/evidence-accounting-resolution.md) proposes that
+specific disposition without rewriting its five successful preservations.
+No new preservation is executed by that maintenance record. New commits or pushes
+need explicit authority; publication and policy clarification supply neither a
+workload `PASS` nor permission to bypass immutable-input, review or approval gates.
