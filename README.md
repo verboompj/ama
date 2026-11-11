@@ -61,11 +61,13 @@ The [prototype collection](./prototypes/README.md) holds interactive journey dra
 The [farmer journey draft](./prototypes/farmer-journey/README.md) adds a self-contained
 clickable UX walkthrough using the Field & File logo and synthetic case data.
 
-The maintained 27-slide
+The maintained 28-slide
 [Ministry presentation](./presentations/field-and-file/ministry-of-agriculture-v4.pptx)
 separates the customer proposal (slides 1-17) from **Part 2: Engineering the solution**
-(slides 18-27), covering architecture, decision flows, compliance scope, delivery
+(slides 18-28), covering architecture, decision flows, compliance scope, delivery
 roles, logging, evidence overhead and human arbitration of conflicting agent advice.
+The final slide adds an indicative full-solution Azure budget and annual allocation
+per farmer, with usage scenarios, explicit unquoted allowances and sources in notes.
 
 The [Azure delivery team](./docs/delivery/README.md) defines nine development agents,
 shared repository skills, a staged task backlog, and explicit architecture-to-Bicep
@@ -155,7 +157,7 @@ the technical PoC does not claim certification or waive applicable obligations.
 │       └── index.html       # Self-contained interactive UX draft
 ├── presentations/           # Maintained presentation assets
 │   └── field-and-file/
-│       ├── ministry-of-agriculture-v4.pptx # Current 26-slide presentation
+│       ├── ministry-of-agriculture-v4.pptx # Current 28-slide presentation
 │       └── index.html       # Existing separate unversioned HTML companion
 └── assets/                  # Repository media (logo, etc.)
 ```
