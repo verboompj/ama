@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "accessDate": "2026-11-11",
+  "sourcePage": "https://learn.microsoft.com/en-us/azure/architecture/icons/",
+  "downloadUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+  "archiveName": "azure-icons-v25.zip",
+  "archiveSha256": "f293d99252b3638557dd08ccbff9f2529083473d39b373fb2af29a7200351339",
+  "permission": "Microsoft permits copying, distribution and display in architectural diagrams, training materials or documentation only; all other rights reserved. Not an open-source icon licence.",
+  "conditions": [
+    "Use product names near icons",
+    "Use icons as they appear in Azure",
+    "Do not crop, flip, rotate, distort, recolour or change shape",
+    "Do not use Microsoft product icons to represent the custom product"
+  ],
+  "usage": "Unmodified original SVG bytes embedded as data URIs in self-contained SVGs and Excalidraw files; uniformly fitted, unrotated and uncropped. PNGs rendered locally with Sharp. No repository content uploaded.",
+  "icons": [
+    {
+      "key": "aks",
+      "product": "Azure Kubernetes Service",
+      "originalName": "10023-icon-service-Kubernetes-Services.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/containers/10023-icon-service-Kubernetes-Services.svg",
+      "sha256": "81954a481503057498d543a51863b2eb4673284e109662cdc421051d11dba25c",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "agent",
+      "product": "Foundry Agent Service",
+      "originalName": "038470523-icon-service-Foundry-Agent-Service.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/ai + machine learning/038470523-icon-service-Foundry-Agent-Service.svg",
+      "sha256": "aedb65eeb06c1d4f3d57568edd2e8e7205065589ae8ceba4513a2fd21b4053ca",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "models",
+      "product": "Foundry Models",
+      "originalName": "038470614-icon-service-Foundry-Models.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/ai + machine learning/038470614-icon-service-Foundry-Models.svg",
+      "sha256": "9c671f141cb0e19b62e004628183ed8711ad16ec3b2e56b14c3cd035d5fac711",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "aml",
+      "product": "Azure Machine Learning",
+      "originalName": "038470510-icon-service-Azure-Machine-Learning.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/ai + machine learning/038470510-icon-service-Azure-Machine-Learning.svg",
+      "sha256": "66af628f9dd7e49def76a4f6d90f262a5b47866098bc7b97042b541017992ad2",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "search",
+      "product": "Azure AI Search",
+      "originalName": "10044-icon-service-Cognitive-Search.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/ai + machine learning/10044-icon-service-Cognitive-Search.svg",
+      "sha256": "f7af1213ce089236593835cb5564d6d3f01358cba6488fe562aa8bbc8adc3b38",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "blob",
+      "product": "Azure Storage",
+      "originalName": "10086-icon-service-Storage-Accounts.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/storage/10086-icon-service-Storage-Accounts.svg",
+      "sha256": "7190d3bb14ce30ce74bd0af873915830fe821e8c5f6ef6f3149e6f7cfb2aa4f7",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "bus",
+      "product": "Azure Service Bus",
+      "originalName": "10836-icon-service-Azure-Service-Bus.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/integration/10836-icon-service-Azure-Service-Bus.svg",
+      "sha256": "eaf42cb87aedf608f60d40b601eb86491daaa71b8eab40a935e8e7fa2e62a2cf",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "events",
+      "product": "Azure Event Grid",
+      "originalName": "10221-icon-service-Event-Grid-Subscriptions.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/integration/10221-icon-service-Event-Grid-Subscriptions.svg",
+      "sha256": "d685b65f39515d1f8514dae0e773c2c4f6399b6236e88409a6e78428d67cd83a",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "kv",
+      "product": "Azure Key Vault",
+      "originalName": "10245-icon-service-Key-Vaults.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/security/10245-icon-service-Key-Vaults.svg",
+      "sha256": "712b426f54f0fc50d0816dc79df709daa7ac5f93ccaf4e9b3527f627f6e9ad97",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "acr",
+      "product": "Azure Container Registry",
+      "originalName": "10105-icon-service-Container-Registries.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/containers/10105-icon-service-Container-Registries.svg",
+      "sha256": "c134b0a442f203a7eeeb6f99a1f02ed34e51373d7fca59f96c9f125874c9d7d4",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "identity",
+      "product": "Managed identities",
+      "originalName": "10227-icon-service-Managed-Identities.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/identity/10227-icon-service-Managed-Identities.svg",
+      "sha256": "fa2e0fb863e81d7923b5708bed196e19310867a194d23bea96dddc42e302693c",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "vnet",
+      "product": "Azure Virtual Network",
+      "originalName": "10061-icon-service-Virtual-Networks.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/networking/10061-icon-service-Virtual-Networks.svg",
+      "sha256": "64a5e75ecef2f9f69067faa2eb131266cb8f2858706f8ab74bfea5ad0d98b14d",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "dns",
+      "product": "Azure DNS Private Resolver",
+      "originalName": "02882-icon-service-DNS-Private-Resolver.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/networking/02882-icon-service-DNS-Private-Resolver.svg",
+      "sha256": "990d109df8bac6312c886afdf0b521145baa88df78701afca51d7c8f8eaba9ce",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "pe",
+      "product": "Azure Private Endpoint",
+      "originalName": "02579-icon-service-Private-Endpoints.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/other/02579-icon-service-Private-Endpoints.svg",
+      "sha256": "96de0bb7f0aeb1220d0fd6d337578d5e93dca017d6ea7d42d887aa329b2fd90d",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "vpn",
+      "product": "Azure VPN Gateway",
+      "originalName": "10063-icon-service-Virtual-Network-Gateways.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/networking/10063-icon-service-Virtual-Network-Gateways.svg",
+      "sha256": "5ed14416dafff4e946fae5b68b9c86e8c9a9bbaa37ab94324a5d94c5cfbcb106",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "firewall",
+      "product": "Azure Firewall",
+      "originalName": "10084-icon-service-Firewalls.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/networking/10084-icon-service-Firewalls.svg",
+      "sha256": "154c416cc15b95b7c6c1ab61a5ecb33f14845197b7d163bd9dc6f1968c14be1e",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "nat",
+      "product": "Azure NAT Gateway",
+      "originalName": "10310-icon-service-NAT.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/networking/10310-icon-service-NAT.svg",
+      "sha256": "0cd798c39a99ca7dee22069851b71cc1ae76a0cd5dc3cdff315e0f34b6ddb941",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "monitor",
+      "product": "Azure Monitor",
+      "originalName": "00001-icon-service-Monitor.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/monitor/00001-icon-service-Monitor.svg",
+      "sha256": "1396f59a7d8fd7505a423842b987c9b343a092263d1ab5c7b0d94d58d8b17448",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "insights",
+      "product": "Application Insights",
+      "originalName": "00012-icon-service-Application-Insights.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/monitor/00012-icon-service-Application-Insights.svg",
+      "sha256": "36c73dea8b1598fbfff84890a2b409600f1339eec8c1bf1a896439e9da8f9dca",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    },
+    {
+      "key": "law",
+      "product": "Log Analytics workspace",
+      "originalName": "00009-icon-service-Log-Analytics-Workspaces.svg",
+      "archiveMember": "Azure_Public_Service_Icons/Icons/monitor/00009-icon-service-Log-Analytics-Workspaces.svg",
+      "sha256": "7a244a8d7260e84be5c904185db7b04994fe6ed345e2b224163bc5f7e3d97ce0",
+      "sourceUrl": "https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V25.zip",
+      "accessDate": "2026-11-11",
+      "transform": "Uniform proportional fit only; bytes embedded unchanged"
+    }
+  ],
+  "fieldAndFile": {
+    "path": "assets/field-and-file-logo.svg",
+    "commit": "c179b1c2d28298b6b1a135277090672989900913",
+    "sha256": "f94446aa6b3fa326430022ab0471e194da710a8a90b52474c4a0c2f00978f4d1",
+    "usage": "Unmodified original SVG; original cream/green/gold/blue retained"
+  },
+  "diagrams": [
+    "azure-deployment-overview",
+    "decision-agent-flow"
+  ],
+  "inputRevision": "c179b1c2d28298b6b1a135277090672989900913",
+  "authorRevision": "diagram-author-r5",
+  "diagramRevisions": {
+    "azure-deployment-overview": "diagram-author-r5",
+    "decision-agent-flow": "diagram-author-r4 (unchanged; safeguards preserved)"
+  },
+  "modelRouting": {
+    "classification": "HIGH",
+    "chosenModel": "gpt-6.1-sol",
+    "actualModel": "gpt-6.1-sol",
+    "actualModelSource": "Parent runtime result, reported by user in final correction assignment on 2026-11-11",
+    "escalation": "User explicitly approved before invocation; no fallback or subagents",
+    "visibility": "Model now parent-reported; direct host introspection, account enablement, cost and accounting not exposed. Earlier r4 actual model was NOT VERIFIED."
+  },
+  "status": "Proposed deployment; author-ready, independent review pending"
+}

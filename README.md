@@ -49,9 +49,22 @@ connects normal farmer-photo capture, exception handling, and random validation 
 The [business-process flow](./docs/architecture/business-process-flow.md) maps those
 activities to their owners and carries the claim through advance, final calculation,
 payment reconciliation, and appeal safeguards.
+The [decision-agent contract](./docs/architecture/decision-agent-architecture.md)
+connects registered evidence and Azure ML ratings to controlled assessment,
+farmer/field follow-up and correlated case records. The
+[Azure-icon deployment overview](./docs/architecture/azure-deployment-overview.png)
+and [decision-agent flow](./docs/architecture/decision-agent-flow.png) show the current
+proposed target: Foundry-hosted custom agents with AKS application and rules services.
+Editable diagram sources and hosting-change context are in the
+[architecture index](./docs/architecture/README.md).
 The [prototype collection](./prototypes/README.md) holds interactive journey drafts.
 The [farmer journey draft](./prototypes/farmer-journey/README.md) adds a self-contained
 clickable UX walkthrough using the Field & File logo and synthetic case data.
+
+The [Ministry presentation](./presentations/field-and-file/ministry-of-agriculture-v4.pptx)
+separates the customer proposal (slides 1-17) from **Part 2: Engineering the solution**
+(slides 18-26), covering architecture, decision flows, compliance scope, delivery
+roles, logging and human-led agentic engineering.
 
 The [Azure delivery team](./docs/delivery/README.md) defines nine development agents,
 shared repository skills, a staged task backlog, and explicit architecture-to-Bicep

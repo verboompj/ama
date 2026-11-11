@@ -1,5 +1,10 @@
 # Business Process Flow: From Parcel to Payment
 
+**PROPOSED — technical amendment 11 November 2026.** The user selected Foundry Agent
+Service for custom runtime agent orchestration; applications, typed APIs and
+deterministic rules remain on AKS. This is not a deployed process or design release,
+and does not amend historical WP-001 evidence.
+
 ## 1. Purpose and Scope
 
 This is the business view of the
@@ -19,6 +24,14 @@ Mermaid flows below. Open the source file in <https://aka.ms/excalidraw>.
 
 **Core principle:** monitoring creates evidence, evidence supports case readiness,
 and the authorised paying-agency system executes payments. These are distinct steps.
+The [Decision Support Agent contract](./decision-agent-architecture.md) makes the
+bounded assessment, evidence journal and farmer/field reassessment loop explicit.
+“Decision Support Agent” is the public name/proposed hosted implementation of the
+existing **Discrepancy Resolution Agent** role, not a sixth runtime role; the other
+four runtime roles and all human authority boundaries remain distinct.
+The intended [decision-agent PNG](./decision-agent-flow.png) and
+[Azure deployment PNG](./azure-deployment-overview.png) are separately owned diagram
+deliverables; editable-source targets are linked from that contract.
 
 ## 2. Claim, Evidence, and Review Flow
 
@@ -35,6 +48,8 @@ flowchart TD
         CLAIM[Register claim, parcel versions and submission receipt]
         REGISTER[Validate package and register claimant-supplied evidence]
         MONITOR[Run administrative checks and as-of Sentinel monitoring]
+        AGENT[Foundry-hosted Decision Support Agent\nRetrieve approved ML rating and rules; assess scoped question]
+        JOURNAL[Register cited assessment and action receipt\nDurable case and evidence journal through AKS APIs]
         RESULT{Monitoring result}
         REQUEST[Continue observation or request proportionate evidence]
     end
@@ -42,12 +57,14 @@ flowchart TD
     subgraph Review["Caseworker and Independent Control"]
         ASSESS[Assess farmer response and available evidence]
         RESOLVED{Scoped question resolved?}
-        TASK[Authorise and assign independent inspection]
+        PROPOSE[Record non-binding field-validation proposal\nScoped gap, alternatives, selection basis and deadline]
+        TASK[Authorised control owner approves and assigns independent inspection]
         METHOD{Suitable lawful evidence route?}
         GROUND[Ground inspection or approved alternative]
         DRONE[Authorised drone survey]
         FINDING[Validate evidence and lock independent factual finding]
-        COMBINED[Review combined evidence, dates and limitations]
+        REASSESS[Versioned reassessment using accepted response or finding\nPreserve earlier evidence, assessment and as-of limits]
+        COMBINED[Caseworker reviews combined evidence, dates and limitations]
         CONTROLS[Confirm controls and eligible amount\nfor the relevant payment stage]
         READY{Sufficiently established under applicable rules?}
         HOLD[Explain affected hold and outstanding action\nContinue review with deadline tracking]
@@ -70,16 +87,20 @@ flowchart TD
     CLAIM -. Normal capability, not universally mandatory .-> PHOTO
     PHOTO --> REGISTER
     REGISTER -. Available case evidence; not automatic approval .-> ASSESS
-    MONITOR --> RESULT
+    MONITOR --> AGENT
+    AGENT --> JOURNAL
+    JOURNAL --> RESULT
     RESULT -->|Consistent and sufficient for monitored question| CONTROLS
     RESULT -->|Difference or UNKNOWN| REQUEST
     REQUEST -->|Later observation useful within deadline| MONITOR
     REQUEST -->|Focused evidence request| RESPOND
     REQUEST -->|No response by applicable deadline| ASSESS
-    RESPOND --> ASSESS
+    RESPOND --> REGISTER
     ASSESS --> RESOLVED
     RESOLVED -->|Yes, within approved rules| CONTROLS
-    RESOLVED -->|No; human assesses inspection need| TASK
+    RESOLVED -->|No; remaining gap or approved risk route| PROPOSE
+    PROPOSE -->|Human assesses and approves inspection need| TASK
+    PROPOSE -->|Declined or alternative required| HOLD
     CLAIM -. Claim population; selected cases only .-> RANDOM
     RANDOM --> TASK
     RISK --> TASK
@@ -88,7 +109,8 @@ flowchart TD
     METHOD -->|Drone proportionate and permitted| DRONE
     GROUND --> FINDING
     DRONE --> FINDING
-    FINDING --> COMBINED
+    FINDING --> REASSESS
+    REASSESS --> COMBINED
     FINDING -. Quality-sample findings only .-> QUALITY
     COMBINED -->|Question resolved and due process observed| CONTROLS
     COMBINED -->|Inconclusive or contested| HOLD
@@ -106,6 +128,21 @@ Solid arrows show business progression; dotted arrows show supporting evidence,
 population sampling, or ongoing assurance. A farmer upload does not automatically
 create a human-review obligation for every photo: approved task rules determine
 whether bounded workflow handling or caseworker review is needed.
+
+The Decision Support Agent accepts only registered case/evidence references,
+calibrated Azure ML probabilities/confidence, quality/coverage, UNKNOWN/review
+status, approved as-of and availability cutoffs, and model/feature/taxonomy/rule
+versions. Labels and confidence are evidence, not entitlement. Typed AKS tools
+enforce actor authority, current case state and permitted transitions independently
+of the LLM; claimant content cannot supply instructions or permissions.
+
+Every accepted farmer response or independent finding creates a new assessment
+version. Farmer responses pass the same package acceptance checks before assessment;
+`ASSESS` includes that versioned reassessment and applicable caseworker review.
+The field route explicitly records a proposal before approval, never autonomous
+dispatch. A focused farmer request must follow approved notice policy and state the
+question, evidence alternatives, delivery status and response deadline; otherwise
+it remains a draft for approval.
 
 ### What the branches mean
 
@@ -235,16 +272,39 @@ and confirmed paid amounts.
 | Business responsibility | Accountable actor | Architecture support and boundary |
 |---|---|---|
 | Prepare and submit claim | Farmer or authorised representative | Portal/PWA, national eID, `web-bff`, `case-api`; guidance agent cannot submit an official change on its own |
-| Capture farmer evidence | Farmer or representative | Guided app, `evidence-api`, quarantine, immutable evidence; GPS is supporting provenance |
+| Capture farmer evidence | Farmer or representative | Guided app, `evidence-api`, quarantine, governed versioned evidence; GPS is supporting provenance |
 | Check package acceptance | Agency evidence service | Complete clean pinned objects, manifest/hash validation, explicit receipt; offline draft is not submission |
 | Monitor parcel and activity | Agency control owner; EO/model specialists maintain approved methods | Copernicus APIs, `feature-worker`, Azure ML, prediction store; approved as-of window and abstention |
-| Explain and resolve routine questions | Approved workflow or caseworker | Discrepancy Resolution Agent, `rules-service`, `case-api`; contested/adverse outcomes escalate |
+| Explain and resolve routine questions | Approved workflow or caseworker | Decision Support Agent (discrepancy role), `rules-service`, `case-api`; contested/adverse outcomes escalate |
+| Assess scoped evidence and propose next action | Agency control owner; bounded automation only within approved policy | Foundry-hosted Decision Support Agent consumes approved Azure ML rating and cited rules through typed AKS APIs; durable assessment receipt, farmer-request and field-proposal boundaries |
 | Select independent checks | Authorised control owner | Locked quality sample or approved targeted selection; prioritisation agent recommends only |
 | Inspect and establish facts | Inspector/surveyor | Field app, optional drone, evidence worker and store; attested pre-AI finding, dated limitations |
 | Establish entitlement and decide adverse cases | Authorised agency officials under approved procedures | Versioned rules and authoritative case records; neither LLM nor crop model has decision authority |
 | Authorise and execute payment | Existing agency payment authority | `payment-system-adapter` hands off approved records; existing treasury system retains authorisation, execution, and ledger |
 | Reconcile and inform farmer | Agency payment operations and case services | Idempotent adapter, transaction references, case/portal state; an accepted instruction is not settlement |
 | Audit and assure | Auditor and authorised submission owner | Immutable lineage, `audit-pack-worker`, Audit Evidence Agent; draft requires approval before submission |
+
+### Durable record, deadlines and safe failure
+
+The governed evidence file preserves accepted object versions/hashes, capture and
+provenance. The durable case/action journal correlates case, parcel, evidence,
+request and action IDs, actor/authority, reasons/citations, model/rule/agent versions,
+request/response/result/status timestamps, approval references and payment transaction
+links. Corrections and reassessments append linked versions rather than overwrite
+the independent finding or original assessment.
+
+Operational monitoring receives minimal correlated metadata, not raw claimant
+content or whole prompts/tool payloads. Retention, access, legal holds and any
+immutable-policy enforcement need approved legal/records/operational choices; no
+perpetual WORM policy is implied by “immutable lineage.”
+
+Persist accepted actions before acknowledgement and use stable idempotency keys
+and case-version checks. Duplicate events return the existing receipt; conflicting
+or stale commands are rejected. Replay cannot resend notices, dispatch inspections
+or duplicate payments. Timeouts, UNKNOWN, failed delivery, invalid capture and
+expired response deadlines are explicit case exceptions with owners and next
+actions. No response or missing imagery does not establish non-compliance.
+No automatic alternate model/region or indefinite wait is authorised.
 
 ## 6. Where the Two-Month Benefit Can Arise
 
@@ -265,6 +325,7 @@ not a legal entitlement rule.
 ## 7. Source Procedures
 
 - [AKS-centred Foundry architecture](./aks-centered-foundry-architecture.md)
+- [Decision Support Agent contract and logical/sequence views](./decision-agent-architecture.md)
 - [Personas and use cases](../Persona/personas-and-use-cases.md)
 - [Evidence-validation storyline](../copernicus/crop-classification/evidence-validation-storyline.md)
 - [Drone and independent validation procedure](../copernicus/crop-classification/drone-survey-validation-process.md)

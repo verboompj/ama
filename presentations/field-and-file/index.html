@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -66,6 +66,36 @@
       --cp-sheen: rgba(255, 255, 255, 0.04);
       --cp-highlight: rgba(253, 142, 161, 0.12);
     }
+    /* Match the farmer app's Field & File branding in either host theme. */
+    html[data-theme] {
+      color-scheme: light;
+      --cp-bg: #f5f0e6;
+      --cp-bg-elevated: #fcfbf8;
+      --cp-surface: #ffffff;
+      --cp-surface-soft: #f1f4ef;
+      --cp-border: #d1d5ca;
+      --cp-border-strong: #778371;
+      --cp-text: #1e2521;
+      --cp-text-muted: #50594f;
+      --cp-text-soft: #596355;
+      --cp-accent: #52734d;
+      --cp-accent-hover: #405d3c;
+      --cp-accent-soft: #eaf0e7;
+      --cp-accent-fg: #ffffff;
+      --cp-success: #405d3c;
+      --cp-danger: #a12727;
+      --cp-warning: #d9a441;
+      --cp-warning-soft: #fcf3df;
+      --cp-link: #315d70;
+      --cp-signal: #5b8fa8;
+      --cp-signal-soft: #eaf2f6;
+      --cp-shadow: 0 18px 48px rgba(30, 37, 33, 0.12);
+      --cp-overlay: rgba(245, 240, 230, 0.8);
+      --cp-panel: rgba(255, 255, 255, 0.86);
+      --cp-panel-strong: rgba(255, 255, 255, 0.96);
+      --cp-sheen: rgba(255, 255, 255, 0.55);
+      --cp-highlight: #eaf0e7;
+    }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--cp-bg); color: var(--cp-text); font: 18px/1.45 "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; }
     button, select { font: inherit; }
@@ -78,18 +108,18 @@
     .primary:hover { background: var(--cp-accent-hover); color: var(--cp-accent-fg); }
     .toolbar { min-height: 60px; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--cp-border); background: var(--cp-bg-elevated); }
     .toolbar .label { display: flex; align-items: center; gap: 12px; font-size: 14px; }
-    .toolbar .label strong { font-size: 17px; }
+    .toolbar .logo { width: 210px; height: 61.25px; flex-shrink: 0; }
     .toolbar .tools { display: flex; gap: 8px; }
     .toolbar button { font-size: 13px; }
-    .workspace { display: grid; place-items: center; padding: 20px 16px 12px; min-height: calc(100dvh - 124px); }
+    .workspace { display: grid; place-items: center; padding: 20px 16px 12px; min-height: 0; }
     #canvas-shell { position: relative; }
     #slides { transform-origin: top left; }
-    .slide { width: 1280px; height: 720px; padding: 32px 44px 24px; display: flex; flex-direction: column; background: var(--cp-bg-elevated); border: 1px solid var(--cp-border); overflow: hidden; }
+    .slide { width: 1280px; height: 720px; padding: 24px 44px 20px; display: flex; flex-direction: column; background: var(--cp-bg-elevated); border: 1px solid var(--cp-border); overflow: hidden; }
     .slide[hidden] { display: none !important; }
     .slide.hero-slide { background: var(--cp-surface); }
-    .slide-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 34px; margin-bottom: 20px; }
+    .slide-head { display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 63px; margin-bottom: 8px; }
     .brand { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; letter-spacing: -.03em; }
-    .brand svg { width: 34px; height: 34px; }
+    .brand .logo { width: 216px; height: 63px; display: block; flex-shrink: 0; }
     .chapter, .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--cp-text-muted); }
     .chapter { text-align: right; }
     .section-kicker { font: 13px/1.3 Consolas, "Courier New", Courier, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--cp-accent); margin: 0 0 8px; }
@@ -97,24 +127,24 @@
     h2 { font-size: 24px; line-height: 1.2; letter-spacing: -.02em; margin: 0 0 12px; font-weight: 650; }
     h3 { font-size: 18px; margin: 0 0 8px; }
     p { margin: 0 0 12px; }
-    .subtitle { font-size: 19px; max-width: 1040px; color: var(--cp-text-muted); margin-bottom: 24px; }
+    .subtitle { font-size: 19px; max-width: 1040px; color: var(--cp-text-muted); margin-bottom: 16px; }
     .body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 18px; }
     .body > * { flex-shrink: 0; }
-    .compact-slide .slide-head { margin-bottom: 16px; }
-    .compact-slide .subtitle { margin-bottom: 16px; }
-    .compact-slide .body { gap: 14px; }
+    .compact-slide .subtitle { margin-bottom: 12px; }
+    .compact-slide .body { gap: 12px; }
     .columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; min-height: 0; }
     .columns.wide-left { grid-template-columns: 1.2fr .8fr; }
     .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
     .four { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-    .card { padding: 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); box-shadow: 0 1px 2px var(--cp-border); }
-    .card.soft { background: var(--cp-surface-soft); box-shadow: none; }
+    .card { padding: 20px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); }
+    .card.soft { background: var(--cp-bg-elevated); }
     .card.accent { background: var(--cp-accent-soft); border-color: var(--cp-accent); }
     .card p:last-child { margin-bottom: 0; }
     .card.small { padding: 16px; font-size: 16px; }
     .muted { color: var(--cp-text-muted); }
     .small-text { font-size: 15px; line-height: 1.45; }
-    .badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--cp-border); border-radius: .625rem; font-size: 12px; font-weight: 650; background: var(--cp-surface); color: var(--cp-text); }
+    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 5px 10px; border: 1px solid var(--cp-border); border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--cp-surface); color: var(--cp-text); }
+    .badge.attention { border-color: var(--cp-warning); background: var(--cp-warning-soft); }
     .badge.proposed { color: var(--cp-accent); border-color: var(--cp-accent); background: var(--cp-accent-soft); }
     .badge.blocked { color: var(--cp-danger); border-color: var(--cp-danger); }
     .badge.ready { color: var(--cp-success); border-color: var(--cp-success); }
@@ -122,20 +152,17 @@
     .avatar { width: 40px; height: 40px; display: inline-grid; place-items: center; border-radius: .625rem; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); color: var(--cp-accent); flex-shrink: 0; }
     .avatar svg { width: 23px; height: 23px; }
     .persona strong { font-size: 17px; }
-    .speech { font-size: 25px; line-height: 1.3; letter-spacing: -.025em; font-weight: 600; margin: 0 0 20px; }
-    .speech::before { content: "“"; color: var(--cp-accent); }
-    .speech::after { content: "”"; color: var(--cp-accent); }
-    .dialogue-line { padding: 10px 0; display: grid; grid-template-columns: 110px 1fr; gap: 16px; border-top: 1px solid var(--cp-border); font-size: 17px; }
-    .dialogue-line strong { color: var(--cp-accent); font-size: 15px; }
+    .journey-row { padding: 10px 0; display: grid; grid-template-columns: 110px 1fr; gap: 16px; border-top: 1px solid var(--cp-border); font-size: 17px; }
+    .journey-row strong { color: var(--cp-accent); font-size: 15px; }
     .hero-title { font-size: 62px; line-height: 1.02; max-width: 660px; margin: 10px 0 20px; }
     .hero-tagline { font-size: 25px; line-height: 1.4; max-width: 600px; }
     .big-number { font-size: 41px; line-height: 1.08; font-weight: 650; letter-spacing: -.05em; }
     .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
     .metrics .metric { padding: 14px 0 0; }
     .metrics p { font-size: 15px; color: var(--cp-text-muted); margin: 6px 0 0; }
-    .field-map { position: relative; min-height: 262px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px; padding: 18px; border-radius: 16px; border: 1px solid var(--cp-border); background: var(--cp-surface-soft); }
-    .parcel { border: 2px solid var(--cp-border-strong); border-radius: .625rem; background: repeating-linear-gradient(125deg, var(--cp-bg-elevated) 0 12px, var(--cp-border) 12px 14px); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; min-height: 98px; }
-    .parcel.selected { background: repeating-linear-gradient(125deg, var(--cp-accent-soft) 0 12px, var(--cp-highlight) 12px 14px); border-color: var(--cp-accent); grid-row: span 2; }
+    .field-map { position: relative; min-height: 250px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 10px; padding: 18px; border-radius: 16px; border: 1px solid var(--cp-border); background: var(--cp-signal-soft); }
+    .parcel { border: 2px solid var(--cp-border-strong); border-radius: .625rem; background: var(--cp-bg-elevated); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; min-height: 98px; }
+    .parcel.selected { background: var(--cp-accent-soft); border-color: var(--cp-accent); grid-row: span 2; }
     .parcel span { align-self: flex-start; background: var(--cp-surface); border-radius: .625rem; padding: 4px 8px; font-size: 14px; }
     .parcel strong { background: var(--cp-surface); border-radius: .625rem; padding: 4px 8px; font-size: 16px; align-self: flex-start; }
     .map-caption { padding-top: 10px; font-size: 13px; color: var(--cp-text-muted); }
@@ -146,6 +173,8 @@
     .phone .parcel span, .phone .parcel strong { font-size: 11px; }
     .compact-slide .phone { padding: 14px; }
     .compact-slide .phone-top { margin-bottom: 10px; }
+    #slide-2 .phone { padding: 12px; }
+    #slide-2 .phone-top { margin-bottom: 8px; }
     .compact-slide .phone .field-map { min-height: 100px; padding: 8px; }
     .compact-slide .phone .parcel { min-height: 38px; padding: 6px; }
     .compact-slide .phone .screen-row { margin: 8px 0; }
@@ -157,7 +186,7 @@
     .step .number { font: 14px Consolas, "Courier New", Courier, monospace; color: var(--cp-accent); display: block; margin-bottom: 8px; }
     .step h3 { font-size: 17px; }
     .step p { font-size: 15px; margin: 0; color: var(--cp-text-muted); }
-    .takeaway { padding: 12px 16px; background: var(--cp-accent-soft); border: 1px solid var(--cp-accent); border-radius: .625rem; font-size: 18px; }
+    .takeaway { padding: 12px 16px; background: var(--cp-surface-soft); border: 1px solid var(--cp-border); border-left: 3px solid var(--cp-accent); border-radius: 0 .625rem .625rem 0; font-size: 18px; }
     .takeaway strong { color: var(--cp-accent); }
     .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .comparison .card { padding: 18px; }
@@ -216,7 +245,8 @@
     .static-sources { max-width: 1190px; margin: 24px auto; padding: 24px; border: 1px solid var(--cp-border); border-radius: 16px; background: var(--cp-surface); }
     @media (max-width: 760px) {
       .toolbar { padding: 10px 12px; flex-wrap: wrap; gap: 8px; }
-      .toolbar .label { font-size: 12px; }
+      .toolbar .label { font-size: 12px; flex-wrap: wrap; }
+      .toolbar .logo { width: 168px; height: 49px; }
       .toolbar .tools { gap: 6px; }
       .toolbar .tools button { font-size: 12px; padding: 7px 10px; }
       .workspace { display: block; min-height: 0; padding: 12px; }
@@ -224,7 +254,7 @@
       .slide { width: 100%; height: auto; min-height: 0; padding: 22px; overflow: visible; border-radius: 16px; }
       .slide-head { align-items: start; gap: 12px; margin-bottom: 24px; }
       .brand { font-size: 15px; white-space: nowrap; }
-      .brand svg { width: 28px; height: 28px; }
+      .brand .logo { width: 168px; height: 49px; }
       .chapter { font-size: 9px; letter-spacing: .08em; max-width: 100px; }
       h1 { font-size: 31px; }
       .hero-title { font-size: 43px; }
@@ -234,11 +264,10 @@
       .metrics { grid-template-columns: 1fr 1fr; }
       .big-number { font-size: 34px; }
       .body { gap: 18px; }
-      .speech { font-size: 22px; }
       .steps { flex-direction: column; }
       .lane { grid-template-columns: 1fr; gap: 4px; }
       .role-grid { grid-template-columns: 1fr 1fr; }
-      .dialogue-line { grid-template-columns: 80px 1fr; gap: 10px; font-size: 16px; }
+      .journey-row { grid-template-columns: 80px 1fr; gap: 10px; font-size: 16px; }
       .slide-footer { align-items: start; }
       .slide-footer .footer-right { gap: 8px; }
       .navigation { gap: 8px; flex-wrap: wrap; }
@@ -269,14 +298,8 @@
 <body>
   <svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
-      <symbol id="field-mark" viewBox="0 0 204 204">
-        <rect width="204" height="204" rx="34" fill="var(--cp-text)"/>
-        <path d="M22 147C64 108 115 91 182 89V178H22Z" fill="var(--cp-accent)"/>
-        <path d="M22 178C67 143 120 128 182 127V182H22Z" fill="var(--cp-border-strong)"/>
-        <path d="M45 177C80 150 124 138 174 138M70 181C98 160 132 151 174 151M105 182C125 168 147 163 174 162" fill="none" stroke="var(--cp-bg)" stroke-width="8" stroke-linecap="round"/>
-        <circle cx="62" cy="60" r="10" fill="var(--cp-bg)"/>
-        <path d="M80 60C105 60 125 80 125 105M80 39C117 39 146 68 146 105" fill="none" stroke="var(--cp-bg)" stroke-width="9" stroke-linecap="round"/>
-        <path d="M119 112L140 132L178 89" fill="none" stroke="var(--cp-bg)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <symbol id="field-logo" viewBox="0 0 960 280">
+        <image width="960" height="280" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NjAiIGhlaWdodD0iMjgwIiB2aWV3Qm94PSIwIDAgOTYwIDI4MCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsbGVkYnk9InRpdGxlIGRlc2NyaXB0aW9uIj4KICA8dGl0bGUgaWQ9InRpdGxlIj5GaWVsZCBhbmQgRmlsZSBsb2dvPC90aXRsZT4KICA8ZGVzYyBpZD0iZGVzY3JpcHRpb24iPkEgZ3JlZW4gZmllbGQsIGdvbGRlbiBjcm9wIHJvd3MsIGFuZCBhIGJsdWUgc2F0ZWxsaXRlIHNpZ25hbCBmb3JtaW5nIGEgY2hlY2tlZCBhZ3JpY3VsdHVyYWwgcGFyY2VsIGJlc2lkZSB0aGUgRmllbGQgYW5kIEZpbGUgd29yZG1hcmsuPC9kZXNjPgogIDxyZWN0IHdpZHRoPSI5NjAiIGhlaWdodD0iMjgwIiByeD0iMjgiIGZpbGw9IiNGNUYwRTYiLz4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MiAzOCkiPgogICAgPHJlY3Qgd2lkdGg9IjIwNCIgaGVpZ2h0PSIyMDQiIHJ4PSIzNCIgZmlsbD0iIzFFMjUyMSIvPgogICAgPHBhdGggZD0iTTIyIDE0N0M2NCAxMDggMTE1IDkxIDE4MiA4OVYxNzhIMjJaIiBmaWxsPSIjNTI3MzREIi8+CiAgICA8cGF0aCBkPSJNMjIgMTc4QzY3IDE0MyAxMjAgMTI4IDE4MiAxMjdWMTgySDIyWiIgZmlsbD0iI0Q5QTQ0MSIvPgogICAgPHBhdGggZD0iTTQ1IDE3N0M4MCAxNTAgMTI0IDEzOCAxNzQgMTM4IiBmaWxsPSJub25lIiBzdHJva2U9IiNGNUYwRTYiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNNzAgMTgxQzk4IDE2MCAxMzIgMTUxIDE3NCAxNTEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y1RjBFNiIgc3Ryb2tlLXdpZHRoPSI4IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxwYXRoIGQ9Ik0xMDUgMTgyQzEyNSAxNjggMTQ3IDE2MyAxNzQgMTYyIiBmaWxsPSJub25lIiBzdHJva2U9IiNGNUYwRTYiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8Y2lyY2xlIGN4PSI2MiIgY3k9IjYwIiByPSIxMCIgZmlsbD0iIzVCOEZBOCIvPgogICAgPHBhdGggZD0iTTgwIDYwQzEwNSA2MCAxMjUgODAgMTI1IDEwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNUI4RkE4IiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTgwIDM5QzExNyAzOSAxNDYgNjggMTQ2IDEwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNUI4RkE4IiBzdHJva2Utd2lkdGg9IjkiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogICAgPHBhdGggZD0iTTExOSAxMTJMMTQwIDEzMkwxNzggODkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Y1RjBFNiIgc3Ryb2tlLXdpZHRoPSIxMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPC9nPgogIDxnIGZpbGw9IiMxRTI1MjEiPgogICAgPHRleHQgeD0iMjg2IiB5PSIxMzIiIGZvbnQtZmFtaWx5PSJHZW9yZ2lhLCAnVGltZXMgTmV3IFJvbWFuJywgc2VyaWYiIGZvbnQtc2l6ZT0iNzYiIGZvbnQtd2VpZ2h0PSI3MDAiPkZpZWxkICZhbXA7IEZpbGU8L3RleHQ+CiAgICA8dGV4dCB4PSIyOTIiIHk9IjE4NCIgZm9udC1mYW1pbHk9IidTZWdvZSBVSScsIEFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI3IiBmb250LXdlaWdodD0iNjAwIiBsZXR0ZXItc3BhY2luZz0iMyI+RlJPTSBQQVJDRUwgVE8gUEFZTUVOVDwvdGV4dD4KICA8L2c+CiAgPHBhdGggZD0iTTI5MiAyMDVIODg0IiBzdHJva2U9IiNEOUE0NDEiIHN0cm9rZS13aWR0aD0iOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo="/>
       </symbol>
       <symbol id="person" viewBox="0 0 24 24">
         <circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
@@ -292,10 +315,9 @@
     </defs>
   </svg>
   <header class="toolbar" aria-label="Presentation controls">
-    <div class="label"><strong>Field &amp; File</strong><span>Customer story + project retrospective</span></div>
+    <div class="label"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg><span>Customer story + project retrospective</span></div>
     <div class="tools">
       <button id="notes-button" type="button" aria-keyshortcuts="N">Talk track <span aria-hidden="true">N</span></button>
-      <button id="theme-button" type="button">Change theme</button>
       <button id="fullscreen-button" type="button" aria-keyshortcuts="F">Fullscreen</button>
       <button id="print-button" type="button">Print / PDF</button>
     </div>
@@ -305,23 +327,23 @@
       <div id="slides">
 
         <section class="slide hero-slide" id="slide-1" aria-labelledby="title-1" data-chapter="Customer · 1 of 6">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">The proposed customer solution<br>Case Study 47 · Fictional Hungary</div></header>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">The proposed customer solution<br>Case Study 47 · Fictional Hungary</div></header>
           <div class="body">
             <div class="columns wide-left">
               <div>
-                <p class="section-kicker">01 / The thesis</p>
+                <p class="section-kicker">01 / A better CAP service experience</p>
                 <h1 class="hero-title" id="title-1">From parcel<br>to payment.</h1>
-                <p class="hero-tagline">Make the exception the unit of work.<br>Monitor broadly. Ask early. Decide fairly.</p>
-                <p class="muted small-text">A proposed CAP service that connects what happens in the field to decisions farmers can understand.</p>
+                <p class="hero-tagline">A simpler route to agricultural support.<br>Clear actions, timely decisions, visible payments.</p>
+                <p class="muted small-text">Field &amp; File brings farmers, advisers and agency staff together around one application journey.</p>
               </div>
               <div>
                 <div class="field-map" role="img" aria-label="Illustrative farm map: one parcel requires clarification while other parcels continue monitoring">
-                  <div class="parcel selected"><span>P-17 · Clarify</span><strong>The signal needs context.</strong></div>
+                  <div class="parcel selected"><span>P-17 · Update</span><strong>Field update to review.</strong></div>
                   <div class="parcel"><span>P-18</span><strong>Monitoring</strong></div>
                   <div class="parcel"><span>P-19</span><strong>Monitoring</strong></div>
                 </div>
-                <p class="map-caption">Napraforgó Farm · illustrative parcels, not real claimant data.</p>
-                <div class="card accent small"><strong>Executive proposition</strong><p>Turn scarce inspection capacity into focused, defensible human intervention—not blanket manual review.</p></div>
+                <p class="map-caption">Napraforgó Farm · an illustrative seasonal journey.</p>
+                <div class="card accent small"><strong>Agency outcome</strong><p>Resolve issues earlier, focus inspection effort and help farmers plan their cash flow.</p></div>
               </div>
             </div>
             <div class="metrics">
@@ -331,107 +353,107 @@
               <div class="metric"><div class="big-number">−40%</div><p>inspection-cost ambition</p></div>
             </div>
           </div>
-          <footer class="slide-footer"><span>Brief figures and outcome targets—not verified agency facts or achieved results.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>01 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Case-study scale and target benefits for the proposed service.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>01 / 10</span></div></footer>
         </section>
 
         <section class="slide compact-slide" id="slide-2" aria-labelledby="title-2" data-chapter="Customer · 2 of 6">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Winter → spring<br>The Farmer + The Adviser</div></header>
-          <p class="section-kicker">02 / Start from the farmer’s question</p>
-          <h1 id="title-2">“What do I need to do—and by when?”</h1>
-          <p class="subtitle">The product is an understandable next step, not another form or an unexplained AI score.</p>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">Winter → spring<br>The Farmer + The Adviser</div></header>
+          <p class="section-kicker">02 / Preparing the application</p>
+          <h1 id="title-2">A simpler application season.</h1>
+          <p class="subtitle">Farmers and advisers get practical guidance, a shared draft and a clear view of deadlines.</p>
           <div class="body">
             <div class="columns wide-left">
               <div class="card">
                 <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span><strong>The Farmer / authorised Adviser</strong><span class="badge proposed">Proposed experience</span></div>
-                <div class="dialogue-line"><strong>Farmer</strong><span>“Help me prepare the claim for this season.”</span></div>
-                <div class="dialogue-line"><strong>Guidance</strong><span>“Check these parcels, obligations and dates. Here is the rule behind each action.”</span></div>
-                <div class="dialogue-line"><strong>Adviser</strong><span>“I can correct the draft within my delegated authority.”</span></div>
-                <div class="dialogue-line"><strong>Service</strong><span>“Submission received. Keep this receipt and track the case.”</span></div>
-                <p class="small-text muted" style="margin-top:16px">Hungarian-first, accessible and assisted channels. Mobile/offline drafts are useful—but only a server receipt means “submitted”.</p>
+                <div class="journey-row"><strong>Prepare</strong><span>Understand available schemes, commitments and key dates.</span></div>
+                <div class="journey-row"><strong>Review</strong><span>Check parcels and crops with an authorised adviser.</span></div>
+                <div class="journey-row"><strong>Submit</strong><span>Confirm the application and receive a submission receipt.</span></div>
+                <div class="journey-row"><strong>Follow</strong><span>See case progress, upcoming actions and support options.</span></div>
+                <p class="small-text muted" style="margin-top:16px">Hungarian-first, accessible and assisted channels. Offline drafts sync when connectivity returns; a receipt confirms submission.</p>
               </div>
               <div class="phone" aria-label="Illustrative proposed farmer mobile screen">
                 <div class="phone-top"><strong>Napraforgó Farm</strong><span class="badge">Draft</span></div>
-                <h3>Your season, clearly</h3>
+                <h3>Your application and next steps</h3>
                 <div class="field-map" aria-hidden="true"><div class="parcel selected"><span>P-17</span><strong>Maize declared</strong></div><div class="parcel"><span>P-18</span></div><div class="parcel"><span>P-19</span></div></div>
                 <div class="screen-row"><span>Claim checklist</span><strong>Review</strong></div>
                 <div class="screen-row"><span>Adviser access</span><strong>Scoped</strong></div>
                 <div class="screen-action">Record a field event</div>
-                <p class="small-text muted" style="margin:12px 0 0">Purposeful evidence capture throughout the season—not a universal photo obligation.</p>
+                <p class="small-text muted" style="margin:12px 0 0">Capture relevant field events and attach evidence when needed.</p>
               </div>
             </div>
             <div class="takeaway"><strong>Farmer value:</strong> fewer avoidable mistakes, clear deadlines and a visible route to assistance.</div>
           </div>
-          <footer class="slide-footer"><span>Original illustrative dialogue; farmer UX in the repo is a synthetic prototype, not a live service.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>02 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Customer touchpoint: farmer portal, delegated adviser access and assisted support.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>02 / 10</span></div></footer>
         </section>
 
         <section class="slide compact-slide" id="slide-3" aria-labelledby="title-3" data-chapter="Customer · 3 of 6">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Summer · the anomaly<br>The Farmer + The Caseworker</div></header>
-          <p class="section-kicker">03 / A satellite signal is not a verdict</p>
-          <h1 id="title-3">“The parcel changed. The declaration did not.”</h1>
-          <p class="subtitle">A storm and replanting create an evidence question—not an automatic finding of non-compliance.</p>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">Summer · field updates<br>The Farmer + The Caseworker</div></header>
+          <p class="section-kicker">03 / Support through the growing season</p>
+          <h1 id="title-3">Clear support when field conditions change.</h1>
+          <p class="subtitle">Early updates help farmers explain changes and help caseworkers resolve the application.</p>
           <div class="body">
             <div class="comparison">
               <div class="card">
                 <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><strong>The Caseworker’s view</strong></div>
-                <div class="signal" role="img" aria-label="Illustrative signal pattern only, not measured satellite observations"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="signal" role="img" aria-label="Illustrative seasonal monitoring pattern"><span></span><span></span><span></span><span></span><span></span><span></span></div>
                 <div class="screen-row"><span>Declared</span><strong>Maize · P-17</strong></div>
-                <div class="screen-row"><span>Monitoring</span><span class="badge blocked">UNKNOWN</span></div>
-                <p class="small-text muted">Dated observations, model version and limitations travel together. The crop classifier can abstain.</p>
+                <div class="screen-row"><span>Monitoring</span><span class="badge attention">Review needed</span></div>
+                <p class="small-text muted">See the parcel history and farmer’s explanation together. Uncertain observations are clearly marked for review.</p>
               </div>
               <div class="card accent">
                 <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span><strong>The Farmer’s response</strong></div>
-                <p class="speech">A storm damaged this field. We replanted.</p>
-                <p>The service explains what is in question, the relevant rule and response window.</p>
-                <p class="small-text"><strong>Respond:</strong> explain · correct · submit suitable evidence · ask for human review.</p>
-                <p class="small-text muted">A geo-tag supports provenance. It does not prove eligibility.</p>
+                <h2>Storm damage and replanting</h2>
+                <p>Add the field update, attach suitable evidence and see the response deadline.</p>
+                <p class="small-text"><strong>Support:</strong> guidance, corrections and access to a caseworker.</p>
+                <p class="small-text muted">Location and capture details help staff trace the evidence.</p>
               </div>
             </div>
             <div class="steps">
-              <div class="step"><span class="number">1 / NOTICE</span><h3>Ask a scoped question</h3><p>Plain language, dates, uncertainty and an action.</p></div>
-              <div class="step"><span class="number">2 / EVIDENCE</span><h3>Validate the response</h3><p>Quarantine, integrity, receipt and versioned case record.</p></div>
-              <div class="step"><span class="number">3 / RESOLUTION</span><h3>Close or escalate</h3><p>Routine rules may resolve the issue; disputes go to a human.</p></div>
+              <div class="step"><span class="number">1 / UPDATE</span><h3>Receive a clear update</h3><p>The affected parcel, relevant dates and next action.</p></div>
+              <div class="step"><span class="number">2 / RESPONSE</span><h3>Add useful context</h3><p>Explain the change and keep a receipt for the response.</p></div>
+              <div class="step"><span class="number">3 / PROGRESS</span><h3>See the next step</h3><p>Follow the resolution or continue with a caseworker.</p></div>
             </div>
           </div>
-          <footer class="slide-footer"><span>Synthetic P-17 scenario and signal; consistent monitoring does not prove every scheme condition.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>03 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Customer touchpoint: a timely update, a practical response route and visible case progress.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>03 / 10</span></div></footer>
         </section>
 
         <section class="slide" id="slide-4" aria-labelledby="title-4" data-chapter="Customer · 4 of 6">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Independent evidence<br>The Inspector + Decision Guardian</div></header>
-          <p class="section-kicker">04 / Resolve uncertainty without weakening fairness</p>
-          <h1 id="title-4">“Show me the facts. Let me hear the farmer.”</h1>
-          <p class="subtitle">Inspection establishes a scoped finding. An accountable official determines the consequence.</p>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">Independent evidence<br>The Inspector + Decision Officer</div></header>
+          <p class="section-kicker">04 / Inspection and decision support</p>
+          <h1 id="title-4">Fair decisions backed by field evidence.</h1>
+          <p class="subtitle">Inspectors receive focused work plans. Farmers receive explained decisions and a clear review route.</p>
           <div class="body">
             <div class="three">
               <div class="card">
                 <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span><strong>The Inspector</strong></div>
-                <p class="speech">Which question needs a visit?</p>
-                <p class="small-text">A human approves the task and proportionate ground or authorised drone route.</p>
-                <p class="small-text muted">Task-scoped access, raw evidence and capture lineage. Lock the independent finding before revealing model suggestions.</p>
+                <h2>Focused field visits</h2>
+                <p class="small-text">An approved work plan identifies the parcel, purpose and suitable ground or drone method.</p>
+                <p class="small-text muted">Record independent observations, then review model recommendations alongside the case history.</p>
               </div>
               <div class="card soft">
-                <p class="eyebrow">Two separate control lanes</p>
-                <h2>Targeted ≠ random</h2>
+                <p class="eyebrow">Case resolution + service assurance</p>
+                <h2>Evidence at two levels</h2>
                 <div class="status-row"><strong>Targeted inspection</strong><span class="badge">Resolve a risk</span></div>
                 <div class="status-row"><strong>Probability sample</strong><span class="badge">Test the system</span></div>
-                <p class="small-text muted" style="margin-top:16px">Random validation includes apparently consistent cases. Farmer photos cannot replace independent sample observations.</p>
+                <p class="small-text muted" style="margin-top:16px">An independent probability sample covers the wider service, including parcels with consistent observations.</p>
               </div>
               <div class="card accent">
-                <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#shield"/></svg></span><strong>The Decision Guardian</strong></div>
-                <p class="speech">Was the farmer heard?</p>
-                <p class="small-text">Notice, evidence access, response, human review and a reasoned decision with an appeal route.</p>
-                <p class="small-text"><strong>No LLM-issued sanctions, reductions or entitlement decisions.</strong></p>
+                <div class="persona"><span class="avatar"><svg aria-hidden="true"><use href="#shield"/></svg></span><strong>The Decision Officer</strong></div>
+                <h2>A fair decision process</h2>
+                <p class="small-text">Farmers can access the evidence, respond, receive a reasoned decision and use the appeal route.</p>
+                <p class="small-text"><strong>Authorised officials decide entitlement, reductions and sanctions.</strong></p>
               </div>
             </div>
             <div class="takeaway"><strong>Public-service value:</strong> focus field capacity while retaining independent assurance and due process.</div>
           </div>
-          <footer class="slide-footer"><span>Proposed control design; actual national procedures, sampling targets and drone permissions need approval.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>04 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Customer touchpoint: proportionate field checks, explained decisions and accessible appeal.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>04 / 10</span></div></footer>
         </section>
 
         <section class="slide" id="slide-5" aria-labelledby="title-5" data-chapter="Customer · 5 of 6">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Payment + accountability<br>Operations · policy · audit · safeguards</div></header>
-          <p class="section-kicker">05 / Complete the journey, not just the classification</p>
-          <h1 id="title-5">“Why was this amount paid—and can we prove it?”</h1>
-          <p class="subtitle">One traceable case connects evidence, decisions and the actual settlement record.</p>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">Payment + accountability<br>Operations · policy · audit · safeguards</div></header>
+          <p class="section-kicker">05 / Payment and service accountability</p>
+          <h1 id="title-5">Clear payment progress. Traceable decisions.</h1>
+          <p class="subtitle">Farmers can track their payment. Agency teams can explain the amount, timing and supporting evidence.</p>
           <div class="body">
             <div class="steps">
               <div class="step"><span class="number">EVIDENCE</span><h3>Versioned inputs</h3><p>Claim, rules, imagery, model, response and findings.</p></div>
@@ -440,49 +462,49 @@
               <div class="step"><span class="number">RECONCILIATION</span><h3>Settlement confirmed</h3><p>Transaction references, exceptions and safe retries.</p></div>
             </div>
             <div class="four">
-              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Operations Lead</h3><p>See aging queues, blocked amounts and next actions—not just “AI accuracy”.</p></div>
+              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Operations Lead</h3><p>Manage workload, payment deadlines and cases needing staff attention.</p></div>
               <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Policy Owner</h3><p>Version scheme rules and assess service outcomes, including accessibility.</p></div>
-              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Auditor</h3><p>Reconstruct the case. Approve a reproducible audit pack, not an unreviewed AI draft.</p></div>
-              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#shield"/></svg></span><h3 style="margin-top:12px">Safeguards Officer</h3><p>Challenge data use, retention, rights and unequal outcomes alongside farmer advocates.</p></div>
+              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#file"/></svg></span><h3 style="margin-top:12px">Auditor</h3><p>Review the decision history and approve a reproducible evidence pack.</p></div>
+              <div class="card small"><span class="avatar"><svg aria-hidden="true"><use href="#shield"/></svg></span><h3 style="margin-top:12px">Safeguards Officer</h3><p>Review privacy, access and fair outcomes with farmer representatives.</p></div>
             </div>
-            <div class="takeaway"><strong>Critical boundary:</strong> case readiness ≠ payment instruction ≠ settled payment. Agents cannot execute funds.</div>
+            <div class="takeaway"><strong>Farmer value:</strong> a visible payment status from the approved amount to the confirmed settlement.</div>
           </div>
-          <footer class="slide-footer"><span>Earlier-payment ambition is conditional on the relevant controls and authorised payment rules—not crop dates.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>05 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Payment timing follows applicable controls, the scheme calendar and authorised decisions.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>05 / 10</span></div></footer>
         </section>
 
         <section class="slide compact-slide" id="slide-6" aria-labelledby="title-6" data-chapter="Customer · 6 of 6">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">How the proposed service fits together<br>Platform + Earth Observation specialists</div></header>
-          <p class="section-kicker">06 / One service, deliberately different responsibilities</p>
-          <h1 id="title-6">“Use AI to explain. Use evidence to decide.”</h1>
-          <p class="subtitle">The platform connects the personas without giving technical services administrative authority.</p>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">How the proposed service fits together<br>Platform + Earth Observation specialists</div></header>
+          <p class="section-kicker">06 / The connected service</p>
+          <h1 id="title-6">One service for farmers and officials.</h1>
+          <p class="subtitle">Shared case history and coordinated support connect the portal, staff workspace and field teams.</p>
           <div class="body">
             <div class="columns">
               <div style="display:grid;gap:12px">
-                <div class="lane"><strong>User channels</strong><span>Farmer PWA + adviser access · staff workspace · inspector mobile · audit views</span></div>
-                <div class="lane"><strong>AKS runtime</strong><span>Portal, agents, case/evidence APIs, deterministic rules and controlled payment adapter</span></div>
-                <div class="lane"><strong>Managed models</strong><span>Foundry for language; Azure ML for crop classification; approved EU processing</span></div>
-                <div class="lane"><strong>Earth observation</strong><span>Copernicus/Sentinel time-series and appropriate raster-heavy processing</span></div>
+                <div class="lane"><strong>Farmer journey</strong><span>Prepare the claim, receive timely updates and follow case and payment progress.</span></div>
+                <div class="lane"><strong>Caseworker support</strong><span>Review a shared evidence history and guide each case towards a clear decision.</span></div>
+                <div class="lane"><strong>Field inspection</strong><span>Follow an approved work plan and add independent findings to the same case.</span></div>
+                <div class="lane"><strong>Reliable service</strong><span>Connect customer channels, monitoring and payment systems with controlled access.</span></div>
               </div>
               <div class="card">
-                <p class="eyebrow">Five business agents · proposed, not deployed</p>
-                <div class="status-row"><strong>Guidance</strong><span>Explain + pre-check</span></div>
-                <div class="status-row"><strong>Monitoring</strong><span>Classify or abstain</span></div>
-                <div class="status-row"><strong>Resolution</strong><span>Resolve within rules</span></div>
-                <div class="status-row"><strong>Inspection</strong><span>Recommend only</span></div>
-                <div class="status-row"><strong>Audit evidence</strong><span>Draft for approval</span></div>
-                <p class="small-text muted" style="margin-top:14px">The platform operator restores services; the EO specialist evaluates models. Neither can approve a claim or sanction.</p>
+                <p class="eyebrow">Five service agents · proposed design</p>
+                <div class="status-row"><strong>Guidance</strong><span>Understand + prepare</span></div>
+                <div class="status-row"><strong>Monitoring</strong><span>Identify field changes</span></div>
+                <div class="status-row"><strong>Resolution</strong><span>Support case progress</span></div>
+                <div class="status-row"><strong>Inspection</strong><span>Plan focused field work</span></div>
+                <div class="status-row"><strong>Audit evidence</strong><span>Prepare packs for approval</span></div>
+                <p class="small-text muted" style="margin-top:14px">Platform and data specialists maintain service and model quality. Officials retain decision authority.</p>
               </div>
             </div>
-            <div class="takeaway"><strong>Proposed customer value:</strong> understandable actions for farmers; focused work for staff; traceable decisions for the agency.</div>
+            <div class="takeaway"><strong>Service experience:</strong> consistent guidance, shared evidence and clear handoffs across channels.</div>
           </div>
-          <footer class="slide-footer"><span>Maintained proposed architecture. Foundation models/GPU serving are not hosted inside AKS.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>06 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Technology roles: AKS application runtime · Foundry language models · Azure ML crop models.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>06 / 10</span></div></footer>
         </section>
 
         <section class="slide compact-slide" id="slide-7" aria-labelledby="title-7" data-chapter="Project · 1 of 3">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">The actual repository project<br>Structure + delivery agents</div></header>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">The actual repository project<br>Structure + delivery agents</div></header>
           <p class="section-kicker">07 / How we organised the work</p>
-          <h1 id="title-7">The service agents are not the build team.</h1>
-          <p class="subtitle">Nine delivery roles turn a case brief into scoped artifacts, fixed handoffs and explicit decisions.</p>
+          <h1 id="title-7">A team organised around customer outcomes.</h1>
+          <p class="subtitle">Nine delivery roles translate persona needs into a service design, implementation artifacts and review evidence.</p>
           <div class="body">
             <div class="columns">
               <div class="card">
@@ -492,57 +514,57 @@
                   <div class="role">Application / AI</div><div class="role">ML / data</div><div class="role">Documenter</div>
                   <div class="role">Infrastructure tester</div><div class="role">Security reviewer</div><div class="role">Compliance reviewer</div>
                 </div>
-                <p class="small-text muted" style="margin-top:16px">Profiles, shared skills, phase prompts and assignments are defined. Actual host/model behaviour is not guaranteed by configuration.</p>
+                <p class="small-text muted" style="margin-top:16px">Role profiles, shared skills and scoped assignments support repeatable work and documented handoffs.</p>
               </div>
               <div class="card soft">
                 <h2>One owner per artifact</h2>
-                <p class="small-text">Independent work can run in parallel after contracts freeze. Reviews return to the owner; they do not silently rewrite the baseline.</p>
-                <h3>Risk-fit model routing</h3>
-                <p class="small-text muted">Lower-tier GPT for clerical work only. Higher-capability technical roles; distinct security/compliance reviewer defaults. Technical documentation escalates.</p>
-                <p class="small-text"><strong>Important limit:</strong> coordination and gate enforcement are procedural, not a fully automated delivery platform.</p>
+                <p class="small-text">Specialists work against agreed inputs. Independent reviewers return findings to the accountable artifact owner.</p>
+                <h3>Model capability matched to the task</h3>
+                <p class="small-text muted">Clerical tasks use the lower tier. Technical design, implementation and assurance use higher-capability models.</p>
+                <p class="small-text"><strong>Coordination:</strong> accountable people manage assignments, review gates and approvals.</p>
               </div>
             </div>
             <div class="steps">
-              <div class="step"><span class="number">CASE → SCOPE</span><h3>Targets + ownership</h3><p>Brief, personas, decisions and bounded assignment.</p></div>
-              <div class="step"><span class="number">DESIGN → RELEASE</span><h3>Review + approval</h3><p>Feasibility, actual plan, fixed revision and human authority.</p></div>
-              <div class="step"><span class="number">BUILD → EVIDENCE</span><h3>Candidate + checks</h3><p>Author work, independent assurance and explicit blockers.</p></div>
+              <div class="step"><span class="number">CASE → SCOPE</span><h3>Prioritise user needs</h3><p>Farmer and staff requirements, targets and ownership.</p></div>
+              <div class="step"><span class="number">DESIGN → RELEASE</span><h3>Agree the service design</h3><p>Feasibility, review and approval of a fixed revision.</p></div>
+              <div class="step"><span class="number">BUILD → EVIDENCE</span><h3>Build in stages</h3><p>Infrastructure, crop models and application services.</p></div>
             </div>
           </div>
-          <footer class="slide-footer"><span>Delivery sequence agreed: infrastructure → Azure ML → application/runtime. Separate scopes, not one deployment.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>07 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Agreed sequence: infrastructure → Azure ML → application/runtime, with stage-specific approvals.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>07 / 10</span></div></footer>
         </section>
 
         <section class="slide" id="slide-8" aria-labelledby="title-8" data-chapter="Project · 2 of 3">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">Assurance + approval boundaries<br>What a gate actually means</div></header>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">Quality + progress<br>Release decisions and next checks</div></header>
           <p class="section-kicker">08 / Strong evidence, proportionate to the experiment</p>
-          <h1 id="title-8">Compliance is a design input—not a stamp.</h1>
-          <p class="subtitle">The repo preserves requirements and findings, but the current PoC is intentionally technical and uncertified.</p>
+          <h1 id="title-8">A controlled path from prototype to pilot.</h1>
+          <p class="subtitle">Each stage brings the proposed service closer to a pilot through explicit quality checks and accountable approval.</p>
           <div class="body">
             <div class="four">
               <div class="gate"><span class="badge ready">Recorded</span><h3>Design released</h3><p>Exact design/plan, feasibility, scoped reviews and user local-authoring approval.</p></div>
-              <div class="gate active"><span class="badge blocked">Blocked</span><h3>Locally validated</h3><p>Compiler success is not enough. Effective author contracts fail; independent acceptance is pending.</p></div>
-              <div class="gate"><span class="badge">Not run</span><h3>Deployment ready</h3><p>Actual target, identity, scope, funding, authorised validation and inspected what-if.</p></div>
-              <div class="gate"><span class="badge">Not run</span><h3>Operationally verified</h3><p>Separately approved execution and observed behaviour in the real environment.</p></div>
+              <div class="gate active"><span class="badge blocked">Blocked</span><h3>Candidate validation</h3><p>Templates compile. Contract evaluation blocks local acceptance; independent review is pending.</p></div>
+              <div class="gate"><span class="badge">Pending</span><h3>Azure readiness</h3><p>Confirm the target, identity, scope and budget; approve validation and review the what-if.</p></div>
+              <div class="gate"><span class="badge">Pending</span><h3>Live verification</h3><p>Execute the approved campaign and verify behaviour in the target environment.</p></div>
             </div>
             <div class="columns">
               <div class="card small">
-                <h2>Traceability over confidence</h2>
-                <p>Source precedence, versioned decisions, preserved bytes/hashes, non-author reviews and honest <strong>PASS / FAIL / BLOCKED / NOT RUN</strong> labels.</p>
+                <h2>Quality at each stage</h2>
+                <p>Versioned inputs, measurable targets, independent reviews and explicit results support each release decision.</p>
               </div>
               <div class="card small accent">
-                <h2>Deliberate PoC boundary</h2>
-                <p>Historical security/compliance requirements remain reference evidence. Certification campaigns are not PoC outcomes; scoped safety and later applicable obligations still matter.</p>
+                <h2>Security and compliance context</h2>
+                <p>The technical PoC evaluates infrastructure. Security and compliance requirements inform design; production assurance has its own scope and approvals.</p>
               </div>
             </div>
-            <p class="small-text muted">Review/test loops stop at five total attempts. Preparation accounting was clarified separately; it does not reset a failing workload check.</p>
+            <p class="small-text muted">Five-attempt review limits provide a visible stop and escalation point. Gate decisions reference recorded evidence and accountable approval.</p>
           </div>
-          <footer class="slide-footer"><span>No claim of GDPR, AI Act, CAP or production certification. Source summaries are not legislation.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>08 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Current scope: ARM-only technical PoC. Production assurance is a separate stage.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>08 / 10</span></div></footer>
         </section>
 
         <section class="slide compact-slide" id="slide-9" aria-labelledby="title-9" data-chapter="Project · 3 of 3">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">What we actually built<br>Committed baseline · 4a37a94</div></header>
-          <p class="section-kicker">09 / Reusable infrastructure, honest maturity</p>
-          <h1 id="title-9">Actual Bicep. Not an actual Azure deployment.</h1>
-          <p class="subtitle">WP-001 now has a compiled private-foundation candidate—while the end-product application remains proposed.</p>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">Current infrastructure artifacts<br>Committed baseline · 4a37a94</div></header>
+          <p class="section-kicker">09 / The first delivery stage</p>
+          <h1 id="title-9">The technical foundation for the service.</h1>
+          <p class="subtitle">WP-001 contains a compiled private-foundation candidate, supporting the staged plan for models and applications.</p>
           <div class="body">
             <div class="metrics">
               <div class="metric"><div class="big-number">10</div><p>Bicep files · root + nine modules</p></div>
@@ -552,7 +574,7 @@
             </div>
             <div class="columns">
               <div class="card">
-                <p class="eyebrow">Visible reuse—not an assumption</p>
+                <p class="eyebrow">Published Azure Verified Modules</p>
                 <pre class="code">module vnet
   'br/public:avm/res/network/virtual-network:0.10.2'
   = { /* project parameters */ }</pre>
@@ -561,47 +583,47 @@
               </div>
               <div class="card soft">
                 <div class="status-row"><strong>Ten template builds</strong><span class="badge ready">Compile</span></div>
-                <div class="status-row"><strong>Two parameter files</strong><span class="badge">Synthetic only</span></div>
+                <div class="status-row"><strong>Two parameter files</strong><span class="badge">Test bindings</span></div>
                 <div class="status-row"><strong>Restore / lint</strong><span class="badge">Warnings recorded</span></div>
                 <div class="status-row"><strong>Effective contract suite</strong><span class="badge blocked">FAIL · 5/5 stop</span></div>
-                <p class="small-text muted" style="margin-top:14px">An unresolved ARM-evaluator input aborts the suite. Independent acceptance, conformance, actual what-if and live checks are not run.</p>
+                <p class="small-text muted" style="margin-top:14px">Contract evaluation is blocked by an unresolved input. Independent acceptance, conformance and Azure checks are pending.</p>
               </div>
             </div>
-            <div class="takeaway"><strong>AVM ≠ guaranteed quality:</strong> exact pins and compiled artifacts still need project-specific evidence.</div>
+            <div class="takeaway"><strong>Reusable foundation:</strong> pinned components, documented exceptions and traceable project-specific checks.</div>
           </div>
-          <footer class="slide-footer"><span>Published source baseline: commit 4a37a94. Native API availability and real environment parameters are unverified.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>09 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Foundation source baseline: commit 4a37a94. Azure deployment is pending.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>09 / 10</span></div></footer>
         </section>
 
         <section class="slide hero-slide compact-slide" id="slide-10" aria-labelledby="title-10" data-chapter="Learnings">
-          <header class="slide-head"><div class="brand"><svg aria-hidden="true"><use href="#field-mark"/></svg>Field &amp; File</div><div class="chapter">The retrospective<br>What the experience taught us</div></header>
-          <p class="section-kicker">10 / Human in the loop—twice</p>
-          <h1 id="title-10">The human became the referee.</h1>
-          <p class="subtitle">Customer decisions need human oversight by design. Engineering coordination also needed it—more than intended.</p>
+          <header class="slide-head"><div class="brand"><svg class="logo" role="img" aria-label="Field &amp; File — From parcel to payment"><use href="#field-logo"/></svg></div><div class="chapter">The retrospective<br>What the experience taught us</div></header>
+          <p class="section-kicker">10 / Lessons for the next delivery stages</p>
+          <h1 id="title-10">Keep customer outcomes at the centre.</h1>
+          <p class="subtitle">Heavy assurance requirements created competing agent interpretations and increased the sponsor’s coordination load.</p>
           <div class="body">
             <div class="referee">
               <div class="side">
-                <div class="card small"><strong>Implementation goal</strong><p>“Produce a bounded technical PoC.”</p></div>
-                <div class="card small"><strong>Assurance demands</strong><p>Different agents treated different evidence and approvals as prerequisites.</p></div>
+                <div class="card small"><strong>Implementation goal</strong><p>Validate a focused technical PoC.</p></div>
+                <div class="card small"><strong>Assurance demands</strong><p>Competing approval interpretations slowed handoffs between agents.</p></div>
               </div>
               <div class="center">
                 <span class="avatar"><svg aria-hidden="true"><use href="#person"/></svg></span>
-                <h2>The accountable human</h2>
-                <p>Clarified the goal.<br>Resolved conflicting interpretations.<br>Changed the authorised scope.</p>
+                <h2>The human referee</h2>
+                <p>Set the priority.<br>Resolved agent conflicts.<br>Clarified scope and ownership.</p>
                 <span class="badge proposed">User’s retrospective</span>
               </div>
               <div class="side">
-                <div class="card small accent"><strong>What helped</strong><p>Explicit ownership, visible blockers, recorded decisions and no false deployment claims.</p></div>
+                <div class="card small accent"><strong>What helped</strong><p>Explicit ownership, visible blockers, recorded decisions and traceable artifacts.</p></div>
                 <div class="card small"><strong>What cost time</strong><p>Heavyweight standards, recursive coordination and a complex test evaluator.</p></div>
               </div>
             </div>
             <div class="three">
-              <div class="card small"><h3>1 / Fit assurance to risk</h3><p>Set the experiment boundary before agents debate production-grade obligations.</p></div>
-              <div class="card small"><h3>2 / Automate facts first</h3><p>Prefer simple deterministic checks; reuse tooling before building another evaluator.</p></div>
-              <div class="card small"><h3>3 / Escalate once, clearly</h3><p>One conflict owner, a bounded decision and fewer routine human dispatches.</p></div>
+              <div class="card small"><h3>1 / Agree success early</h3><p>Define customer outcomes, the experiment scope and acceptance criteria together.</p></div>
+              <div class="card small"><h3>2 / Keep checks practical</h3><p>Use focused deterministic checks and proven tools for each delivery stage.</p></div>
+              <div class="card small"><h3>3 / Assign conflict ownership</h3><p>Give each disagreement one accountable owner and a clear decision path.</p></div>
             </div>
-            <div class="takeaway"><strong>Learning:</strong> governance should make authority clearer—not turn the sponsor into the orchestration engine.</div>
+            <div class="takeaway"><strong>Learning:</strong> align agents around customer value, proportionate assurance and one accountable decision path.</div>
           </div>
-          <footer class="slide-footer"><span>User reflection + recorded project blockers. Improvements are recommendations, not implemented policy or waived checks.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>10 / 10</span></div></footer>
+          <footer class="slide-footer"><span>Lessons from the project; proposed improvements for the next delivery stages.</span><div class="footer-right"><button class="source-button" type="button">Sources</button><span>10 / 10</span></div></footer>
         </section>
       </div>
     </div>
@@ -656,63 +678,63 @@
     };
     const narrative = [
       {
-        talk: "Open with the public-service thesis, not Azure products. The brief describes a large paying-agency workload, slow payments and scarce inspection capacity. The proposed change is to monitor broadly and turn differences or missing evidence into early, explainable work. The target is not autonomous sanctions: it is a fairer, more traceable path from the physical field to the official case. The scale and savings numbers shown are case assumptions and ambitions, not measurements from a real Hungarian agency or from our PoC.",
-        bridge: "To understand that proposition, follow one fictional farm through a season. Start with the question a farmer and adviser ask before submitting anything.",
-        note: "Six customer slides describe a proposed end product. The four remaining slides describe the actual development project and its retrospective. Farm, parcels and dialogue are illustrative.",
+        talk: "The case brings together two customer needs: farmers need understandable requirements and predictable cash flow; the paying agency needs accurate decisions and efficient use of staff. Field & File proposes one connected journey from preparing a claim to confirming payment. Guidance helps farmers apply correctly, seasonal monitoring identifies changes early, and staff receive the evidence needed to resolve cases. The case targets earlier payments, lower inspection costs, fewer errors and improved farmer satisfaction. Those outcomes give the agency and its customers a shared definition of success.",
+        bridge: "Follow Napraforgó Farm through the season, beginning with the application and the adviser’s support.",
+        note: "The fictional case supplies the scale assumptions and target benefits. Slides 1–6 describe the proposed customer service; slides 7–9 cover repository delivery; slide 10 covers project lessons.",
         sources: ["case", "theme", "personas"]
       },
       {
-        talk: "For the farmer, this is a cash-flow and confidence problem. For the adviser, it is a correctness and delegation problem. Guidance translates approved scheme-year rules into a practical checklist, identifies avoidable draft issues and preserves the submitted version and receipt. Evidence capture is available throughout the season for an approved purpose. It must not quietly become a photo obligation for every farmer. Low bandwidth, Hungarian language, accessibility and assisted routes are service requirements. An offline draft is not a received submission.",
-        bridge: "Now the farmer has submitted a claim. During the summer, reality changes faster than the declaration. That is where monitoring must ask a question rather than issue a verdict.",
-        note: "The existing farmer journey is a clickable synthetic HTML prototype. This slide is an original illustrative mock-up, not a live portal screenshot or promise of delivered functionality.",
+        talk: "The farmer starts with a practical checklist of available schemes, parcel details, commitments and deadlines. An authorised adviser can help review the draft within their delegated access. The farmer confirms submission and receives a receipt, then follows case progress through the same service. Hungarian language, accessible design and assisted channels make the journey usable across different levels of digital confidence. Offline drafts support work in the field and sync when connectivity returns. Farmers can capture relevant events throughout the season and select suitable evidence when an approved rule or request calls for it.",
+        bridge: "After submission, the service continues through the growing season, helping the farmer keep the case aligned with events in the field.",
+        note: "The journey is illustrated using the repository’s farmer prototype and persona requirements. Evidence requests specify their purpose and suitable response options; a server receipt confirms submission.",
         sources: ["personas", "architecture", ["Existing farmer UX prototype", "prototypes/farmer-journey/README.md"]]
       },
       {
-        talk: "Use P-17 as the recurring example: maize was declared, but a storm and replanting complicate the monitoring result. The crop classifier can abstain rather than pretending it has sufficient evidence. The farmer sees the observation dates, relevant question and response window—not just a score. They can explain, correct, offer suitable evidence or seek human review. The caseworker sees provenance and limitations. Submitted evidence is validated and linked to the same case. A routine question may close under deterministic rules; uncertainty or dispute goes to a person.",
-        bridge: "If the response does not resolve the question, the next step is not a harsher model. It is proportionate independent evidence and the correct human decision path.",
-        note: "The signal bars are illustrative; they are not Sentinel measurements, confidence values or a demonstrated trained-model result. Missing imagery is not evidence of non-compliance.",
+        talk: "In the illustrative P-17 scenario, storm damage leads to replanting after maize was declared. The service highlights the parcel and explains the action needed, observation dates and response deadline. The farmer adds an explanation, updates the relevant details and attaches suitable evidence. The caseworker receives the parcel history and response together, helping them resolve the case efficiently. The classifier supports an UNKNOWN result when further observations or review are needed. Routine cases follow approved rules; uncertainty and disputes reach an authorised official. The farmer can see that progress throughout.",
+        bridge: "Some cases benefit from a field visit. The next stage gives inspectors focused tasks and farmers a clear route to an explained decision.",
+        note: "P-17 and its monitoring pattern are illustrative. Location metadata records evidence provenance; eligibility follows the applicable rules and reviewed evidence. Observation gaps lead to an uncertainty status and suitable follow-up.",
         sources: ["flow", "architecture", "personas"]
       },
       {
-        talk: "The inspector needs a specific factual question, authorised access and a suitable method. Ground work or an authorised drone mission can add evidence the satellite cannot provide. Independent findings must be locked before model suggestions are shown. Separately, a probability-based quality sample tests the control system—including cases that looked consistent. It cannot be replaced by targeted yield or persuasive farmer photos. The legal and sanctions officer then protects notice, response, evidence access, reasoned decisions and appeal rights. A factual finding does not itself authorise a sanction.",
-        bridge: "Once the relevant controls establish an amount, the case enters payment. Operations and audit must still be able to explain what happened and confirm that funds actually settled.",
-        note: "These are proposed procedural and authority boundaries. Actual national rules, sample protocols, thresholds and drone permissions require the responsible owners; this presentation does not supply legal approval.",
+        talk: "Inspectors receive an approved work plan with the parcel, purpose and suitable ground or authorised drone method. They capture and lock independent findings before viewing model recommendations. Targeted visits help resolve individual cases; a separate independent probability sample assesses the wider monitoring service, including apparently consistent parcels. The decision officer brings the evidence together, gives the farmer an opportunity to respond and issues a reasoned decision. Farmers receive access to the evidence and the appropriate appeal route. Authorised officials retain entitlement, reduction and sanction decisions.",
+        bridge: "With the relevant controls completed and an amount established, the journey continues through payment and settlement.",
+        note: "The proposed process preserves independent sampling and official decision authority. Responsible owners approve national procedures, sampling protocols and drone permissions.",
         sources: ["flow", ["Independent ground and drone validation", "docs/copernicus/crop-classification/drone-survey-validation-process.md"], "personas"]
       },
       {
-        talk: "The agency does not buy a classifier; it needs a reliable public-service chain. Operations needs deadlines, blocked amounts and actionable queues. Policy owners need versioned rules and service outcomes. Safeguards officers and farmer advocates need visibility into access, rights and unequal outcomes. Auditors need reproducible lineage. The case service establishes readiness; the existing authorised payment system executes and keeps the transaction ledger. A sent instruction is not a paid amount. Reconciliation, idempotency and human authority remain essential. Audit agents prepare drafts for authorised approval.",
-        bridge: "That division of responsibility determines the technology choices. The architecture should support every persona without letting an AI conversation become an administrative or payment authority.",
-        note: "The earlier-payment benefit is a target contingent on relevant-stage controls and authorised rules. Not every unresolved parcel necessarily blocks every intervention; the appropriate rules decide that.",
+        talk: "The farmer’s payment view follows the approved amount, payment instruction and confirmed settlement. Operations teams manage deadlines and cases needing attention. Policy owners review service outcomes against versioned scheme rules. Auditors can reconstruct the evidence and decision history, while safeguards officers and farmer representatives review privacy, access and fair treatment. The case service establishes payment readiness, the authorised payment team issues the instruction, and the existing treasury system executes and reconciles the transaction. These distinct statuses give customers an accurate view of progress. Audit packs are prepared for authorised approval.",
+        bridge: "The complete customer journey shapes the platform: connected channels, a shared case history and specialist services behind each step.",
+        note: "Earlier payment is a case target, subject to relevant controls, the scheme calendar and authorised decisions. Applicable rules determine readiness for each amount or intervention.",
         sources: ["flow", "architecture", ["CAP claim and payment calendar", "docs/research/cap-claim-and-payment-calendar.md"]]
       },
       {
-        talk: "AKS is the proposed application and agent runtime, not a GPU model-serving cluster. Foundry provides managed language-model inference; Azure ML provides the custom crop classifier; Copernicus services handle appropriate raster-heavy work. Deterministic rules and case/payment services retain the authoritative boundaries. The five business agents have bounded tasks: explain, classify or abstain, resolve routine questions, recommend inspections and draft audit packs. They are distinct from the development agents used to build this repository. Models and technical operators do not acquire eligibility or sanction authority.",
-        bridge: "That completes the customer proposition. Now switch lenses: what did we actually build, and how did the development process shape the outcome?",
-        note: "The full service architecture is proposed. Foundry, ML, application runtime, integration stores and business agents have not been deployed under the foundation package.",
+        talk: "The proposed platform supports the farmer portal, adviser access, staff workspace, inspector mobile experience and audit views. AKS runs the application and service agents; Foundry supplies managed language models; Azure ML supplies crop classification; Copernicus supports earth-observation processing. The five service agents provide guidance, monitoring, routine resolution, inspection recommendations and audit drafts. Shared case records and deterministic rules connect these tasks. Officials make administrative decisions, treasury executes payments, and platform and data specialists maintain service and model quality. The result is a consistent experience across channels.",
+        bridge: "The remaining slides show how the repository project is organised to deliver this customer service in stages.",
+        note: "This is the maintained proposed architecture. Case and personal model processing uses approved EU Regional or EU Data Zone options. Delivery proceeds through infrastructure, Azure ML and application/runtime stages.",
         sources: ["architecture", "personas", "poc"]
       },
       {
-        talk: "The repository separates the five business agents from nine delivery roles. The coordinator creates bounded assignments; the architect owns design; implementers own their paths; non-author reviewers assess fixed evidence; the documenter keeps explanations aligned. Profiles, repository skills and phase prompts are real version-controlled artifacts, but their presence is not proof of a fully automated orchestrator or guaranteed host model selection. Model routing reserves the lower tier for clerical work and keeps consequential technical work high. The actual sequence is infrastructure, then ML, then application—not one blanket deployment.",
-        bridge: "A structured approach is useful only if its gates mean something precise. The next slide explains both the safeguards and the boundaries we had to clarify for a technical PoC.",
-        note: "Model policy is an intended routing contract, not an independently measured cost saving, runtime attestation or permission change. Procedural coordination still depends on the host and accountable people.",
+        talk: "The repository uses nine delivery roles to translate the case and persona needs into implementation work. The coordinator scopes assignments, the architect owns the design, specialists implement their artifacts, independent reviewers assess evidence, and the documenter keeps the explanations aligned. Versioned role profiles and shared skills support these handoffs. Configured model routing matches capability to clerical, technical and assurance tasks. Accountable people manage coordination and approvals. The staged plan begins with infrastructure, continues with crop-model capabilities and then delivers the application and runtime experience.",
+        bridge: "Each delivery stage has a clear readiness decision, helping the team progress from the prototype towards an approved pilot.",
+        note: "The nine delivery roles build and review the service; the five runtime agents provide business capabilities. Model routing is a configured policy, with runtime selection checked for each assignment.",
         sources: ["routing", "framework", "poc"]
       },
       {
-        talk: "The repo preserves the original brief and treats participant legal summaries as research, not legislation. Design release, local acceptance, deployment readiness and observed verification are separate. For the current ARM-only technical PoC, the user removed certification campaigns as requested outcomes while retaining historical requirements and scoped safety/applicability dispositions. That is not a legal exemption. Fixed revisions, hashes and explicit result labels make the limits visible. We also clarified evidence-preparation accounting separately so successful preservation did not become a lifetime artifact ceiling; failing workload checks still retained their budget.",
-        bridge: "With those boundaries established, the question becomes concrete: where are the actual artifacts, which AVMs are used, and what has or has not passed?",
-        note: "The current status is blocked at local candidate acceptance. Design release authorises local writing only. No Azure mutation, validate/what-if or deployment approval follows from it.",
+        talk: "The project moves through design release, candidate validation, Azure readiness and live verification. The design has been released for local authoring. The candidate compiles, while contract evaluation currently blocks local acceptance. Later stages confirm the Azure target, identity, scope and budget, then assess the approved deployment and observed behaviour. Versioned evidence and independent reviews support these decisions. Security and compliance requirements remain design context; the current PoC focuses on ARM infrastructure validation, with production assurance handled through a separate scope. A five-attempt limit gives each review loop a clear escalation point.",
+        bridge: "The foundation artifacts make the current progress tangible and identify the checks that remain ahead.",
+        note: "Local candidate acceptance is blocked. The design release authorises local authoring; Azure validation and execution require their own scoped approval and readiness evidence.",
         sources: ["release", "ledger", ["Accepted evidence-accounting disposition", "delivery/releases/WP-001/evidence-accounting-resolution.md"], "poc"]
       },
       {
-        talk: "There is actual Bicep in infra: one subscription root and nine logical modules, with two parameter variants and an author test runner. The source explicitly contains twenty distinct AVM pins across twenty-three declarations. AKS, VPN and certain extension resources are documented native exceptions, not claims of AVM-only infrastructure. All ten files compile, both parameter files compile with synthetic bindings, and restore/lint finish with recorded warnings. The effective ARM evaluator still aborts its contract suite and the five-attempt loop stopped. No independent local acceptance or actual Azure deployment should be inferred.",
-        bridge: "That combination—useful artifacts, honest evidence and real friction—sets up the retrospective. The hardest lesson was not only technical; it was the human coordination burden.",
-        note: "Source example is abbreviated only for presentation; the linked connectivity file contains the actual AVM invocation and parameters. All implementation-status claims are dated to 8 November 2026 and commit 4a37a94.",
+        talk: "WP-001 has one Bicep root and nine logical modules, two parameter variants and an author contract suite. Twenty distinct published AVM versions appear across twenty-three declarations. Native Bicep covers the documented AKS, VPN and extension-resource gaps. All ten templates compile, the parameter files compile with synthetic bindings, and restore/lint complete with recorded warnings. Contract evaluation remains blocked by an unresolved ARM-evaluator input after the five-attempt budget was consumed. Independent acceptance, conformance and Azure checks are pending, and the package has zero Azure deployments. This candidate is the infrastructure stage of the service plan.",
+        bridge: "The work produced useful artifacts and a clear record of progress. The final slide captures the coordination lessons for the next stages.",
+        note: "The AVM example is abbreviated for the slide; the source link provides the full invocation. Foundation implementation status refers to the published baseline at commit 4a37a94.",
         sources: ["implementation", ["Actual VNet AVM declaration", "infra/modules/connectivity.bicep"], ["Foundation root and guide", "infra/README.md"], "ledger"]
       },
       {
-        talk: "This is the user's retrospective, not a universal claim that compliance is bad. Heavyweight assurance standards led agents to conflict over prerequisites, and the user had to arbitrate scope and progress. Human oversight was already necessary for customer decisions; the build process demanded another human-in-the-loop role as referee. The records also exposed tool/transport interruptions and a complex evaluator that blocked otherwise compiling artifacts. Keep the benefits—ownership, provenance and explicit limits—but set the experiment boundary early, automate factual checks simply and give each disagreement one accountable escalation route.",
-        bridge: "Close with the original thesis: clearer next actions for farmers and officials, and a delivery process that makes authority clearer instead of adding another layer of uncertainty.",
-        note: "The human-referee learning is supplied by the user in this presentation request. Other friction is supported by the recorded interruptions, scope decisions and failed author checks. The three improvements are recommendations; no framework policy or exhausted check has been changed for this deck.",
+        talk: "The sponsor’s retrospective highlights a practical delivery lesson: heavy assurance requirements created conflicting agent interpretations and required the sponsor to act as referee. The human had to reset priorities, resolve disagreements and clarify the authorised scope. Explicit ownership, recorded decisions and traceable artifacts helped the team retain a useful delivery record. For the next stages, agree customer outcomes and acceptance criteria early, use practical deterministic checks and give each conflict one accountable owner. Proportionate assurance and clear coordination should help the team concentrate its effort on the farmer and agency experience.",
+        bridge: "Close on the customer outcome: a simpler application, timely support, fair decisions and visible payment progress.",
+        note: "The human-referee lesson is the user’s retrospective, supported by recorded project decisions and blockers. The three improvement areas are recommendations for future delivery stages.",
         sources: ["poc", "ledger", "implementation", ["Recorded specialist interruption", "delivery/releases/WP-001/handoffs/U001-implementation-interruption.md"]]
       }
     ];
@@ -784,9 +806,6 @@
     document.getElementById("notes-button").addEventListener("click", openContext);
     document.querySelectorAll(".source-button").forEach(button => button.addEventListener("click", openContext));
     document.getElementById("close-dialog").addEventListener("click", () => dialog.close());
-    document.getElementById("theme-button").addEventListener("click", () => {
-      document.documentElement.dataset.theme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    });
     document.getElementById("fullscreen-button").addEventListener("click", async () => {
       try {
         if (document.fullscreenElement) await document.exitFullscreen();

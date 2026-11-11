@@ -2,13 +2,19 @@
 
 ## 1. Decision
 
-Use **AKS as the primary application and agent runtime**, while using managed Azure
-services for the models and data capabilities that do not benefit from self-hosting.
+**PROPOSED — hosting direction amended 11 November 2026.** Use **AKS as the
+application/API platform and Foundry Agent Service as the custom agent runtime**.
+The user explicitly selected Foundry-hosted agents on that date. This supersedes
+the earlier AKS-agent-runtime proposal in this document, not the historical/released
+WP-001 evidence. No implementation, deployment, certification or design release is
+claimed by this amendment.
 
 The recommended split is:
 
-- **AKS** hosts the web application, agent orchestration, deterministic CAP
-  services, integrations, evidence APIs, and background workers.
+- **AKS** hosts the web application, agent invocation adapters, deterministic CAP
+  services, typed case/evidence/rules APIs, integrations and background workers.
+- **Foundry Agent Service** hosts custom agent orchestration, including the bounded
+  **Decision Support Agent**; hosted-runtime/region feasibility remains a release dependency.
 - **Microsoft Foundry model deployments** provide foundation-model inference.
 - **Azure Machine Learning managed compute and endpoints** train and serve the custom
   crop classifier.
@@ -25,10 +31,12 @@ has been retired; it is not an alternative implementation baseline.
 
 For business ownership, evidence branches, and the advance/final-payment lifecycle,
 see the [business process flow](./business-process-flow.md).
+The precise inputs, tools, journal and reassessment loop are defined in the
+[Decision Support Agent contract](./decision-agent-architecture.md).
 
-## 2. Why Agents Fit AKS
+## 2. Why Separate Agent Hosting from Application Services
 
-An agent is not the model itself. The agent runtime is application code that:
+An agent is not the model itself. Custom code hosted in Foundry Agent Service:
 
 - receives a user request;
 - retrieves state and permissions;
@@ -40,49 +48,24 @@ An agent is not the model itself. The agent runtime is application code that:
 - records traces and case evidence;
 - returns a response.
 
-This workload is normally CPU- and network-bound. It does not require GPU nodes because
-the expensive model inference happens in Foundry or another managed model endpoint.
-
-Hosting the agent in AKS is reasonable when the project wants:
-
-- one deployment platform for agents and non-AI services;
-- full control over prompts, tools, state graphs, retries, and error handling;
-- custom agent frameworks such as Semantic Kernel, LangGraph, or Microsoft Agent
-  Framework;
-- explicit separation between conversational reasoning and administrative decisions;
-- normal container CI/CD, canary deployment, and rollback;
-- private networking and workload identity;
-- hands-on experience operating production-style AKS workloads.
+AKS still provides substantial platform experience through applications, deterministic
+rules, tool enforcement, integrations and evidence processing. Neither the hosted
+agent nor the AKS application tier requires self-hosted foundation-model GPU serving.
+Foundry hosting does not transfer administrative authority to the model or platform.
 
 ## 3. Trade-Off
 
-The choice is justified, but it is not operationally free.
+Hosted agents move agent compute/session lifecycle and scaling to a managed runtime
+while retaining custom orchestration code. The team still owns image/dependency
+security, prompts, tools, groundedness, authority, retries/idempotency, durable case
+records, evaluations and safe version changes. AKS pod lifecycle applies to the
+application/tool/worker tier, not to the hosted agent.
 
-### Advantages
-
-- Agent, portal, APIs, workers, and deterministic rules use one runtime platform.
-- Shared deployment, identity, networking, observability, and release practices.
-- No dependency on a hosted-agent runtime for custom orchestration behaviour.
-- Easier local/container development and framework portability.
-- Agent code can be tested like any other service.
-- The architecture demonstrates meaningful AKS skills for the capstone.
-
-### Responsibilities retained by the project
-
-- container-image security and dependency patching;
-- pod scaling and disruption management;
-- conversation/session persistence;
-- retry, timeout, and circuit-breaker behaviour;
-- agent and prompt versioning;
-- tool-call tracing;
-- evaluation integration;
-- safe rollout and rollback;
-- framework upgrades;
-- protection against prompt injection and unsafe tool calls.
-
-Foundry-hosted agents would reduce some of this operational work. In this project,
-learning and demonstrating AKS is an explicit objective, so retaining it is a
-deliberate trade-off rather than accidental complexity.
+The trade-off is an additional service and identity/network boundary, hosted feature
+and regional constraints, session/model quotas, cold-start/latency considerations and
+cost. The selected hosted mode must be shown feasible in the approved EU processing
+boundary with private AKS tool reachability. These are explicit future release
+decisions, not a reason to silently fall back to the old AKS-agent proposal.
 
 ## 4. High-Level Architecture
 
@@ -110,13 +93,8 @@ flowchart TB
     subgraph AKS["AKS Standard"]
         INGRESS[Gateway API / App Routing]
         BFF[web-bff]
-        INTERACTIVE[interactive-agent-api]
-        WORKER[agent-worker\nqueue and schedule driven]
-        FARMERAGENT[Farmer Guidance Agent\nL3 - bounded actions]
-        MONITORAGENT[Parcel Monitoring Agent\nL4 - classify, abstain, or escalate]
-        RESOLUTIONAGENT[Discrepancy Resolution Agent\nL3 - bounded actions, escalate disputes]
-        INSPECTIONAGENT[Inspection Prioritisation Agent\nL2 - recommendation only]
-        AUDITAGENT[Audit Evidence Agent\nL4 - autonomous draft only]
+        INTERACTIVE[interactive-agent-api\nFoundry invocation adapter]
+        WORKER[agent-worker\nqueue-driven invocation adapter]
         CASE[case-api]
         RULES[CAP rules-service]
         EVIDENCE[evidence-api]
@@ -126,9 +104,16 @@ flowchart TB
         DRONEWORKER[drone-evidence-worker\nmanifest validation and photogrammetry]
         GUIDANCE[guidance-indexer]
         AUDIT[audit-pack-worker]
+        SCORE[crop-scoring adapter]
     end
 
     subgraph Foundry["Microsoft Foundry"]
+        HOSTED[Agent Service\ncustom orchestration hosting]
+        FARMERAGENT[Farmer Guidance Agent\nL3 - bounded actions]
+        MONITORAGENT[Parcel Monitoring Agent\nL4 - explain approved ML results]
+        RESOLUTIONAGENT[Decision Support Agent\nbaseline Discrepancy Resolution role]
+        INSPECTIONAGENT[Inspection Prioritisation Agent\nL2 - recommendation only]
+        AUDITAGENT[Audit Evidence Agent\nL4 - autonomous draft only]
         CHAT[Chat Model Deployment]
         EMBED[Embedding Model Deployment]
         EVAL[Evaluation Assets / Model Experiments]
@@ -145,16 +130,16 @@ flowchart TB
     subgraph Data["Managed Azure Data Services"]
         LAKE[ADLS Gen2 / Blob Storage]
         QUARANTINE[Blob Upload Quarantine]
-        EVIDENCESTORE[Immutable Evidence Store]
+        EVIDENCESTORE[Governed Evidence Store\nversion / hash / approved retention]
         SEARCH[Azure AI Search]
         CASEDB[Operational Case Database]
-        STATE[Conversation / Thread State]
+        STATE[Session Context / Ownership Mapping\nnot authoritative case state]
         PRED[Prediction Result Store]
         BUS[Service Bus]
         EVENTS[Event Grid\nobject and scan notifications]
         KV[Key Vault]
         MON[Application Insights / Azure Monitor]
-        AUDITLOG[Immutable Audit Log]
+        AUDITLOG[Durable Case / Evidence Journal\napproved integrity policy]
         ACR[Azure Container Registry]
     end
 
@@ -183,8 +168,13 @@ flowchart TB
     BFF --> CASE
     BFF --> EVIDENCE
 
-    INTERACTIVE --> FARMERAGENT
-    INTERACTIVE --> RESOLUTIONAGENT
+    INTERACTIVE --> HOSTED
+    WORKER --> HOSTED
+    HOSTED --> FARMERAGENT
+    HOSTED --> MONITORAGENT
+    HOSTED --> RESOLUTIONAGENT
+    HOSTED --> INSPECTIONAGENT
+    HOSTED --> AUDITAGENT
     FARMERAGENT --> CHAT
     FARMERAGENT --> SEARCH
     FARMERAGENT --> CASE
@@ -193,10 +183,10 @@ flowchart TB
     RESOLUTIONAGENT --> CASE
     RESOLUTIONAGENT --> RULES
     RESOLUTIONAGENT --> EVIDENCE
+    RESOLUTIONAGENT --> SCORE
+    RESOLUTIONAGENT --> SEARCH
 
-    WORKER --> MONITORAGENT
-    WORKER --> INSPECTIONAGENT
-    MONITORAGENT --> PRED
+    MONITORAGENT --> SCORE
     MONITORAGENT --> EVIDENCE
     MONITORAGENT --> RULES
     INSPECTIONAGENT --> CASE
@@ -212,6 +202,12 @@ flowchart TB
     EVIDENCE --> LAKE
     EVIDENCE --> EVIDENCESTORE
     EVIDENCE --> CASE
+    CASE --> AUDITLOG
+    EVIDENCE --> AUDITLOG
+    EVIDENCE --> PRED
+    SCORE --> PRED
+    SCORE --> BATCH
+    SCORE --> ONLINE
     BUS --> WORKER
     BUS --> AUDIT
     AUDIT --> AUDITAGENT
@@ -249,16 +245,26 @@ flowchart TB
     RESOLUTIONAGENT --> STATE
     EMBED --> SEARCH
     AKS --> ACR
+    HOSTED --> ACR
+    HOSTED --> MON
     AKS --> MON
     AML --> MON
-    AKS --> AUDITLOG
-    AML --> AUDITLOG
+    AML -->|Registered scoring provenance via evidence API| EVIDENCE
 
     AKS -.Workload Identity.-> Data
     AKS -.Managed Identity / RBAC.-> Foundry
     AKS -.Managed Identity / RBAC.-> AML
+    HOSTED -.Agent identity / narrow tool access.-> CASE
+    HOSTED -.Agent identity / narrow tool access.-> EVIDENCE
     AML -.Managed Identity / RBAC.-> LAKE
 ```
+
+All views are proposed logical contracts, not deployed network paths. Intended
+Azure-icon renders: [deployment overview](./azure-deployment-overview.png) and
+[decision-agent loop](./decision-agent-flow.png); editable source links and
+proposed/foundation/external distinctions are specified in the
+[agent contract](./decision-agent-architecture.md#3-logical-deployment-and-data-boundaries).
+Image production and acceptance belong to the diagram author.
 
 ## 5. AKS Workloads
 
@@ -333,30 +339,23 @@ capture footprint, surveyor findings, and upload receipt. Drone-control software
 not receive broader case access than required, and consumer cloud synchronisation is
 not part of the evidence path.
 
-### 5.2 `interactive-agent-api` and `agent-worker`
+### 5.2 AKS invocation adapters and Foundry-hosted orchestration
 
-Responsibilities:
+`interactive-agent-api` authenticates and authorises application requests, maps
+application conversation ownership to service session IDs, invokes the pinned
+Foundry-hosted agent version and returns validated responses/status. `agent-worker`
+consumes approved Service Bus work, invokes hosted assessment asynchronously and
+records retry/timeout/job status. Neither hosts the agent's reasoning/state graph.
 
-- prompt and instruction versioning;
-- conversation orchestration;
-- tool selection;
-- state-graph execution;
-- retrieval orchestration;
-- model endpoint invocation;
-- structured output validation;
-- tool timeout/retry policies;
-- response generation;
-- correlation IDs and tracing.
+Foundry Agent Service hosts custom orchestration: prompt/instruction versions,
+retrieval, model invocation, tool selection and structured output. APIs independently
+enforce actor/case authority, current state and permitted transitions. Authoritative
+state, notices, holds and deadlines survive the hosted session.
 
-The service calls the Foundry-hosted model. It does not run the model locally.
-
-Deploy the interactive and asynchronous paths separately:
-
-- `interactive-agent-api` serves farmer and caseworker conversations.
-- `agent-worker` consumes scheduled or event-driven work from Service Bus.
-
-They may share code, but use separate Kubernetes Deployments, service accounts,
-scaling policies, and concurrency limits.
+Interactive and queue invocation adapters remain separate AKS deployments/service
+accounts with bounded concurrency. Hosted agent scaling is a separate service
+configuration, not HPA on these adapters. All paths share correlation and durable
+action receipts; no generic database or payment-execution tool is exposed.
 
 ### 5.3 `case-api`
 
@@ -424,17 +423,27 @@ Responsibilities:
 
 Workers should use Kubernetes Jobs or KEDA-scaled Deployments where appropriate.
 
-### 5.7 Agent deployment map
+### 5.7 Proposed runtime capability map
 
-| Case agent | Autonomy level | AKS runtime | Trigger | Allowed autonomy and hard boundary |
+| Case agent / capability | Autonomy level | Hosting and support | Trigger | Allowed autonomy and hard boundary |
 |---|---|---|---|---|
-| **Farmer Guidance Agent** | **L3 – bounded action** | `interactive-agent-api` | Farmer conversation | Explains approved rules, pre-checks claims, and guides evidence submission. Cannot change an official claim or decide eligibility. |
-| **Parcel Monitoring Agent** | **L4 – autonomous analytical output** | `feature-worker` + `agent-worker` | Seasonal schedule/new acquisition | Produces parcel classification and evidence, including an inconclusive result. Must abstain/escalate on uncertainty; cannot reject a claim, reduce payment, or impose a sanction. |
-| **Discrepancy Resolution Agent** | **L3 – bounded action** | `interactive-agent-api` + `agent-worker` | Case event/farmer response | Sends approved notices, requests evidence, validates submissions, and resolves only routine cases under deterministic rules. Escalates disputes and any potentially adverse outcome. |
-| **Inspection Prioritisation Agent** | **L2 – recommendation only** | `agent-worker` | Unresolved/risk-review event | Ranks cases for human consideration. Cannot order an inspection, determine non-compliance, or use unapproved risk factors. |
-| **Audit Evidence Agent** | **L4 – autonomous draft only** | `audit-pack-worker` | Audit request/scheduled control | Compiles and validates a draft evidence pack. An authorised official must review and approve it before submission. |
+| **Farmer Guidance Agent** | **L3 – bounded action** | Foundry Agent Service; AKS interactive adapter | Farmer conversation | Explains approved rules and guides evidence. Cannot change an official claim or decide eligibility. |
+| **Parcel Monitoring Agent** | **L4 – analytical output only** | Foundry monitoring orchestration; AKS features/scoring adapter; Azure ML classifier | Seasonal schedule/new acquisition | Consumes approved ML results and limitations, including UNKNOWN. The LLM does not perform crop classification or decide a claim. |
+| **Discrepancy Resolution Agent — public name: Decision Support Agent** | **L3 – bounded action** | Foundry Agent Service; AKS interactive/queue adapters and typed tools | Registered evidence, case event/farmer response | Assesses the scoped question, records citations, requests approved farmer validation and proposes field tasks. Routine progression only under rules; disputes/adverse outcomes escalate. |
+| **Inspection Prioritisation Agent** | **L2 – recommendation only** | Foundry Agent Service; AKS queue adapter | Unresolved/risk-review event | Ranks candidates using approved factors. Control owner approves tasks; random sample stays independent. |
+| **Audit Evidence Agent** | **L4 – autonomous draft only** | Foundry Agent Service; AKS `audit-pack-worker` assembles artifacts | Audit request/scheduled control | Drafts a traceable pack. An authorised official approves submission. |
 
-The monitoring and audit agents are not dependent on a user chat session.
+These remain the original **five runtime roles**, not six. “Decision Support Agent”
+is the public name and proposed hosted implementation of the existing Discrepancy
+Resolution Agent role, not an umbrella absorbing the other roles. It consumes
+Parcel Monitoring/Azure ML evidence without acquiring classification authority.
+Logical roles do not require five separate deployments; the application writer must
+validate the minimum necessary agent topology without merging authority boundaries. The
+[contract](./decision-agent-architecture.md) defines accepted evidence, calibrated
+rating, as-of/version pins, journal and reassessment semantics.
+
+Monitoring and audit work is not dependent on an interactive user chat session;
+durable queue/case events may invoke separate hosted work.
 
 L-level labels describe **workflow autonomy, not legal decision authority**. L4 is
 limited to reversible analytical or drafting work. No agent has authority to issue an
@@ -501,7 +510,7 @@ mandatory.
    the raw original, and registers the evidence reference.
 5. Deterministic checks verify package completeness and timing. Optional image-quality
    models may identify blur or missing content but cannot decide compliance.
-6. The Discrepancy Resolution Agent may explain instructions or summarise registered
+6. The Foundry-hosted Decision Support Agent may explain instructions or summarise registered
    evidence. It cannot invent capture metadata or make an authoritative visual
    finding.
 7. A bounded workflow or Caseworker records whether the evidence answers the scoped
@@ -589,11 +598,14 @@ transition independently of the agent.
 | Tool | Backing service | Purpose |
 |---|---|---|
 | `get_case_status` | `case-api` | Retrieve structured claim and parcel status |
-| `get_cap_rule` | `rules-service` / AI Search | Retrieve authoritative versioned guidance |
+| `get_cap_rule` | `rules-service`; AI Search supplies cited guidance separately | Retrieve effective deterministic rules and approved guidance versions |
 | `get_parcel_evidence` | `evidence-api` | Retrieve approved evidence and provenance |
-| `get_crop_result` | Prediction Result Store | Return an approved stored prediction, alternatives, confidence, and quality |
+| `get_crop_result` | AKS scoring adapter / prediction store | Return approved as-of prediction, calibrated alternatives/confidence, quality and versions |
 | `request_reanalysis` | `case-api` + Service Bus | Queue an approved scoring request |
-| `submit_farmer_evidence` | `case-api` | Validate and register evidence |
+| `submit_farmer_evidence` | `evidence-api` + `case-api` | Validate quarantine/session manifest before registering accepted evidence |
+| `record_assessment` | `case-api` | Append cited assessment with expected case version and durable receipt |
+| `request_farmer_validation` | `case-api` + notification worker | Approved focused request, deadline and receipt; otherwise draft for approval |
+| `propose_field_validation` | `case-api` | Non-binding factual task proposal; authorised control owner must approve |
 | `request_human_review` | `case-api` | Create a caseworker task |
 | `create_audit_draft` | audit worker | Request a draft audit package |
 
@@ -602,18 +614,19 @@ unrestricted HTTP tools.
 
 ## 9. Conversation and Workflow State
 
-Do not store durable conversation state only in pod memory.
+Do not store authoritative case/workflow state only in pod memory or a hosted session.
 
 Use:
 
-- a managed database or Cosmos DB for conversation/thread state;
+- the selected hosted conversation/session facility and application ownership mapping;
+  any customer-managed database/Cosmos DB dependency requires a release decision;
 - the operational case database for authoritative workflow state;
 - Redis only for transient cache/locks where required;
 - Blob Storage for uploaded files and evidence artifacts.
 
 Pods remain disposable and horizontally scalable.
 
-The case state and conversation state must remain separate. Deleting a chat thread
+The case state and conversation state must remain separate. Deleting a hosted session/chat thread
 must not delete the administrative case record.
 
 Use a dedicated Prediction Result Store, or a clearly separated case-database schema,
@@ -738,8 +751,10 @@ Scale on:
 - custom in-flight conversation metric;
 - queue depth for asynchronous agent work.
 
-Do not scale solely on CPU, because a saturated model endpoint can create high latency
-while agent pods remain CPU-idle.
+Configure Foundry-hosted session/concurrency/capacity limits independently from AKS
+adapter/worker scaling. Do not treat idle adapter CPU as proof of available model
+capacity. Hosted cold-start, quota, cancellation and recovery behaviours require
+measurement in the approved region; no capacity or SLO is assumed.
 
 Use timeouts, bounded retries, circuit breakers, and bulkheads for every downstream
 tool.
@@ -763,7 +778,8 @@ tool.
 Use:
 
 - AKS Workload Identity for each service account;
-- separate managed identities for agent, case API, ingestion, and workers;
+- separate hosted agent runtime/project identities and AKS case API, ingestion and
+  worker identities; verify exact identity types and roles for the selected hosting API;
 - Azure RBAC at the narrowest scope;
 - `ManagedIdentityCredential` in production;
 - `DefaultAzureCredential` only for local development;
@@ -826,18 +842,24 @@ Controls include:
 Use one correlation ID across the portal request, agent turn, model call, tool call,
 case event, crop prediction, and human decision.
 
-Persist material AI logs and technical evidence to an immutable/WORM-capable storage
-destination. Retain model, prompt, tool, dataset, rule, and deployment versions for the
-period required by the applicable AI Act classification, CAP audit, national
-administrative law, and the agency's approved records schedule. Where high-risk
-requirements apply, use at least the applicable AI Act minimum and
-extend it where CAP/audit obligations require longer retention. Keep transient chat
-retention separate from the legally required case/evidence record; GDPR erasure does
-not remove records retained under a valid public-task or legal-obligation basis.
+Keep durable case/evidence/action records separate from operational traces. Register
+object versions/hashes, capture/provenance, actor/authority, reasons/citations,
+request/response/result/status timestamps, approvals and payment transaction links
+through case/evidence APIs. Persist material assessment/action records before
+acknowledging acceptance. Preserve earlier versions with linked corrections.
+
+Raw claimant content stays in governed evidence storage. Application Insights and
+other monitoring receive minimised correlated metadata, not raw photos, claimant
+text, credentials, full prompts/tool payloads or signed URLs. The hosted session is
+not the legal case record. Retention/access, encryption, legal holds, deletion and
+any immutable/WORM enforcement need approved legal/records/operational choices;
+no perpetual retention or blanket legal classification is assumed. The
+[journal contract](./decision-agent-architecture.md#6-durable-journal-versus-operational-traces)
+defines idempotency, replay, deadlines and failure behaviour.
 
 ## 17. Evaluation
 
-Foundry remains useful even though the agent runtime is in AKS:
+Foundry hosts the custom agent runtime as well as supporting models/evaluations:
 
 - use Foundry models and evaluation capabilities for response-quality experiments;
 - maintain versioned evaluation datasets;
@@ -860,13 +882,16 @@ The deployment pipeline should require:
 |---|---|
 | Foundry model unavailable | Deterministic portal and case functions remain available; chat assistance degrades explicitly |
 | Foundry quota/429 throttling | Apply bounded exponential backoff, per-user rate limits, queue non-interactive work, and fail over only to an approved deployment in the same EU processing boundary |
-| Agent pod failure | Kubernetes restarts/replaces pod; durable state is recovered externally |
+| Hosted agent/session failure | Surface unavailable/in-progress status, recover supported session state, reconcile durable action receipts before replay; never duplicate effects |
+| AKS invocation adapter/worker pod failure | Kubernetes replaces pod; recover queued work and case receipts, not an in-pod agent state graph |
 | Invalid tool call | Tool rejects request; no case transition |
 | AI Search unavailable | Agent states guidance retrieval is unavailable; does not invent policy |
-| AML online endpoint unavailable | Queue batch/rescore or show last approved result |
+| AML online endpoint unavailable | Queue approved batch/rescore or show last approved result only if its version/cutoff remains valid; otherwise UNKNOWN/unavailable |
 | Crop batch job fails | Preserve previous result and create an operational exception |
 | Copernicus API unavailable | Use cached features/evidence or defer processing |
 | Low observation quality | Return `UNKNOWN` and request additional evidence |
+| Journal unavailable | Do not accept an unrecorded transition/notice; retain explicit failed/pending status and reconcile safely |
+| Farmer response deadline expires or notice delivery fails | Track exception and escalate through approved rules; no automatic adverse finding |
 | Drone mission unsafe, prohibited, or incomplete | Record an explicit aborted/invalid result and route to another approved evidence method |
 | Drone processing fails quality or lineage validation | Preserve raw evidence, reject the derivative, and create a human-review task |
 
@@ -876,6 +901,7 @@ Main cost levers:
 
 - AKS baseline and autoscaling;
 - Foundry model tokens/capacity;
+- Foundry hosted-agent compute/session/storage and private-network dependencies;
 - Azure AI Search tier;
 - AML training jobs;
 - AML batch/online endpoint compute;
@@ -900,55 +926,61 @@ disabled outside demonstration/interactive periods where operationally acceptabl
 
 ## 20. MVP Sequence
 
-1. Deploy an AKS cluster with Workload Identity, ingress, ACR, and monitoring.
-2. Deploy `web-bff`, `interactive-agent-api`, `agent-worker`, `case-api`,
-   `rules-service`, and `evidence-api`.
-3. Deploy an EU Regional or EU Data Zone Foundry chat model and grant the agent
-   workload identity access.
-4. Add the governed guidance-indexing worker and AI Search index versioning.
-5. Build the public crop-feature dataset.
-6. Train the CPU crop classifier using Azure ML managed compute; evaluate both
+This is a future dependency order, not an executable/released plan or deployment
+authority. WP-001 remains a compiled foundation candidate with exhausted 5/5 author
+checks and no independent local acceptance/deployment; preserve its records.
+
+1. Resolve foundation acceptance and separately authorised platform prerequisites.
+2. Obtain scoped application/ML feasibility, approved contracts/targets and required
+   independent/specialist review; approve the actual implementation plan before release.
+3. Confirm hosted runtime, compatible model, EU processing/storage, region, private
+   networking, identity and cost. Later provision Foundry Agent Service hosting and
+   model deployments only under the applicable released design and execution authority.
+4. Implement `web-bff`, AKS invocation adapters, `case-api`, `rules-service` and
+   `evidence-api`, then package the custom Foundry-hosted orchestration.
+5. Add the governed guidance-indexing worker and AI Search index versioning.
+6. Build the public crop-feature dataset under separate data authorisation.
+7. Train the CPU crop classifier using Azure ML managed compute under separate job
+   authorisation; evaluate both
    complete-season and truncated-season/as-of-date candidates.
-7. Deploy a managed batch endpoint.
-8. Add the Prediction Result Store and `get_crop_result`, `get_case_status`, and
+8. Add a managed batch endpoint under the relevant release.
+9. Add the Prediction Result Store and `get_crop_result`, `get_case_status`, and
    `get_cap_rule` tools.
-9. Add farmer-safe explanations and human escalation.
-10. Run agent and crop model in shadow mode.
-11. Add the farmer capture/quarantine/receipt lane and KEDA workers for ingestion,
+10. Add farmer-safe explanations, durable journal and human escalation.
+11. Independently validate the scoped agent/model targets before authorised shadow use.
+12. Add the farmer capture/quarantine/receipt lane and KEDA workers for ingestion,
    evidence, and audits. Photo capture is in scope; automated photo interpretation
    is optional and separately evaluated.
-12. Demonstrate an optional drone side flow with synthetic or authorised data,
+13. Demonstrate an optional drone side flow with synthetic or authorised data,
    mission finalisation, independent findings, and both exception and random entry.
-13. Demonstrate payment-status reconciliation using a mock treasury adapter. Connect
+14. Demonstrate payment-status reconciliation using a mock treasury adapter. Connect
    the real system only after agency authorisation and integration assurance.
-14. Add an online crop endpoint only if interactive rescoring is required.
+15. Add an online crop endpoint only if interactive rescoring is required.
 
 ## 21. If Azure ML Is Not Available
 
-The architecture still works:
-
-1. Train the XGBoost/LightGBM baseline on a controlled CPU runner.
-2. Store the training container, feature manifest, model, and metrics in ACR/Blob.
-3. Serve the CPU model as an AKS deployment.
-4. Put it behind the crop-scoring adapter so callers keep the same application
-   contract even though AML and AKS have different authentication and scoring APIs.
-5. Move it to Azure ML later without changing the agent tool.
-
-This puts one additional workload on AKS.
+The earlier proposal considered a controlled CPU runner and AKS classifier serving.
+That is an **unapproved alternative**, not an automatic fallback. Azure ML remains
+the selected classifier platform. If unavailable, record UNKNOWN/unavailable and
+return the material platform choice to a new design revision and human approval.
+The stable scoring-adapter contract can isolate future approved changes; it does not
+authorise them.
 
 ## 22. Recommendation
 
-Adopt an **AKS-centered, Foundry-backed architecture**:
+Adopt the **proposed AKS application platform with Foundry-hosted custom agents**:
 
-- agents and deterministic application services run on AKS;
+- applications, typed tools, deterministic rules and integration workers run on AKS;
+- custom orchestration, including Decision Support Agent assessment, runs in Foundry Agent Service;
 - foundation models remain managed in Foundry;
 - crop training and serving use Azure ML managed compute/endpoints;
 - raster-heavy processing uses Copernicus APIs or managed batch compute;
 - AKS does not host GPU model servers unless future evaluation proves a need.
 
-This is a good architectural compromise: it maximises relevant AKS learning and
-platform consistency while avoiding the least valuable and most operationally
-demanding part of self-hosted AI—GPU model infrastructure.
+The historical filename remains because AKS still hosts the application platform.
+The dated hosting amendment is a proposed design direction only; the precise
+contract, open release decisions and current official research are in the
+[Decision Support Agent architecture](./decision-agent-architecture.md).
 
 ## 23. References
 

@@ -13,6 +13,12 @@ app-deployment checklist, a resource inventory or evidence of an operating syste
 The original [case brief](case-study-47.md), [source scan](case-study-47.jpg)
 and [assessment rubric](rubrik/AMA_Capstone_Rubric_Participants.md) remain unchanged.
 
+The scope picture retains its fixed source revision. For the current proposed
+runtime hosting, use the **[Azure-icon deployment overview](../docs/architecture/azure-deployment-overview.png)**
+and **[decision-agent flow](../docs/architecture/decision-agent-flow.png)**.
+The [decision-agent contract](../docs/architecture/decision-agent-architecture.md)
+records the approved Foundry-hosting direction and evidence/follow-up boundaries.
+
 ## Reading the Picture
 
 | Angle | What it contributes |
@@ -47,9 +53,10 @@ changes and new ML candidates, not automatic production self-learning.
 - Established amounts, agency authorisation, treasury execution and reconciled
   settlement remain distinct. Advances, balances, recovery and offsets follow
   their applicable controls; an accepted instruction is not confirmed payment.
-- Managed Foundry supplies foundation-model inference; Azure ML owns the custom
-  crop-classifier lifecycle; Copernicus performs appropriate raster processing.
-  AKS hosts application/workflow/agent orchestration, not foundation-model serving.
+- The current proposal hosts custom runtime agents and foundation-model inference
+  in Foundry. Azure ML owns the custom crop-classifier lifecycle; Copernicus performs
+  appropriate raster processing. AKS hosts application, API and deterministic
+  rules services. The fixed-revision scope picture predates this hosting amendment.
 - The full map describes the **broader proposed target**, primarily the annual
   area-based claim process. Other interventions have their own controls. Current
   public/synthetic POC and foundation packages are narrower; their presence does
