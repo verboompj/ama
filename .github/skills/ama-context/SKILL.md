@@ -35,7 +35,6 @@ description: Establish AMA case context, source precedence and approved risk sco
      an LLM. Treasury execution is separate from case readiness.
 5. The engineering team has nine roles, including application/AI and ML/data
    implementation specialists. Runtime CAP agents and business personas retain their
-   architecture-defined responsibilities. The cast
-   references remain Jeremy as Farmer and Charlie as Adviser only.
+   architecture-defined responsibilities.
 6. Check the worktree; leave unrelated files alone. Carry unresolved context and
    prerequisite gaps into the handoff rather than making up defaults.

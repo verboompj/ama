@@ -21,26 +21,20 @@ and EU auditors assess whether Hungary's controls are reliable.
 
 ## 2. Persona Landscape
 
-| Persona | Clarkson's Farm reference | Role in the service | Primary concern | Decision authority |
-|---|---|---|---|---|
-| Farmer / CAP applicant | Jeremy Clarkson | Applies for support and responds to evidence requests | Receive the correct payment quickly and fairly | Submits, corrects, explains, and contests their own claim |
-| Agricultural adviser / authorised representative | Charlie Ireland | Helps farmers prepare and manage claims | Complete accurate claims for multiple clients | Acts only within delegated authority |
-| Paying-agency caseworker | No direct counterpart | Manages claims and resolves routine exceptions | Move cases to a correct, timely conclusion | Applies policy within delegated administrative limits |
-| Field inspector | No direct counterpart | Verifies conditions that remote monitoring cannot resolve | Collect defensible field evidence efficiently | Records findings; does not define policy |
-| Legal and sanctions officer | No direct counterpart | Reviews adverse, disputed, or sanctionable cases | Ensure decisions are lawful, proportionate, and reasoned | Approves or rejects adverse measures and sanctions |
-| Programme owner / operations manager | No direct counterpart | Owns national service performance | Deliver compliant payments at national scale | Sets operating policy, service levels, and escalation rules |
-| Ministry policy official | No direct counterpart | Owns policy intent and political accountability | Ensure national CAP implementation meets policy goals | Sets or approves policy, not individual claim outcomes |
-| EU Commission auditor | No direct counterpart | Assesses control-system reliability and expenditure legality | Obtain complete, reproducible audit evidence | Raises findings and financial corrections |
-| Data protection, AI risk, and compliance officer | No direct counterpart | Provides independent compliance oversight | Prevent unlawful or insufficiently governed processing | Approves controls or requires remediation |
-| IT, security, and platform operator | No direct counterpart | Runs and protects the digital service | Keep a payment-critical system secure and available | Operates technology; cannot determine benefit eligibility |
-| Geospatial / data science specialist | No direct counterpart | Builds and evaluates monitoring models | Produce accurate, explainable, stable classifications | Recommends model releases and thresholds |
-| Farmer association / civil-society representative | No cast assignment | Represents collective farmer interests | Ensure the system is understandable, accessible, and fair | Influences policy and rollout; no individual case authority |
-
-The only cast assignments are Jeremy as the Farmer and Charlie as the Adviser, one
-character per persona. These are analogies, not additional personas or claims about
-real applications or appointed representation. The
-[reference map](./clarksons-farm-persona-reference.md) preserves the decision
-boundaries above.
+| Persona | Role in the service | Primary concern | Decision authority |
+|---|---|---|---|
+| Farmer / CAP applicant | Applies for support and responds to evidence requests | Receive the correct payment quickly and fairly | Submits, corrects, explains, and contests their own claim |
+| Agricultural adviser / authorised representative | Helps farmers prepare and manage claims | Complete accurate claims for multiple clients | Acts only within delegated authority |
+| Paying-agency caseworker | Manages claims and resolves routine exceptions | Move cases to a correct, timely conclusion | Applies policy within delegated administrative limits |
+| Field inspector | Verifies conditions that remote monitoring cannot resolve | Collect defensible field evidence efficiently | Records findings; does not define policy |
+| Legal and sanctions officer | Reviews adverse, disputed, or sanctionable cases | Ensure decisions are lawful, proportionate, and reasoned | Approves or rejects adverse measures and sanctions |
+| Programme owner / operations manager | Owns national service performance | Deliver compliant payments at national scale | Sets operating policy, service levels, and escalation rules |
+| Ministry policy official | Owns policy intent and political accountability | Ensure national CAP implementation meets policy goals | Sets or approves policy, not individual claim outcomes |
+| EU Commission auditor | Assesses control-system reliability and expenditure legality | Obtain complete, reproducible audit evidence | Raises findings and financial corrections |
+| Data protection, AI risk, and compliance officer | Provides independent compliance oversight | Prevent unlawful or insufficiently governed processing | Approves controls or requires remediation |
+| IT, security, and platform operator | Runs and protects the digital service | Keep a payment-critical system secure and available | Operates technology; cannot determine benefit eligibility |
+| Geospatial / data science specialist | Builds and evaluates monitoring models | Produce accurate, explainable, stable classifications | Recommends model releases and thresholds |
+| Farmer association / civil-society representative | Represents collective farmer interests | Ensure the system is understandable, accessible, and fair | Influences policy and rollout; no individual case authority |
 
 ### Primary versus supporting personas
 

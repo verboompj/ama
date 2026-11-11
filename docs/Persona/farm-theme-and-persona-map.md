@@ -5,14 +5,9 @@
 ## 1. Creative Direction
 
 **Field & File** is the presentation theme for the CAP subsidy verification case
-study. It uses the appeal of an observational farm documentary: practical work,
+study. It uses an original observational farm-documentary theme: practical work,
 unpredictable weather, expensive mistakes, strong personalities, and the recurring
-collision between agricultural reality and administrative rules.
-
-The theme is inspired by the *kind* of tension made accessible by programmes such as
-*Clarkson's Farm*, but it is not a reproduction of that programme. It must not use its
-name as the case-study brand, imitate its logo, reproduce dialogue or storylines, use
-programme imagery, or present fictional personas as its real cast. Field & File is an
+collision between agricultural reality and administrative rules. Field & File is an
 original identity for a fictional Hungarian farm and paying agency.
 
 ### Theme proposition
@@ -79,18 +74,10 @@ agricultural events, evidence acceptance, eligibility calculation, advance readi
 advance payment, and final balance. The detailed calendar is documented in
 [CAP Claim and Payment Calendar](../research/cap-claim-and-payment-calendar.md).
 
-## 4. Persona-to-Cast Map
+## 4. Persona Map
 
-These are narrative roles, not comedy impressions or copies of television
-personalities. Each character represents an existing design persona documented in
+These narrative roles represent existing design personas documented in
 [Personas and Use Cases](./personas-and-use-cases.md).
-
-For recognisable farm-side references, see the
-[Clarkson's Farm persona reference map](./clarksons-farm-persona-reference.md):
-**Jeremy Clarkson** maps to **Farmer / CAP applicant** and **Charlie Ireland**
-maps to **Agricultural adviser / authorised representative**. These are the only
-cast assignments: one Farmer, one Adviser. No new personas are added, and the
-remaining persona roles stay unchanged.
 
 | Existing persona | Field & File role | Narrative function | Typical scene | Product touchpoint |
 |---|---|---|---|---|
@@ -147,7 +134,7 @@ Characters should feel recognisable without becoming caricatures.
 4. **Humour from situations, not humiliation.** Weather, forms, machinery, and
    mismatched terminology can provide lightness. Avoid mocking farmers, civil
    servants, rural communities, or accessibility needs.
-5. **No AI hero character.** Agents assist the cast; they are not magical colleagues
+5. **No AI hero character.** Agents assist people using the service; they are not magical colleagues
    and never replace accountable human authority.
 6. **Visible disagreement.** A useful story allows the farmer's account, satellite
    signal, and rule interpretation to differ until evidence resolves the case.
@@ -179,7 +166,7 @@ Alternative supporting lines:
 |---|---|---|
 | Practical | “This parcel needs another observation before a conclusion is possible.” | Abstract transformation language |
 | Plain-spoken | Explain NDVI or confidence in ordinary terms before technical detail | Unexplained acronyms and model jargon |
-| Dryly human | Acknowledge weather, deadlines, and real operational friction | Forced jokes or television catchphrases |
+| Dryly human | Acknowledge weather, deadlines, and real operational friction | Forced jokes or irrelevant catchphrases |
 | Fair | Present the farmer's and agency's evidence side by side | Treating a model flag as proof of wrongdoing |
 | Precise | Name the parcel, date, rule, source, and uncertainty | “The AI says the claim is wrong” |
 | Calm | Give a clear next action and deadline | Alarmist messages for low-confidence observations |
@@ -207,8 +194,6 @@ through a controlled verification process.
 - Place it on cream or white backgrounds whenever possible.
 - Do not recolour individual elements, stretch the mark, add shadows, or place it over
   detailed satellite imagery.
-- Do not combine it with the name, logo, typography, or visual marks of *Clarkson's
-  Farm* or any broadcaster.
 
 ## 8. Colour System
 
@@ -252,8 +237,7 @@ Typography should remain restrained:
 - use sentence case rather than all caps for headings;
 - reserve uppercase with letter spacing for short labels and the tagline;
 - use bold to show hierarchy, not to simulate shouting;
-- keep technical identifiers visually separate from farmer-facing explanations;
-- do not imitate the typography or hand-painted signage of the television programme.
+- keep technical identifiers visually separate from farmer-facing explanations.
 
 ## 10. Imagery and Illustration
 
@@ -268,8 +252,6 @@ Typography should remain restrained:
 
 ### Avoid
 
-- imagery, screenshots, locations, cast likenesses, or promotional assets from
-  *Clarkson's Farm*;
 - glowing brains, humanoid robots, or unexplained AI-generated dashboards;
 - presenting a single attractive satellite image as sufficient crop proof;
 - idyllic stock photography that hides weather, mud, small parcels, or accessibility;
@@ -377,8 +359,7 @@ auditable public administration.
 
 ## 15. Guardrails
 
-- Field & File is an original case-study theme, not an endorsed adaptation or
-  affiliation.
+- Field & File is an original case-study theme.
 - Use only licensed, repository-owned, public-domain, or properly attributed imagery.
 - Never use real claimant data or imply that synthetic characters are real people.
 - Keep humour away from payment hardship, sanctions, disability, privacy, and appeal.
@@ -392,7 +373,6 @@ auditable public administration.
 This document defines the narrative and visual layer. Detailed requirements remain in:
 
 - [Personas and Use Cases](./personas-and-use-cases.md);
-- [Clarkson's Farm Persona Reference Map](./clarksons-farm-persona-reference.md);
 - [AKS-Centred Foundry Architecture](../architecture/aks-centered-foundry-architecture.md);
 - [Crop Classification Goal](../copernicus/crop-classification/README.md);
 - [Agricultural Analysis Use Case](../copernicus/crop-classification/agricultural-analysis-use-case.md);
